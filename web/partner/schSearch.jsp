@@ -123,11 +123,13 @@
         <!-- End Overlay --> 
         <section class="content-header">
             <s:if test="%{configFlowFlag == 'manufacturing'}">
-                <h1>Scheduler Task<small> Manufacturing</small></h1>
-                <ol class="breadcrumb">
+                <h1>Scheduler Task
+<!--                    <small> Manufacturing</small>-->
+                </h1>
+<!--                <ol class="breadcrumb">
                     <li><a href="#"><i class="fa fa-wrench"></i>Manufacturing</a></li>
                     <li class="active">  Scheduler Task</li>
-                </ol>
+                </ol>-->
             </s:if><s:elseif test="%{configFlowFlag == 'logistics'}">
                 <h1>Scheduler Task<small> Logistics</small></h1>
                 <ol class="breadcrumb">

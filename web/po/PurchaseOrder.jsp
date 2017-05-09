@@ -62,11 +62,13 @@
             <!-- Content Header (Page header) -->
             <!-- Main content --> 
             <section class="content-header">
-                <h1>Purchase Order<small>Manufacturing</small></h1>
-                <ol class="breadcrumb">
+                <h1>Purchase Order
+<!--                    <small>Manufacturing</small>-->
+                </h1>
+<!--                <ol class="breadcrumb">
                     <li><a href="#"><i class="fa fa-wrench"></i>Manufacturing</a></li>
                     <li class="active">Purchase Order</li>
-                </ol>
+                </ol>-->
             </section>
             <br>
             <section class="content">
@@ -87,7 +89,7 @@
                                             <div class="col-sm-12">
                                                 <div class="row">
                                                     <div class="col-sm-3"><label>Database&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;</label>
-                                                        <s:radio cssClass="myRadio" id="database" name="database" value="%{database}" list="#@java.util.LinkedHashMap@{'MSCVP':'MSCVP','ARCHIVE':'ARCHIVE'}"/>
+                                                        <s:radio cssClass="myRadio" id="database" name="database" value="%{database}" list="#@java.util.LinkedHashMap@{'MSCVP':'LIVE','ARCHIVE':'ARCHIVE'}"/>
                                                     </div>
                                                 </div>
                                                 <div class="row">

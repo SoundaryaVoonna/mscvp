@@ -281,7 +281,7 @@
             var certType = document.getElementById('certType').value;
             if (certType == "-1")
             {
-                alert("please select certificate type");
+                alert("Please select Certificate Type");
                 return false;
             }
             return true;

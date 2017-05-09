@@ -41,6 +41,18 @@
 
                 // document.getElementById('loadingAcoountSearch').style.display = "none";
             }
+            
+            $(function () {
+                    // $("#example1").DataTable();
+                    $('#results').DataTable({
+                        "paging": true,
+                        "lengthChange": true,
+                        "searching": true,
+                        "ordering": true,
+                        "info": true,
+                        "autoWidth": false
+                    });
+                });
         </script>
 
 
@@ -172,11 +184,12 @@
                                                                         <th >Comments</th>
                                                                         <th >Archive Date</th>
                                                                 </thead>
+                                                                <tbody>
                                                                 <%
                                                                     for (int i = 0; i < list.size(); i++) {
                                                                         purgeHistoryBean = (PurgeHistoryBean) list.get(i);
                                                                 %>
-                                                                <tbody>
+                                                                
                                                                     <tr>
                                                                         <td><%
                                                                             out.println(purgeHistoryBean.getUser());
@@ -193,8 +206,10 @@
                                                                         <td><%
                                                                             out.println(purgeHistoryBean.getArchiveDate());
                                                                             %></td></tr>
-                                                                </tbody>
-                                                                <%}
+                                                               
+                                                                <%}%>
+                                                                
+                                                                     </tbody><%
                                                                 } else {
                                                                 %>
                                                                 <tr><td>
@@ -240,6 +255,7 @@
         <script src='<s:url value="../includes/plugins/daterangepicker/daterangepicker.js"/>'></script>
         <script src='<s:url value="../includes/plugins/datatables/jquery.dataTables.min.js"/>'></script>
         <script src='<s:url value="../includes/plugins/datatables/dataTables.bootstrap.min.js"/>'></script>
+        <script src='<s:url value="../includes/bootstrap/js/app.min.js"/>'></script>
 
         <script type="text/javascript">
 
@@ -248,12 +264,12 @@
                     var transType = document.getElementById("transType").value;
                     if (date == "")
                     {
-                        alert("please enter Date range !!");
+                        alert("Please enter Date range !!");
                         return false;
                     }
                     if (transType == "-1")
                     {
-                        alert("please select Transaction Type !!");
+                        alert("Please select Transaction Type !!");
                         return false;
                     }
                 }
@@ -266,18 +282,6 @@
                     document.getElementById("datepicker").value = x;
                 }
 
-                $(function () {
-                    // $("#example1").DataTable();
-                    $('#results').DataTable({
-                        "paging": true,
-                        "lengthChange": true,
-                        "searching": true,
-                        "ordering": true,
-                        "info": true,
-                        "autoWidth": false
-                    });
-                });
-                
                 function resetvalues()
                 {
                     document.getElementById('reportrange').value = "";

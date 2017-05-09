@@ -193,7 +193,7 @@
             alert("Please add your Comments !! ");
             return false;
             }
-                var r = confirm("Confirm to delete " + days + " days before " + transactionType + " transaction records");
+                var r = confirm("Confirm to delete " + days + " days post " + transactionType + " transaction records");
                 if (r == true)
                 {
                     returnType = true;

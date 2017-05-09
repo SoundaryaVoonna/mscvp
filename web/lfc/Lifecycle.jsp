@@ -780,6 +780,8 @@
 
         <script src='<s:url value="../includes/plugins/datatables/jquery.dataTables.min.js"/>'></script>
         <script src='<s:url value="../includes/plugins/datatables/dataTables.bootstrap.min.js"/>'></script>
+        <script src='<s:url value="../includes/bootstrap/js/app.min.js"/>'></script>
+        
         <script type="text/javascript">
            $(function() {
                $('#attach_box').click(function() {

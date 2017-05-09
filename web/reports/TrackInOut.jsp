@@ -213,12 +213,12 @@
             <section class="content-header">
                 <h1>
                     EDI Tracking IN/OUT
-                    <small>Manufacturing</small>
+<!--                    <small>Manufacturing</small>-->
                 </h1>
-                <ol class="breadcrumb">
+<!--                <ol class="breadcrumb">
                     <li><a href="#"><i class="fa fa-wrench"></i>Manufacturing</a></li>
                     <li class="active">EDI Tracking IN/OUT</li>
-                </ol>
+                </ol>-->
             </section>
             <br>
             <section class="content">
@@ -244,7 +244,7 @@
 
                                         <div class="form-group">
                                             <div class="row">
-                                                <div class="col-sm-3"> <label>Date Range</label>
+                                                <div class="col-sm-3"> <label>Date Range</label><font style="color:red">*</font>
                                                     <s:textfield name="reportrange"  id="reportrange" cssClass="form-control pull-left"   value="%{reportrange}"  /> 
                                                 </div>
                                                 <div id="loadingAcoountSearch" class="loadingImg">

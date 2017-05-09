@@ -122,12 +122,12 @@
                 %>
                 <h1>
                     Dashboard
-                    <small>Manufacturing</small>
+<!--                    <small>Manufacturing</small>-->
                 </h1>
-                <ol class="breadcrumb">
+<!--                <ol class="breadcrumb">
                     <li><a href="#"><i class="fa fa-wrench"></i>Manufacturing</a></li>
                     <li class="active">Dashboard</li>
-                </ol>
+                </ol>-->
             </section>
 
             <section class="content">

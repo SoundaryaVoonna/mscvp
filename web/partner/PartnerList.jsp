@@ -128,11 +128,13 @@
             <!-- Main content --> 
             <s:if test="%{configFlowFlag == 'manufacturing'}">
                 <section class="content-header">
-                    <h1>Partner Search<small>Manufacturing</small></h1>
-                    <ol class="breadcrumb">
+                    <h1>Partner Search
+<!--                        <small>Manufacturing</small>-->
+                    </h1>
+<!--                    <ol class="breadcrumb">
                         <li><a href="#"><i class="fa fa-wrench"></i>Manufacturing</a></li>
                         <li class="active">  Partner Search</li>
-                    </ol>
+                    </ol>-->
                 </section>   
             </s:if><s:elseif test="%{configFlowFlag == 'logistics'}">
                 <section class="content-header">

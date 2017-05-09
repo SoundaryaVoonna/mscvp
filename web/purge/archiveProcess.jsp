@@ -183,7 +183,7 @@
             var transactionType = document.getElementById('transType').value;
             var comment = document.getElementById('commentId').value;
         if (days == "") {
-                alert("Please enter Day Count !!");
+                alert("Please Enter Day Count !!");
                 return false;
             }
             if (transactionType == "-1")  {
@@ -194,7 +194,7 @@
                 alert(" Please add your Comments !!");
                 return false;
             }
-                var r = confirm("Confirm to delete " + days + " days before " + transactionType + " transaction records");
+                var r = confirm("Confirm to delete " + days + " days post " + transactionType + " transaction records");
                 if (r == true)
                 {
                     returnType = true;

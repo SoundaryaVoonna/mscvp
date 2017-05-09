@@ -178,12 +178,12 @@
         <section class="content-header">
             <h1>
                 EDI Tracking Summary
-                <small>Manufacturing</small>
+<!--                <small>Manufacturing</small>-->
             </h1>
-            <ol class="breadcrumb">
+<!--            <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-wrench"></i>Manufacturing</a></li>
                 <li class="active">EDI Tracking Summary</li>
-            </ol>
+            </ol>-->
         </section>
         <br>
         <section class="content">
