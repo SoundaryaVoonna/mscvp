@@ -53,23 +53,23 @@
                 var userEmail = document.getElementById('userEmail').value;
                 var reportsType = document.getElementById('reportsType').value;
                 if(schtitle=="") {
-                    alert("please enter schtitle Value!!!");
+                    alert("Please enter Schedule Title!");
                     return false;
                 }
                 if(schType=="-1") {
-                    alert("please select schType!");
+                    alert("Please select Schedule Type!");
                     return false;
                 }
                 if(schhours=="-1") {
-                    alert("please enter schhours Value!!!");
+                    alert("Please enter Schedule Time!");
                     return false;
                 }
                 if(userEmail=="") {
-                    alert("please enter userEmail Value!!!");
+                    alert("Please select Active Users!");
                     return false;
                 }
                 if(reportsType=="-1") {
-                    alert("please select reportsType!");
+                    alert("Please select Reports Type!");
                     return false;
                 }
             }

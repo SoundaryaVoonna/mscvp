@@ -25,7 +25,9 @@
 
         <script language="JavaScript"
         src='<s:url value="/includes/js/GeneralAjax.js"/>'></script>
-
+        <script type="text/javascript">
+            $('#dob').datepicker();
+        </script>
         <script type="text/javascript">
             function doOnLoad()
             {
@@ -44,7 +46,50 @@
 
                 return (false);
             }
-            ;
+
+            function imageValidation() {
+                //imageUpdate
+                var imageUpdate = document.getElementById("imageUpdate").value;
+                if (imageUpdate == '') {
+                    document.getElementById('imageResultMessage').innerHTML = "<font color=red>Please select file.</font>";
+                    return false;
+                }
+            }
+
+//            function passwordValidation() {
+//                alert("inside password change");
+//                //var oldPwd = document.getElementById("oldPwd").value;
+//                var oldPwd = document.forms["resetPwdForm"]["oldPwd"].value;
+//               // alert("oldPwd "+document.resetPwdForm.getElementById("oldPwd").value);
+//                alert(oldPwd);
+//                var pwd = document.getElementById("newPwd").value;
+//                alert("pwd is "+pwd);
+//                var cnfPwd = document.getElementById("confirmPwd").value;
+//                alert("cnfpwd is "+cnfPwd);
+//                if (oldPwd == "") {
+//                     alert("in oldpwd");
+//                    document.getElementById('pwdResultMessage').innerHTML = "<font color=red>Please enter Old Password</font>";
+//                    return false;
+//                }
+//                if (pwd == "") {
+//                    alert("in pwd");
+//                    document.getElementById('pwdResultMessage').innerHTML = "<font color=red>Please enter Password</font>";
+//                    return false;
+//                }
+//                if (cnfPwd == "") {
+//                     alert("in cnfpwd");
+//                    document.getElementById('pwdResultMessage').innerHTML = "<font color=red>Please enter Confirm Password</font>";
+//                    return false;
+//                }
+//                if (pwd != cnfPwd) {
+//                    document.getElementById('pwdResultMessage').innerHTML = "<font color=red>Passwords not matched</font>";
+//                    document.getElementById("regpassword").value = "";
+//                    document.getElementById("cnfPassword").value = "";
+//                    return false;
+//                }
+//                return false;
+//            }
+
             function validateForm() {
                 var education = document.forms["profileForm"]["education"].value;
                 var designation = document.getElementById('designation').value;
@@ -278,9 +323,7 @@
                                                         </div>
 
                                                     </div>
-                                                    <script type="text/javascript">
-                                                        $('#dob').datepicker();
-                                                    </script>
+
 
                                                     <div class="row">
                                                         <div class="col-sm-2"><label for="gender">Gender</label></div> 
@@ -316,6 +359,7 @@
                                     <div class="row">
                                         <div class="col-sm-4"></div>
                                         <div class="col-sm-4">
+                                            <div style="text-align: center;" id="imageResultMessage"></div>
                                             <s:form name="imageForm" action="imageUpload" theme="simple" method="post" enctype="multipart/form-data">
                                                 <div style="text-align: center;">${resultMessage}</div>
                                                 <div class="row">
@@ -341,7 +385,7 @@
                                                         <strong>   <input type="button" value="Remove"  tabindex="17" class="btn btn-primary col-sm-12" onclick="removeValue();"/></strong>
                                                     </div>
                                                     <div class="col-sm-6">
-                                                        <s:submit value="Upload"     cssClass="btn btn-primary col-sm-12" tabindex="16"/>
+                                                        <s:submit value="Upload"   onclick="return imageValidation()"  cssClass="btn btn-primary col-sm-12" tabindex="16"/>
                                                     </div>
                                                 </div>
                                             </s:form>
@@ -356,6 +400,7 @@
 
                                 <div class="tab-pane" id="change-password">
                                     <br>
+                                    <div style="text-align: center;" id="pwdResultMessage"></div>
                                     <s:form class="form-horizontal" action="../user/updateMyPwd.action" method="post" name="resetPwdForm" id="resetPwdForm" theme="simple">
                                         <div style="text-align: center;">${resultMessage}</div>
                                         <div class="row">
@@ -392,7 +437,7 @@
                                         </div>
                                         <br>
                                         <div class="row">
-                                            <div class="col-sm-2"><s:submit value="Update"     cssClass="btn btn-primary col-sm-12" tabindex="16"/></div>
+                                            <div class="col-sm-2"><s:submit value="Update" cssClass="btn btn-primary col-sm-12" tabindex="16"/></div>
 
                                             <div class="col-sm-6"></div>
                                             <div class="col-sm-4"></div>
@@ -407,15 +452,6 @@
             </section><!-- /.content -->
         </div><!-- /.content-wrapper -->
 
-
-
-
-
-
-
-
-
-
         <div>
             <s:include value="../includes/template/footer.jsp"/>
         </div>
@@ -424,7 +460,6 @@
         <script src='<s:url value="../includes/bootstrap/js/bootstrap.min.js"/>'></script>
         <!-- AdminLTE App -->
         <script src='<s:url value="../includes/bootstrap/js/app.min.js"/>'></script>
-
 
 
     </body>

@@ -244,6 +244,8 @@ public class UserServiceImpl implements UserService {
                 } else {
                     updatedRows = 2;
                 }
+            }else{
+                 updatedRows = 3;
             }
         } catch (SQLException se) {
             throw new ServiceLocatorException(se);

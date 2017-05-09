@@ -239,7 +239,10 @@ public class UserAction extends ActionSupport implements ServletRequestAware, Se
                     } else if (updatedRows == 2) {
                         resultMessage = "<font color=\"red\" size=\"3\">Passwords do not match!</font>";
                         resultType = SUCCESS;
-                    } else {
+                    }  else if (updatedRows == 3) {
+                        resultMessage = "<font color=\"red\" size=\"3\">Please enter correct Old Password!</font>";
+                        resultType = SUCCESS;
+                    }else {
                         resultMessage = "<font color=\"red\" size=\"3\">Sorry! We are not able to change your password. Please enter valid password! </font>";
                         resultType = INPUT;
                     }

@@ -446,42 +446,134 @@ public class LifecycleUtility {
             statement = connection.createStatement();
             resultSet = statement.executeQuery(searchQuery);
             while (resultSet.next()) {
-                poLifecycleBean.setFileType(resultSet.getString("FILE_TYPE"));
-                poLifecycleBean.setTranType(resultSet.getString("TRANSACTION_TYPE"));
-                poLifecycleBean.setSenderId(resultSet.getString("SENDER_ID"));
-                poLifecycleBean.setRecId(resultSet.getString("RECEIVER_ID"));
-                poLifecycleBean.setDirection(resultSet.getString("DIRECTION"));
+                if ((resultSet.getString("FILE_TYPE") != null) && !"".equals(resultSet.getString("FILE_TYPE"))) {
+                    poLifecycleBean.setFileType(resultSet.getString("FILE_TYPE"));
+                } else {
+                    poLifecycleBean.setFileType("--");
+                }
+                if ((resultSet.getString("TRANSACTION_TYPE") != null) && !"".equals(resultSet.getString("TRANSACTION_TYPE"))) {
+                    poLifecycleBean.setTranType(resultSet.getString("TRANSACTION_TYPE"));
+                } else {
+                    poLifecycleBean.setTranType("--");
+                }
+                if ((resultSet.getString("SENDER_ID") != null) && !"".equals(resultSet.getString("SENDER_ID"))) {
+                    poLifecycleBean.setSenderId(resultSet.getString("SENDER_ID"));
+                } else {
+                    poLifecycleBean.setSenderId("--");
+                }
+                if ((resultSet.getString("RECEIVER_ID") != null) && !"".equals(resultSet.getString("RECEIVER_ID"))) {
+                    poLifecycleBean.setRecId(resultSet.getString("RECEIVER_ID"));
+                } else {
+                    poLifecycleBean.setRecId("--");
+                }
+                if ((resultSet.getString("DIRECTION") != null) && !"".equals(resultSet.getString("DIRECTION"))) {
+                    poLifecycleBean.setDirection(resultSet.getString("DIRECTION"));
+                } else {
+                    poLifecycleBean.setDirection("--");
+                }
                 poLifecycleBean.setDatetimeRec(resultSet.getTimestamp("DATE_TIME_RECEIVED"));
-                poLifecycleBean.setStatus(resultSet.getString("STATUS"));
-                poLifecycleBean.setPoNumber(resultSet.getString("PO_NUMBER"));
-                poLifecycleBean.setSenName(resultSet.getString("SENDER_NAME"));
-                poLifecycleBean.setRecName(resultSet.getString("RECEIVER_NAME"));
+                if ((resultSet.getString("STATUS") != null) && !"".equals(resultSet.getString("STATUS"))) {
+                    poLifecycleBean.setStatus(resultSet.getString("STATUS"));
+                } else {
+                    poLifecycleBean.setStatus("--");
+                }
+                if ((resultSet.getString("PO_NUMBER") != null) && !"".equals(resultSet.getString("PO_NUMBER"))) {
+                    poLifecycleBean.setPoNumber(resultSet.getString("PO_NUMBER"));
+                } else {
+                    poLifecycleBean.setPoNumber("--");
+                }
+                if ((resultSet.getString("SENDER_NAME") != null) && !"".equals(resultSet.getString("SENDER_NAME"))) {
+                    poLifecycleBean.setSenName(resultSet.getString("SENDER_NAME"));
+                } else {
+                    poLifecycleBean.setSenName("--");
+                }
+                if ((resultSet.getString("RECEIVER_NAME") != null) && !"".equals(resultSet.getString("RECEIVER_NAME"))) {
+                    poLifecycleBean.setRecName(resultSet.getString("RECEIVER_NAME"));
+                } else {
+                    poLifecycleBean.setRecName("--");
+                }
                 poLifecycleBean.setFileId(resultSet.getString("FILE_ID"));
-                poLifecycleBean.setStCtrlNum(resultSet.getString("ST_CONTROL_NUMBER"));
-                poLifecycleBean.setGsCtrlNum(resultSet.getString("GS_CONTROL_NUMBER"));
+                if ((resultSet.getString("ST_CONTROL_NUMBER") != null) && !"".equals(resultSet.getString("ST_CONTROL_NUMBER"))) {
+                    poLifecycleBean.setStCtrlNum(resultSet.getString("ST_CONTROL_NUMBER"));
+                } else {
+                    poLifecycleBean.setStCtrlNum("--");
+                }
+                if ((resultSet.getString("GS_CONTROL_NUMBER") != null) && !"".equals(resultSet.getString("GS_CONTROL_NUMBER"))) {
+                    poLifecycleBean.setGsCtrlNum(resultSet.getString("GS_CONTROL_NUMBER"));
+                } else {
+                    poLifecycleBean.setGsCtrlNum("--");
+                }
                 if (resultSet.getString("SAP_IDOC_NUMBER") != null && !"".equals(resultSet.getString("SAP_IDOC_NUMBER"))) {
                     poLifecycleBean.setSapIdocNum(resultSet.getString("SAP_IDOC_NUMBER"));
                 } else {
                     poLifecycleBean.setSapIdocNum("0");
                 }
-                poLifecycleBean.setPreFile(resultSet.getString("PRE_TRANS_FILEPATH"));
-                poLifecycleBean.setPostTranFile(resultSet.getString("POST_TRANS_FILEPATH"));
-                poLifecycleBean.setOrgFile(resultSet.getString("ORG_FILEPATH"));
-                poLifecycleBean.setAckFile(resultSet.getString("ACK_FILE_ID"));
-                poLifecycleBean.setPodate(resultSet.getDate("ORDER_DATE").toString());
-                poLifecycleBean.setPoValue(resultSet.getString("PO_VALUE"));
-                poLifecycleBean.setPoStatus(resultSet.getString("ORDER_STATUS"));
+                if ((resultSet.getString("PRE_TRANS_FILEPATH") != null) && !"".equals(resultSet.getString("PRE_TRANS_FILEPATH"))) {
+                    poLifecycleBean.setPreFile(resultSet.getString("PRE_TRANS_FILEPATH"));
+                } else {
+                    poLifecycleBean.setPreFile("--");
+                }
+                if ((resultSet.getString("POST_TRANS_FILEPATH") != null) && !"".equals(resultSet.getString("POST_TRANS_FILEPATH"))) {
+                    poLifecycleBean.setPostTranFile(resultSet.getString("POST_TRANS_FILEPATH"));
+                } else {
+                    poLifecycleBean.setPostTranFile("--");
+                }
+                if ((resultSet.getString("ORG_FILEPATH") != null) && !"".equals(resultSet.getString("ORG_FILEPATH"))) {
+                    poLifecycleBean.setOrgFile(resultSet.getString("ORG_FILEPATH"));
+                } else {
+                    poLifecycleBean.setOrgFile("--");
+                }
+                if ((resultSet.getString("ACK_FILE_ID") != null) && !"".equals(resultSet.getString("ACK_FILE_ID"))) {
+                    poLifecycleBean.setAckFile(resultSet.getString("ACK_FILE_ID"));
+                } else {
+                    poLifecycleBean.setAckFile("--");
+                }
+                if ((resultSet.getString("ORDER_DATE") != null) && !"".equals(resultSet.getString("ORDER_DATE"))) {
+                    poLifecycleBean.setPodate(resultSet.getDate("ORDER_DATE").toString());
+                } else {
+                    poLifecycleBean.setPodate("--");
+                }
+                if ((resultSet.getString("PO_VALUE") != null) && !"".equals(resultSet.getString("PO_VALUE"))) {
+                    poLifecycleBean.setPoValue(resultSet.getString("PO_VALUE"));
+                } else {
+                    poLifecycleBean.setPoValue("--");
+                }
+                if ((resultSet.getString("ORDER_STATUS") != null) && !"".equals(resultSet.getString("ORDER_STATUS"))) {
+                    poLifecycleBean.setPoStatus(resultSet.getString("ORDER_STATUS"));
+                } else {
+                    poLifecycleBean.setPoStatus("--");
+                }
                 if (resultSet.getString("SO_NUMBER") != null && !"".equals(resultSet.getString("SO_NUMBER"))) {
                     poLifecycleBean.setSoNumber(resultSet.getString("SO_NUMBER"));
                 } else {
                     poLifecycleBean.setSoNumber("0");
                 }
-                poLifecycleBean.setIteamQty(resultSet.getString("ITEM_QTY"));
-                poLifecycleBean.setAckStatus(resultSet.getString("ACK_STATUS"));
+                if ((resultSet.getString("ITEM_QTY") != null) && !"".equals(resultSet.getString("ITEM_QTY"))) {
+                    poLifecycleBean.setIteamQty(resultSet.getString("ITEM_QTY"));
+                } else {
+                    poLifecycleBean.setIteamQty("--");
+                }
+                if ((resultSet.getString("ACK_STATUS") != null) && !"".equals(resultSet.getString("ACK_STATUS"))) {
+                    poLifecycleBean.setAckStatus(resultSet.getString("ACK_STATUS"));
+                } else {
+                    poLifecycleBean.setAckStatus("--");
+                }
                 poLifecycleBean.setBolNumber("0");
-                poLifecycleBean.setIsaDate(resultSet.getString("ISA_DATE"));
-                poLifecycleBean.setIsaTime(resultSet.getString("ISA_TIME"));
-                poLifecycleBean.setIsaCtrlNum(resultSet.getString("ISA_NUMBER"));
+                if ((resultSet.getString("ISA_DATE") != null) && !"".equals(resultSet.getString("ISA_DATE"))) {
+                    poLifecycleBean.setIsaDate(resultSet.getString("ISA_DATE"));
+                } else {
+                    poLifecycleBean.setIsaDate("--");
+                }
+                if ((resultSet.getString("ISA_TIME") != null) && !"".equals(resultSet.getString("ISA_TIME"))) {
+                    poLifecycleBean.setIsaTime(resultSet.getString("ISA_TIME"));
+                } else {
+                    poLifecycleBean.setIsaTime("--");
+                }
+                if ((resultSet.getString("ISA_NUMBER") != null) && !"".equals(resultSet.getString("ISA_NUMBER"))) {
+                    poLifecycleBean.setIsaCtrlNum(resultSet.getString("ISA_NUMBER"));
+                } else {
+                    poLifecycleBean.setIsaCtrlNum("--");
+                }
                 poLifecycleBean.setInvAmt("0");
                 poLifecycleBean.setChequeNum("0");
                 poLifecycleBean.setAsnNumber("0");

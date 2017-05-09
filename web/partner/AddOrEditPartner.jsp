@@ -60,7 +60,8 @@
              //       location.href = "../partner/getPartnerList.action?configFlowFlag=" + configFlowFlag1;
              //   }
                // else if ((configFlowFlag1 == 'logistics')) {
-                    location.href = "../partner/getPartnerList.action?configFlowFlag=" + configFlowFlag1;
+                  location.href = "../partner/getPartnerList.action?configFlowFlag=" + configFlowFlag1;
+                   //location.href = "../partner/partnerSearch.action";
                // }
              //   return true;
             }
