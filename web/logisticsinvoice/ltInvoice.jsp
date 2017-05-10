@@ -50,14 +50,27 @@
 //                $('#hide-menu1').removeClass('show-menu');
 //            });
         </script>
-<!--        <script type="text/javascript">
-            function   getLogisticsInvDetailsInfo(InvoiceNumber, id) {
-                getLogisticsInvDetails(InvoiceNumber, id);
-            }
+        <!--        <script type="text/javascript">
+                    function   getLogisticsInvDetailsInfo(InvoiceNumber, id) {
+                        getLogisticsInvDetails(InvoiceNumber, id);
+                    }
+        
+                </script> -->
 
-        </script> -->
-
-
+        <script>
+            $(function () {
+                // $("#example1").DataTable();
+                $('#results').DataTable({
+                    "paging": true,
+                    "lengthChange": true,
+                    "searching": true,
+                    "ordering": true,
+                    "info": true,
+                    "autoWidth": true,
+                    order: [[0, 'desc']]
+                });
+            });
+        </script>
 
     </head>
     <%
@@ -86,12 +99,12 @@
             <section class="content-header">
                 <h1>
                     Invoice
-                    <small>Logistics</small>
+                    <!--<small>Logistics</small>-->
                 </h1>
-                <ol class="breadcrumb">
-                    <li><a href="#"><i class="fa fa-truck"></i>Logistics</a></li>
-                    <li class="active">Invoice</li>
-                </ol>
+                <!--                <ol class="breadcrumb">
+                                    <li><a href="#"><i class="fa fa-truck"></i>Logistics</a></li>
+                                    <li class="active">Invoice</li>
+                                </ol>-->
             </section>
             <br>
 
@@ -117,7 +130,7 @@
                                             <div class="col-sm-12">
                                                 <div class="row">
                                                     <div class="col-sm-3"> <label>Date Range</label>
-                                                        <s:textfield name="reportrange"  id="reportrange" cssClass="form-control pull-left"   value="%{reportrange}" onchange="Date1();" /> 
+                                                        <s:textfield name="reportrange"  id="reportrange" cssClass="form-control pull-left"   value="%{reportrange}" onchange="Date1();" tabindex="1"/> 
                                                     </div>
                                                     <script type="text/javascript">
         function Date1()
@@ -132,7 +145,7 @@
 
                                                     <div  class="col-sm-3">
                                                         <label>Document Type</label>  
-                                                        <s:select headerKey="-1" headerValue="Select Type" list="docTypeList" name="docType" id="docType" value="%{docType}" tabindex="9" cssClass="form-control"/>
+                                                        <s:select headerKey="-1" headerValue="Select Type" list="docTypeList" name="docType" id="docType" value="%{docType}" tabindex="2" cssClass="form-control"/>
                                                     </div>
                                                     <div  class="col-sm-3">
                                                         <label>Sender Id</label>  
@@ -155,21 +168,21 @@
                                                     </div>
                                                     <div  class="col-sm-3">
                                                         <label>Status</label>  
-                                                        <s:select headerKey="-1" headerValue="Select Type" list="{'Success','Error','Warning'}" name="status" id="status" value="%{status}" tabindex="10" cssClass="form-control"/> 
+                                                        <s:select headerKey="-1" headerValue="Select Type" list="{'Success','Error','Warning'}" name="status" id="status" value="%{status}"  cssClass="form-control" tabindex="7"/> 
                                                     </div>
                                                 </div>
                                                 <br>
                                                 <div class="row">
                                                     <div class="col-sm-3">
                                                         <label for="corrattribute">Correlation</label>
-                                                        <s:select headerKey="-1" headerValue="Select Attribute" cssClass="form-control" list="correlationList" name="corrattribute" id="corrattribute" value="%{corrattribute}"  />
+                                                        <s:select headerKey="-1" headerValue="Select Attribute" cssClass="form-control" list="correlationList" name="corrattribute" id="corrattribute" value="%{corrattribute}"  tabindex="8"/>
                                                     </div>
                                                     <div class="col-sm-3">
                                                         <label for="corrvalue">Value</label>
-                                                        <s:textfield cssClass="form-control" name="corrvalue" id="corrvalue" value="%{corrvalue}" />
+                                                        <s:textfield cssClass="form-control" name="corrvalue" id="corrvalue" value="%{corrvalue}" tabindex="9"/>
                                                     </div>
                                                     <div class="col-sm-3"><br>
-                                                        <button  type="button" id="addButton" name="addButton" value="Add Div" class="btn btn-success"   style="margin-top:6px ;" ><i class="fa fa-plus"></i></button>
+                                                        <button  type="button" id="addButton" name="addButton" value="Add Div" class="btn btn-success"   style="margin-top:6px ;" tabindex="10"><i class="fa fa-plus"></i></button>
                                                         &nbsp; <label>Add Filter</label>
                                                     </div>
                                                 </div>
@@ -188,7 +201,7 @@
                                                             document.getElementById("corr").style.display = "block";
 
                                                         else
-                                                            alert('Limit exceded.... cant add more fields');
+                                                            alert('Limit exceded.... cannot add more fields !!');
                                                     })
 
                                                 </script>
@@ -197,11 +210,11 @@
                                                     <br>   <div class="row">
                                                         <div class="col-sm-3">
                                                             <label for="corrattribute1">Correlation</label>
-                                                            <s:select headerKey="-1" headerValue="Select Attribute" cssClass="form-control" list="correlationList" name="corrattribute1" id="corrattribute1" value="%{corrattribute1}"/>
+                                                            <s:select headerKey="-1" headerValue="Select Attribute" cssClass="form-control" list="correlationList" name="corrattribute1" id="corrattribute1" value="%{corrattribute1}" tabindex="11"/>
                                                         </div>
                                                         <div class="col-sm-3">
                                                             <label for="corrvalue1">Value</label>
-                                                            <s:textfield cssClass="form-control" name="corrvalue1" id="corrvalue1" value="%{corrvalue1}" />
+                                                            <s:textfield cssClass="form-control" name="corrvalue1" id="corrvalue1" value="%{corrvalue1}" tabindex="12"/>
                                                         </div>
 
                                                     </div>
@@ -216,8 +229,8 @@
                                         </div>
 
                                         <div class="row">
-                                            <div class="col-sm-2"> <s:submit value="Search" Class="btn btn-primary col-sm-12" onclick="return checkCorrelation();" tabindex="12"/></div>
-                                            <div class="col-sm-2"> <strong><input type="button" value="Reset" class="btn btn-primary col-sm-12" tabindex="13" onclick="return resetvalues();"/></strong></div>
+                                            <div class="col-sm-2"> <s:submit value="Search" Class="btn btn-primary col-sm-12" onclick="return checkCorrelation();" tabindex="13"/></div>
+                                            <div class="col-sm-2"> <strong><input type="button" value="Reset" class="btn btn-primary col-sm-12" tabindex="14" onclick="return resetvalues();"/></strong></div>
                                                     <s:hidden name="sampleValue" id="sampleValue" value="2"/>
                                                 </s:form></div>
                                 </div>
@@ -259,7 +272,7 @@
                                                                     LogisticsInvoiceBean logisticsInvoiceBean;
                                                             %>
                                                             <thead> <tr>
-
+                                                                    <th>Inv&nbsp;Date</th>
                                                                     <th>InstanceId</th>
                                                                     <th>Partner</th>
 
@@ -271,7 +284,7 @@
                                                                     <th>PO#</th>
                                                                     <th>Item&nbsp;Qty</th>
                                                                     <th>Inv&nbsp;Amount</th>
-                                                                    <th>Inv&nbsp;Date</th>
+
                                                                     <th>Status</th>
 
 
@@ -290,6 +303,16 @@
                                                                                 cssValue = "grayEditSelection";
                                                                             }
                                                                     %>
+                                                                    <td>
+                                                                        <%
+                                                                            if (logisticsInvoiceBean.getInvDate() != null && !"".equals(logisticsInvoiceBean.getInvDate())) {
+                                                                                out.println(logisticsInvoiceBean.getInvDate());
+                                                                            } else {
+                                                                                out.println("-");
+                                                                            }
+                                                                        %>
+
+                                                                    </td>
                                                                     <td>
                                                                         <%
                                                                             if (logisticsInvoiceBean.getInstanceId() != null && !"".equals(logisticsInvoiceBean.getInstanceId())) {
@@ -360,16 +383,7 @@
                                                                         %>
 
                                                                     </td>
-                                                                    <td>
-                                                                        <%
-                                                                            if (logisticsInvoiceBean.getInvDate() != null && !"".equals(logisticsInvoiceBean.getInvDate())) {
-                                                                                out.println(logisticsInvoiceBean.getInvDate());
-                                                                            } else {
-                                                                                out.println("-");
-                                                                            }
-                                                                        %>
 
-                                                                    </td>
                                                                     <td>
                                                                         <%
                                                                             if (logisticsInvoiceBean.getStatus() != null && !"".equals(logisticsInvoiceBean.getStatus())) {
@@ -554,26 +568,14 @@
 
                     <div id="noresult"></div>
                     <div class="col-sm-12" style="margin-top:10px;"><button type="button" class="btn btn-primary col-sm-11" id="hide-menu" onclick="hide()" value="X">Close</button></div>   
-                    </div> 
+                </div> 
             </div>
         </div>
 
 
 
     </div> 
-    <script>
-        $(function () {
-            // $("#example1").DataTable();
-            $('#results').DataTable({
-                "paging": true,
-                "lengthChange": true,
-                "searching": true,
-                "ordering": true,
-                "info": true,
-                "autoWidth": true
-            });
-        });
-    </script>
+
 </div>
 <div>
     <s:include value="../includes/template/footer.jsp"/>

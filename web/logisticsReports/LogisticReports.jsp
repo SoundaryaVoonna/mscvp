@@ -104,6 +104,20 @@
             }
 
         </script>
+        <script>
+                $(function () {
+                    //   $("#example1").DataTable();
+                    $('#results').DataTable({
+                        "paging": true,
+                        "lengthChange": true,
+                        "searching": true,
+                        "ordering": true,
+                        "info": true,
+                        "autoWidth": true,
+                        order: [[0, 'desc']]
+                    });
+                });
+            </script>
 
 
 
@@ -132,12 +146,12 @@
             <section class="content-header">
                 <h1>
                     Excel Reports
-                    <small>Logistics</small>
+                    <!--<small>Logistics</small>-->
                 </h1>
-                <ol class="breadcrumb">
+<!--                <ol class="breadcrumb">
                     <li><a href="#"><i class="fa fa-truck"></i>Logistics</a></li>
                     <li class="active">Excel Reports</li>
-                </ol>
+                </ol>-->
             </section>
 
             <section class="content">
@@ -162,7 +176,7 @@
                                             <div class="col-sm-12">
                                                 <div class="row">
                                                     <div class="col-sm-3"> <label>Date Range</label>
-                                                        <s:textfield name="reportrange"  id="reportrange" cssClass="form-control pull-left"   value="%{reportrange}"  /> 
+                                                        <s:textfield name="reportrange"  id="reportrange" cssClass="form-control pull-left"   value="%{reportrange}" tabindex="1" /> 
                                                     </div>
 
                                                     <script type="text/javascript">
@@ -182,15 +196,15 @@
                                                     <s:hidden id="docdatepicker" name="docdatepicker"/>
                                                     <div  class="col-sm-3">
                                                         <label>Document Type</label>  
-                                                        <s:select headerKey="-1" cssClass="form-control" headerValue="Select Type" list="docTypeList" name="docType" id="docType" value="%{docType}"  />
+                                                        <s:select headerKey="-1" cssClass="form-control" headerValue="Select Type" list="docTypeList" name="docType" id="docType" value="%{docType}" tabindex="2" />
                                                     </div>
                                                     <div class="col-sm-3">
                                                         <label>Sender Id</label>
-                                                        <s:textfield name="docSenderId"  id="docSenderId" cssClass="form-control"   value="%{docSenderId}"  /> 
+                                                        <s:textfield name="docSenderId"  id="docSenderId" cssClass="form-control"   value="%{docSenderId}" tabindex="3" /> 
                                                     </div>
                                                     <div class="col-sm-3">
                                                         <label>Sender Name</label>
-                                                        <s:textfield name="docSenderName"  id="docSenderName" cssClass="form-control"   value="%{docSenderName}"  /> 
+                                                        <s:textfield name="docSenderName"  id="docSenderName" cssClass="form-control"   value="%{docSenderName}" tabindex="4" /> 
                                                     </div>
                                                 </div>
                                                 <br>
@@ -201,18 +215,18 @@
                                                     </div>
                                                     <div class="col-sm-3">
                                                         <label>Receiver Name</label>
-                                                        <s:textfield name="docRecName"  id="docRecName" cssClass="form-control"   value="%{docRecName}" tabindex="5" /> 
+                                                        <s:textfield name="docRecName"  id="docRecName" cssClass="form-control"   value="%{docRecName}" tabindex="6" /> 
                                                     </div> 
 
                                                     <div class="col-sm-3">
                                                         <label>Status</label>
-                                                        <s:select headerKey="-1" headerValue="Select Type" list="{'Success','Error','Warning'}" name="status" id="status" value="%{status}" tabindex="10"  cssClass="form-control"/> 
+                                                        <s:select headerKey="-1" headerValue="Select Type" list="{'Success','Error','Warning'}" name="status" id="status" value="%{status}" tabindex="7"  cssClass="form-control"/> 
                                                     </div> 
                                                 </div>
                                                 <br>
                                                 <div class="row">
-                                                    <div class="col-sm-2"> <s:submit value="Search" cssClass="btn btn-primary col-sm-12" onclick="Date1()" tabindex="12"/></div>
-                                                    <div class="col-sm-2"><strong><input type="button" value="Reset" class="btn btn-primary col-sm-12" tabindex="13" onclick="return resetvalues();"/></strong></div>
+                                                    <div class="col-sm-2"> <s:submit value="Search" cssClass="btn btn-primary col-sm-12" onclick="Date1()" tabindex="8"/></div>
+                                                    <div class="col-sm-2"><strong><input type="button" value="Reset" class="btn btn-primary col-sm-12" tabindex="9" onclick="return resetvalues();"/></strong></div>
 
 
                                                     <div id="loadingAcoountSearch" class="loadingImg">
@@ -264,11 +278,11 @@
                                                                     LogisticReportsBean logisticsReportBean;
                                                             %>
                                                             <thead> <tr>
-
+                                                                    <th>DateTime</th>
                                                                     <th>FileFormat</th> 
                                                                     <th>InstanceId</th>
                                                                     <th>Partner</th>
-                                                                    <th>DateTime</th>
+                                                                    
                                                                     <th>TransType</th>
                                                                     <th>Direction</th>
                                                                     <th >Status</th>
@@ -288,7 +302,18 @@
                                                                             cssValue = "grayEditSelection";
                                                                         }
                                                                 %>
-                                                                <tr>   <td>
+                                                                <tr>   
+                                                                    <td>
+                                                                        <%                                                                            
+                                                                            if (logisticsReportBean.getDate_time_rec() != null && !"".equals(logisticsReportBean.getDate_time_rec())) {
+                                                                                out.println(logisticsReportBean.getDate_time_rec().toString().substring(0, logisticsReportBean.getDate_time_rec().toString().lastIndexOf(":")));
+                                                                            } else {
+                                                                                out.println("-");
+                                                                            }
+                                                                        %>
+
+                                                                    </td>
+                                                                    <td>
                                                                         <%
                                                                             if (logisticsReportBean.getFile_type() != null && !"".equals(logisticsReportBean.getFile_type())) {
                                                                                 out.println(logisticsReportBean.getFile_type());
@@ -322,16 +347,7 @@
                                                                     </td>
 
 
-                                                                    <td>
-                                                                        <%                                                                            
-                                                                            if (logisticsReportBean.getDate_time_rec() != null && !"".equals(logisticsReportBean.getDate_time_rec())) {
-                                                                                out.println(logisticsReportBean.getDate_time_rec().toString().substring(0, logisticsReportBean.getDate_time_rec().toString().lastIndexOf(":")));
-                                                                            } else {
-                                                                                out.println("-");
-                                                                            }
-                                                                        %>
-
-                                                                    </td>   
+                                                                       
                                                                     <td>
                                                                         <%
                                                                             if (logisticsReportBean.getTransaction_type() != null && !"".equals(logisticsReportBean.getTransaction_type())) {
@@ -453,19 +469,7 @@
 
             </div>
 
-            <script>
-                $(function () {
-                    //   $("#example1").DataTable();
-                    $('#results').DataTable({
-                        "paging": true,
-                        "lengthChange": true,
-                        "searching": true,
-                        "ordering": true,
-                        "info": true,
-                        "autoWidth": true
-                    });
-                });
-            </script>
+            
 
 
         </div>

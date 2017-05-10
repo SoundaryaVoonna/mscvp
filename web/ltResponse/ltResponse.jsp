@@ -47,6 +47,19 @@
 //                $('#hide-menu1').removeClass('show-menu');
 //               
 //            });
+
+            $(function () {
+                // $("#example1").DataTable();
+                $('#results').DataTable({
+                    "paging": true,
+                    "lengthChange": true,
+                    "searching": true,
+                    "ordering": true,
+                    "info": true,
+                    "autoWidth": false,
+                    order: [[0, 'desc']]
+                });
+            });
         </script>
 
 
@@ -72,12 +85,12 @@
             <section class="content-header">
                 <h1>
                     Response
-                    <small>Logistics</small>
+                    <!--<small>Logistics</small>-->
                 </h1>
-                <ol class="breadcrumb">
+<!--                <ol class="breadcrumb">
                     <li><a href="#"><i class="fa fa-truck"></i>Logistics</a></li>
                     <li class="active">Response</li>
-                </ol>
+                </ol>-->
             </section>
             <br>
             <section class="content">
@@ -98,7 +111,7 @@
                                             <div class="col-sm-12">
                                                 <div class="row">
                                                     <div class="col-sm-3"> <label>Date Range</label>
-                                                        <s:textfield name="reportrange"  id="reportrange" cssClass="form-control pull-left"   value="%{reportrange}" onchange="Date1();" /> 
+                                                        <s:textfield name="reportrange"  id="reportrange" cssClass="form-control pull-left"   value="%{reportrange}" onchange="Date1();" tabindex="1"/> 
                                                     </div>
 
                                                     <script type="text/javascript">
@@ -116,18 +129,18 @@
                                                     <div  class="col-sm-3">
 
                                                         <label>Document Type</label> 
-                                                        <s:select headerKey="-1" cssClass="form-control" headerValue="Select Type" list="docTypeList" name="docType" id="docType" value="%{docType}" />
+                                                        <s:select headerKey="-1" cssClass="form-control" headerValue="Select Type" list="docTypeList" name="docType" id="docType" value="%{docType}" tabindex="2"/>
                                                     </div>
 
                                                     <div  class="col-sm-3">
 
                                                         <label>Sender Id</label>  
-                                                        <s:textfield cssClass="form-control" name="senderId" id="senderId" value="%{senderId}"  />
+                                                        <s:textfield cssClass="form-control" name="senderId" id="senderId" value="%{senderId}" tabindex="3" />
                                                     </div>
 
                                                     <div  class="col-sm-3">
                                                         <label>Sender Name</label>  
-                                                        <s:textfield cssClass="form-control" name="senderName" id="senderName" value="%{senderName}"  />
+                                                        <s:textfield cssClass="form-control" name="senderName" id="senderName" value="%{senderName}" tabindex="4" />
                                                     </div>
 
 
@@ -136,12 +149,12 @@
                                                 <div class="row">
                                                     <div class="col-sm-3">
                                                         <label>Receiver Id</label>
-                                                        <s:textfield cssClass="form-control" name="receiverId" id="receiverId" value="%{receiverId}"  />
+                                                        <s:textfield cssClass="form-control" name="receiverId" id="receiverId" value="%{receiverId}"  tabindex="5"/>
 
                                                     </div>
                                                     <div class="col-sm-3">
                                                         <label>Receiver Name</label>
-                                                        <s:textfield cssClass="form-control" name="receiverName" id="receiverName" value="%{receiverName}"  />
+                                                        <s:textfield cssClass="form-control" name="receiverName" id="receiverName" value="%{receiverName}"  tabindex="6"/>
 
                                                     </div>
                                                     <!--                                                        <div class="col-sm-3">
@@ -150,21 +163,21 @@
                                                 </div>-->
                                                     <div class="col-sm-3">
                                                         <label for="status">Status</label>
-                                                        <s:select headerKey="-1" headerValue="Select Type" cssClass="form-control" list="{'Success','Error','Warning'}" name="status" id="status" value="%{status}"  /> 
+                                                        <s:select headerKey="-1" headerValue="Select Type" cssClass="form-control" list="{'Success','Error','Warning'}" name="status" id="status" value="%{status}" tabindex="7" /> 
                                                     </div>
                                                 </div>
                                                 <br>
                                                 <div class="row">
                                                     <div class="col-sm-3">
                                                         <label for="corrattribute">Correlation</label>
-                                                        <s:select headerKey="-1" headerValue="Select Attribute" cssClass="form-control" list="correlationList" name="corrattribute" id="corrattribute" value="%{corrattribute}"  />
+                                                        <s:select headerKey="-1" headerValue="Select Attribute" cssClass="form-control" list="correlationList" name="corrattribute" id="corrattribute" value="%{corrattribute}" tabindex="8" />
                                                     </div>
                                                     <div class="col-sm-3">
                                                         <label for="corrvalue">Value</label>
-                                                        <s:textfield cssClass="form-control" name="corrvalue" id="corrvalue" value="%{corrvalue}" />
+                                                        <s:textfield cssClass="form-control" name="corrvalue" id="corrvalue" value="%{corrvalue}" tabindex="9"/>
                                                     </div>
                                                     <div class="col-sm-3"><br>
-                                                        <button  type="button" id="addButton" name="addButton" value="Add Div" class="btn btn-success"   style="margin-top:6px ;" ><i class="fa fa-plus"></i></button>
+                                                        <button  type="button" id="addButton" name="addButton" value="Add Div" class="btn btn-success"   style="margin-top:6px ;" tabindex="10"><i class="fa fa-plus"></i></button>
                                                         &nbsp; <label>Add Filter</label>
                                                     </div>
                                                 </div>
@@ -182,7 +195,7 @@
                                                         if (count == 1)
                                                             document.getElementById("corr").style.display = "block";
                                                         else
-                                                            alert('Limit exceded.... cant add more fields');
+                                                            alert('Limit exceded.... cannot add more fields !!');
                                                     })
 
                                                 </script>
@@ -190,11 +203,11 @@
                                                     <br>   <div class="row">
                                                         <div class="col-sm-3">
                                                             <label for="corrattribute1">Correlation</label>
-                                                            <s:select headerKey="-1" headerValue="Select Attribute" cssClass="form-control" list="correlationList" name="corrattribute1" id="corrattribute1" value="%{corrattribute1}"/>
+                                                            <s:select headerKey="-1" headerValue="Select Attribute" cssClass="form-control" list="correlationList" name="corrattribute1" id="corrattribute1" value="%{corrattribute1}" tabindex="11"/>
                                                         </div>
                                                         <div class="col-sm-3">
                                                             <label for="corrvalue1">Value</label>
-                                                            <s:textfield cssClass="form-control" name="corrvalue1" id="corrvalue1" value="%{corrvalue1}" />
+                                                            <s:textfield cssClass="form-control" name="corrvalue1" id="corrvalue1" value="%{corrvalue1}" tabindex="12"/>
                                                         </div>
 
                                                     </div>
@@ -211,9 +224,9 @@
                                         </span>
                                         <div class="row">
 
-                                            <div class="col-sm-2"><s:submit value="Search"  onclick="return checkCorrelation();" cssClass="btn btn-primary col-sm-12" tabindex="16"/></div>
+                                            <div class="col-sm-2"><s:submit value="Search"  onclick="return checkCorrelation();" cssClass="btn btn-primary col-sm-12" tabindex="13"/></div>
 
-                                            <div class="col-sm-2"><strong><input type="button" value="Reset"  tabindex="17" class="btn btn-primary col-sm-12" onclick="return resetvalues();"/></strong></div>
+                                            <div class="col-sm-2"><strong><input type="button" value="Reset"  tabindex="14" class="btn btn-primary col-sm-12" onclick="return resetvalues();"/></strong></div>
 
                                             <s:hidden name="sampleValue" id="sampleValue" value="2"/>
 
@@ -325,8 +338,7 @@
 
 
                                                                         <td>
-                                                                            <%                                                                                
-                                                                                if (ltResponseBean.getShipmentId() != null && !"".equals(ltResponseBean.getShipmentId())) {
+                                                                            <%                                                                                if (ltResponseBean.getShipmentId() != null && !"".equals(ltResponseBean.getShipmentId())) {
                                                                                     out.println(ltResponseBean.getShipmentId());
                                                                                 } else {
                                                                                     out.println("-");
@@ -337,8 +349,7 @@
 
                                                                         </td>
                                                                         <td>
-                                                                            <%                                                                                
-                                                                                if (ltResponseBean.getTransType() != null && !"".equals(ltResponseBean.getTransType())) {
+                                                                            <%                                                                                if (ltResponseBean.getTransType() != null && !"".equals(ltResponseBean.getTransType())) {
                                                                                     out.println(ltResponseBean.getTransType());
                                                                                 } else {
                                                                                     out.println("-");
@@ -539,19 +550,7 @@
     </s:if> 
 </div>
 
-<script>
-    $(function () {
-        // $("#example1").DataTable();
-        $('#results').DataTable({
-            "paging": true,
-            "lengthChange": true,
-            "searching": true,
-            "ordering": true,
-            "info": true,
-            "autoWidth": false
-        });
-    });
-</script>
+
 
 </div>
 <div>

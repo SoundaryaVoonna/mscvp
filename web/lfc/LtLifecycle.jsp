@@ -79,16 +79,16 @@
 //                $('#hide-menu1').removeClass('show-menu');
 //            });
 
-            function doOnLoad() {
-
-                $("#purchaseorder").addClass("active");
-                $("#oredermanagement").addClass("active");
-
-                $("#manufacturing").addClass("active");
-
-                $("#purchaseorder i").addClass("text-red");
-                document.getElementById('loadingAcoountSearch').style.display = "none";
-            }
+//            function doOnLoad() {
+//
+//                $("#purchaseorder").addClass("active");
+//                $("#oredermanagement").addClass("active");
+//
+//                $("#manufacturing").addClass("active");
+//
+//                $("#purchaseorder i").addClass("text-red");
+//                document.getElementById('loadingAcoountSearch').style.display = "none";
+//            }
 
             function doOnLoad()
             {
@@ -98,6 +98,19 @@
 
                 document.getElementById('loadingAcoountSearch').style.display = "none";
             }
+            
+            $(function () {
+                //$("#example1").DataTable();
+                $('#results').DataTable({
+                    "paging": true,
+                    "lengthChange": true,
+                    "searching": true,
+                    "ordering": true,
+                    "info": true,
+                    "autoWidth": false,
+                    order: [[0, 'desc']]
+                });
+            });
 
         </script>
 
@@ -118,12 +131,12 @@
             <section class="content-header">
                 <h1>
                     LifeCycle
-                    <small>Logistics</small>
+                    <!--<small>Logistics</small>-->
                 </h1>
-                <ol class="breadcrumb">
+<!--                <ol class="breadcrumb">
                     <li><a href="#"><i class="fa fa-truck"></i>Logistics</a></li>
                     <li class="active">LifeCycle</li>
-                </ol>
+                </ol>-->
             </section>
             <br>
             <div id="gridDiv">     
@@ -155,12 +168,13 @@
                                                         %>
 
                                                         <thead>  <tr class="gridHeader">
+                                                                <th>DateTime</th>
                                                                 <th>Trans&nbsp;Type</th>
                                                                 <th>Shipment&nbsp;#</th>
                                                                 <th>Instance&nbsp;#</th>
                                                                 <th>Type</th>
                                                                 <th>Direction</th>
-                                                                <th>DateTime</th>  
+                                                                  
                                                                 <th>Status</th>
                                                                 <th>Ack Status</th> 
                                                             </tr></thead>
@@ -178,6 +192,15 @@
 
                                                             <%-- Po Start--%>
                                                             <tr>
+                                                                <td>
+                                                                    <%
+                                                                        if (ltTenderBean.getDatetime() != null) {
+                                                                            out.println(ltTenderBean.getDatetime().toString().substring(0, ltTenderBean.getDatetime().toString().lastIndexOf(":")));
+                                                                        } else {
+                                                                            out.println("--");
+                                                                        }
+                                                                    %>
+                                                                </td>
                                                                 <td>
                                                                     <%
                                                                         if (ltTenderBean.getTran_type() != null) {
@@ -270,15 +293,7 @@
                                                                         }
                                                                     %>
                                                                 </td>
-                                                                <td>
-                                                                    <%
-                                                                        if (ltTenderBean.getDatetime() != null) {
-                                                                            out.println(ltTenderBean.getDatetime().toString().substring(0, ltTenderBean.getDatetime().toString().lastIndexOf(":")));
-                                                                        } else {
-                                                                            out.println("--");
-                                                                        }
-                                                                    %>
-                                                                </td>  
+                                                                  
                                                                 <%--<td>
                                                                   <%
                                                                     out.println(poLifeCycleBean.getSenderId());
@@ -357,14 +372,13 @@
             <div id="hide-menu1" class="hide-menu message ">
 
                 <div class="row col-sm-12">
-
-
+                    <br>
                     <div class="col-sm-6"> <label class="labelw">Instance Id </label>
                         <s:textfield  cssClass="form-control"  required="required" placeholder="" id="LfcInstanceId" name="LfcInstanceId" readonly="true"/>
                     </div>
 
 
-                    <div class="col-sm-6"> <label class="labelw">PO # :</label>
+                    <div class="col-sm-6"> <label class="labelw">PO # </label>
                         <s:textfield  cssClass="form-control"  required="required" placeholder="" id="LfcPONum" name="LfcPONum" readonly="true"/>
                     </div> </div>
 
@@ -380,14 +394,15 @@
                           <div class="col-sm-6"> <label class="labelw">PO Qty :</label>
                               <s:textfield  cssClass="form-control"  required="required" placeholder="" id="LfcPOQty" name="POShipDate" readonly="true"/>
                           </div> --%>
-                <div class="row col-sm-12"> <br>
-                    <div class="col-sm-6"> <label class="labelw">Trans Type :</label>
+                <div class="row col-sm-12"> 
+                    <div class="col-sm-6"> <label class="labelw">Trans Type </label>
                         <s:textfield  cssClass="form-control"  required="required" placeholder="" id="LfcTransactionType" name="LfcTransactionType" readonly="true"/>
                     </div>
+                </div>
                     <br>
                     <div id="senderinfo">
                         <div class="row col-sm-12">
-                            <div class="col-sm-6"> <h5>Partner Info :</h5></div>
+                            <div class="col-sm-6"> <h5>Seder Info :</h5></div>
                             <div class="col-sm-6"></div>
                             <div class="col-sm-6"></div>
 
@@ -405,7 +420,7 @@
                     <br>
                     <div id="receiverinfo">
                         <div class="row col-sm-12">
-                            <div class="col-sm-6"> <h5>Sender Info:</h5></div>
+                            <div class="col-sm-6"> <h5>Receiver Info:</h5></div>
                             <div class="col-sm-6"></div>
                             <div class="col-sm-6"></div>
                         </div>
@@ -419,27 +434,29 @@
                                 <s:textfield  cssClass="form-control"  required="required" placeholder="" id="LfcPOReceiverName" name="LfcPOReceiverName" readonly="true"/>
                             </div>
                         </div>
-                    </div>  <div class="row col-sm-12 clear">
-                        <div class="col-sm-6"> <label class="labelw"> ISA # :</label>
+                    </div> 
+                            
+                            <div class="row col-sm-12 clear">
+                                <br/>
+                        <div class="col-sm-6"> <label class="labelw"> ISA # </label>
                             <s:textfield  cssClass="form-control"  required="required" placeholder="" id="LfcPOIsa" name="LfcPOIsa" readonly="true"/>
                         </div>
-                        <div class="col-sm-6"> <label class="labelw"> ISA Date : </label>
+                        <div class="col-sm-6"> <label class="labelw"> ISA Date  </label>
                             <s:textfield  cssClass="form-control"  required="required" placeholder="" id="LfcPOISADate" name="LfcPOISADate" readonly="true"/>
                         </div>
                     </div>
 
-                    <br/>
-
                     <div class="row col-sm-12" >
 
-                        <div class="col-sm-6"> <label class="labelw">  ISA TIME : </label>
+                        <div class="col-sm-6"> <label class="labelw">  ISA TIME  </label>
                             <s:textfield  cssClass="form-control"  required="required" placeholder="" id="LfcPOIsATime" name="LfcPOIsATime" readonly="true"/>
                         </div>
-                        <div class="col-sm-6"> <label class="labelw"> STATUS :</label>
+                        <div class="col-sm-6"> <label class="labelw"> STATUS </label>
                             <s:textfield  cssClass="form-control"  required="required" placeholder="" id="LfcPOStatus" name="LfcPOStatus" readonly="true"/>
                         </div>
                     </div>
-                    <div class="col-sm-6"> <label class="labelw"> ACK FileId :</label></div>
+                        <div class="row col-sm-12" style="margin-top:10px;">
+                    <div class="col-sm-6"> <label class="labelw"> ACK FileId </label></div>
                     <div class="col-sm-6"><div id="LfcPOAckFileId"></div>
                     </div>
                 </div>
@@ -447,16 +464,11 @@
                     <div class="col-sm-6"> <label class="labelw">  PreTranslation  </label></div>
                     <div class="col-sm-6"><div id="LfcPOPreTransition"></div></div>
                 </div>
-                <div>
+                <div class="row col-sm-12">
                     <div class="col-sm-6"> <label class="labelw"> PostTranslation </label></div>
                     <div class="col-sm-6"><div id="LfcPOPostTransition"></div></div>
                 </div>
                 <%--  <div class="col-sm-6"> <label class="labelw">997ACKFile </label></div>   --%>                   
-
-
-
-
-                <br><br><br><br><br><br>
 
                 <div class="row col-sm-12" id="errorDiv" style="display: none">
                     <div class="col-sm-6"> <label class="labelw"> Error&nbsp;Message </label></div>
@@ -464,32 +476,21 @@
                 </div>
 
                 <div id="noresult"></div>
-                <div class="row col-sm-12">
+                <div class="row col-sm-12" style="margin-top:10px;">
                     <button type="button" class="btn btn-primary col-sm-11" style="margin-left:12px; " id="hide-menu" onclick="hide()" value="X">Close</button>
                 </div>
             </div>
         </div>
 
 
-        <script type="text/javascript">
-            $(function () {
-                //$("#example1").DataTable();
-                $('#results').DataTable({
-                    "paging": true,
-                    "lengthChange": true,
-                    "searching": true,
-                    "ordering": true,
-                    "info": true,
-                    "autoWidth": false
-                });
-            });
-        </script>
+        
         <%--  <div id="footer">
            <h2><font color="white">&#169 2013 Miracle Software Systems, Inc. All rights reserved</font></h2>
                   </div>--%>
 
         <script src='<s:url value="../includes/plugins/datatables/jquery.dataTables.min.js"/>'></script>
         <script src='<s:url value="../includes/plugins/datatables/dataTables.bootstrap.min.js"/>'></script>
+        <script src='<s:url value="../includes/bootstrap/js/app.min.js"/>'></script>
 
         <div>
             <s:include value="../includes/template/footer.jsp"/>

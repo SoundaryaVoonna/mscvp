@@ -385,7 +385,7 @@
                                                         <strong>   <input type="button" value="Remove"  tabindex="17" class="btn btn-primary col-sm-12" onclick="removeValue();"/></strong>
                                                     </div>
                                                     <div class="col-sm-6">
-                                                        <s:submit value="Upload"   onclick="return imageValidation()"  cssClass="btn btn-primary col-sm-12" tabindex="16"/>
+                                                        <s:submit value="Upload" onclick="return imageValidation()"  cssClass="btn btn-primary col-sm-12" tabindex="16"/>
                                                     </div>
                                                 </div>
                                             </s:form>

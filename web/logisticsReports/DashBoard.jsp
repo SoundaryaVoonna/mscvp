@@ -129,12 +129,12 @@
                 %>
                 <h1>
                     Dashboard
-                    <small>Logistics</small>
+                    <!--<small>Logistics</small>-->
                 </h1>
-                <ol class="breadcrumb">
+<!--                <ol class="breadcrumb">
                     <li><a href="#"><i class="fa fa-truck"></i>Logistics</a></li>
                     <li class="active">Dashboard</li>
-                </ol>
+                </ol>-->
             </section>
 
             <br>
@@ -161,7 +161,7 @@
                                             <div class="col-sm-12">
                                                 <div class="row">
                                                     <div class="col-sm-3"> <label>Date Range</label>
-                                                        <s:textfield name="reportrange"  id="reportrange" cssClass="form-control pull-left"   value="%{reportrange}" onchange="Date1()"/> 
+                                                        <s:textfield name="reportrange"  id="reportrange" cssClass="form-control pull-left"   value="%{reportrange}" onchange="Date1()" tabindex="1"/> 
                                                     </div>
                                                     <script type="text/javascript">
         function Date1()
@@ -192,7 +192,7 @@
                                                             headerKey="ALL"
                                                             headerValue="ALL"
                                                             list="partnerMap" 
-                                                            tabindex="13" cssClass="form-control"
+                                                            tabindex="2" cssClass="form-control"
                                                             value="" />
 
                                                     </div><!-- /.box -->
@@ -211,12 +211,12 @@
                                                         <label for="docType">Document Type</label>
 
                                                         <%-- <s:select headerKey="-1" headerValue="Select Type" list="docTypeList" name="docType" id="docType" value="%{docType}" tabindex="13" cssStyle="width : 150px"/> --%>
-                                                        <s:select headerKey="-1" headerValue="Select Type" list="docTypeList" name="docType" id="docType" value="%{docType}" tabindex="13" cssClass="form-control"/>
+                                                        <s:select headerKey="-1" headerValue="Select Type" list="docTypeList" name="docType" id="docType" value="%{docType}" tabindex="3" cssClass="form-control"/>
                                                     </div>  
 
                                                     <div class="col-sm-3">
                                                         <label for="status">Status</label>
-                                                        <s:select headerKey="-1" headerValue="Select Type" list="{'Success','Error','Warning'}" name="status" id="status" value="%{status}" tabindex="14" cssClass="form-control"/>  
+                                                        <s:select headerKey="-1" headerValue="Select Type" list="{'Success','Error','Warning'}" name="status" id="status" value="%{status}" tabindex="4" cssClass="form-control"/>  
                                                     </div>
                                                 </div>
                                             </div>
@@ -228,9 +228,9 @@
                                 <div class="box-footer text-center">
                                     <div class="row">
                                         <%--     <s:submit value="Search" cssClass="button" tabindex="16"/> --%>
-                                        <div class="col-sm-2"> <strong><input type="button" value="Generate" class="btn btn-primary col-sm-12" tabindex="16" onclick="getDashboardDeatls('L');"/></strong></div>
+                                        <div class="col-sm-2"> <strong><input type="button" value="Generate" class="btn btn-primary col-sm-12" tabindex="5" onclick="getDashboardDeatls('L');"/></strong></div>
 
-                                        <div class="col-sm-2">    <strong><input type="reset" value="Reset" class="btn btn-primary col-sm-12" tabindex="17" onclick="return resetValues();"/></strong></div>
+                                        <div class="col-sm-2">    <strong><input type="reset" value="Reset" class="btn btn-primary col-sm-12" tabindex="6" onclick="return resetValues();"/></strong></div>
                                     </div>
 
                                     <s:hidden name="sampleValue" id="sampleValue" value="2"/>

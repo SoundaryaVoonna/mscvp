@@ -67,11 +67,13 @@
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
             <section class="content-header">
-                <h1>Search Certificate Monitoring<small>Certificate Monitoring</small></h1>
-                <ol class="breadcrumb">
+                <h1>Search Certificate Monitoring
+<!--                    <small>Certificate Monitoring</small>-->
+                </h1>
+<!--                <ol class="breadcrumb">
                     <li><a href="#"><i class="fa fa-gavel"></i>Certificate Monitoring</a></li>
                     <li class="active">Search Certificate Monitoring</li>
-                </ol>
+                </ol>-->
             </section>
             <br>
 
@@ -96,7 +98,7 @@
                                             <div class="col-sm-12">
                                                 <div class="row">
                                                     <div class="col-sm-3"> <label>Date Range</label>
-                                                        <s:textfield name="reportrange"  id="reportrange" cssClass="form-control pull-left"   value="%{reportrange}" onchange="Date1();" /> 
+                                                        <s:textfield name="reportrange"  id="reportrange" cssClass="form-control pull-left"   value="%{reportrange}" onchange="Date1();" tabindex="1" /> 
                                                     </div>
                                                     <script type="text/javascript">
         function Date1()
@@ -111,7 +113,7 @@
                                                     <div class="col-sm-3">
                                                         <label for="certType">Certificate Type <font style="color: red">*</font></label>
 
-                                                        <s:select headerKey="-1" headerValue="--Select Type--" cssClass="form-control" list="#@java.util.LinkedHashMap@{'CA':'CA Certificate','System':'System Certificate','Trusted':'Trusted Certificate'}" name="certType" id="certType" value="%{certType}"  /> 
+                                                        <s:select headerKey="-1" headerValue="--Select Type--" cssClass="form-control" list="#@java.util.LinkedHashMap@{'CA':'CA Certificate','System':'System Certificate','Trusted':'Trusted Certificate'}" name="certType" id="certType" value="%{certType}"  tabindex="3"/> 
                                                     </div>
 
                                                 </div>
@@ -130,9 +132,9 @@
                                         </span>
                                         <div class="row">
 
-                                            <div class="col-sm-2"><s:submit value="Search"  cssClass="btn btn-primary col-sm-12" tabindex="16" onclick="return validateCertType();"/></div>
+                                            <div class="col-sm-2"><s:submit value="Search"  cssClass="btn btn-primary col-sm-12" tabindex="3" onclick="return validateCertType();"/></div>
 
-                                            <div class="col-sm-2"><strong><input type="button" value="Reset"  tabindex="17" class="btn btn-primary col-sm-12" onclick="return resetvalues();"/></strong></div>
+                                            <div class="col-sm-2"><strong><input type="button" value="Reset"  tabindex="4" class="btn btn-primary col-sm-12" onclick="return resetvalues();"/></strong></div>
 
                                             <s:hidden name="sampleValue" id="sampleValue" value="2"/>
 
@@ -172,9 +174,9 @@
 
                                                         <table id="results"  class="table table-bordered table-hover">
                                                             <thead><tr>
-                                                                    <th>CERTIFICATE NAME</th>
-                                                                    <th>VALID FROM </th>
                                                                     <th> VALID TILL </th>
+                                                                    <th>VALID FROM </th>
+                                                                    <th>CERTIFICATE NAME</th>
                                                                     <th>DAYS</th> 
                                                                 </tr> </thead>
                                                             <tbody>
@@ -193,7 +195,7 @@
                                                                 %>
                                                                 <tr>
                                                                     <td>
-                                                                        <%                                                                            out.println(valuesarray[0]);
+                                                                        <%                                                                            out.println(valuesarray[2]);
                                                                         %>
                                                                     </td>
                                                                     <td>
@@ -201,7 +203,7 @@
                                                                         %>
                                                                     </td>
                                                                     <td>
-                                                                        <%out.println(valuesarray[2]);
+                                                                        <%out.println(valuesarray[0]);
                                                                         %>
                                                                     </td>  
                                                                     <td>
@@ -281,7 +283,7 @@
             var certType = document.getElementById('certType').value;
             if (certType == "-1")
             {
-                alert("Please select Certificate Type");
+                alert("Please select Certificate Type !!");
                 return false;
             }
             return true;

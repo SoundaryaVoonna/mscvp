@@ -69,6 +69,21 @@
 
         </script>
 
+        <script>
+            $(function () {
+                // $("#example1").DataTable();
+                $('#results').DataTable({
+                    "paging": true,
+                    "lengthChange": true,
+                    "searching": true,
+                    "ordering": true,
+                    "info": true,
+                    "autoWidth": false,
+                    order: [[0, 'desc']]
+                });
+            });
+        </script>
+
 
     </head>
     <%
@@ -114,12 +129,12 @@
             <section class="content-header">
                 <h1>
                     Document Repository
-                    <small>Logistics</small>
+                    <!--<small>Logistics</small>-->
                 </h1>
-                <ol class="breadcrumb">
-                    <li><a href="#"><i class="fa fa-truck"></i>Logistics</a></li>
-                    <li class="active">Document Repository</li>
-                </ol>
+                <!--                <ol class="breadcrumb">
+                                    <li><a href="#"><i class="fa fa-truck"></i>Logistics</a></li>
+                                    <li class="active">Document Repository</li>
+                                </ol>-->
             </section>
             <br>
 
@@ -144,7 +159,7 @@
                                             <div class="col-sm-12">
                                                 <div class="row">
                                                     <div class="col-sm-3"> <label>Date Range</label>
-                                                        <s:textfield name="reportrange"  id="reportrange" cssClass="form-control pull-left"   value="%{reportrange}" onchange="Date1();" /> 
+                                                        <s:textfield name="reportrange"  id="reportrange" cssClass="form-control pull-left"   value="%{reportrange}" onchange="Date1();" tabindex="1"/> 
                                                     </div>
 
                                                     <script type="text/javascript">
@@ -162,17 +177,17 @@
                                                     <div  class="col-sm-3">
 
                                                         <label>Document Type</label> 
-                                                        <s:select headerKey="-1" cssClass="form-control" headerValue="Select Type" list="docTypeList" name="docType" id="docType" value="%{docType}" />
+                                                        <s:select headerKey="-1" cssClass="form-control" headerValue="Select Type" list="docTypeList" name="docType" id="docType" value="%{docType}" tabindex="2"/>
                                                     </div>
 
                                                     <div  class="col-sm-3">
                                                         <label>Sender Id</label>  
-                                                        <s:textfield cssClass="form-control"  name="docSenderId" id="docSenderId" value="%{docSenderId}"  />
+                                                        <s:textfield cssClass="form-control"  name="docSenderId" id="docSenderId" value="%{docSenderId}"  tabindex="3"/>
                                                     </div>
 
                                                     <div  class="col-sm-3">
                                                         <label>Sender Name</label>  
-                                                        <s:textfield cssClass="form-control"  name="docSenderName" id="docSenderName" value="%{docSenderName}"  />
+                                                        <s:textfield cssClass="form-control"  name="docSenderName" id="docSenderName" value="%{docSenderName}"  tabindex="4"/>
                                                     </div>
 
 
@@ -181,29 +196,29 @@
                                                 <div class="row">
                                                     <div class="col-sm-3">
                                                         <label>Receiver Id</label>
-                                                        <s:textfield cssClass="form-control"  name="docBusId" id="docBusId" value="%{docBusId}"  />
+                                                        <s:textfield cssClass="form-control"  name="docBusId" id="docBusId" value="%{docBusId}" tabindex="5" />
                                                     </div>
                                                     <div class="col-sm-3">
                                                         <label>Receiver Name</label>
-                                                        <s:textfield cssClass="form-control"  name="docRecName" id="docRecName" value="%{docRecName}"  />
+                                                        <s:textfield cssClass="form-control"  name="docRecName" id="docRecName" value="%{docRecName}" tabindex="6" />
                                                     </div>
                                                     <div class="col-sm-3">
                                                         <label for="status">Status</label>
-                                                        <s:select headerKey="-1" headerValue="Select Type" cssClass="form-control" list="{'Success','Error','Warning'}" name="status" id="status" value="%{status}"  /> 
+                                                        <s:select headerKey="-1" headerValue="Select Type" cssClass="form-control" list="{'Success','Error','Warning'}" name="status" id="status" value="%{status}"  tabindex="7"/> 
                                                     </div>
                                                 </div>
                                                 <br>
                                                 <div class="row">
                                                     <div class="col-sm-3">
                                                         <label for="corrattribute">Correlation</label>
-                                                        <s:select headerKey="-1" headerValue="Select Attribute" cssClass="form-control" list="correlationList" name="corrattribute" id="corrattribute" value="%{corrattribute}"  />
+                                                        <s:select headerKey="-1" headerValue="Select Attribute" cssClass="form-control" list="correlationList" name="corrattribute" id="corrattribute" value="%{corrattribute}" tabindex="8" />
                                                     </div>
                                                     <div class="col-sm-3">
                                                         <label for="corrvalue">Value</label>
-                                                        <s:textfield cssClass="form-control" name="corrvalue" id="corrvalue" value="%{corrvalue}" />
+                                                        <s:textfield cssClass="form-control" name="corrvalue" id="corrvalue" value="%{corrvalue}" tabindex="9"/>
                                                     </div>
                                                     <div class="col-sm-3"><br>
-                                                        <button  type="button" id="addButton" name="addButton" value="Add Div" class="btn btn-success"   style="margin-top:6px ;" ><i class="fa fa-plus"></i></button>
+                                                        <button  type="button" id="addButton" name="addButton" value="Add Div" class="btn btn-success"   style="margin-top:6px ;" tabindex="10" ><i class="fa fa-plus"></i></button>
                                                         &nbsp; <label>Add Filter</label>
                                                     </div>
                                                 </div>
@@ -221,7 +236,7 @@
                                                         else if (count == 2)
                                                             document.getElementById("corr1").style.display = "block";
                                                         else
-                                                            alert('Limit exceeded.... cant add more fields');
+                                                            alert('Limit exceeded.... cannot add more fields !!');
                                                     })
 
                                                 </script>
@@ -229,11 +244,11 @@
                                                     <br>   <div class="row">
                                                         <div class="col-sm-3">
                                                             <label for="corrattribute1">Correlation</label>
-                                                            <s:select headerKey="-1" headerValue="Select Attribute" cssClass="form-control" list="correlationList" name="corrattribute1" id="corrattribute1" value="%{corrattribute1}"/>
+                                                            <s:select headerKey="-1" headerValue="Select Attribute" cssClass="form-control" list="correlationList" name="corrattribute1" id="corrattribute1" value="%{corrattribute1}" tabindex="11"/>
                                                         </div>
                                                         <div class="col-sm-3">
                                                             <label for="corrvalue1">Value</label>
-                                                            <s:textfield cssClass="form-control" name="corrvalue1" id="corrvalue1" value="%{corrvalue1}" />
+                                                            <s:textfield cssClass="form-control" name="corrvalue1" id="corrvalue1" value="%{corrvalue1}" tabindex="12"/>
                                                         </div>
 
                                                     </div>
@@ -242,11 +257,11 @@
                                                     <br>   <div class="row">
                                                         <div class="col-sm-3">
                                                             <label for="corrattribute2">Correlation</label>
-                                                            <s:select headerKey="-1" headerValue="Select Attribute" cssClass="form-control" list="correlationList" name="corrattribute2" id="corrattribute2" value="%{corrattribute2}"  />
+                                                            <s:select headerKey="-1" headerValue="Select Attribute" cssClass="form-control" list="correlationList" name="corrattribute2" id="corrattribute2" value="%{corrattribute2}" tabindex="13" />
                                                         </div>
                                                         <div class="col-sm-3">
                                                             <label for="corrvalue2">Value</label>
-                                                            <s:textfield cssClass="form-control" name="corrvalue2" id="corrvalue2" value="%{corrvalue2}" />
+                                                            <s:textfield cssClass="form-control" name="corrvalue2" id="corrvalue2" value="%{corrvalue2}" tabindex="14"/>
                                                         </div>
 
                                                     </div></div>
@@ -267,9 +282,9 @@
 
 
 
-                                            <div class="col-sm-2"><s:submit value="Search"  onclick="return checkCorrelation()" cssClass="btn btn-primary col-sm-12" tabindex="16"/></div>
+                                            <div class="col-sm-2"><s:submit value="Search"  onclick="return checkCorrelation()" cssClass="btn btn-primary col-sm-12" tabindex="15"/></div>
 
-                                            <div class="col-sm-2"><strong><input type="button" value="Reset"  tabindex="17" class="btn btn-primary col-sm-12" onclick="return resetvalues();"/></strong></div>
+                                            <div class="col-sm-2"><strong><input type="button" value="Reset"  tabindex="16" class="btn btn-primary col-sm-12" onclick="return resetvalues();"/></strong></div>
 
                                             <s:hidden name="sampleValue" id="sampleValue" value="2"/>
 
@@ -318,13 +333,13 @@
                                                                     LogisticsDocBean logisticsDocBean;
                                                             %>
                                                             <thead><tr>
-
+                                                                    <th >DateTime</th>
                                                                     <th >File&nbsp;Format</th> 
                                                                     <th >InstanceId</th>
                                                                     <th >Partner</th>
                                                                     <th >Shipment</th>
-                                                                    <th >DateTime</th>
-                                                                        <%-- <th >ISA #</th>  --%>
+
+                                                                    <%-- <th >ISA #</th>  --%>
 
                                                                     <%-- <th >DOC_ORIGIN</th> --%>
                                                                     <th >Trans&nbsp;Type</th>
@@ -349,6 +364,15 @@
                                                                                 cssValue = "grayEditSelection";
                                                                             }
                                                                     %>
+                                                                    <td>
+                                                                        <%                                                                            if (logisticsDocBean.getDate_time_rec() != null && !"".equals(logisticsDocBean.getDate_time_rec())) {
+                                                                                out.println(logisticsDocBean.getDate_time_rec().toString().substring(0, logisticsDocBean.getDate_time_rec().toString().lastIndexOf(":")));
+                                                                            } else {
+                                                                                out.println("-");
+                                                                            }
+                                                                        %>
+
+                                                                    </td>
                                                                     <td>
                                                                         <%
                                                                             if (logisticsDocBean.getFile_type() != null && !"".equals(logisticsDocBean.getFile_type())) {
@@ -399,18 +423,9 @@
                                                                     </td>
 
 
-                                                                    <td>
-                                                                        <%                                                                            if (logisticsDocBean.getDate_time_rec() != null && !"".equals(logisticsDocBean.getDate_time_rec())) {
-                                                                                out.println(logisticsDocBean.getDate_time_rec().toString().substring(0, logisticsDocBean.getDate_time_rec().toString().lastIndexOf(":")));
-                                                                            } else {
-                                                                                out.println("-");
-                                                                            }
-                                                                        %>
 
-                                                                    </td>   
                                                                     <td>
-                                                                        <%
-                                                                            if (logisticsDocBean.getTransaction_type() != null && !"".equals(logisticsDocBean.getTransaction_type())) {
+                                                                        <%                                                                            if (logisticsDocBean.getTransaction_type() != null && !"".equals(logisticsDocBean.getTransaction_type())) {
                                                                                 out.println(logisticsDocBean.getTransaction_type());
                                                                             } else {
                                                                                 out.println("-");
@@ -634,19 +649,7 @@
 
     </div>
 
-    <script>
-        $(function () {
-            // $("#example1").DataTable();
-            $('#results').DataTable({
-                "paging": true,
-                "lengthChange": true,
-                "searching": true,
-                "ordering": true,
-                "info": true,
-                "autoWidth": false
-            });
-        });
-    </script>
+
 </div>
 <div>
     <s:include value="../includes/template/footer.jsp"/>

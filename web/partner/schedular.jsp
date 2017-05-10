@@ -53,23 +53,23 @@
                 var userEmail = document.getElementById('userEmail').value;
                 var reportsType = document.getElementById('reportsType').value;
                 if(schtitle=="") {
-                    alert("Please enter Schedule Title!");
+                    alert("Please enter Schedule Title !!");
                     return false;
                 }
                 if(schType=="-1") {
-                    alert("Please select Schedule Type!");
+                    alert("Please select Schedule Type !!");
                     return false;
                 }
                 if(schhours=="-1") {
-                    alert("Please enter Schedule Time!");
+                    alert("Please enter Schedule Time !!");
                     return false;
                 }
                 if(userEmail=="") {
-                    alert("Please select Active Users!");
+                    alert("Please select Active Users !!");
                     return false;
                 }
                 if(reportsType=="-1") {
-                    alert("Please select Reports Type!");
+                    alert("Please select Reports Type !!");
                     return false;
                 }
             }
@@ -160,18 +160,22 @@
                 </ol>--%>
             </s:if><s:elseif test="%{configFlowFlag == 'logistics'}">
                 <% if (request.getAttribute("userPageId").toString().equals("0")) {%>
-                <h1>Scheduler Creation<small> Logistics</small></h1>    
+                <h1>Scheduler Creation
+<!--                    <small> Logistics</small>-->
+                </h1>    
                 <%} else {%>
-                <h1>Update Scheduler<small> Logistics</small></h1> 
+                <h1>Update Scheduler
+<!--                    <small> Logistics</small>-->
+                </h1> 
                 <%}%>
-                <ol class="breadcrumb">
+<!--                <ol class="breadcrumb">
                     <li><a href="#"><i class="fa fa-truck"></i>Logistics</a></li>
                     <% if (request.getAttribute("userPageId").toString().equals("0")) {%>
                     <li class="active"> Scheduler Creation </li>
                     <%} else {%>
                     <li class="active">  Update Scheduler </li>
                     <%}%>
-                </ol>
+                </ol>-->
             </s:elseif>
 
         </section>
@@ -215,7 +219,7 @@
                                                 <div class="row">
                                                     <div class="col-sm-12">
                                                         <div class="row">
-                                                            <div class="col-sm-4"> <label for="schtitle">Schedule Title </label>
+                                                            <div class="col-sm-4"> <label for="schtitle">Schedule Title </label><font style="color:red">*</font>
                                                                 <s:textfield cssClass="form-control" name="schtitle" id="schtitle"  value="%{schtitle}" tabindex="1" />
                                                             </div>
 
@@ -225,36 +229,36 @@
 
                                                             <div  class="col-sm-4">
 
-                                                                <label for="schType">Schedule Type</label> 
-                                                                <s:select headerKey="-1" cssClass="form-control"  headerValue="All" list="{'Daily','Weekely'}" name="schType" id="schType" value="%{schType}" tabindex="2"  onchange="Showfun();"/>
+                                                                <label for="schType">Schedule Type</label><font style="color:red">*</font> 
+                                                                <s:select headerKey="-1" cssClass="form-control"  headerValue="Select Type" list="{'Daily','Weekely'}" name="schType" id="schType" value="%{schType}" tabindex="2"  onchange="Showfun();"/>
                                                             </div>
 
                                                             <div  class="col-sm-4">
-                                                                <label for="schhrFormat">Schedule&nbsp;Time</label>  
+                                                                <label for="schhrFormat">Schedule&nbsp;Time</label><font style="color:red">*</font> 
 
 
 
-                                                                <s:select headerKey="-1" cssClass="form-control" headerValue="HH" list="{'01','02','03','04','05','06','07','08','09','10','11','12'}" name="schhours" id="schhours" value="%{schhours}" tabindex="2" />
+                                                                <s:select headerKey="-1" cssClass="form-control" headerValue="HH" list="{'01','02','03','04','05','06','07','08','09','10','11','12'}" name="schhours" id="schhours" value="%{schhours}" tabindex="3" />
                                                             </div>
-                                                            <div class="col-sm-4"><br> <s:select  list="{'AM','PM'}" name="schhrFormat" id="schhrFormat" value="%{schhrFormat}" tabindex="2" cssClass="form-control"/></div>
+                                                            <div class="col-sm-4"><br> <s:select  list="{'AM','PM'}" name="schhrFormat" id="schhrFormat" value="%{schhrFormat}" tabindex="4" cssClass="form-control"/></div>
                                                         </div>
 
 
                                                         <div class="row">
 
                                                             <div  class="col-sm-4">
-                                                                <label for="userEmail">Active Users</label>  
-                                                                <s:select headerKey="-1" multiple="true" required="true" list="userMap" name="userEmail" id="userEmail" value="receiverids"  cssClass="form-control"/>
+                                                                <label for="userEmail">Active Users</label><font style="color:red">*</font>
+                                                                <s:select headerKey="-1" multiple="true" required="true" list="userMap" name="userEmail" id="userEmail" value="receiverids"  cssClass="form-control" tabindex="5"/>
 
                                                             </div>
                                                             <div class="col-sm-4">
                                                                 <label for="extranalmailids">External User EmailIds</label>
-                                                                <s:textarea  name="extranalmailids" id="extranalmailids"  value="%{extranalmailids}" tabindex="7" cssClass="form-control" onchange="SchEmailValidator(this);checkEmails(this);"/>
+                                                                <s:textarea  name="extranalmailids" id="extranalmailids"  value="%{extranalmailids}" tabindex="6" cssClass="form-control" onchange="SchEmailValidator(this);checkEmails(this);"/>
                                                             </div>  
 
                                                             <div class="col-sm-4">
-                                                                <label for="reportsType">Reports&nbsp;Type</label>
-                                                                <s:select headerKey="-1" cssClass="form-control"  headerValue="All" list="{'ExcelReport'}" name="reportsType" id="reportsType" value="%{reportsType}" tabindex="2"  onchange="Reportstype();"/>
+                                                                <label for="reportsType">Reports&nbsp;Type</label><font style="color:red">*</font>
+                                                                <s:select headerKey="-1" cssClass="form-control"  headerValue="All" list="{'ExcelReport'}" name="reportsType" id="reportsType" value="%{reportsType}" tabindex="7"  onchange="Reportstype();"/>
                                                             </div>
 
                                                         </div>
@@ -282,12 +286,12 @@
                                                     if (request.getAttribute("userPageId").toString().equals("0")) {
                                                 %>
                                                 <div class="col-sm-2"> <s:submit value="Add" cssClass="btn btn-primary col-sm-12" onclick="return checkUservalues();" tabindex="8"/></div>
-                                                <div class="col-sm-2"><strong><input type="button" value="Reset"  tabindex="17" class="btn btn-primary col-sm-12" onclick="return resetvalues();"/></strong></div>
-                                                <div class="col-sm-2">  <strong><input type="button" value="BackToList" class="btn btn-primary col-sm-12" onclick="return getUserList();" tabindex="9"/></strong></div>
+                                                <div class="col-sm-2"><strong><input type="button" value="Reset"  tabindex="9" class="btn btn-primary col-sm-12" onclick="return resetvalues();"/></strong></div>
+                                                <div class="col-sm-2">  <strong><input type="button" value="BackToList" class="btn btn-primary col-sm-12" onclick="return getUserList();" tabindex="10"/></strong></div>
                                                         <%} else {%>
-                                                <div class="col-sm-2"> <s:submit value="Update" cssClass="btn btn-primary col-sm-12"  tabindex="8"/></div>
+                                                <div class="col-sm-2"> <s:submit value="Update" cssClass="btn btn-primary col-sm-12"  tabindex="11"/></div>
 
-                                                <div class="col-sm-2">  <strong><input type="button" value="BackToList" class="btn btn-primary col-sm-12" onclick="return getUserList();" tabindex="9"/></strong></div>
+                                                <div class="col-sm-2">  <strong><input type="button" value="BackToList" class="btn btn-primary col-sm-12" onclick="return getUserList();" tabindex="12"/></strong></div>
 
                                                 <%}%>
 

@@ -276,7 +276,7 @@
                     <ul class="treeview-menu">
                         <li id="certMonitoring"><a href="<s:url action="../utilities/certMonitor.action"/>"><i class="fa fa-circle-o"></i> Certificate Monitoring
                             </a></li>
-                        <li id="codeList"><a href="<s:url action="../utilities/codeList.action"/>"><i class="fa fa-circle-o"></i> Code List</a></li>
+                        <!--<li id="codeList"><a href="<s:url action="../utilities/codeList.action"/>"><i class="fa fa-circle-o"></i> Code List</a></li>-->
                     </ul>
                 </li>
                 <%

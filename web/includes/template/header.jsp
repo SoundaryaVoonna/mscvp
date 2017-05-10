@@ -152,11 +152,58 @@
         </header>
         <!-- Content Wrapper. Contains page content -->
     <!-- Control Sidebar -->
-<aside class="control-sidebar control-sidebar-dark" id="sidebarDiv">
+<%--    <aside class="control-sidebar control-sidebar-dark" id="sidebarDiv">
+     Create the tabs 
+     Tab panes 
+     Home tab content 
+    <div>
+        <div class="col-sm-1"></div>
+        <div class="col-sm-10">
+            <div class="tab-pane active" id="control-sidebar-home-tab">
+                <div class="sidebar-section">
+                    <h2 class="text-light">Profile</h2>
+                    <s:form cssClass="form-control-borderless"   name="resetPwdForm" id="resetPwdForm" theme="simple">
+                       <div id="responseString"></div>
+
+                        </div>
+                        <div class="form-group">
+                            <label for="side-profile-name">Name</label>
+                            <s:textfield  name="sideprofilename" id="sideprofilename" cssClass="form-control" placeholder="John Doe" value="%{#session.userName}" readonly="true" />
+                        </div>
+                        <div class="form-group">
+                            <label for="side-profile-email">Email</label>
+                            <s:textfield id="side-profile-email" name="side-profile-email" cssClass="form-control" placeholder="john.doe@example.com"  value="%{#session.emailid}" readonly="true"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="oldPwd">Old Password</label>
+                            <s:password cssClass="form-control" placeholder="OldPassword" name="oldPwd" id="oldPwd"/>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="newPwd">New Password</label>
+                            <s:password cssClass="form-control" placeholder="NewPassword" name="newPwd" id="newPwd"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="confirmPwd">Confirm New Password</label>
+                            <s:password cssClass="form-control" placeholder="ConfirmPassword" name="confirmPwd" id="confirmPwd"/>
+                        </div><br>
+                        <div class="form-group remove-margin">
+                            <input type="button" value="Update" class="btn btn-primary col-sm-12" onclick="getPassword()"/>
+                        </div>
+                    </s:form>
+                </div>
+            </div>
+        </div>    
+         /.control-sidebar-menu 
+</aside> /.control-sidebar --%>
+<!-- Add the sidebar's background. This div must be placed
+     immediately after the control sidebar -->
+
+     <aside class="control-sidebar-bg control-sidebar control-sidebar-dark" id="sidebarDiv">
     <!-- Create the tabs -->
     <!-- Tab panes -->
     <!-- Home tab content -->
-    <div class="row">
+    <div>
         <div class="col-sm-1"></div>
         <div class="col-sm-10">
             <div class="tab-pane active" id="control-sidebar-home-tab">
@@ -196,8 +243,5 @@
         </div>    
         <!-- /.control-sidebar-menu -->
 </aside><!-- /.control-sidebar -->
-<!-- Add the sidebar's background. This div must be placed
-     immediately after the control sidebar -->
-<div class="control-sidebar-bg"></div>
-    
+
 </div>
