@@ -193,10 +193,10 @@ function doAddPartner(){
     var partnerIdentifier=document.getElementById("partnerIdentifier").value;
     //alert('partnerIdentifier----'+partnerIdentifier);
     if(partnerName.trim()=="" || partnerName.trim()== null){
-        document.getElementById("resultMessage").innerHTML="<font color='red'>Please fill the Partner Name!</font>";
+        document.getElementById("resultMessage").innerHTML="<font color='red'>Please fill the Partner Name !!</font>";
         return false;
     }else if(partnerIdentifier.trim()=="" || partnerIdentifier.trim()== null){
-        document.getElementById("resultMessage").innerHTML="<font color='red'>Please fill the Partner Identifier!</font>";
+        document.getElementById("resultMessage").innerHTML="<font color='red'>Please fill the Partner Identifier !!</font>";
         return false;
     }else{
         return true;

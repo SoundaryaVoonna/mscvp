@@ -41,7 +41,7 @@
                 var configFlowFlag = document.getElementById("configFlowFlag").value;
                 window.location = "../webconfig/addPartner.action?configFlowFlag=" + configFlowFlag;
             }
-            function resetPartvalues()
+            function resetvalues1()
             {
                 document.getElementById("partnerName").value = "";
                 document.getElementById("status").value = "ACTIVE";
@@ -108,12 +108,12 @@
                 </s:if><s:elseif test="%{configFlowFlag1 == 'logistics'}">
                 <section class="content-header">
                     <h1>Partner Edit
-<!--                        <small>Logistics</small>-->
+                        <small>Logistics</small>
                     </h1>
-<!--                    <ol class="breadcrumb">
+                    <ol class="breadcrumb">
                         <li><a href="#"><i class="fa fa-truck"></i>Logistics</a></li>
                         <li class="active"> Partner Edit</li>
-                    </ol> -->
+                    </ol> 
                 </section>
             </s:elseif>
             <s:if test="%{configFlowFlag == 'manufacturing'}">
@@ -174,26 +174,26 @@
                                                     <div class="col-sm-12">
                                                         <div class="row">
                                                             <s:hidden name="partnerId" value="%{partnerId}" id="partnerId"/>
-                                                            <div class="col-xs-3"> <label for="partnerName ">Partner Name </label><font style="color:red">*</font>
+                                                            <div class="col-xs-3"> <label for="partnerName ">Partner Name <font color="red">*</font></label>
 
-                                                                <s:textfield cssClass="form-control" name="partnerName" id="partnerName" tabindex="1" value="%{partnerName}" />
+                                                                <s:textfield cssClass="form-control" name="partnerName" id="partnerName" value="%{partnerName}" tabindex="1"/>
                                                             </div>
 
 
 
                                                             <div  class="col-xs-3">
                                                                 <label for="status">Status</label> 
-                                                                <s:select list="#@java.util.LinkedHashMap@{'ACTIVE':'ACTIVE','INACTIVE':'INACTIVE'}" name="status" id="status" value="%{status}" tabindex="2" cssClass="form-control"/>
+                                                                <s:select list="#@java.util.LinkedHashMap@{'ACTIVE':'ACTIVE','INACTIVE':'INACTIVE'}" name="status" id="status" value="%{status}"  cssClass="form-control" tabindex="2"/>
                                                             </div>
 
                                                             <div  class="col-xs-3">
                                                                 <label for="internalIdentifier">Internal Identifier </label>  
-                                                                <s:textfield cssClass="form-control" name="internalIdentifier" id="internalIdentifier" tabindex="3" value="%{internalIdentifier}" />
+                                                                <s:textfield cssClass="form-control" name="internalIdentifier" id="internalIdentifier"  value="%{internalIdentifier}" tabindex="3"/>
                                                             </div>
 
                                                             <div  class="col-xs-3">
-                                                                <label for="partnerIdentifier">Partner Identifier </label><font style="color:red">*</font>  
-                                                                <s:textfield cssClass="form-control" name="partnerIdentifier" id="partnerIdentifier" tabindex="4" value="%{partnerIdentifier}" />
+                                                                <label for="partnerIdentifier">Partner Identifier <font color="red">*</font></label>  
+                                                                <s:textfield cssClass="form-control" name="partnerIdentifier" id="partnerIdentifier"  value="%{partnerIdentifier}" tabindex="4"/>
                                                             </div>
                                                             <div id="loadingAcoountSearch" class="loadingImg">
                                                                 <span id ="LoadingContent" > <img src="<s:url value="/includes/images/Loader2.gif"/>"   ></span>
@@ -226,10 +226,10 @@
                                                     <div class="row">
                                                         <s:if test="%{formAction == 'doAddPartner'}">
                                                             <div class="col-sm-2"><s:submit value="Save" cssClass="btn btn-primary col-sm-12" tabindex="7"/></div>
-                                                            <div class="col-sm-2"> <strong><input type="button" value="Reset" onclick="return resetPartvalues();" class="btn btn-primary col-sm-12" tabindex="8" /></strong></div>
+                                                            <div class="col-sm-2"> <strong><input type="button" value="Reset" onclick="return resetvalues1();" class="btn btn-primary col-sm-12" tabindex="8" /></strong></div>
                                                                 </s:if><s:else>
                                                             <div class="col-sm-2"><s:submit value="Update" cssClass="btn btn-primary col-sm-12" tabindex="9"/></div>
-                                                            <div class="col-sm-2"> <strong><input type="button" value="Reset" onclick="return resetPartvalues();" class="btn btn-primary col-sm-12" tabindex="10" /></strong></div>
+                                                            <div class="col-sm-2"> <strong><input type="button" value="Reset" onclick="return resetvalues1();" class="btn btn-primary col-sm-12" tabindex="10" /></strong></div>
                                                             <div class="col-sm-2">  <strong><input type="button" value="BackToList" class="btn btn-primary col-sm-12" onclick="return getPartnerList();" tabindex="11"/></strong></div>
                                                                 </s:else>
                                                             </s:form>

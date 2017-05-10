@@ -138,13 +138,11 @@
                 </section>   
             </s:if><s:elseif test="%{configFlowFlag == 'logistics'}">
                 <section class="content-header">
-                    <h1>Partner Search
-<!--                        <small>Logistics</small>-->
-                    </h1>
-<!--                    <ol class="breadcrumb">
+                    <h1>Partner Search<small>Logistics</small></h1>
+                    <ol class="breadcrumb">
                         <li><a href="#"><i class="fa fa-truck"></i>Logistics</a></li>
                         <li class="active">  Partner Search</li>
-                    </ol>-->
+                    </ol>
                 </section>
             </s:elseif>
             <br>
@@ -188,24 +186,24 @@
                                                         <div class="row">
                                                             <div class="col-xs-3"> <label for="partnerName ">Partner Name </label>
 
-                                                                <s:textfield cssClass="form-control" name="partnerName" id="partnerName" tabindex="1" value="%{partnerName}" onchange="fieldLengthValidator(this);"/>
+                                                                <s:textfield cssClass="form-control" name="partnerName" id="partnerName"  value="%{partnerName}" onchange="fieldLengthValidator(this);" tabindex="1"/>
                                                             </div>
 
 
 
                                                             <div  class="col-xs-3">
                                                                 <label for="status">Status</label> 
-                                                                <s:select list="#@java.util.LinkedHashMap@{'ACTIVE':'ACTIVE','INACTIVE':'INACTIVE'}" name="status" id="status" value="%{status}" tabindex="2" cssClass="form-control"/>
+                                                                <s:select list="#@java.util.LinkedHashMap@{'ACTIVE':'ACTIVE','INACTIVE':'INACTIVE'}" name="status" id="status" value="%{status}"  cssClass="form-control" tabindex="2"/>
                                                             </div>
 
                                                             <div  class="col-xs-3">
                                                                 <label for="internalIdentifier">Internal Identifier </label>  
-                                                                <s:textfield cssClass="form-control" name="internalIdentifier" id="internalIdentifier" tabindex="2" value="%{internalIdentifier}" onchange="fieldLengthValidator(this);"/>
+                                                                <s:textfield cssClass="form-control" name="internalIdentifier" id="internalIdentifier"  value="%{internalIdentifier}" onchange="fieldLengthValidator(this);" tabindex="3"/>
                                                             </div>
 
                                                             <div  class="col-xs-3">
                                                                 <label for="partnerIdentifier">Partner Identifier </label>  
-                                                                <s:textfield cssClass="form-control" name="partnerIdentifier" id="partnerIdentifier" tabindex="3" value="%{partnerIdentifier}" onchange="fieldLengthValidator(this);makeUpperCase(this);"/>
+                                                                <s:textfield cssClass="form-control" name="partnerIdentifier" id="partnerIdentifier"  value="%{partnerIdentifier}" onchange="fieldLengthValidator(this);makeUpperCase(this);" tabindex="4"/>
                                                             </div>
                                                             <div id="loadingAcoountSearch" class="loadingImg">
                                                                 <span id ="LoadingContent" > <img src="<s:url value="/includes/images/Loader2.gif"/>"   ></span>
@@ -216,11 +214,11 @@
                                                         <div class="row">
                                                             <div class="col-xs-3">
                                                                 <label for="applicationId">Application ID</label>
-                                                                <s:textfield cssClass="form-control" name="applicationId" id="applicationId" value="%{applicationId}" tabindex="4" onchange="fieldLengthValidator(this);"/>
+                                                                <s:textfield cssClass="form-control" name="applicationId" id="applicationId" value="%{applicationId}"  onchange="fieldLengthValidator(this);" tabindex="5"/>
                                                             </div>
                                                             <div class="col-xs-3">
                                                                 <label for="corrvalue">Country Code</label>
-                                                                <s:textfield cssClass="form-control" name="countryCode" id="countryCode" value="%{countryCode}" tabindex="5" onchange="fieldLengthValidator(this);"/>
+                                                                <s:textfield cssClass="form-control" name="countryCode" id="countryCode" value="%{countryCode}"  onchange="fieldLengthValidator(this);" tabindex="6"/>
                                                             </div>
 
                                                         </div>
@@ -234,9 +232,9 @@
 
                                                     <br>
                                                     <div class="row">
-                                                        <div class="col-sm-2"> <strong><input type="button" value="Add" class="btn btn-primary col-sm-12" tabindex="6" onclick="goToAddPartner();"/></strong></div>
-                                                        <div class="col-sm-2"><s:submit value="Search"  cssClass="btn btn-primary col-sm-12" tabindex="7"/></div>
-                                                        <div class="col-sm-2"><strong><input type="button" value="Reset"  tabindex="8" class="btn btn-primary col-sm-12" onclick="return resetvalues();"/></strong></div>
+                                                        <div class="col-sm-2"> <strong><input type="button" value="Add" class="btn btn-primary col-sm-12" tabindex="7" onclick="goToAddPartner();"/></strong></div>
+                                                        <div class="col-sm-2"><s:submit value="Search"  cssClass="btn btn-primary col-sm-12" tabindex="8"/></div>
+                                                        <div class="col-sm-2"><strong><input type="button" value="Reset"  tabindex="9" class="btn btn-primary col-sm-12" onclick="return resetvalues();"/></strong></div>
 
 
                                                         <s:hidden name="sampleValue" id="sampleValue" value="2"/>

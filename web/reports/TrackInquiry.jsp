@@ -161,7 +161,7 @@
                                             <div class="row">
                                                 <div class="col-sm-3"> <label>Date Range</label>
 
-                                                    <s:textfield name="reportrange"  id="reportrange" cssClass="form-control pull-left"   value="%{reportrange}"  /> 
+                                                    <s:textfield name="reportrange"  id="reportrange" cssClass="form-control pull-left"   value="%{reportrange}"  tabindex="1"/> 
                                                 </div>
 
                                                 <script type="text/javascript">
@@ -181,20 +181,20 @@
 
                                                 <div class="col-sm-3"> <label>Document Type</label>
 
-                                                    <s:select headerKey="-1" headerValue="Select Type" list="docTypeList" name="docType" id="docType" value="%{docType}" tabindex="13" cssClass="form-control"/>
+                                                    <s:select headerKey="-1" headerValue="Select Type" list="docTypeList" name="docType" id="docType" value="%{docType}"  cssClass="form-control" tabindex="2"/>
                                                 </div>
                                                 <div class="col-sm-3"> <label>Partner&nbsp;Name</label>
 
-                                                    <s:select headerKey="-1" headerValue="Select Type" list="partnerMap" name="partnerMapId" id="partnerMapId" tabindex="13" cssClass="form-control"  value="%{partnerMapId}"/>
+                                                    <s:select headerKey="-1" headerValue="Select Type" list="partnerMap" name="partnerMapId" id="partnerMapId"  cssClass="form-control"  value="%{partnerMapId}" tabindex="3"/>
                                                 </div>
 
                                                 <%-- return compareDates(document.getElementById('docdatepickerfrom').value,document.getElementById('docdatepicker').value); --%>
                                             </div>
                                             <br>
                                             <div clas="row">
-                                                <div class="col-sm-2">   <s:submit value="Search" cssClass="btn btn-primary col-sm-12" tabindex="3" onclick="Date1()"/></div>
+                                                <div class="col-sm-2">   <s:submit value="Search" cssClass="btn btn-primary col-sm-12"  onclick="Date1()" tabindex="4"/></div>
 
-                                                <div class="col-sm-2"> <strong><input type="button" value="Reset" class="btn btn-primary col-sm-12" tabindex="3" onclick="return resetValues();"/></strong> </div>
+                                                <div class="col-sm-2"> <strong><input type="button" value="Reset" class="btn btn-primary col-sm-12"  onclick="return resetValues();" tabindex="5"/></strong> </div>
                                             </div>
                                             <s:hidden name="sampleValue" id="sampleValue" value="2"/>
                                             <div id="loadingAcoountSearch" class="loadingImg">

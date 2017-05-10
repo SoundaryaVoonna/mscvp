@@ -298,26 +298,26 @@
 
                                                     <div class="row">
                                                         <div class="col-sm-2"> <label for="name">Name</label></div>
-                                                        <div class="col-sm-4"> <s:textfield name="name"  id="name" placeholder="Nina Mcintire" cssClass="form-control pull-left"   value="%{userBean.name}"  readonly="true"/> 
+                                                        <div class="col-sm-4"> <s:textfield name="name"  id="name" placeholder="Nina Mcintire" cssClass="form-control pull-left"   value="%{userBean.name}"  readonly="true" tabindex="1"/> 
                                                         </div> 
                                                         <div class="col-sm-2"> <label for="education">Education</label></div>
-                                                        <div class="col-sm-4">  <s:textfield name="education"  id="education" placeholder=" B.S. in Computer Science from the University of Tennessee at Knoxville" cssClass="form-control pull-left"   value="%{userBean.education}"  />  
+                                                        <div class="col-sm-4">  <s:textfield name="education"  id="education" placeholder=" B.S. in Computer Science from the University of Tennessee at Knoxville" cssClass="form-control pull-left"   value="%{userBean.education}" tabindex="2" />  
                                                         </div> 
                                                     </div> <br>
                                                     <div class="row">
                                                         <div class="col-sm-2"> <label for="designation">Designation</label></div>
-                                                        <div class="col-sm-4">  <s:textfield name="designation"  id="designation" placeholder="Software Engineer" cssClass="form-control pull-left"   value="%{userBean.designation}"  />  
+                                                        <div class="col-sm-4">  <s:textfield name="designation"  id="designation" placeholder="Software Engineer" cssClass="form-control pull-left"   value="%{userBean.designation}"  tabindex="3"/>  
                                                         </div>
                                                         <div class="col-sm-2">  <label for="location">Location</label> </div>
-                                                        <div class="col-sm-4">   <s:textfield name="location"  id="location" placeholder="Novi MI" cssClass="form-control pull-left"   value="%{userBean.location}"  />  
+                                                        <div class="col-sm-4">   <s:textfield name="location"  id="location" placeholder="Novi MI" cssClass="form-control pull-left"   value="%{userBean.location}" tabindex="4" />  
                                                         </div>
                                                     </div><br>
                                                     <div class="row">
                                                         <div class="col-sm-2"> <label for="organization">Organization</label> </div>
-                                                        <div class="col-sm-4">  <s:textfield name="organization"  id="organization" placeholder="Miracle Software Systems, Inc." cssClass="form-control pull-left"   value="%{userBean.organization}"  />
+                                                        <div class="col-sm-4">  <s:textfield name="organization"  id="organization" placeholder="Miracle Software Systems, Inc." cssClass="form-control pull-left"   value="%{userBean.organization}"  tabindex="5"/>
                                                         </div>
                                                         <div class="col-sm-2"> <label for="dob">DOB</label> </div>
-                                                        <div class="col-sm-4"><div class="inner-addon left-addon"><s:textfield name="dob" data-provide="datepicker"  id="dob" cssClass="form-control pull-left" placeholder="MM/DD/YYYY  &#xf063;"  value="%{userBean.dob}" style="padding: 0px 34px;"  /><i class="fa fa-calendar glyphicon glyphicon-calendar" style="position: relative;right: -9px;top: -26px;"></i></div> 
+                                                        <div class="col-sm-4"><div class="inner-addon left-addon"><s:textfield name="dob" data-provide="datepicker"  id="dob" cssClass="form-control pull-left" placeholder="MM/DD/YYYY  &#xf063;"  value="%{userBean.dob}" style="padding: 0px 34px;" tabindex="6"  /><i class="fa fa-calendar glyphicon glyphicon-calendar" style="position: relative;right: -9px;top: -26px;"></i></div> 
                                                                 <%-- <div class="col-sm-4"><div class="inner-addon"><s:textfield name="dob" data-provide="datepicker"  id="dob" cssClass="form-control pull-left" placeholder="MM/DD/YYYY"  value="%{userBean.dob}"  /></div> --%>
 
                                                         </div>
@@ -328,20 +328,20 @@
                                                     <div class="row">
                                                         <div class="col-sm-2"><label for="gender">Gender</label></div> 
                                                         <div class="col-sm-4" style="padding:13px">
-                                                            <s:radio name="gender" id="gender" cssClass="width:30px" list="{'Male','Female'}" value="%{userBean.gender}" ></s:radio>
+                                                            <s:radio name="gender" id="gender" cssClass="width:30px" list="{'Male','Female'}" value="%{userBean.gender}" tabindex="7"></s:radio>
                                                             </div>
 
                                                             <div class="col-sm-2">
                                                                 <label>Phone Number</label>
                                                             </div>
                                                             <div class="col-sm-4">
-                                                            <s:textfield name="phonenumber"  id="phonenumber" placeholder="9123456780" cssClass="form-control pull-left"   value="%{userBean.phonenumber}" onchange="formatPhone(this)" />  
+                                                            <s:textfield name="phonenumber"  id="phonenumber" placeholder="9123456780" cssClass="form-control pull-left"   value="%{userBean.phonenumber}" onchange="formatPhone(this)" tabindex="8" />  
                                                         </div>
                                                     </div> <br>
 
                                                     <div class="row">
 
-                                                        <div class="col-sm-2"><b> <s:submit value="Update" cssClass="btn btn-primary btn-block"/></b></div>
+                                                        <div class="col-sm-2"><b> <s:submit value="Update" cssClass="btn btn-primary btn-block" tabindex="9"/></b></div>
                                                         <div class="col-sm-6"></div>
                                                         <div class="col-sm-4"></div>
                                                     </div>
@@ -366,7 +366,7 @@
                                                     <div class="col-sm-12">
                                                         <center> 
                                                             <s:url id="uImage" action="renderImage" namespace="/user"> </s:url>
-                                                            <img src="<s:property value="#uImage" />" width="100" height="100" class="img-circle" alt="User Image"/>
+                                                            <img src="<s:property value="#uImage" />" width="100" height="100" class="img-circle" alt="User Image" tabindex="1"/>
                                                             <!--                                                        <img src="../bootstrap/img/user2-160x160.jpg" class="img-circle" alt="User Image"> --></center>
                                                     </div>
                                                 </div> <br>
@@ -377,15 +377,15 @@
                                                                 <!--                                                      IMAGE:</td><td><input type="file" name="image" id="image"/>-->
                                                                 <!--                                                            <input class="form-control" id="fileDestination" name="fileDestination" placeholder="Upload" readonly required="required" type="text">-->
                                                                 <span><imageErrorMsg></imageerrormsg></span>
-                                                                        <s:file name="imageUpdate" cssClass="btn btn-primary btn-block btn-flat" id="imageUpdate" onchange="ValidateFileUpload();"/>
+                                                                        <s:file name="imageUpdate" cssClass="btn btn-primary btn-block btn-flat" id="imageUpdate" onchange="ValidateFileUpload();" tabindex="2"/>
                                                             </div>
                                                         </div> </center> </div> <br>
                                                 <div class="row">
                                                     <div class="col-sm-6">
-                                                        <strong>   <input type="button" value="Remove"  tabindex="17" class="btn btn-primary col-sm-12" onclick="removeValue();"/></strong>
+                                                        <strong>   <input type="button" value="Remove"   class="btn btn-primary col-sm-12" onclick="removeValue();" tabindex="3"/></strong>
                                                     </div>
                                                     <div class="col-sm-6">
-                                                        <s:submit value="Upload" onclick="return imageValidation()"  cssClass="btn btn-primary col-sm-12" tabindex="16"/>
+                                                        <s:submit value="Upload" onclick="return imageValidation()"  cssClass="btn btn-primary col-sm-12" tabindex="4"/>
                                                     </div>
                                                 </div>
                                             </s:form>
@@ -407,7 +407,7 @@
                                             <div class="form-group" >
                                                 <label for="oldpassword" class="col-sm-2">Old Password</label>
                                                 <div class="col-sm-4">
-                                                    <s:password cssClass="form-control" placeholder="Old Password" name="oldPwd" id="oldPwd"/>
+                                                    <s:password cssClass="form-control" placeholder="Old Password" name="oldPwd" id="oldPwd" tabindex="1"/>
                                                 </div> 
                                                 <div class="col-sm-3"></div>
                                                 <div class="col-sm-3"></div>
@@ -418,7 +418,7 @@
                                             <div class="form-group">
                                                 <label for="newpassword" class="col-sm-2">New Password</label>
                                                 <div class="col-sm-4">
-                                                    <s:password cssClass="form-control" placeholder="New Password" name="newPwd" id="newPwd"/>
+                                                    <s:password cssClass="form-control" placeholder="New Password" name="newPwd" id="newPwd" tabindex="2"/>
                                                 </div>
                                                 <div class="col-sm-3"></div>
                                                 <div class="col-sm-3"></div>
@@ -429,7 +429,7 @@
                                             <div class="form-group">
                                                 <label for="confirmpassword" class="col-sm-2">Confirm Password</label>
                                                 <div class="col-sm-4">
-                                                    <s:password cssClass="form-control" placeholder="Confirm Password" name="confirmPwd" id="confirmPwd"/>
+                                                    <s:password cssClass="form-control" placeholder="Confirm Password" name="confirmPwd" id="confirmPwd" tabindex="3"/>
                                                 </div>
                                                 <div class="col-sm-3"></div>
                                                 <div class="col-sm-3"></div>
@@ -437,7 +437,7 @@
                                         </div>
                                         <br>
                                         <div class="row">
-                                            <div class="col-sm-2"><s:submit value="Update" cssClass="btn btn-primary col-sm-12" tabindex="16"/></div>
+                                            <div class="col-sm-2"><s:submit value="Update" cssClass="btn btn-primary col-sm-12" tabindex="4"/></div>
 
                                             <div class="col-sm-6"></div>
                                             <div class="col-sm-4"></div>

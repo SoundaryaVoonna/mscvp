@@ -108,7 +108,7 @@
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-sm-3"> <label>Date Range</label>
-                                                        <s:textfield name="reportrange"  id="reportrange" cssClass="form-control pull-left"   value="%{reportrange}"  onchange="Date1()"/> 
+                                                        <s:textfield name="reportrange"  id="reportrange" cssClass="form-control pull-left"   value="%{reportrange}"  onchange="Date1()" tabindex="1"/> 
                                                     </div>
                                                     <script type="text/javascript">
         function Date1()
@@ -126,34 +126,34 @@
 
                                                     <div  class="col-sm-3">
                                                         <label>Sender Id</label> 
-                                                        <s:select headerKey="-1" cssClass="form-control" headerValue="Select Type" list="senderIdList" name="docSenderId" id="docSenderId" value="%{docSenderId}" />
+                                                        <s:select headerKey="-1" cssClass="form-control" headerValue="Select Type" list="senderIdList" name="docSenderId" id="docSenderId" value="%{docSenderId}" tabindex="2"/>
                                                     </div>
                                                     <div  class="col-sm-3">
                                                         <label>Sender Name</label> 
-                                                        <s:select headerKey="-1" cssClass="form-control" headerValue="Select Type" list="senderNameList" name="docSenderName" id="docSenderName" value="%{docSenderName}" />
+                                                        <s:select headerKey="-1" cssClass="form-control" headerValue="Select Type" list="senderNameList" name="docSenderName" id="docSenderName" value="%{docSenderName}" tabindex="3"/>
                                                     </div>
                                                     <div  class="col-sm-3">
                                                         <label>Receiver Id</label> 
-                                                        <s:select headerKey="-1" cssClass="form-control" headerValue="Select Type" list="receiverIdList" name="docReceiverId" id="docReceiverId" value="%{docReceiverId}" />
+                                                        <s:select headerKey="-1" cssClass="form-control" headerValue="Select Type" list="receiverIdList" name="docReceiverId" id="docReceiverId" value="%{docReceiverId}" tabindex="4"/>
                                                     </div> 
                                                 </div>
                                                 <br>
                                                 <div class="row">
                                                     <div  class="col-sm-3">
                                                         <label>Receiver Name</label> 
-                                                        <s:select headerKey="-1" cssClass="form-control" headerValue="Select Type" list="receiverNameList" name="docReceiverName" id="docReceiverName" value="%{docReceiverName}" />
+                                                        <s:select headerKey="-1" cssClass="form-control" headerValue="Select Type" list="receiverNameList" name="docReceiverName" id="docReceiverName" value="%{docReceiverName}" tabindex="5"/>
                                                     </div>  
                                                     <div  class="col-sm-3">
                                                         <label>Document Type</label>
-                                                        <s:select headerKey="-1" cssClass="form-control" headerValue="Select Type" list="docTypeList" name="docType" id="docType" value="%{docType}" />
+                                                        <s:select headerKey="-1" cssClass="form-control" headerValue="Select Type" list="docTypeList" name="docType" id="docType" value="%{docType}" tabindex="6"/>
                                                     </div>  
                                                     <div  class="col-sm-3">
                                                         <label>Status</label> 
-                                                        <s:select headerKey="-1" cssClass="form-control" headerValue="Select Type" list="{'Success','Error','Warning'}" name="status" id="status" value="%{status}" />
+                                                        <s:select headerKey="-1" cssClass="form-control" headerValue="Select Type" list="{'Success','Error','Warning'}" name="status" id="status" value="%{status}" tabindex="7"/>
                                                     </div>  
                                                     <div  class="col-sm-3">
                                                         <label>Ack Status</label> 
-                                                        <s:select headerKey="-1" cssClass="form-control" headerValue="Select Type" list="{'Overdue','Accepted','Rejected'}" name="ackStatus" id="ackStatus" value="%{ackStatus}" />
+                                                        <s:select headerKey="-1" cssClass="form-control" headerValue="Select Type" list="{'Overdue','Accepted','Rejected'}" name="ackStatus" id="ackStatus" value="%{ackStatus}" tabindex="8"/>
                                                     </div>
                                                     <div id="loadingAcoountSearch" class="loadingImg">
                                                         <span id ="LoadingContent" > <img src="<s:url value="/includes/images/Loader2.gif"/>"   ></span>
@@ -163,8 +163,8 @@
                                         </div>
                                         <br>
                                         <div class="row">
-                                            <div class="col-sm-2"><s:submit value="Search" onclick="return checkReport();" cssClass="btn btn-primary col-sm-12" tabindex="16"/></div>
-                                            <div class="col-sm-2"><strong><input type="button" value="Reset"  tabindex="17" class="btn btn-primary col-sm-12" onclick="return resetvaluesExcelReport();"/></strong></div>
+                                            <div class="col-sm-2"><s:submit value="Search" onclick="return checkReport();" cssClass="btn btn-primary col-sm-12" tabindex="9"/></div>
+                                            <div class="col-sm-2"><strong><input type="button" value="Reset"   class="btn btn-primary col-sm-12" onclick="return resetvaluesExcelReport();" tabindex="10"/></strong></div>
                                                     <s:hidden name="sampleValue" id="sampleValue" value="2"/>
                                                 </s:form>
                                     </div>

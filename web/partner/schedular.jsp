@@ -230,7 +230,7 @@
                                                             <div  class="col-sm-4">
 
                                                                 <label for="schType">Schedule Type</label><font style="color:red">*</font> 
-                                                                <s:select headerKey="-1" cssClass="form-control"  headerValue="Select Type" list="{'Daily','Weekely'}" name="schType" id="schType" value="%{schType}" tabindex="2"  onchange="Showfun();"/>
+                                                                <s:select headerKey="-1" cssClass="form-control"  headerValue="Select Type" list="{'Daily','Weekely'}" name="schType" id="schType" value="%{schType}"   onchange="Showfun();" tabindex="2"/>
                                                             </div>
 
                                                             <div  class="col-sm-4">
@@ -240,7 +240,7 @@
 
                                                                 <s:select headerKey="-1" cssClass="form-control" headerValue="HH" list="{'01','02','03','04','05','06','07','08','09','10','11','12'}" name="schhours" id="schhours" value="%{schhours}" tabindex="3" />
                                                             </div>
-                                                            <div class="col-sm-4"><br> <s:select  list="{'AM','PM'}" name="schhrFormat" id="schhrFormat" value="%{schhrFormat}" tabindex="4" cssClass="form-control"/></div>
+                                                            <div class="col-sm-4"><br> <s:select  list="{'AM','PM'}" name="schhrFormat" id="schhrFormat" value="%{schhrFormat}"  cssClass="form-control" tabindex="4"/></div>
                                                         </div>
 
 
@@ -253,12 +253,12 @@
                                                             </div>
                                                             <div class="col-sm-4">
                                                                 <label for="extranalmailids">External User EmailIds</label>
-                                                                <s:textarea  name="extranalmailids" id="extranalmailids"  value="%{extranalmailids}" tabindex="6" cssClass="form-control" onchange="SchEmailValidator(this);checkEmails(this);"/>
+                                                                <s:textarea  name="extranalmailids" id="extranalmailids"  value="%{extranalmailids}"  cssClass="form-control" onchange="SchEmailValidator(this);checkEmails(this);" tabindex="6"/>
                                                             </div>  
 
                                                             <div class="col-sm-4">
                                                                 <label for="reportsType">Reports&nbsp;Type</label><font style="color:red">*</font>
-                                                                <s:select headerKey="-1" cssClass="form-control"  headerValue="All" list="{'ExcelReport'}" name="reportsType" id="reportsType" value="%{reportsType}" tabindex="7"  onchange="Reportstype();"/>
+                                                                <s:select headerKey="-1" cssClass="form-control"  headerValue="All" list="{'ExcelReport'}" name="reportsType" id="reportsType" value="%{reportsType}"   onchange="Reportstype();" tabindex="7"/>
                                                             </div>
 
                                                         </div>

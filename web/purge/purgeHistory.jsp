@@ -72,12 +72,12 @@
             <section class="content-header">
                 <h1>
                     Purge History
-                    <small>History</small>
+<!--                    <small>History</small>-->
                 </h1>
-                <ol class="breadcrumb">
+<!--                <ol class="breadcrumb">
                     <li><a href="#"><i class="fa fa-remove"></i>History</a></li>
                     <li class="active">Purge History</li>
-                </ol>
+                </ol>-->
             </section>
             <br>
 
@@ -110,8 +110,8 @@
                                                             out.println(responseString);
                                                         }
                                                     %>
-                                                    <div class="col-sm-3"> <label>Date range</label> <font style="color:red">*</font>
-                                                        <s:textfield name="reportrange"  id="reportrange" cssClass="form-control pull-left"  tabindex="1" value="%{reportrange}"  onchange="Date1()"/> 
+                                                    <div class="col-sm-3"> <label>Date Range</label> <font style="color:red">*</font>
+                                                        <s:textfield name="reportrange"  id="reportrange" cssClass="form-control pull-left"   value="%{reportrange}"  onchange="Date1()" tabindex="1"/> 
                                                     </div>
                                                     <div class="col-sm-3">
                                                         <label>Transaction&nbsp;Type</label><font style="color:red">*</font>
@@ -120,9 +120,9 @@
 
                                                 </div>     <br>
                                                 <div class ="row"> 
-                                                    <div class="col-sm-2"><s:submit value="Search History"  onclick="return checkValues();" tabindex="3" cssClass="btn btn-primary col-sm-12" /></div>
+                                                    <div class="col-sm-2"><s:submit value="Search History"  onclick="return checkValues();"  cssClass="btn btn-primary col-sm-12" tabindex="3" /></div>
 
-                                                    <div class="col-sm-2"><strong><input type="button" value="Reset"  tabindex="4" class="btn btn-primary col-sm-12" onclick="return resetvalues();"/></strong></div>
+                                                    <div class="col-sm-2"><strong><input type="button" value="Reset"   class="btn btn-primary col-sm-12" onclick="return resetvalues();" tabindex="4"/></strong></div>
                                                 </div>
                                                 <s:hidden name="sampleValue" id="sampleValue" value="2"/>
                                                 <s:hidden name="datepickerfrom" id="datepickerfrom" value=""/>
@@ -258,7 +258,7 @@
             var transType = document.getElementById("transType").value;
             if (date == "")
             {
-                alert("Please enter Date range !!");
+                alert("Please enter Date Range !!");
                 return false;
             }
             if (transType == "-1")

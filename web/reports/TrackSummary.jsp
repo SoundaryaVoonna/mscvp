@@ -217,7 +217,7 @@
                                             <div class="form-group">
                                                 <div class="row">
                                                     <div class="col-sm-3"> <label>Date Range</label>
-                                                        <s:textfield name="reportrange"  id="reportrange" cssClass="form-control pull-left"   value="%{reportrange}"  /> 
+                                                        <s:textfield name="reportrange"  id="reportrange" cssClass="form-control pull-left"   value="%{reportrange}"  tabindex="1"/> 
                                                     </div>
 
                                                     <script type="text/javascript">
@@ -266,7 +266,7 @@
                                                     <div  class="col-sm-3">
 
                                                         <label>NetworkVan</label> 
-                                                        <s:select headerKey="-1" cssClass="form-control" headerValue="Select Type" list="networklanlist" name="docNetworkvan" id="docNetworkvan" value="%{docNetworkvan}" tabindex="3" /> 
+                                                        <s:select headerKey="-1" cssClass="form-control" headerValue="Select Type" list="networklanlist" name="docNetworkvan" id="docNetworkvan" value="%{docNetworkvan}" tabindex="2" /> 
                                                     </div>
                                                       <div id="loadingAcoountSearch" class="loadingImg">
                                                     <span id ="LoadingContent" > <img src="<s:url value="/includes/images/Loader2.gif"/>"   ></span>
@@ -276,8 +276,8 @@
                                             <br>
 
                                             <div class="row">
-                                                <div class="col-sm-2"><s:submit value="Search"  onclick="Date1()" cssClass="btn btn-primary col-sm-12" tabindex="16"/></div>
-                                                <div class="col-sm-2">   <strong><input type="button" value="Reset" class="btn btn-primary col-sm-12" tabindex="17" onclick="return resetValues();"/></strong></div>
+                                                <div class="col-sm-2"><s:submit value="Search"  onclick="Date1()" cssClass="btn btn-primary col-sm-12" tabindex="3"/></div>
+                                                <div class="col-sm-2">   <strong><input type="button" value="Reset" class="btn btn-primary col-sm-12"  onclick="return resetValues();" tabindex="4"/></strong></div>
                                             </div>
 
                                             <s:hidden name="sampleValue" id="sampleValue" value="2"/>

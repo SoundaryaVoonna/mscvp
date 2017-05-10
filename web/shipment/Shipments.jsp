@@ -96,7 +96,7 @@
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-sm-3"> <label>Date Range</label>
-                                                        <s:textfield name="reportrange"  id="reportrange" cssClass="form-control pull-left"   value="%{reportrange}" onchange="Date1();" /> 
+                                                        <s:textfield name="reportrange"  id="reportrange" cssClass="form-control pull-left"   value="%{reportrange}" onchange="Date1();"  tabindex="1" /> 
                                                     </div>
                                                     <script type="text/javascript">
                                                         function Date1() {
@@ -109,49 +109,49 @@
                                                     </script>
                                                     <div  class="col-sm-3">
                                                         <label>Document Type</label> 
-                                                        <s:select headerKey="-1" cssClass="form-control" headerValue="Select Type" list="{'856'}" name="docType" id="docType" value="%{docType}" />
+                                                        <s:select headerKey="-1" cssClass="form-control" headerValue="Select Type" list="{'856'}" name="docType" id="docType" value="%{docType}"  tabindex="2"/>
                                                     </div>
                                                     <div  class="col-sm-3">
                                                         <label>Sender Id</label>  
-                                                        <s:select headerKey="-1" cssClass="form-control" headerValue="Select Type" list="senderIdList" name="senderId" id="senderId" value="%{senderId}"  />
+                                                        <s:select headerKey="-1" cssClass="form-control" headerValue="Select Type" list="senderIdList" name="senderId" id="senderId" value="%{senderId}"   tabindex="3"/>
                                                     </div>
                                                     <div  class="col-sm-3">
                                                         <label>Sender Name</label>  
-                                                        <s:select headerKey="-1" cssClass="form-control" headerValue="Select Type" list="senderNameList" name="senderName" id="senderName" value="%{senderName}"  />
+                                                        <s:select headerKey="-1" cssClass="form-control" headerValue="Select Type" list="senderNameList" name="senderName" id="senderName" value="%{senderName}"   tabindex="4"/>
                                                     </div>
                                                 </div>
                                                 <br>
                                                 <div class="row">
                                                     <div class="col-sm-3">
                                                         <label>Receiver Id</label>
-                                                        <s:select headerKey="-1" cssClass="form-control" headerValue="Select Type" list="receiverIdList" name="buId" id="buId" value="%{buId}"  />
+                                                        <s:select headerKey="-1" cssClass="form-control" headerValue="Select Type" list="receiverIdList" name="buId" id="buId" value="%{buId}"   tabindex="5"/>
                                                     </div>
                                                     <div class="col-sm-3">
                                                         <label>Receiver Name</label>
-                                                        <s:select headerKey="-1" cssClass="form-control" headerValue="Select Type" list="receiverNameList" name="recName" id="recName" value="%{recName}"  />
+                                                        <s:select headerKey="-1" cssClass="form-control" headerValue="Select Type" list="receiverNameList" name="recName" id="recName" value="%{recName}"   tabindex="6"/>
                                                     </div>
                                                     <div class="col-sm-3">
                                                         <label for="ackStatus">Ack Status</label>
-                                                        <s:select headerKey="-1" headerValue="Select Type" cssClass="form-control" list="{'Overdue','Accepted','Rejected'}" name="ackStatus" id="ackStatus" value="%{ackStatus}"  /> 
+                                                        <s:select headerKey="-1" headerValue="Select Type" cssClass="form-control" list="{'Overdue','Accepted','Rejected'}" name="ackStatus" id="ackStatus" value="%{ackStatus}"   tabindex="7"/> 
                                                     </div>
                                                     <div class="col-sm-3">
                                                         <label for="status">Status</label>
-                                                        <s:select headerKey="-1" headerValue="Select Type" cssClass="form-control" list="{'Success','Error','Warning'}" name="status" id="status" value="%{status}"  /> 
+                                                        <s:select headerKey="-1" headerValue="Select Type" cssClass="form-control" list="{'Success','Error','Warning'}" name="status" id="status" value="%{status}"  tabindex="8" /> 
                                                     </div>
                                                 </div>
                                                 <br>
                                                 <div class="row">
                                                     <div class="col-sm-3">
                                                         <label for="corrattribute">Correlation</label>
-                                                        <s:select headerKey="-1" headerValue="Select Attribute" cssClass="form-control" list="correlationList" name="corrattribute" id="corrattribute" value="%{corrattribute}"  />
+                                                        <s:select headerKey="-1" headerValue="Select Attribute" cssClass="form-control" list="correlationList" name="corrattribute" id="corrattribute" value="%{corrattribute}"   tabindex="9"/>
                                                     </div>
                                                     <div class="col-sm-3">
                                                         <label for="corrvalue">Value</label>
-                                                        <s:textfield cssClass="form-control" name="corrvalue" id="corrvalue" value="%{corrvalue}" />
+                                                        <s:textfield cssClass="form-control" name="corrvalue" id="corrvalue" value="%{corrvalue}"  tabindex="10"/>
                                                     </div>
 
                                                     <div class="col-sm-3"><br>
-                                                        <button  type="button" id="addButton" name="addButton" value="Add Div" class="btn btn-success"   style="margin-top:6px ;" ><i class="fa fa-plus"></i></button>
+                                                        <button  type="button" id="addButton" name="addButton" value="Add Div" class="btn btn-success"   style="margin-top:6px ;"  tabindex="11" ><i class="fa fa-plus"></i></button>
                                                         &nbsp; <label>Add Filter</label>
                                                     </div>
                                                     <div id="loadingAcoountSearch" class="loadingImg">
@@ -167,18 +167,18 @@
                                                         //   else if(count==2)
                                                         //   document.getElementById("corr1").style.display = "block";
                                                         else
-                                                            alert('Limit exceded.... cant add more fields');
+                                                            alert('Limit exceded.... cannot add more fields !!');
                                                     })
                                                 </script>
                                                 <div id="corr" style="display: none">
                                                     <br>   <div class="row">
                                                         <div class="col-sm-3">
                                                             <label for="corrattribute1">Correlation</label>
-                                                            <s:select headerKey="-1" headerValue="Select Attribute" cssClass="form-control" list="correlationList" name="corrattribute1" id="corrattribute1" value="%{corrattribute1}"/>
+                                                            <s:select headerKey="-1" headerValue="Select Attribute" cssClass="form-control" list="correlationList" name="corrattribute1" id="corrattribute1" value="%{corrattribute1}"  tabindex="12"/>
                                                         </div>
                                                         <div class="col-sm-3">
                                                             <label for="corrvalue1">Value</label>
-                                                            <s:textfield cssClass="form-control" name="corrvalue1" id="corrvalue1" value="%{corrvalue1}" />
+                                                            <s:textfield cssClass="form-control" name="corrvalue1" id="corrvalue1" value="%{corrvalue1}"  tabindex="13"/>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -186,8 +186,8 @@
                                         </div>
                                         <br>
                                         <div class="row">
-                                            <div class="col-sm-2"><s:submit value="Search"  onclick="return checkCorrelation();" cssClass="btn btn-primary col-sm-12" tabindex="16"/></div>
-                                            <div class="col-sm-2"><strong><input type="button" value="Reset"  tabindex="17" class="btn btn-primary col-sm-12" onclick="return resetvaluesShipment();"/></strong></div>
+                                            <div class="col-sm-2"><s:submit value="Search"  onclick="return checkCorrelation();" cssClass="btn btn-primary col-sm-12" tabindex="14"/></div>
+                                            <div class="col-sm-2"><strong><input type="button" value="Reset"   class="btn btn-primary col-sm-12" onclick="return resetvaluesShipment();" tabindex="15"/></strong></div>
                                             <s:hidden name="sampleValue" id="sampleValue" value="2"/>
                                         </s:form>
                                     </div>

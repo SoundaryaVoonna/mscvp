@@ -70,12 +70,12 @@
             <section class="content-header">
                 <h1>
                     Purge Process
-                    <small>Purging</small>
+<!--                    <small>Purging</small>-->
                 </h1>
-                <ol class="breadcrumb">
+<!--                <ol class="breadcrumb">
                     <li><a href="#"><i class="fa fa-remove"></i>Purging</a></li>
                     <li class="active">Purge Process</li>
-                </ol>
+                </ol>-->
             </section>
             <br>
 
@@ -110,7 +110,7 @@
                                                     %>
                                                     <div class="col-sm-3">
                                                         <label>Day Count<font color="red">*</font></label>
-                                                            <s:textfield  cssClass="form-control"  name="dayCount" id="dayCount"  tabindex="1" onblur="return validatenumber(this);"/>
+                                                            <s:textfield  cssClass="form-control"  name="dayCount" id="dayCount"  onblur="return validatenumber(this);" tabindex="1"/>
                                                     </div>
                                                     <div class="col-sm-3">
                                                         <label>Transaction&nbsp;Type<font color = "red">*</font></label>
@@ -123,9 +123,9 @@
                                                     </div></div>  </div></div>
                                         
                                                         <br>      <div class="row">
-                                            <div class="col-sm-2"><s:submit value="Purge Data"  onclick="return checkValues();" tabindex="4" cssClass="btn btn-primary col-sm-12"/></div>
+                                            <div class="col-sm-2"><s:submit value="Purge Data"  onclick="return checkValues();" cssClass="btn btn-primary col-sm-12" tabindex="4"/></div>
 
-                                            <div class="col-sm-2"><strong><input type="reset" value="Reset"  tabindex="5" class="btn btn-primary col-sm-12" onclick="return resetvalues();"/></strong></div>
+                                            <div class="col-sm-2"><strong><input type="reset" value="Reset"  class="btn btn-primary col-sm-12" onclick="return resetvalues();"  tabindex="5"/></strong></div>
 
                                             <s:hidden name="sampleValue" id="sampleValue" value="2"/>
 

@@ -226,7 +226,7 @@
 
                                             <div class="row">
                                                 <div class="col-sm-2"><s:submit value="Search"   cssClass="btn btn-primary col-sm-12" tabindex="2"/></div>
-                                                <div class="col-sm-2">   <strong><input type="button" value="Add" class="btn btn-primary col-sm-12" tabindex="3" onclick="goToSchdularReport();"/></strong></div>
+                                                <div class="col-sm-2">   <strong><input type="button" value="Add" class="btn btn-primary col-sm-12"  onclick="goToSchdularReport();" tabindex="3"/></strong></div>
                                             </div>
 
                                             <s:hidden name="sampleValue" id="sampleValue" value="2"/>

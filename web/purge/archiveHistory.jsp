@@ -83,12 +83,12 @@
             <section class="content-header">
                 <h1>
                     Archive History
-                    <small>History</small>
+<!--                    <small>History</small>-->
                 </h1>
-                <ol class="breadcrumb">
+<!--                <ol class="breadcrumb">
                     <li><a href="#"><i class="fa fa-remove"></i>History</a></li>
                     <li class="active">Archive History</li>
-                </ol>
+                </ol>-->
             </section>
             <br>
 
@@ -125,8 +125,8 @@
                                                     <s:hidden name="datepicker" id="datepicker" value=""/>
 
                                                     <s:hidden name="sampleValue" id="sampleValue" value="2"/>
-                                                    <div class="col-sm-3"> <label>Date range<font color="red">*</font></label>
-                                                            <s:textfield name="reportrange"  id="reportrange" cssClass="form-control pull-left"  tabindex="1"  value="%{reportrange}" onchange="Date1()"/> 
+                                                    <div class="col-sm-3"> <label>Date Range<font color="red">*</font></label>
+                                                            <s:textfield name="reportrange"  id="reportrange" cssClass="form-control pull-left"    value="%{reportrange}" onchange="Date1()" tabindex="1"/> 
                                                     </div>
                                                     <div class="col-sm-3">
                                                         <label>Transaction&nbsp;Type<font color="red">*</font></label>
@@ -137,8 +137,8 @@
                                                 <br>
 
                                                 <div class ="row">
-                                                    <div class="col-sm-2"><s:submit value="Search History"  onclick="return checkValues();" tabindex="3" cssClass="btn btn-primary col-sm-12"/></div>
-                                                    <div class="col-sm-2"><strong><input type="button" value="Reset"  tabindex="4" class="btn btn-primary col-sm-12" onclick="return resetvalues();"/></strong></div>
+                                                    <div class="col-sm-2"><s:submit value="Search History"  onclick="return checkValues();"  cssClass="btn btn-primary col-sm-12" tabindex="3"/></div>
+                                                    <div class="col-sm-2"><strong><input type="button" value="Reset"   class="btn btn-primary col-sm-12" onclick="return resetvalues();" tabindex="4"/></strong></div>
                                                 </div>
 
 
@@ -264,7 +264,7 @@
                     var transType = document.getElementById("transType").value;
                     if (date == "")
                     {
-                        alert("Please enter Date range !!");
+                        alert("Please enter Date Range !!");
                         return false;
                     }
                     if (transType == "-1")

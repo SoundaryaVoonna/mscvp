@@ -245,7 +245,7 @@
                                         <div class="form-group">
                                             <div class="row">
                                                 <div class="col-sm-3"> <label>Date Range</label><font style="color:red">*</font>
-                                                    <s:textfield name="reportrange"  id="reportrange" cssClass="form-control pull-left"   value="%{reportrange}"  /> 
+                                                    <s:textfield name="reportrange"  id="reportrange" cssClass="form-control pull-left"   value="%{reportrange}"  tabindex="1"/> 
                                                 </div>
                                                 <div id="loadingAcoountSearch" class="loadingImg">
                                                     <span id ="LoadingContent" > <img src="<s:url value="/includes/images/Loader2.gif"/>"   ></span>
@@ -256,8 +256,8 @@
                                             </div>
                                             <br>
                                             <div class="row">
-                                                <div class="col-sm-2"><s:submit value="Search"  onclick="return Date1();" cssClass="btn btn-primary col-sm-12" tabindex="16"/></div>
-                                                <div class="col-sm-2">   <strong><input type="button" value="Reset" class="btn btn-primary col-sm-12" tabindex="17" onclick="return resetvalues();"/></strong></div>
+                                                <div class="col-sm-2"><s:submit value="Search"  onclick="return Date1();" cssClass="btn btn-primary col-sm-12" tabindex="2"/></div>
+                                                <div class="col-sm-2">   <strong><input type="button" value="Reset" class="btn btn-primary col-sm-12"  onclick="return resetvalues();" tabindex="3"/></strong></div>
 
                                             </div>
                                             <s:hidden name="sampleValue" id="sampleValue" value="2"/>
@@ -621,7 +621,7 @@
                 {
                     var date=document.trackInOutForm.reportrange.value;
                     if(date==''){
-                        alert("Please Select Date Range");
+                        alert("Please select Date Range");
                         return false;
                     }
                     var arr=date.split("-");
