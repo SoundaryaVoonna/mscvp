@@ -54,17 +54,17 @@
                 // alert("test");
             }
 
-            function getPartnerList() {
-                var configFlowFlag1 = $('#configFlowFlag1').val();
-             //   if ((configFlowFlag1 == 'manufacturing')) {
-             //       location.href = "../partner/getPartnerList.action?configFlowFlag=" + configFlowFlag1;
-             //   }
-               // else if ((configFlowFlag1 == 'logistics')) {
-                  location.href = "../partner/getPartnerList.action?configFlowFlag=" + configFlowFlag1;
-                   //location.href = "../partner/partnerSearch.action";
-               // }
-             //   return true;
-            }
+//            function getPartnerList() {
+//                var configFlowFlag1 = $('#configFlowFlag1').val();
+//             //   if ((configFlowFlag1 == 'manufacturing')) {
+//             //       location.href = "../partner/getPartnerList.action?configFlowFlag=" + configFlowFlag1;
+//             //   }
+//               // else if ((configFlowFlag1 == 'logistics')) {
+//                  location.href = "../partner/getPartnerList.action?configFlowFlag=" + configFlowFlag1;
+//                   //location.href = "../partner/partnerSearch.action";
+//               // }
+//             //   return true;
+//            }
         </script>
 
     </head>
@@ -169,6 +169,7 @@
                                             <s:hidden name="sampleValue" id="sampleValue" value="2"/>
                                             <s:hidden name="configFlowFlag" value="%{configFlowFlag}" id="configFlowFlag"/> 
                                             <s:hidden name="configFlowFlag1" value="%{configFlowFlag1}" id="configFlowFlag1"/> 
+                                            <s:hidden name="formAction" id="formAction" value="%{formAction}"/>
                                             <div class="form-group">
                                                 <div class="row">
                                                     <div class="col-sm-12">
@@ -229,8 +230,16 @@
                                                             <div class="col-sm-2"> <strong><input type="button" value="Reset" onclick="return resetvalues1();" class="btn btn-primary col-sm-12" tabindex="8" /></strong></div>
                                                                 </s:if><s:else>
                                                             <div class="col-sm-2"><s:submit value="Update" cssClass="btn btn-primary col-sm-12" tabindex="9"/></div>
-                                                            <div class="col-sm-2"> <strong><input type="button" value="Reset" onclick="return resetvalues1();" class="btn btn-primary col-sm-12" tabindex="10" /></strong></div>
-                                                            <div class="col-sm-2">  <strong><input type="button" value="BackToList" class="btn btn-primary col-sm-12" onclick="return getPartnerList();" tabindex="11"/></strong></div>
+                                                                      <s:url var="myUrl" action="../partner/partnerSearch.action">
+
+                                                            <s:param name="status" value="%{status}"/>
+
+                                                        </s:url>
+                                                               <div class="col-sm-2">  <s:a href='%{#myUrl}' style="text-decoration:none;">
+                                                            <strong><input type="button" value="BackToList" class="btn btn-primary col-sm-12" tabindex="9"/></strong></s:a></div>        
+<!--                                                            <div class="col-sm-2"> <strong><input type="button" value="Reset" onclick="return resetPartvalues();" class="btn btn-primary col-sm-12" tabindex="10" /></strong></div>-->
+<!--                                                            <div class="col-sm-2">  <strong><input type="button" value="BackToList" class="btn btn-primary col-sm-12" onclick="return getPartnerList();" tabindex="11"/></strong></div>-->
+                                                           
                                                                 </s:else>
                                                             </s:form>
                                                 </div>

@@ -292,7 +292,7 @@
                                                             <thead>  <tr>
                                                                     <th >Action</th>
                                                                     <th >PartnerName </th>
-                                                                    <th>InternalIdentifier</td>
+                                                                    <th>InternalIdentifier</th>
                                                                     <th>PartnerIdentifier</th>
                                                                     <th>ApplicationId </th>
                                                                     <th>CountryCode </th>

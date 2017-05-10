@@ -225,10 +225,6 @@
                                             <div class="col-sm-2"><strong><input type="button" value="Reset"  tabindex="17" class="btn btn-primary col-sm-12" onclick="return resetvalues();"/></strong></div>
 
                                             <s:hidden name="sampleValue" id="sampleValue" value="2"/>
-
-
-
-                                        </s:form>
                                     </div>
                                 </div>
                             </div>
@@ -421,17 +417,17 @@
                                                     <td colspan="4" align="right" bgcolor="white" ><%    if (searchResult.size() != 0) {%>
 
 
-                                                        <strong><input type="button" name="First" id="First" value="First" class="btn btn-effect-ripple btn-primary" 
+                                                        <strong><input type="button" name="First" id="First" value="<<" class="btn btn-effect-ripple btn-primary" 
                                                                        onclick="gridNext(this);" align="right"></strong>
-                                                        <strong> <input type="button" name="Previous" id="Previous" value="Previous" class="btn btn-effect-ripple btn-primary"  
+                                                        <strong> <input type="button" name="Previous" id="Previous" value="<" class="btn btn-effect-ripple btn-primary"  
                                                                         onclick="gridNext(this);" align="right"> </strong>
                                                         (<%=strIntStartGrid + 1%> - <%=strIntEndGrid%> of <%=resultCount%>)
-                                                        <strong><input type="button" name="Next" id="Next" value="Next" class="btn btn-effect-ripple btn-primary" 
+                                                        <strong><input type="button" name="Next" id="Next" value=">" class="btn btn-effect-ripple btn-primary" 
                                                                        onclick="gridNext(this);" align="right"></strong>
-                                                        <strong><input type="button" name="Last" id="Last" value="Last" class="btn btn-effect-ripple btn-primary"  
+                                                        <strong><input type="button" name="Last" id="Last" value=">>" class="btn btn-effect-ripple btn-primary"  
                                                                        onclick="gridNext(this);" align="right"></strong>
 
-                                                        <s:select list="pageList" cssClass="form-control" name="pageNumber" id="pageNumber" headerKey="select" headerValue="select" onchange="goToPage();" />
+                                                        <s:select list="pageList" name="pageNumber" id="pageNumber" headerKey="select" headerValue="select" onchange="goToPage();" />
 
                                                         <%}%>
 
@@ -466,6 +462,7 @@
                                     </div></div>
                             </div> </section>
                         </s:if>
+                </s:form>
             </div>
 
 

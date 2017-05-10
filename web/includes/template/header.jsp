@@ -52,7 +52,28 @@
         var oldpwd=document.getElementById("oldPwd").value;
         var newpwd=document.getElementById("newPwd").value;
         var cnfrmpwd=document.getElementById("confirmPwd").value;
-       
+             if(oldpwd==""){
+           document.getElementById("responseString").innerHTML="<font style='color:red'>Please enter Old Paassword !!</font>";
+                    return false; 
+       }
+          if(newpwd==""){
+          // alert("Please enter New Paassword !!");
+           document.getElementById("responseString").innerHTML="<font style='color:red'>Please enter New Paassword !!</font>";
+                    return false; 
+       }
+          if(cnfrmpwd==""){
+           //alert("Please enter Confirm Paassword !!");
+            document.getElementById("responseString").innerHTML="<font style='color:red'>Please enter Confirm Paassword !!</font>";
+                    return false; 
+       }
+       if(newpwd!=cnfrmpwd){
+          // alert("Please enter New Password and Confirm equal !!");
+         
+            document.getElementById("responseString").innerHTML="<font style='color:red'>New Password and Confirm Password must be same!!</font>";
+             document.getElementById("confirmPwd").value="";
+           return false;
+       }
+        $("#loadingImage").show();
         var url="../ajax/changePassword.action?oldPwd="+oldpwd+"&newPwd="+newpwd+"&cnfrmPwd="+cnfrmpwd;
        
        
@@ -83,6 +104,7 @@
         {
             var val1=request.responseText;
             document.getElementById("responseString").innerHTML=val1;
+             $("#loadingImage").hide();
         }
     }
 </script>
@@ -225,7 +247,7 @@
                             <label for="oldPwd">Old Password</label>
                             <s:password cssClass="form-control" placeholder="OldPassword" name="oldPwd" id="oldPwd"/>
                         </div>
-
+                        <div id="loadingImage" align="center" style="display:none;z-index: 100px"><img  src="../includes/images/ajax-loader.gif" /></div>
                         <div class="form-group">
                             <label for="newPwd">New Password</label>
                             <s:password cssClass="form-control" placeholder="NewPassword" name="newPwd" id="newPwd"/>
