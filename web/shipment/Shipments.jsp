@@ -31,7 +31,7 @@
         <link rel="stylesheet" href='<s:url value="/includes/plugins/daterangepicker/daterangepicker.css"/>' type="text/css">
         <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
         <script type="text/javascript">
-            $(function() {
+            $(function () {
                 //$("#example1").DataTable();
                 $('#results').DataTable({
                     "paging": true,
@@ -66,12 +66,12 @@
             <section class="content-header">
                 <h1>
                     Shipments 
-<!--                    <small>Manufacturing</small>-->
+                    <!--                    <small>Manufacturing</small>-->
                 </h1>
-<!--                <ol class="breadcrumb">
-                    <li><a href="#"><i class="fa fa-wrench"></i>Manufacturing</a></li>
-                    <li class="active">Shipments </li>
-                </ol>-->
+                <!--                <ol class="breadcrumb">
+                                    <li><a href="#"><i class="fa fa-wrench"></i>Manufacturing</a></li>
+                                    <li class="active">Shipments </li>
+                                </ol>-->
             </section>
             <br>
             <section class="content">
@@ -160,7 +160,7 @@
                                                 </div>
                                                 <script>
                                                     var count = 0;
-                                                    $("#addButton").click(function() {
+                                                    $("#addButton").click(function () {
                                                         count++;
                                                         if (count == 1)
                                                             document.getElementById("corr").style.display = "block";
@@ -188,8 +188,8 @@
                                         <div class="row">
                                             <div class="col-sm-2"><s:submit value="Search"  onclick="return checkCorrelation();" cssClass="btn btn-primary col-sm-12" tabindex="14"/></div>
                                             <div class="col-sm-2"><strong><input type="button" value="Reset"   class="btn btn-primary col-sm-12" onclick="return resetvaluesShipment();" tabindex="15"/></strong></div>
-                                            <s:hidden name="sampleValue" id="sampleValue" value="2"/>
-                                        </s:form>
+                                                    <s:hidden name="sampleValue" id="sampleValue" value="2"/>
+                                                </s:form>
                                     </div>
                                 </div>
                             </div>
@@ -327,12 +327,12 @@
                                                         </table>
                                                     </td>
                                                 </tr>
-                                               </tbody>
+                                                </tbody>
                                             </table></div>
-                                        <%-- Process butttons  start --%>
-                                        <% // out.println(session.getAttribute(AppConstants.SES_ROLE_ID));
-                                            if ((session.getAttribute(AppConstants.SES_ROLE_ID).equals("100") || session.getAttribute(AppConstants.SES_ROLE_ID).equals("104")) && list.size() != 0) {
-                                        %><br>
+                                            <%-- Process butttons  start --%>
+                                            <% // out.println(session.getAttribute(AppConstants.SES_ROLE_ID));
+                                                if ((session.getAttribute(AppConstants.SES_ROLE_ID).equals("100") || session.getAttribute(AppConstants.SES_ROLE_ID).equals("104")) && list.size() != 0) {
+                                            %><br>
                                         <div class="row">
                                             <div id="gridButtons" >
                                                 <div class="col-sm-2"><input type="button" value="Generate Excel" class="btn btn-effect-ripple btn-primary" onclick="return gridDownload('shipment', 'xls');" onmouseover="Tip('Click here to generate an excel Report.')" onmouseout="UnTip()"  id="excel"/></div>
@@ -454,6 +454,10 @@
                     <div class="col-sm-6">  <label class="labelw">  Error&nbsp;Message </label></div>
                     <div class="col-sm-6" id="mserrormessage" style="color: red"></div>
                 </div>
+                <div class="row col-sm-12" id="errorReportDiv" style="display: none">
+                    <div class="col-sm-6"> <label class="labelw">  Error&nbsp;Report </label></div>
+                    <div class="col-sm-6"><div id="ErrReport"></div></div>
+                </div>
                 <div id="noresult"></div>
                 <br/>
                 <div class="row col-sm-12" style="margin-top:10px;"> <button type="button" class="btn btn-primary col-sm-11" id="hide-menu" onclick="hide()" style="margin-left:12px;" value="X">Close</button></div>
@@ -502,19 +506,19 @@
                         var corrattr1 = document.getElementById('corrattribute1').value;
                         var corrval1 = document.getElementById('corrvalue1').value;
                         if ((corrattr != "-1") && (corrval == "")) {
-                            alert("please enter Correlation Value!!!");
+                            alert("Please enter Correlation Value !!");
                             return false;
                         }
                         if ((corrattr == "-1") && (corrval != "")) {
-                            alert("please select Correlation!");
+                            alert("Please select Correlation !!");
                             return false;
                         }
                         if ((corrattr1 != "-1") && (corrval1 == "")) {
-                            alert("please enter Correlation Value!!!");
+                            alert("Please enter Correlation Value !!");
                             return false;
                         }
                         if ((corrattr1 == "-1") && (corrval1 != "")) {
-                            alert("please select Correlation!");
+                            alert("Please select Correlation !!");
                             return false;
                         }
                         var res = Formvalidation(document.getElementById('datepickerfrom').value, document.getElementById('datepicker').value);

@@ -117,29 +117,30 @@ public class AjaxHandlerServiceImpl implements AjaxHandlerService {
         PreparedStatement statement = null;
         ResultSet resultSet = null;
         StringBuffer sb = new StringBuffer();
- if("ARCHIVE".equals(database)){
-     queryString = "SELECT ARCHIVE_FILES.FILE_TYPE,ARCHIVE_FILES.TRANSACTION_TYPE as TRANSACTION_TYPE,ARCHIVE_FILES.ISA_NUMBER,"
-                + "ARCHIVE_FILES.GS_CONTROL_NUMBER,ARCHIVE_FILES.ST_CONTROL_NUMBER,ARCHIVE_PO.FILE_ID as FILE_ID,ARCHIVE_PO.PO_Number,ARCHIVE_PO.Order_Date,ARCHIVE_PO.PO_VALUE,ARCHIVE_PO.SAP_IDOC_Number,"
-                + "ARCHIVE_FILES.SENDER_ID,ARCHIVE_FILES.RECEIVER_ID,ARCHIVE_PO.DELIVERY_STATUS,ARCHIVE_PO.SHIP_DATE,ARCHIVE_PO.ROUTINGS, ARCHIVE_PO.INVOICED_AMOUNT,ARCHIVE_PO.PAYMENT_RECEIVED,ARCHIVE_PO.SHIP_ADDRESS_ID,ARCHIVE_PO.BILL_ADDRESS_ID,"
-                + "ARCHIVE_PO.ITEM_QTY,ARCHIVE_FILES.PRE_TRANS_FILEPATH,ARCHIVE_FILES.POST_TRANS_FILEPATH,"
-                + "ARCHIVE_FILES.ORG_FILEPATH,ARCHIVE_FILES.ERR_MESSAGE,ARCHIVE_PO.SO_NUMBER,ARCHIVE_FILES.STATUS,ARCHIVE_FILES.ISA_DATE,ARCHIVE_FILES.ISA_TIME,"
-                + "ARCHIVE_FILES.ACK_FILE_ID as ACK_FILE_ID,ARCHIVE_PO.ORDER_STATUS AS ORDER_STATUS,TP1.NAME as SENDER_NAME,TP2.NAME as RECEIVER_NAME "
-                + "FROM ARCHIVE_PO LEFT OUTER JOIN ARCHIVE_FILES ON (ARCHIVE_PO.PO_NUMBER = ARCHIVE_FILES.PRI_KEY_VAL and ARCHIVE_PO.FILE_ID = ARCHIVE_FILES.FILE_ID) "
-                + "LEFT OUTER JOIN TP TP1 ON (TP1.ID=ARCHIVE_FILES.SENDER_ID) LEFT OUTER JOIN TP TP2 ON (TP2.ID = ARCHIVE_FILES.RECEIVER_ID) "
-                + "WHERE FLOWFLAG like 'M' AND ARCHIVE_PO.PO_NUMBER LIKE '%" + poNumber + "%' and ARCHIVE_FILES.FILE_ID "
-                + "LIKE '%" + poInst + "%'";
- }else{
-     queryString = "SELECT FILES.FILE_TYPE,Files.TRANSACTION_TYPE as TRANSACTION_TYPE,FILES.ISA_NUMBER,"
-                + "FILES.GS_CONTROL_NUMBER,FILES.ST_CONTROL_NUMBER,PO.FILE_ID as FILE_ID,PO.PO_Number,PO.Order_Date,PO.PO_VALUE,PO.SAP_IDOC_Number,"
-                + "FILES.SENDER_ID,FILES.RECEIVER_ID,PO.DELIVERY_STATUS,PO.SHIP_DATE,PO.ROUTINGS, PO.INVOICED_AMOUNT,PO.PAYMENT_RECEIVED,PO.SHIP_ADDRESS_ID,PO.BILL_ADDRESS_ID,"
-                + "PO.ITEM_QTY,FILES.PRE_TRANS_FILEPATH,FILES.POST_TRANS_FILEPATH,"
-                + "FILES.ORG_FILEPATH,FILES.ERR_MESSAGE,PO.SO_NUMBER,FILES.STATUS,FILES.ISA_DATE,FILES.ISA_TIME,"
-                + "FILES.ACK_FILE_ID as ACK_FILE_ID,PO.ORDER_STATUS AS ORDER_STATUS,TP1.NAME as SENDER_NAME,TP2.NAME as RECEIVER_NAME "
-                + "FROM PO LEFT OUTER JOIN FILES ON (PO.PO_NUMBER = FILES.PRI_KEY_VAL and PO.FILE_ID = FILES.FILE_ID) "
-                + "LEFT OUTER JOIN TP TP1 ON (TP1.ID=FILES.SENDER_ID) LEFT OUTER JOIN TP TP2 ON (TP2.ID = FILES.RECEIVER_ID) "
-                + "WHERE FLOWFLAG like 'M' AND PO.PO_NUMBER LIKE '%" + poNumber + "%' and FILES.FILE_ID "
-                + "LIKE '%" + poInst + "%'";
- }
+        if ("ARCHIVE".equals(database)) {
+            queryString = "SELECT ARCHIVE_FILES.FILE_TYPE,ARCHIVE_FILES.TRANSACTION_TYPE as TRANSACTION_TYPE,ARCHIVE_FILES.ISA_NUMBER,"
+                    + "ARCHIVE_FILES.GS_CONTROL_NUMBER,ARCHIVE_FILES.ST_CONTROL_NUMBER,ARCHIVE_PO.FILE_ID as FILE_ID,ARCHIVE_PO.PO_Number,ARCHIVE_PO.Order_Date,ARCHIVE_PO.PO_VALUE,ARCHIVE_PO.SAP_IDOC_Number,"
+                    + "ARCHIVE_FILES.SENDER_ID,ARCHIVE_FILES.RECEIVER_ID,ARCHIVE_PO.DELIVERY_STATUS,ARCHIVE_PO.SHIP_DATE,ARCHIVE_PO.ROUTINGS, ARCHIVE_PO.INVOICED_AMOUNT,ARCHIVE_PO.PAYMENT_RECEIVED,ARCHIVE_PO.SHIP_ADDRESS_ID,ARCHIVE_PO.BILL_ADDRESS_ID,"
+                    + "ARCHIVE_PO.ITEM_QTY,ARCHIVE_FILES.PRE_TRANS_FILEPATH,ARCHIVE_FILES.POST_TRANS_FILEPATH,ARCHIVE_FILES.ERROR_REPORT_FILEPATH as ERROR_REPORT_FILEPATH, "
+                    + "ARCHIVE_FILES.ORG_FILEPATH,ARCHIVE_FILES.ERR_MESSAGE,ARCHIVE_PO.SO_NUMBER,ARCHIVE_FILES.STATUS,ARCHIVE_FILES.ISA_DATE,ARCHIVE_FILES.ISA_TIME,"
+                    + "ARCHIVE_FILES.ACK_FILE_ID as ACK_FILE_ID,ARCHIVE_PO.ORDER_STATUS AS ORDER_STATUS,TP1.NAME as SENDER_NAME,TP2.NAME as RECEIVER_NAME "
+                    + "FROM ARCHIVE_PO LEFT OUTER JOIN ARCHIVE_FILES ON (ARCHIVE_PO.PO_NUMBER = ARCHIVE_FILES.PRI_KEY_VAL and ARCHIVE_PO.FILE_ID = ARCHIVE_FILES.FILE_ID) "
+                    + "LEFT OUTER JOIN TP TP1 ON (TP1.ID=ARCHIVE_FILES.SENDER_ID) LEFT OUTER JOIN TP TP2 ON (TP2.ID = ARCHIVE_FILES.RECEIVER_ID) "
+                    + "WHERE FLOWFLAG like 'M' AND ARCHIVE_PO.PO_NUMBER LIKE '%" + poNumber + "%' and ARCHIVE_FILES.FILE_ID "
+                    + "LIKE '%" + poInst + "%'";
+        } else {
+            queryString = "SELECT FILES.FILE_TYPE,Files.TRANSACTION_TYPE as TRANSACTION_TYPE,FILES.ISA_NUMBER,"
+                    + "FILES.GS_CONTROL_NUMBER,FILES.ST_CONTROL_NUMBER,PO.FILE_ID as FILE_ID,PO.PO_Number,PO.Order_Date,PO.PO_VALUE,PO.SAP_IDOC_Number,"
+                    + "FILES.SENDER_ID,FILES.RECEIVER_ID,PO.DELIVERY_STATUS,PO.SHIP_DATE,PO.ROUTINGS, PO.INVOICED_AMOUNT,PO.PAYMENT_RECEIVED,PO.SHIP_ADDRESS_ID,PO.BILL_ADDRESS_ID,"
+                    + "PO.ITEM_QTY,FILES.PRE_TRANS_FILEPATH,FILES.POST_TRANS_FILEPATH,FILES.ERROR_REPORT_FILEPATH as ERROR_REPORT_FILEPATH, "
+                    + "FILES.ORG_FILEPATH,FILES.ERR_MESSAGE,PO.SO_NUMBER,FILES.STATUS,FILES.ISA_DATE,FILES.ISA_TIME,"
+                    + "FILES.ACK_FILE_ID as ACK_FILE_ID,PO.ORDER_STATUS AS ORDER_STATUS,TP1.NAME as SENDER_NAME,TP2.NAME as RECEIVER_NAME "
+                    + "FROM PO LEFT OUTER JOIN FILES ON (PO.PO_NUMBER = FILES.PRI_KEY_VAL and PO.FILE_ID = FILES.FILE_ID) "
+                    + "LEFT OUTER JOIN TP TP1 ON (TP1.ID=FILES.SENDER_ID) LEFT OUTER JOIN TP TP2 ON (TP2.ID = FILES.RECEIVER_ID) "
+                    + "WHERE FLOWFLAG like 'M' AND PO.PO_NUMBER LIKE '%" + poNumber + "%' and FILES.FILE_ID "
+                    + "LIKE '%" + poInst + "%'";
+        }
+        System.out.println("queryString==========" + queryString);
         try {
             connection = ConnectionProvider.getInstance().getConnection();
             statement = connection.prepareStatement(queryString);
@@ -291,6 +292,15 @@ public class AjaxHandlerServiceImpl implements AjaxHandlerService {
                 } else {
                     sb.append("<ORGFILEPATH>No File</ORGFILEPATH>");
                 }
+                if (resultSet.getString("ERROR_REPORT_FILEPATH") != null) {
+                    if (new File(resultSet.getString("ERROR_REPORT_FILEPATH")).exists() && new File(resultSet.getString("ERROR_REPORT_FILEPATH")).isFile()) {
+                        sb.append("<ERROR_REPORT_FILEPATH>" + resultSet.getString("ERROR_REPORT_FILEPATH") + "</ERROR_REPORT_FILEPATH>");
+                    } else {
+                        sb.append("<ERROR_REPORT_FILEPATH>No File</ERROR_REPORT_FILEPATH>");
+                    }
+                } else {
+                    sb.append("<ERROR_REPORT_FILEPATH>No File</ERROR_REPORT_FILEPATH>");
+                }
                 if (resultSet.getString("ERR_MESSAGE") != null && !"".equals(resultSet.getString("ERR_MESSAGE"))) {
                     sb.append("<ERR_MESSAGE>" + resultSet.getString("ERR_MESSAGE") + "</ERR_MESSAGE>");
                 } else {
@@ -368,30 +378,30 @@ public class AjaxHandlerServiceImpl implements AjaxHandlerService {
         boolean isGetting = false;
         Connection connection = null;
         PreparedStatement statement = null;
-        ResultSet resultSet = null; 
+        ResultSet resultSet = null;
         StringBuffer sb = new StringBuffer();
-         if("ARCHIVE".equals(database)){
-              queryString = "SELECT ARCHIVE_FILES.FILE_TYPE,ARCHIVE_FILES.TRANSACTION_TYPE as TRANSACTION_TYPE,ARCHIVE_FILES.ST_CONTROL_NUMBER as ST_CONTROL_NUMBER,"
-                      + "ARCHIVE_FILES.GS_CONTROL_NUMBER as GS_CONTROL_NUMBER,ARCHIVE_ASN.FILE_ID as FILE_ID,ARCHIVE_ASN.ASN_NUMBER as ASN_NUMBER,ARCHIVE_ASN.PO_NUMBER as PO_NUMBER,"
-                + "ARCHIVE_ASN.BOL_NUMBER as BOL_NUMBER,ARCHIVE_FILES.ISA_NUMBER as ISA_NUMBER,ARCHIVE_FILES.ISA_DATE as  ISA_DATE,ARCHIVE_FILES.ISA_TIME, "
-                + " ARCHIVE_FILES.PRE_TRANS_FILEPATH,ARCHIVE_FILES.POST_TRANS_FILEPATH,ARCHIVE_FILES.SENDER_ID,ARCHIVE_FILES.RECEIVER_ID,"
-                + "ARCHIVE_FILES.ORG_FILEPATH,ARCHIVE_FILES.ERR_MESSAGE,ARCHIVE_FILES.STATUS,"
-                + "ARCHIVE_FILES.ACK_FILE_ID as ACK_FILE_ID,ARCHIVE_ASN.SHIP_DATE as SHIP_DATE,TP1.NAME as SENDER_NAME,TP2.NAME as RECEIVER_NAME "
-                + "FROM ARCHIVE_ASN LEFT OUTER JOIN ARCHIVE_FILES ON (ARCHIVE_ASN.ASN_NUMBER = ARCHIVE_FILES.PRI_KEY_VAL AND ARCHIVE_ASN.FILE_ID = ARCHIVE_FILES.FILE_ID) "
-                + "LEFT OUTER JOIN TP TP1 ON (TP1.ID=ARCHIVE_FILES.SENDER_ID) LEFT OUTER JOIN TP TP2 ON (TP2.ID = ARCHIVE_FILES.RECEIVER_ID) "
-                + "WHERE FLOWFLAG like 'M' AND ASN_NUMBER LIKE '%" + asnNumber + "%' AND ARCHIVE_ASN.PO_NUMBER LIKE '%" + poNumber + "%'"
-                + " AND ARCHIVE_ASN.FILE_ID LIKE '" + fileID + "'";
-         }else{
-              queryString = "SELECT FILES.FILE_TYPE,Files.TRANSACTION_TYPE as TRANSACTION_TYPE,FILES.ST_CONTROL_NUMBER as ST_CONTROL_NUMBER,FILES.GS_CONTROL_NUMBER as GS_CONTROL_NUMBER,ASN.FILE_ID as FILE_ID,ASN.ASN_NUMBER as ASN_NUMBER,ASN.PO_NUMBER as PO_NUMBER,"
-                + "ASN.BOL_NUMBER as BOL_NUMBER,FILES.ISA_NUMBER as ISA_NUMBER,FILES.ISA_DATE as  ISA_DATE,FILES.ISA_TIME, "
-                + " FILES.PRE_TRANS_FILEPATH,FILES.POST_TRANS_FILEPATH,FILES.SENDER_ID,FILES.RECEIVER_ID,"
-                + "FILES.ORG_FILEPATH,FILES.ERR_MESSAGE,FILES.STATUS,"
-                + "FILES.ACK_FILE_ID as ACK_FILE_ID,ASN.SHIP_DATE as SHIP_DATE,TP1.NAME as SENDER_NAME,TP2.NAME as RECEIVER_NAME "
-                + "FROM ASN LEFT OUTER JOIN FILES ON (ASN.ASN_NUMBER = FILES.PRI_KEY_VAL AND ASN.FILE_ID = FILES.FILE_ID) "
-                + "LEFT OUTER JOIN TP TP1 ON (TP1.ID=FILES.SENDER_ID) LEFT OUTER JOIN TP TP2 ON (TP2.ID = FILES.RECEIVER_ID) "
-                + "WHERE FLOWFLAG like 'M' AND ASN_NUMBER LIKE '%" + asnNumber + "%' AND ASN.PO_NUMBER LIKE '%" + poNumber + "%'"
-                + " AND ASN.FILE_ID LIKE '" + fileID + "'";
-         }
+        if ("ARCHIVE".equals(database)) {
+            queryString = "SELECT ARCHIVE_FILES.FILE_TYPE,ARCHIVE_FILES.TRANSACTION_TYPE as TRANSACTION_TYPE,ARCHIVE_FILES.ST_CONTROL_NUMBER as ST_CONTROL_NUMBER,"
+                    + "ARCHIVE_FILES.GS_CONTROL_NUMBER as GS_CONTROL_NUMBER,ARCHIVE_ASN.FILE_ID as FILE_ID,ARCHIVE_ASN.ASN_NUMBER as ASN_NUMBER,ARCHIVE_ASN.PO_NUMBER as PO_NUMBER,"
+                    + "ARCHIVE_ASN.BOL_NUMBER as BOL_NUMBER,ARCHIVE_FILES.ISA_NUMBER as ISA_NUMBER,ARCHIVE_FILES.ISA_DATE as  ISA_DATE,ARCHIVE_FILES.ISA_TIME, "
+                    + " ARCHIVE_FILES.PRE_TRANS_FILEPATH,ARCHIVE_FILES.POST_TRANS_FILEPATH,ARCHIVE_FILES.SENDER_ID,ARCHIVE_FILES.RECEIVER_ID,"
+                    + "ARCHIVE_FILES.ORG_FILEPATH,ARCHIVE_FILES.ERR_MESSAGE,ARCHIVE_FILES.STATUS,ARCHIVE_FILES.ERROR_REPORT_FILEPATH as ERROR_REPORT_FILEPATH,"
+                    + "ARCHIVE_FILES.ACK_FILE_ID as ACK_FILE_ID,ARCHIVE_ASN.SHIP_DATE as SHIP_DATE,TP1.NAME as SENDER_NAME,TP2.NAME as RECEIVER_NAME "
+                    + "FROM ARCHIVE_ASN LEFT OUTER JOIN ARCHIVE_FILES ON (ARCHIVE_ASN.ASN_NUMBER = ARCHIVE_FILES.PRI_KEY_VAL AND ARCHIVE_ASN.FILE_ID = ARCHIVE_FILES.FILE_ID) "
+                    + "LEFT OUTER JOIN TP TP1 ON (TP1.ID=ARCHIVE_FILES.SENDER_ID) LEFT OUTER JOIN TP TP2 ON (TP2.ID = ARCHIVE_FILES.RECEIVER_ID) "
+                    + "WHERE FLOWFLAG like 'M' AND ASN_NUMBER LIKE '%" + asnNumber + "%' AND ARCHIVE_ASN.PO_NUMBER LIKE '%" + poNumber + "%'"
+                    + " AND ARCHIVE_ASN.FILE_ID LIKE '" + fileID + "'";
+        } else {
+            queryString = "SELECT FILES.FILE_TYPE,Files.TRANSACTION_TYPE as TRANSACTION_TYPE,FILES.ST_CONTROL_NUMBER as ST_CONTROL_NUMBER,FILES.GS_CONTROL_NUMBER as GS_CONTROL_NUMBER,ASN.FILE_ID as FILE_ID,ASN.ASN_NUMBER as ASN_NUMBER,ASN.PO_NUMBER as PO_NUMBER,"
+                    + "ASN.BOL_NUMBER as BOL_NUMBER,FILES.ISA_NUMBER as ISA_NUMBER,FILES.ISA_DATE as  ISA_DATE,FILES.ISA_TIME, "
+                    + " FILES.PRE_TRANS_FILEPATH,FILES.POST_TRANS_FILEPATH,FILES.SENDER_ID,FILES.RECEIVER_ID,"
+                    + "FILES.ORG_FILEPATH,FILES.ERR_MESSAGE,FILES.STATUS,FILES.ERROR_REPORT_FILEPATH as ERROR_REPORT_FILEPATH,"
+                    + "FILES.ACK_FILE_ID as ACK_FILE_ID,ASN.SHIP_DATE as SHIP_DATE,TP1.NAME as SENDER_NAME,TP2.NAME as RECEIVER_NAME "
+                    + "FROM ASN LEFT OUTER JOIN FILES ON (ASN.ASN_NUMBER = FILES.PRI_KEY_VAL AND ASN.FILE_ID = FILES.FILE_ID) "
+                    + "LEFT OUTER JOIN TP TP1 ON (TP1.ID=FILES.SENDER_ID) LEFT OUTER JOIN TP TP2 ON (TP2.ID = FILES.RECEIVER_ID) "
+                    + "WHERE FLOWFLAG like 'M' AND ASN_NUMBER LIKE '%" + asnNumber + "%' AND ASN.PO_NUMBER LIKE '%" + poNumber + "%'"
+                    + " AND ASN.FILE_ID LIKE '" + fileID + "'";
+        }
         try {
             connection = ConnectionProvider.getInstance().getConnection();
             statement = connection.prepareStatement(queryString);
@@ -516,6 +526,15 @@ public class AjaxHandlerServiceImpl implements AjaxHandlerService {
                 } else {
                     sb.append("<ERR_MESSAGE>NO MSG</ERR_MESSAGE>");
                 }
+                if (resultSet.getString("ERROR_REPORT_FILEPATH") != null) {
+                    if (new File(resultSet.getString("ERROR_REPORT_FILEPATH")).exists() && new File(resultSet.getString("ERROR_REPORT_FILEPATH")).isFile()) {
+                        sb.append("<ERROR_REPORT_FILEPATH>" + resultSet.getString("ERROR_REPORT_FILEPATH") + "</ERROR_REPORT_FILEPATH>");
+                    } else {
+                        sb.append("<ERROR_REPORT_FILEPATH>No File</ERROR_REPORT_FILEPATH>");
+                    }
+                } else {
+                    sb.append("<ERROR_REPORT_FILEPATH>No File</ERROR_REPORT_FILEPATH>");
+                }
                 //SST_CONTROL_NUMBER,
                 if (resultSet.getString("ST_CONTROL_NUMBER") != null && !"".equals(resultSet.getString("ST_CONTROL_NUMBER"))) {
                     sb.append("<ST_CONTROL_NUMBER>" + resultSet.getString("ST_CONTROL_NUMBER") + "</ST_CONTROL_NUMBER>");
@@ -581,32 +600,32 @@ public class AjaxHandlerServiceImpl implements AjaxHandlerService {
         PreparedStatement statement = null;
         ResultSet resultSet = null;
         StringBuffer sb = new StringBuffer();
-        if("ARCHIVE".equals(database)){
-             queryString = "SELECT ARCHIVE_FILES.FILE_TYPE,ARCHIVE_FILES.TRANSACTION_TYPE as TRANSACTION_TYPE,ARCHIVE_FILES.ST_CONTROL_NUMBER as ST_CONTROL_NUMBER,ARCHIVE_FILES.GS_CONTROL_NUMBER as GS_CONTROL_NUMBER,"
-                + "ARCHIVE_INVOICE.FILE_ID as FILE_ID,ARCHIVE_INVOICE.INVOICE_NUMBER as INVOICE_NUMBER,ARCHIVE_INVOICE.PO_NUMBER as PO_NUMBER,"
-                + "ARCHIVE_INVOICE.ITEM_QTY as ITEM_QTY,ARCHIVE_INVOICE.INVOICE_AMOUNT as INVOICE_AMOUNT,ARCHIVE_INVOICE.INVOICE_DATE as INVOICE_DATE,"
-                + "ARCHIVE_FILES.ISA_NUMBER as ISA_NUMBER,ARCHIVE_FILES.ISA_DATE as ISA_DATE,ARCHIVE_FILES.ISA_TIME as ISA_TIME,"
-                + " ARCHIVE_FILES.PRE_TRANS_FILEPATH,ARCHIVE_FILES.POST_TRANS_FILEPATH,ARCHIVE_FILES.SENDER_ID,ARCHIVE_FILES.RECEIVER_ID,"
-                + "ARCHIVE_FILES.ORG_FILEPATH,ARCHIVE_FILES.ERR_MESSAGE,ARCHIVE_FILES.STATUS,"
-                + "ARCHIVE_FILES.ACK_FILE_ID as ACK_FILE_ID,TP1.NAME as SENDER_NAME,TP2.NAME as RECEIVER_NAME "
-                + " FROM ARCHIVE_INVOICE LEFT OUTER JOIN ARCHIVE_FILES ON (ARCHIVE_INVOICE.INVOICE_NUMBER = ARCHIVE_FILES.PRI_KEY_VAL AND ARCHIVE_INVOICE.FILE_ID = ARCHIVE_FILES.FILE_ID) "
-                + "LEFT OUTER JOIN TP TP1 ON (TP1.ID=ARCHIVE_FILES.SENDER_ID) LEFT OUTER JOIN TP TP2 ON (TP2.ID = ARCHIVE_FILES.RECEIVER_ID) "
-                + " WHERE FLOWFLAG like 'M' AND ARCHIVE_INVOICE.INVOICE_NUMBER LIKE '%" + invNumber + "%' AND ARCHIVE_INVOICE.PO_NUMBER LIKE '%" + poNumber + "%'"
-                + " AND ARCHIVE_INVOICE.FILE_ID='" + fileID + "'";
-        }else{
-             queryString = "SELECT FILES.FILE_TYPE,Files.TRANSACTION_TYPE as TRANSACTION_TYPE,FILES.ST_CONTROL_NUMBER as ST_CONTROL_NUMBER,FILES.GS_CONTROL_NUMBER as GS_CONTROL_NUMBER,"
-                + "INVOICE.FILE_ID as FILE_ID,INVOICE.INVOICE_NUMBER as INVOICE_NUMBER,INVOICE.PO_NUMBER as PO_NUMBER,"
-                + "INVOICE.ITEM_QTY as ITEM_QTY,INVOICE.INVOICE_AMOUNT as INVOICE_AMOUNT,INVOICE.INVOICE_DATE as INVOICE_DATE,"
-                + "Files.ISA_NUMBER as ISA_NUMBER,Files.ISA_DATE as ISA_DATE,Files.ISA_TIME as ISA_TIME,"
-                + " FILES.PRE_TRANS_FILEPATH,FILES.POST_TRANS_FILEPATH,FILES.SENDER_ID,FILES.RECEIVER_ID,"
-                + "FILES.ORG_FILEPATH,FILES.ERR_MESSAGE,FILES.STATUS,"
-                + "FILES.ACK_FILE_ID as ACK_FILE_ID,TP1.NAME as SENDER_NAME,TP2.NAME as RECEIVER_NAME "
-                + " FROM INVOICE LEFT OUTER JOIN FILES ON (INVOICE.INVOICE_NUMBER = FILES.PRI_KEY_VAL AND INVOICE.FILE_ID = FILES.FILE_ID) "
-                + "LEFT OUTER JOIN TP TP1 ON (TP1.ID=FILES.SENDER_ID) LEFT OUTER JOIN TP TP2 ON (TP2.ID = FILES.RECEIVER_ID) "
-                + " WHERE FLOWFLAG like 'M' AND INVOICE.INVOICE_NUMBER LIKE '%" + invNumber + "%' AND INVOICE.PO_NUMBER LIKE '%" + poNumber + "%'"
-                + " AND INVOICE.FILE_ID='" + fileID + "'";
+        if ("ARCHIVE".equals(database)) {
+            queryString = "SELECT ARCHIVE_FILES.FILE_TYPE,ARCHIVE_FILES.TRANSACTION_TYPE as TRANSACTION_TYPE,ARCHIVE_FILES.ST_CONTROL_NUMBER as ST_CONTROL_NUMBER,ARCHIVE_FILES.GS_CONTROL_NUMBER as GS_CONTROL_NUMBER,"
+                    + "ARCHIVE_INVOICE.FILE_ID as FILE_ID,ARCHIVE_INVOICE.INVOICE_NUMBER as INVOICE_NUMBER,ARCHIVE_INVOICE.PO_NUMBER as PO_NUMBER,"
+                    + "ARCHIVE_INVOICE.ITEM_QTY as ITEM_QTY,ARCHIVE_INVOICE.INVOICE_AMOUNT as INVOICE_AMOUNT,ARCHIVE_INVOICE.INVOICE_DATE as INVOICE_DATE,"
+                    + "ARCHIVE_FILES.ISA_NUMBER as ISA_NUMBER,ARCHIVE_FILES.ISA_DATE as ISA_DATE,ARCHIVE_FILES.ISA_TIME as ISA_TIME,"
+                    + " ARCHIVE_FILES.PRE_TRANS_FILEPATH,ARCHIVE_FILES.POST_TRANS_FILEPATH,ARCHIVE_FILES.SENDER_ID,ARCHIVE_FILES.RECEIVER_ID,"
+                    + "ARCHIVE_FILES.ORG_FILEPATH,ARCHIVE_FILES.ERR_MESSAGE,ARCHIVE_FILES.STATUS,ARCHIVE_FILES.ERROR_REPORT_FILEPATH as ERROR_REPORT_FILEPATH,"
+                    + "ARCHIVE_FILES.ACK_FILE_ID as ACK_FILE_ID,TP1.NAME as SENDER_NAME,TP2.NAME as RECEIVER_NAME "
+                    + " FROM ARCHIVE_INVOICE LEFT OUTER JOIN ARCHIVE_FILES ON (ARCHIVE_INVOICE.INVOICE_NUMBER = ARCHIVE_FILES.PRI_KEY_VAL AND ARCHIVE_INVOICE.FILE_ID = ARCHIVE_FILES.FILE_ID) "
+                    + "LEFT OUTER JOIN TP TP1 ON (TP1.ID=ARCHIVE_FILES.SENDER_ID) LEFT OUTER JOIN TP TP2 ON (TP2.ID = ARCHIVE_FILES.RECEIVER_ID) "
+                    + " WHERE FLOWFLAG like 'M' AND ARCHIVE_INVOICE.INVOICE_NUMBER LIKE '%" + invNumber + "%' AND ARCHIVE_INVOICE.PO_NUMBER LIKE '%" + poNumber + "%'"
+                    + " AND ARCHIVE_INVOICE.FILE_ID='" + fileID + "'";
+        } else {
+            queryString = "SELECT FILES.FILE_TYPE,Files.TRANSACTION_TYPE as TRANSACTION_TYPE,FILES.ST_CONTROL_NUMBER as ST_CONTROL_NUMBER,FILES.GS_CONTROL_NUMBER as GS_CONTROL_NUMBER,"
+                    + "INVOICE.FILE_ID as FILE_ID,INVOICE.INVOICE_NUMBER as INVOICE_NUMBER,INVOICE.PO_NUMBER as PO_NUMBER,"
+                    + "INVOICE.ITEM_QTY as ITEM_QTY,INVOICE.INVOICE_AMOUNT as INVOICE_AMOUNT,INVOICE.INVOICE_DATE as INVOICE_DATE,"
+                    + "Files.ISA_NUMBER as ISA_NUMBER,Files.ISA_DATE as ISA_DATE,Files.ISA_TIME as ISA_TIME,"
+                    + " FILES.PRE_TRANS_FILEPATH,FILES.POST_TRANS_FILEPATH,FILES.SENDER_ID,FILES.RECEIVER_ID,"
+                    + "FILES.ORG_FILEPATH,FILES.ERR_MESSAGE,FILES.STATUS,FILES.ERROR_REPORT_FILEPATH as ERROR_REPORT_FILEPATH,"
+                    + "FILES.ACK_FILE_ID as ACK_FILE_ID,TP1.NAME as SENDER_NAME,TP2.NAME as RECEIVER_NAME "
+                    + " FROM INVOICE LEFT OUTER JOIN FILES ON (INVOICE.INVOICE_NUMBER = FILES.PRI_KEY_VAL AND INVOICE.FILE_ID = FILES.FILE_ID) "
+                    + "LEFT OUTER JOIN TP TP1 ON (TP1.ID=FILES.SENDER_ID) LEFT OUTER JOIN TP TP2 ON (TP2.ID = FILES.RECEIVER_ID) "
+                    + " WHERE FLOWFLAG like 'M' AND INVOICE.INVOICE_NUMBER LIKE '%" + invNumber + "%' AND INVOICE.PO_NUMBER LIKE '%" + poNumber + "%'"
+                    + " AND INVOICE.FILE_ID='" + fileID + "'";
         }
-       
+
         try {
             connection = ConnectionProvider.getInstance().getConnection();
             statement = connection.prepareStatement(queryString);
@@ -731,6 +750,15 @@ public class AjaxHandlerServiceImpl implements AjaxHandlerService {
                 } else {
                     sb.append("<ERR_MESSAGE>NO MSG</ERR_MESSAGE>");
                 }
+                if (resultSet.getString("ERROR_REPORT_FILEPATH") != null) {
+                    if (new File(resultSet.getString("ERROR_REPORT_FILEPATH")).exists() && new File(resultSet.getString("ERROR_REPORT_FILEPATH")).isFile()) {
+                        sb.append("<ERROR_REPORT_FILEPATH>" + resultSet.getString("ERROR_REPORT_FILEPATH") + "</ERROR_REPORT_FILEPATH>");
+                    } else {
+                        sb.append("<ERROR_REPORT_FILEPATH>No File</ERROR_REPORT_FILEPATH>");
+                    }
+                } else {
+                    sb.append("<ERROR_REPORT_FILEPATH>No File</ERROR_REPORT_FILEPATH>");
+                }
                 //TRANSACTION_TYPE,
                 if (resultSet.getString("TRANSACTION_TYPE") != null && !"".equals(resultSet.getString("TRANSACTION_TYPE"))) {
                     sb.append("<TRANSACTION_TYPE>" + resultSet.getString("TRANSACTION_TYPE") + "</TRANSACTION_TYPE>");
@@ -810,27 +838,27 @@ public class AjaxHandlerServiceImpl implements AjaxHandlerService {
         PreparedStatement statement = null;
         ResultSet resultSet = null;
         StringBuffer sb = new StringBuffer();
-      if("ARCHIVE".equals(database)){
-           queryString = "select ARCHIVE_FILES.STATUS,ARCHIVE_FILES.DIRECTION as DIRECTION,ARCHIVE_FILES.FILE_ID,ARCHIVE_FILES.FILE_TYPE,ARCHIVE_FILES.SENDER_ID,ARCHIVE_FILES.RECEIVER_ID,"
-                + "ARCHIVE_FILES.PRE_TRANS_FILEPATH,ARCHIVE_FILES.POST_TRANS_FILEPATH,ARCHIVE_FILES.SEC_KEY_VAL as SEC_KEY_VAL,ARCHIVE_FILES.PRI_KEY_TYPE as PRI_KEY_TYPE,"
-                + "ARCHIVE_FILES.PRI_KEY_VAL as PRI_KEY_VAL,ARCHIVE_FILES.ORG_FILEPATH as ORG_FILEPATH,ARCHIVE_FILES.ISA_NUMBER as ISA_NUMBER,ARCHIVE_FILES.ISA_DATE as ISA_DATE,"
-                + "ARCHIVE_FILES.ISA_TIME as ISA_TIME,ARCHIVE_FILES.TRANSACTION_TYPE as TRANSACTION_TYPE,ARCHIVE_FILES.GS_CONTROL_NUMBER as GS_CONTROL_NUMBER,"
-                + "ARCHIVE_FILES.ST_CONTROL_NUMBER as ST_CONTROL_NUMBER,TP1.NAME as SENDER_NAME,TP2.NAME as RECEIVER_NAME,ARCHIVE_FILES.ERR_MESSAGE,"
-                + "ARCHIVE_FILES.ACK_FILE_ID as ACK_FILE_ID from ARCHIVE_FILES "
-                + "LEFT OUTER JOIN TP TP1 ON (TP1.ID = ARCHIVE_FILES.SENDER_ID) "
-                + "LEFT OUTER JOIN TP TP2 ON (TP2.ID = ARCHIVE_FILES.RECEIVER_ID) "
-                + "where FLOWFLAG like 'M' AND ARCHIVE_FILES.FILE_ID LIKE '%" + instanceid + "%' AND ARCHIVE_FILES.ID =" + id;
-      }else{
-           queryString = "select FILES.STATUS,FILES.DIRECTION as DIRECTION,FILES.FILE_ID,FILES.FILE_TYPE,FILES.SENDER_ID,FILES.RECEIVER_ID,"
-                + "FILES.PRE_TRANS_FILEPATH,FILES.POST_TRANS_FILEPATH,FILES.SEC_KEY_VAL as SEC_KEY_VAL,FILES.PRI_KEY_TYPE as PRI_KEY_TYPE,"
-                + "FILES.PRI_KEY_VAL as PRI_KEY_VAL,FILES.ORG_FILEPATH as ORG_FILEPATH,FILES.ISA_NUMBER as ISA_NUMBER,FILES.ISA_DATE as ISA_DATE,"
-                + "FILES.ISA_TIME as ISA_TIME,FILES.TRANSACTION_TYPE as TRANSACTION_TYPE,FILES.GS_CONTROL_NUMBER as GS_CONTROL_NUMBER,"
-                + "FILES.ST_CONTROL_NUMBER as ST_CONTROL_NUMBER,TP1.NAME as SENDER_NAME,TP2.NAME as RECEIVER_NAME,FILES.ERR_MESSAGE,"
-                + "FILES.ACK_FILE_ID as ACK_FILE_ID from FILES "
-                + "LEFT OUTER JOIN TP TP1 ON (TP1.ID=FILES.SENDER_ID) "
-                + "LEFT OUTER JOIN TP TP2 ON (TP2.ID = FILES.RECEIVER_ID) "
-                + "where FLOWFLAG like 'M' AND FILES.FILE_ID LIKE '%" + instanceid + "%' AND FILES.ID =" + id;
-      }
+        if ("ARCHIVE".equals(database)) {
+            queryString = "select ARCHIVE_FILES.STATUS,ARCHIVE_FILES.DIRECTION as DIRECTION,ARCHIVE_FILES.FILE_ID,ARCHIVE_FILES.FILE_TYPE,ARCHIVE_FILES.SENDER_ID,ARCHIVE_FILES.RECEIVER_ID,"
+                    + "ARCHIVE_FILES.PRE_TRANS_FILEPATH,ARCHIVE_FILES.POST_TRANS_FILEPATH,ARCHIVE_FILES.SEC_KEY_VAL as SEC_KEY_VAL,ARCHIVE_FILES.PRI_KEY_TYPE as PRI_KEY_TYPE,"
+                    + "ARCHIVE_FILES.PRI_KEY_VAL as PRI_KEY_VAL,ARCHIVE_FILES.ORG_FILEPATH as ORG_FILEPATH,ARCHIVE_FILES.ISA_NUMBER as ISA_NUMBER,ARCHIVE_FILES.ISA_DATE as ISA_DATE,"
+                    + "ARCHIVE_FILES.ISA_TIME as ISA_TIME,ARCHIVE_FILES.TRANSACTION_TYPE as TRANSACTION_TYPE,ARCHIVE_FILES.GS_CONTROL_NUMBER as GS_CONTROL_NUMBER,"
+                    + "ARCHIVE_FILES.ST_CONTROL_NUMBER as ST_CONTROL_NUMBER,TP1.NAME as SENDER_NAME,TP2.NAME as RECEIVER_NAME,ARCHIVE_FILES.ERR_MESSAGE,"
+                    + "ARCHIVE_FILES.ACK_FILE_ID as ACK_FILE_ID, ARCHIVE_FILES.ERROR_REPORT_FILEPATH as ERROR_REPORT_FILEPATH from ARCHIVE_FILES "
+                    + "LEFT OUTER JOIN TP TP1 ON (TP1.ID = ARCHIVE_FILES.SENDER_ID) "
+                    + "LEFT OUTER JOIN TP TP2 ON (TP2.ID = ARCHIVE_FILES.RECEIVER_ID) "
+                    + "where FLOWFLAG like 'M' AND ARCHIVE_FILES.FILE_ID LIKE '%" + instanceid + "%' AND ARCHIVE_FILES.ID =" + id;
+        } else {
+            queryString = "select FILES.STATUS,FILES.DIRECTION as DIRECTION,FILES.FILE_ID,FILES.FILE_TYPE,FILES.SENDER_ID,FILES.RECEIVER_ID,"
+                    + "FILES.PRE_TRANS_FILEPATH,FILES.POST_TRANS_FILEPATH,FILES.SEC_KEY_VAL as SEC_KEY_VAL,FILES.PRI_KEY_TYPE as PRI_KEY_TYPE,"
+                    + "FILES.PRI_KEY_VAL as PRI_KEY_VAL,FILES.ORG_FILEPATH as ORG_FILEPATH,FILES.ISA_NUMBER as ISA_NUMBER,FILES.ISA_DATE as ISA_DATE,"
+                    + "FILES.ISA_TIME as ISA_TIME,FILES.TRANSACTION_TYPE as TRANSACTION_TYPE,FILES.GS_CONTROL_NUMBER as GS_CONTROL_NUMBER,"
+                    + "FILES.ST_CONTROL_NUMBER as ST_CONTROL_NUMBER,TP1.NAME as SENDER_NAME,TP2.NAME as RECEIVER_NAME,FILES.ERR_MESSAGE,"
+                    + "FILES.ACK_FILE_ID as ACK_FILE_ID, FILES.ERROR_REPORT_FILEPATH as ERROR_REPORT_FILEPATH from FILES "
+                    + "LEFT OUTER JOIN TP TP1 ON (TP1.ID=FILES.SENDER_ID) "
+                    + "LEFT OUTER JOIN TP TP2 ON (TP2.ID = FILES.RECEIVER_ID) "
+                    + "where FLOWFLAG like 'M' AND FILES.FILE_ID LIKE '%" + instanceid + "%' AND FILES.ID =" + id;
+        }
         System.out.println("queryString==========" + queryString);
         try {
             connection = ConnectionProvider.getInstance().getConnection();
@@ -918,8 +946,7 @@ public class AjaxHandlerServiceImpl implements AjaxHandlerService {
                 }
                 if (resultSet.getString("PRI_KEY_TYPE") != null && resultSet.getString("PRI_KEY_TYPE").equalsIgnoreCase("PO")) {
                     sb.append("<PRI_KEY_TYPE>PO</PRI_KEY_TYPE>");
-                }
-                else if (resultSet.getString("PRI_KEY_TYPE") != null && resultSet.getString("PRI_KEY_TYPE").equalsIgnoreCase("ASN")) {
+                } else if (resultSet.getString("PRI_KEY_TYPE") != null && resultSet.getString("PRI_KEY_TYPE").equalsIgnoreCase("ASN")) {
                     sb.append("<PRI_KEY_TYPE> ASN </PRI_KEY_TYPE>");
                 } else if (resultSet.getString("PRI_KEY_TYPE") != null && resultSet.getString("PRI_KEY_TYPE").equalsIgnoreCase("IN")) {
                     sb.append("<PRI_KEY_TYPE> Invoice </PRI_KEY_TYPE>");
@@ -974,6 +1001,15 @@ public class AjaxHandlerServiceImpl implements AjaxHandlerService {
                     sb.append("<ERR_MESSAGE>" + resultSet.getString("ERR_MESSAGE") + "</ERR_MESSAGE>");
                 } else {
                     sb.append("<ERR_MESSAGE>NO MSG</ERR_MESSAGE>");
+                }
+                if (resultSet.getString("ERROR_REPORT_FILEPATH") != null) {
+                    if (new File(resultSet.getString("ERROR_REPORT_FILEPATH")).exists() && new File(resultSet.getString("ERROR_REPORT_FILEPATH")).isFile()) {
+                        sb.append("<ERROR_REPORT_FILEPATH>" + resultSet.getString("ERROR_REPORT_FILEPATH") + "</ERROR_REPORT_FILEPATH>");
+                    } else {
+                        sb.append("<ERROR_REPORT_FILEPATH>No File</ERROR_REPORT_FILEPATH>");
+                    }
+                } else {
+                    sb.append("<ERROR_REPORT_FILEPATH>No File</ERROR_REPORT_FILEPATH>");
                 }
                 String sapDetails = DataSourceDataProvider.getInstance().getSapDetails(instanceid, ponum);
                 if (!sapDetails.equals("None")) {
@@ -1031,27 +1067,27 @@ public class AjaxHandlerServiceImpl implements AjaxHandlerService {
         PreparedStatement statement = null;
         ResultSet resultSet = null;
         StringBuffer sb = new StringBuffer();
-         if("ARCHIVE".equals(database)){
-             queryString = "SELECT ARCHIVE_FILES.FILE_TYPE,ARCHIVE_FILES.ISA_NUMBER,ARCHIVE_FILES.GS_CONTROL_NUMBER,ARCHIVE_FILES.ST_CONTROL_NUMBER,"
-                     + "ARCHIVE_FILES.TRANSACTION_TYPE,ARCHIVE_FILES.SEC_KEY_VAL,ARCHIVE_PAYMENT.INVOICE_NUMBER,ARCHIVE_FILES.FILE_ID as FILE_ID, ARCHIVE_PAYMENT.Check_Number as Check_Number, "
-                + "ARCHIVE_FILES.SENDER_ID as SENDER_ID, ARCHIVE_FILES.RECEIVER_ID as RECEIVER_ID,"
-                + "ARCHIVE_FILES.PRE_TRANS_FILEPATH as PRE_TRANS_FILEPATH, ARCHIVE_FILES.POST_TRANS_FILEPATH as POST_TRANS_FILEPATH, "
-                + "ARCHIVE_FILES.ORG_FILEPATH as ORG_FILEPATH,ARCHIVE_FILES.ISA_DATE as ISA_DATE,ARCHIVE_FILES.ISA_TIME as ISA_TIME,"
-                + "ARCHIVE_FILES.ERR_MESSAGE as ERR_MESSAGE,ARCHIVE_FILES.STATUS as STATUS, ARCHIVE_FILES.ACK_FILE_ID as ACK_FILE_ID,TP1.NAME as SENDER_NAME,TP2.NAME as RECEIVER_NAME "
-                + "FROM ARCHIVE_PAYMENT LEFT OUTER JOIN ARCHIVE_FILES ON (ARCHIVE_PAYMENT.FILE_ID=ARCHIVE_FILES.FILE_ID) "
-                + "LEFT OUTER JOIN TP TP1 ON (TP1.ID=ARCHIVE_FILES.SENDER_ID) LEFT OUTER JOIN TP TP2 ON (TP2.ID = ARCHIVE_FILES.RECEIVER_ID) "
-                + "WHERE FLOWFLAG like 'M' AND ARCHIVE_FILES.FILE_ID = '" + fileId + "'";
-         }else{
-             queryString = "SELECT FILES.FILE_TYPE,FILES.ISA_NUMBER,FILES.GS_CONTROL_NUMBER,FILES.ST_CONTROL_NUMBER,FILES.TRANSACTION_TYPE,FILES.SEC_KEY_VAL,PAYMENT.INVOICE_NUMBER,FILES.FILE_ID as FILE_ID, PAYMENT.Check_Number as Check_Number, "
-                + "FILES.SENDER_ID as SENDER_ID, FILES.RECEIVER_ID as RECEIVER_ID,"
-                + "FILES.PRE_TRANS_FILEPATH as PRE_TRANS_FILEPATH, FILES.POST_TRANS_FILEPATH as POST_TRANS_FILEPATH, "
-                + "FILES.ORG_FILEPATH as ORG_FILEPATH,FILES.ISA_DATE as ISA_DATE,FILES.ISA_TIME as ISA_TIME,"
-                + "FILES.ERR_MESSAGE as ERR_MESSAGE,FILES.STATUS as STATUS, FILES.ACK_FILE_ID as ACK_FILE_ID,TP1.NAME as SENDER_NAME,TP2.NAME as RECEIVER_NAME "
-                + "FROM Payment LEFT OUTER JOIN FILES ON (PAYMENT.FILE_ID=FILES.FILE_ID) "
-                + "LEFT OUTER JOIN TP TP1 ON (TP1.ID=FILES.SENDER_ID) LEFT OUTER JOIN TP TP2 ON (TP2.ID = FILES.RECEIVER_ID) "
-                + "WHERE FLOWFLAG like 'M' AND FILES.FILE_ID = '" + fileId + "'";
-         }
-        
+        if ("ARCHIVE".equals(database)) {
+            queryString = "SELECT ARCHIVE_FILES.FILE_TYPE,ARCHIVE_FILES.ISA_NUMBER,ARCHIVE_FILES.GS_CONTROL_NUMBER,ARCHIVE_FILES.ST_CONTROL_NUMBER,"
+                    + "ARCHIVE_FILES.TRANSACTION_TYPE,ARCHIVE_FILES.SEC_KEY_VAL,ARCHIVE_PAYMENT.INVOICE_NUMBER,ARCHIVE_FILES.FILE_ID as FILE_ID, ARCHIVE_PAYMENT.Check_Number as Check_Number, "
+                    + "ARCHIVE_FILES.SENDER_ID as SENDER_ID, ARCHIVE_FILES.RECEIVER_ID as RECEIVER_ID,"
+                    + "ARCHIVE_FILES.PRE_TRANS_FILEPATH as PRE_TRANS_FILEPATH, ARCHIVE_FILES.POST_TRANS_FILEPATH as POST_TRANS_FILEPATH, "
+                    + "ARCHIVE_FILES.ORG_FILEPATH as ORG_FILEPATH,ARCHIVE_FILES.ISA_DATE as ISA_DATE,ARCHIVE_FILES.ISA_TIME as ISA_TIME,"
+                    + "ARCHIVE_FILES.ERR_MESSAGE as ERR_MESSAGE,ARCHIVE_FILES.STATUS as STATUS, ARCHIVE_FILES.ACK_FILE_ID as ACK_FILE_ID,TP1.NAME as SENDER_NAME,TP2.NAME as RECEIVER_NAME "
+                    + "FROM ARCHIVE_PAYMENT LEFT OUTER JOIN ARCHIVE_FILES ON (ARCHIVE_PAYMENT.FILE_ID=ARCHIVE_FILES.FILE_ID) "
+                    + "LEFT OUTER JOIN TP TP1 ON (TP1.ID=ARCHIVE_FILES.SENDER_ID) LEFT OUTER JOIN TP TP2 ON (TP2.ID = ARCHIVE_FILES.RECEIVER_ID) "
+                    + "WHERE FLOWFLAG like 'M' AND ARCHIVE_FILES.FILE_ID = '" + fileId + "'";
+        } else {
+            queryString = "SELECT FILES.FILE_TYPE,FILES.ISA_NUMBER,FILES.GS_CONTROL_NUMBER,FILES.ST_CONTROL_NUMBER,FILES.TRANSACTION_TYPE,FILES.SEC_KEY_VAL,PAYMENT.INVOICE_NUMBER,FILES.FILE_ID as FILE_ID, PAYMENT.Check_Number as Check_Number, "
+                    + "FILES.SENDER_ID as SENDER_ID, FILES.RECEIVER_ID as RECEIVER_ID,"
+                    + "FILES.PRE_TRANS_FILEPATH as PRE_TRANS_FILEPATH, FILES.POST_TRANS_FILEPATH as POST_TRANS_FILEPATH, "
+                    + "FILES.ORG_FILEPATH as ORG_FILEPATH,FILES.ISA_DATE as ISA_DATE,FILES.ISA_TIME as ISA_TIME,"
+                    + "FILES.ERR_MESSAGE as ERR_MESSAGE,FILES.STATUS as STATUS, FILES.ACK_FILE_ID as ACK_FILE_ID,TP1.NAME as SENDER_NAME,TP2.NAME as RECEIVER_NAME "
+                    + "FROM Payment LEFT OUTER JOIN FILES ON (PAYMENT.FILE_ID=FILES.FILE_ID) "
+                    + "LEFT OUTER JOIN TP TP1 ON (TP1.ID=FILES.SENDER_ID) LEFT OUTER JOIN TP TP2 ON (TP2.ID = FILES.RECEIVER_ID) "
+                    + "WHERE FLOWFLAG like 'M' AND FILES.FILE_ID = '" + fileId + "'";
+        }
+
         try {
             connection = ConnectionProvider.getInstance().getConnection();
             statement = connection.prepareStatement(queryString);
@@ -1248,17 +1284,17 @@ public class AjaxHandlerServiceImpl implements AjaxHandlerService {
                 String fileId = st1.nextToken();
                 if (poNum != null && fileId != null) {
                     if (type.equals("POST")) {
-                         if("ARCHIVE".equals(database)){
-                              queryString = "select distinct(ARCHIVE_PO.PO_NUMBER) as PO_NUMBER,ARCHIVE_FILES.FILE_ID,"
-                                + "POST_TRANS_FILEPATH,RE_TRANSLATE_FILEPATH from ARCHIVE_PO "
-                                + "LEFT OUTER JOIN ARCHIVE_FILES ON (ARCHIVE_PO.PO_NUMBER=ARCHIVE_FILES.PRI_KEY_VAL) where "
-                                + "ARCHIVE_PO.PO_NUMBER LIKE ('" + poNum + "') and ARCHIVE_FILES.FILE_ID LIKE '" + fileId + "'";
-                         }else{
-                              queryString = "select distinct(PO.PO_NUMBER) as PO_NUMBER,FILES.FILE_ID,"
-                                + "POST_TRANS_FILEPATH,RE_TRANSLATE_FILEPATH from PO "
-                                + "LEFT OUTER JOIN FILES ON (PO.PO_NUMBER=FILES.PRI_KEY_VAL) where "
-                                + "PO.PO_NUMBER LIKE ('" + poNum + "') and FILES.FILE_ID LIKE '" + fileId + "'";
-                         }
+                        if ("ARCHIVE".equals(database)) {
+                            queryString = "select distinct(ARCHIVE_PO.PO_NUMBER) as PO_NUMBER,ARCHIVE_FILES.FILE_ID,"
+                                    + "POST_TRANS_FILEPATH,RE_TRANSLATE_FILEPATH from ARCHIVE_PO "
+                                    + "LEFT OUTER JOIN ARCHIVE_FILES ON (ARCHIVE_PO.PO_NUMBER=ARCHIVE_FILES.PRI_KEY_VAL) where "
+                                    + "ARCHIVE_PO.PO_NUMBER LIKE ('" + poNum + "') and ARCHIVE_FILES.FILE_ID LIKE '" + fileId + "'";
+                        } else {
+                            queryString = "select distinct(PO.PO_NUMBER) as PO_NUMBER,FILES.FILE_ID,"
+                                    + "POST_TRANS_FILEPATH,RE_TRANSLATE_FILEPATH from PO "
+                                    + "LEFT OUTER JOIN FILES ON (PO.PO_NUMBER=FILES.PRI_KEY_VAL) where "
+                                    + "PO.PO_NUMBER LIKE ('" + poNum + "') and FILES.FILE_ID LIKE '" + fileId + "'";
+                        }
                         boolean isGetting = false;
                         try {
                             connection = ConnectionProvider.getInstance().getConnection();
@@ -1308,18 +1344,18 @@ public class AjaxHandlerServiceImpl implements AjaxHandlerService {
                             }
                         }
                     } else {
-                         if("ARCHIVE".equals(database)){ 
-                              queryString = "select distinct(ARCHIVE_PO.PO_NUMBER) as PO_NUMBER,ARCHIVE_FILES.FILE_ID,"
-                                + "PRE_TRANS_FILEPATH,RE_SUBMIT_FILEPATH,ARCHIVE_FILES.SENDER_ID,ARCHIVE_FILES.RECEIVER_ID,"
-                                      + "ARCHIVE_FILES.TRANSACTION_TYPE from ARCHIVE_PO LEFT OUTER JOIN ARCHIVE_FILES "
-                                + "ON (ARCHIVE_PO.PO_NUMBER=ARCHIVE_FILES.PRI_KEY_VAL) where ARCHIVE_PO.PO_NUMBER LIKE ('" + poNum + "') "
-                                + "and ARCHIVE_FILES.FILE_ID LIKE '" + fileId + "'";
-                         }else{
-                              queryString = "select distinct(PO.PO_NUMBER) as PO_NUMBER,FILES.FILE_ID,"
-                                + "PRE_TRANS_FILEPATH,RE_SUBMIT_FILEPATH,FILES.SENDER_ID,FILES.RECEIVER_ID,FILES.TRANSACTION_TYPE from PO LEFT OUTER JOIN FILES "
-                                + "ON (PO.PO_NUMBER=FILES.PRI_KEY_VAL) where PO.PO_NUMBER LIKE ('" + poNum + "') "
-                                + "and FILES.FILE_ID LIKE '" + fileId + "'";
-                         }
+                        if ("ARCHIVE".equals(database)) {
+                            queryString = "select distinct(ARCHIVE_PO.PO_NUMBER) as PO_NUMBER,ARCHIVE_FILES.FILE_ID,"
+                                    + "PRE_TRANS_FILEPATH,RE_SUBMIT_FILEPATH,ARCHIVE_FILES.SENDER_ID,ARCHIVE_FILES.RECEIVER_ID,"
+                                    + "ARCHIVE_FILES.TRANSACTION_TYPE from ARCHIVE_PO LEFT OUTER JOIN ARCHIVE_FILES "
+                                    + "ON (ARCHIVE_PO.PO_NUMBER=ARCHIVE_FILES.PRI_KEY_VAL) where ARCHIVE_PO.PO_NUMBER LIKE ('" + poNum + "') "
+                                    + "and ARCHIVE_FILES.FILE_ID LIKE '" + fileId + "'";
+                        } else {
+                            queryString = "select distinct(PO.PO_NUMBER) as PO_NUMBER,FILES.FILE_ID,"
+                                    + "PRE_TRANS_FILEPATH,RE_SUBMIT_FILEPATH,FILES.SENDER_ID,FILES.RECEIVER_ID,FILES.TRANSACTION_TYPE from PO LEFT OUTER JOIN FILES "
+                                    + "ON (PO.PO_NUMBER=FILES.PRI_KEY_VAL) where PO.PO_NUMBER LIKE ('" + poNum + "') "
+                                    + "and FILES.FILE_ID LIKE '" + fileId + "'";
+                        }
                         boolean isGetting = false;
                         try {
                             connection = ConnectionProvider.getInstance().getConnection();
@@ -4950,11 +4986,11 @@ public class AjaxHandlerServiceImpl implements AjaxHandlerService {
         String tmp_Recieved_ToTime = "";
         // System.out.println("invNumber--->"+invNumber); 
         //    queryString = "SELECT INVOKEMETHOD,MULTIPLEMSG,ADAPTER,TRANSLATIONMAPNAME,DOCEXTMAPNAME,PRODUCERMAILBOX FROM BUSINESSPROCESSINFO WHERE BP_ID ="+businessProcessId;
-        if(ajaxHandlerAction.getFlag().equals("M")){
-        queryString = "select count(DIRECTION) as total from FILES where (SENDER_ID = ? or RECEIVER_ID=?) and DIRECTION=? AND FLOWFLAG='M'";
+        if (ajaxHandlerAction.getFlag().equals("M")) {
+            queryString = "select count(DIRECTION) as total from FILES where (SENDER_ID = ? or RECEIVER_ID=?) and DIRECTION=? AND FLOWFLAG='M'";
         }
-         if(ajaxHandlerAction.getFlag().equals("L")){
-        queryString = "select count(DIRECTION) as total from FILES where (SENDER_ID = ? or RECEIVER_ID=?) and DIRECTION=? AND FLOWFLAG='L'";
+        if (ajaxHandlerAction.getFlag().equals("L")) {
+            queryString = "select count(DIRECTION) as total from FILES where (SENDER_ID = ? or RECEIVER_ID=?) and DIRECTION=? AND FLOWFLAG='L'";
         }
         // System.out.println("Logistics Invoice Details-->"+queryString);
         try {
@@ -4982,21 +5018,21 @@ public class AjaxHandlerServiceImpl implements AjaxHandlerService {
             preparedStatement = connection.prepareStatement(queryString);
             int inboundTotal = 0;
             int outboundTotal = 0;
-            Map partnerMap=null;
+            Map partnerMap = null;
             if ("ALL".equalsIgnoreCase(ajaxHandlerAction.getPartnerId())) {
-                 if(ajaxHandlerAction.getFlag().equals("M")){
-        partnerMap = DataSourceDataProvider.getInstance().getDashboardPartnerMap("2");
-        }else{
-              partnerMap = DataSourceDataProvider.getInstance().getDashboardPartnerMap("3");       
-                 }
-                
+                if (ajaxHandlerAction.getFlag().equals("M")) {
+                    partnerMap = DataSourceDataProvider.getInstance().getDashboardPartnerMap("2");
+                } else {
+                    partnerMap = DataSourceDataProvider.getInstance().getDashboardPartnerMap("3");
+                }
+
                 Iterator entries = partnerMap.entrySet().iterator();
 
                 while (entries.hasNext()) {
                     Entry thisEntry = (Entry) entries.next();
                     Object key = thisEntry.getKey();
                     //System.out.println("Key-->"+)
-                     Object value = thisEntry.getValue();
+                    Object value = thisEntry.getValue();
                     // ...
                     // inboundString = inboundString+(String)key+"|";
                     preparedStatement.setString(1, (String) key);
@@ -5017,11 +5053,11 @@ public class AjaxHandlerServiceImpl implements AjaxHandlerService {
                         outboundTotal = resultSet.getInt("total");
                     }
                     if (inboundTotal != 0) {
-                        inboundString = inboundString + (String) key+"_"+(String) value+ "|" + inboundTotal + "^";
+                        inboundString = inboundString + (String) key + "_" + (String) value + "|" + inboundTotal + "^";
 
                     }
                     if (outboundTotal != 0) {
-                        outboundString = outboundString + (String) key+"_"+(String) value + "|" + outboundTotal + "^";
+                        outboundString = outboundString + (String) key + "_" + (String) value + "|" + outboundTotal + "^";
                     }
                     inboundTotal = 0;
                     outboundTotal = 0;
@@ -5060,9 +5096,8 @@ public class AjaxHandlerServiceImpl implements AjaxHandlerService {
 
                 resultSet.close();
             }
-            
-            //  resultSet = statement.executeQuery();
 
+            //  resultSet = statement.executeQuery();
             resultString = inboundString + "*" + outboundString;
             System.out.println("resultString--->" + resultString);
         } catch (SQLException ex) {
@@ -5328,21 +5363,21 @@ public class AjaxHandlerServiceImpl implements AjaxHandlerService {
         String queryString = null;
         int count = 0;
         connection = ConnectionProvider.getInstance().getOracleConnection();
-        System.out.println("selected name is "+selectedName);
+        System.out.println("selected name is " + selectedName);
         try {
-            if(selectedName!=null && !"-1".equals(selectedName)){
-            queryString = "SELECT COUNT(*) AS COUNT FROM CODELIST_XREF_ITEM WHERE SENDER_ITEM='" + senderItem + "' AND RECEIVER_ITEM='" + recItem + "' AND LIST_NAME='"+selectedName+"'";
-            
+            if (selectedName != null && !"-1".equals(selectedName)) {
+                queryString = "SELECT COUNT(*) AS COUNT FROM CODELIST_XREF_ITEM WHERE SENDER_ITEM='" + senderItem + "' AND RECEIVER_ITEM='" + recItem + "' AND LIST_NAME='" + selectedName + "'";
+
 //            else
 //            {
 //                queryString = "SELECT COUNT(*) AS COUNT FROM CODELIST_XREF_ITEM WHERE SENDER_ITEM='" + senderItem + "' AND RECEIVER_ITEM='" + recItem + "'";
 //            }
-            preparedStatement = connection.prepareStatement(queryString);
-            resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()) {
-                count = resultSet.getInt("COUNT");
+                preparedStatement = connection.prepareStatement(queryString);
+                resultSet = preparedStatement.executeQuery();
+                while (resultSet.next()) {
+                    count = resultSet.getInt("COUNT");
+                }
             }
-        }
         } catch (SQLException sql) {
             throw new ServiceLocatorException(sql);
         } finally {
@@ -5376,10 +5411,10 @@ public class AjaxHandlerServiceImpl implements AjaxHandlerService {
         connection = ConnectionProvider.getInstance().getOracleConnection();
 
         try {
-            System.out.println("selected CodeList Name is "+newCodeListName);
-            
-                queryString = "SELECT COUNT(*) AS COUNT FROM CODELIST_XREF_VERS  WHERE LIST_NAME='"+newCodeListName+"'";
-            
+            System.out.println("selected CodeList Name is " + newCodeListName);
+
+            queryString = "SELECT COUNT(*) AS COUNT FROM CODELIST_XREF_VERS  WHERE LIST_NAME='" + newCodeListName + "'";
+
             preparedStatement = connection.prepareStatement(queryString);
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
@@ -5407,8 +5442,8 @@ public class AjaxHandlerServiceImpl implements AjaxHandlerService {
         }
         return count;
     }
-    
-     @Override
+
+    @Override
     public String addCodeList(String jsonData, String userName, String newCodeListName) throws ServiceLocatorException {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
@@ -5421,8 +5456,8 @@ public class AjaxHandlerServiceImpl implements AjaxHandlerService {
         int updatedRows = 0;
         int updatedRows1 = 0;
         int updatedRows2 = 0;
-           int count = 0;
-        
+        int count = 0;
+
         try {
             array = new JSONArray(jsonData);
 
@@ -5431,122 +5466,121 @@ public class AjaxHandlerServiceImpl implements AjaxHandlerService {
         }
 
         try {
-             System.out.println("selected CodeList Name is "+newCodeListName);
-            
-                queryString = "SELECT COUNT(*) AS COUNT FROM CODELIST_XREF_VERS  WHERE LIST_NAME='"+newCodeListName+"'";
-            
+            System.out.println("selected CodeList Name is " + newCodeListName);
+
+            queryString = "SELECT COUNT(*) AS COUNT FROM CODELIST_XREF_VERS  WHERE LIST_NAME='" + newCodeListName + "'";
+
             preparedStatement = connection.prepareStatement(queryString);
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 count = resultSet.getInt("COUNT");
             }
-            if(count==0){
-            queryString = "INSERT INTO SI_USER.CODELIST_XREF_ITEM "
-                    + "(LIST_NAME, SENDER_ID, RECEIVER_ID, LIST_VERSION, SENDER_ITEM, RECEIVER_ITEM, TEXT1, TEXT2, TEXT3, TEXT4, DESCRIPTION, TEXT5, TEXT6, TEXT7, TEXT8, TEXT9)"
-                    + " VALUES (?, ?, ?,? , ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-            String queryString1 = "INSERT INTO SI_USER.CODELIST_XREF_VERS"
-                    + "	(LIST_NAME, SENDER_ID, RECEIVER_ID, DEFAULT_VERSION, LIST_VERSION)"
-                    + "VALUES (?, ?, ?, ?, ?)";
-            String queryString2 = "INSERT INTO SI_USER.CODE_LIST_XREF"
-                    + "	(LIST_NAME, SENDER_ID, RECEIVER_ID, LIST_VERSION, STATUS, COMMENTS,  USERNAME, CREATE_DATE)"
-                    + "VALUES (?, ?, ?, ?,? ,?,?, ?)";
-            for (int i = 0; i < array.length(); i++) {
-                jsonObj = array.getJSONObject(i);
-                preparedStatement = connection.prepareStatement(queryString);
-                preparedStatement.setString(1, jsonObj.getString("listName1"));
+            if (count == 0) {
+                queryString = "INSERT INTO SI_USER.CODELIST_XREF_ITEM "
+                        + "(LIST_NAME, SENDER_ID, RECEIVER_ID, LIST_VERSION, SENDER_ITEM, RECEIVER_ITEM, TEXT1, TEXT2, TEXT3, TEXT4, DESCRIPTION, TEXT5, TEXT6, TEXT7, TEXT8, TEXT9)"
+                        + " VALUES (?, ?, ?,? , ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                String queryString1 = "INSERT INTO SI_USER.CODELIST_XREF_VERS"
+                        + "	(LIST_NAME, SENDER_ID, RECEIVER_ID, DEFAULT_VERSION, LIST_VERSION)"
+                        + "VALUES (?, ?, ?, ?, ?)";
+                String queryString2 = "INSERT INTO SI_USER.CODE_LIST_XREF"
+                        + "	(LIST_NAME, SENDER_ID, RECEIVER_ID, LIST_VERSION, STATUS, COMMENTS,  USERNAME, CREATE_DATE)"
+                        + "VALUES (?, ?, ?, ?,? ,?,?, ?)";
+                for (int i = 0; i < array.length(); i++) {
+                    jsonObj = array.getJSONObject(i);
+                    preparedStatement = connection.prepareStatement(queryString);
+                    preparedStatement.setString(1, jsonObj.getString("listName1"));
 //                System.out.println("jsonObj.getString(\"senderIdInst\") --> "+ jsonObj.getString("senderIdInst") +" jsonObj.getString(\"recId\") --> "+jsonObj.getString("recId"));
 //                if(!"".equalsIgnoreCase(jsonObj.getString("senderIdInst")) || jsonObj.getString("senderIdInst") != null){
 //                preparedStatement.setString(2, jsonObj.getString("senderIdInst"));
 //                }else{
-                preparedStatement.setString(2, "null");
-                //}
+                    preparedStatement.setString(2, "null");
+                    //}
 //                if(!"".equalsIgnoreCase(jsonObj.getString("recId")) || jsonObj.getString("recId") != null){
 //                preparedStatement.setString(3, jsonObj.getString("recId"));
 //                }else{
-                preparedStatement.setString(3, "null");
-                //}
-                preparedStatement.setInt(4, 1);
-                preparedStatement.setString(5, jsonObj.getString("senderItem"));
-                preparedStatement.setString(6, jsonObj.getString("recItem"));
-                if (!"".equalsIgnoreCase(jsonObj.getString("text1").trim()) && jsonObj.getString("text1") != null) {
-                    preparedStatement.setString(7, jsonObj.getString("text1"));
-                } else {
-                    preparedStatement.setString(7, "null");
-                }
-                if (!"".equalsIgnoreCase(jsonObj.getString("text2").trim()) && jsonObj.getString("text2") != null) {
-                    preparedStatement.setString(8, jsonObj.getString("text2"));
-                } else {
-                    preparedStatement.setString(8, "null");
-                }
-                if (!"".equalsIgnoreCase(jsonObj.getString("text3").trim()) && jsonObj.getString("text3") != null) {
-                    preparedStatement.setString(9, jsonObj.getString("text3"));
-                } else {
-                    preparedStatement.setString(9, "null");
-                }
-                if (!"".equalsIgnoreCase(jsonObj.getString("text4").trim()) && jsonObj.getString("text4") != null) {
-                    preparedStatement.setString(10, jsonObj.getString("text4"));
-                } else {
-                    preparedStatement.setString(10, "null");
-                }
-                preparedStatement.setString(11, jsonObj.getString("desc"));
-                if (!"".equalsIgnoreCase(jsonObj.getString("text5").trim()) && jsonObj.getString("text5") != null) {
-                    preparedStatement.setString(12, jsonObj.getString("text5"));
-                } else {
-                    preparedStatement.setString(12, "null");
-                }
-                if (!"".equalsIgnoreCase(jsonObj.getString("text6").trim()) && jsonObj.getString("text6") != null) {
-                    preparedStatement.setString(13, jsonObj.getString("text6"));
-                } else {
-                    preparedStatement.setString(13, "null");
-                }
-                if (!"".equalsIgnoreCase(jsonObj.getString("text7").trim()) && jsonObj.getString("text7") != null) {
-                    preparedStatement.setString(14, jsonObj.getString("text7"));
-                } else {
-                    preparedStatement.setString(14, "null");
-                }
-                if (!"".equalsIgnoreCase(jsonObj.getString("text8").trim()) && jsonObj.getString("text8") != null) {
-                    preparedStatement.setString(15, jsonObj.getString("text8"));
-                } else {
-                    preparedStatement.setString(15, "null");
-                }
-                if (!"".equalsIgnoreCase(jsonObj.getString("text9").trim()) && jsonObj.getString("text9") != null) {
-                    preparedStatement.setString(16, jsonObj.getString("text9"));
-                } else {
-                    preparedStatement.setString(16, "null");
-                }
-                preparedStatement1 = connection.prepareStatement(queryString1);
-                preparedStatement1.setString(1, jsonObj.getString("listName1"));
-                preparedStatement1.setString(2, "null");
-                preparedStatement1.setString(3, "null");
-                preparedStatement1.setInt(4, 1);
-                preparedStatement1.setInt(5, 1);
-                preparedStatement2 = connection.prepareStatement(queryString2);
-                preparedStatement2.setString(1, jsonObj.getString("listName1"));
-                preparedStatement2.setString(2, "null");
-                preparedStatement2.setString(3, "null");
-                preparedStatement2.setInt(4, 1);
-                preparedStatement2.setInt(5, 1);
-                preparedStatement2.setString(6, "null");
-                preparedStatement2.setString(7, userName);
+                    preparedStatement.setString(3, "null");
+                    //}
+                    preparedStatement.setInt(4, 1);
+                    preparedStatement.setString(5, jsonObj.getString("senderItem"));
+                    preparedStatement.setString(6, jsonObj.getString("recItem"));
+                    if (!"".equalsIgnoreCase(jsonObj.getString("text1").trim()) && jsonObj.getString("text1") != null) {
+                        preparedStatement.setString(7, jsonObj.getString("text1"));
+                    } else {
+                        preparedStatement.setString(7, "null");
+                    }
+                    if (!"".equalsIgnoreCase(jsonObj.getString("text2").trim()) && jsonObj.getString("text2") != null) {
+                        preparedStatement.setString(8, jsonObj.getString("text2"));
+                    } else {
+                        preparedStatement.setString(8, "null");
+                    }
+                    if (!"".equalsIgnoreCase(jsonObj.getString("text3").trim()) && jsonObj.getString("text3") != null) {
+                        preparedStatement.setString(9, jsonObj.getString("text3"));
+                    } else {
+                        preparedStatement.setString(9, "null");
+                    }
+                    if (!"".equalsIgnoreCase(jsonObj.getString("text4").trim()) && jsonObj.getString("text4") != null) {
+                        preparedStatement.setString(10, jsonObj.getString("text4"));
+                    } else {
+                        preparedStatement.setString(10, "null");
+                    }
+                    preparedStatement.setString(11, jsonObj.getString("desc"));
+                    if (!"".equalsIgnoreCase(jsonObj.getString("text5").trim()) && jsonObj.getString("text5") != null) {
+                        preparedStatement.setString(12, jsonObj.getString("text5"));
+                    } else {
+                        preparedStatement.setString(12, "null");
+                    }
+                    if (!"".equalsIgnoreCase(jsonObj.getString("text6").trim()) && jsonObj.getString("text6") != null) {
+                        preparedStatement.setString(13, jsonObj.getString("text6"));
+                    } else {
+                        preparedStatement.setString(13, "null");
+                    }
+                    if (!"".equalsIgnoreCase(jsonObj.getString("text7").trim()) && jsonObj.getString("text7") != null) {
+                        preparedStatement.setString(14, jsonObj.getString("text7"));
+                    } else {
+                        preparedStatement.setString(14, "null");
+                    }
+                    if (!"".equalsIgnoreCase(jsonObj.getString("text8").trim()) && jsonObj.getString("text8") != null) {
+                        preparedStatement.setString(15, jsonObj.getString("text8"));
+                    } else {
+                        preparedStatement.setString(15, "null");
+                    }
+                    if (!"".equalsIgnoreCase(jsonObj.getString("text9").trim()) && jsonObj.getString("text9") != null) {
+                        preparedStatement.setString(16, jsonObj.getString("text9"));
+                    } else {
+                        preparedStatement.setString(16, "null");
+                    }
+                    preparedStatement1 = connection.prepareStatement(queryString1);
+                    preparedStatement1.setString(1, jsonObj.getString("listName1"));
+                    preparedStatement1.setString(2, "null");
+                    preparedStatement1.setString(3, "null");
+                    preparedStatement1.setInt(4, 1);
+                    preparedStatement1.setInt(5, 1);
+                    preparedStatement2 = connection.prepareStatement(queryString2);
+                    preparedStatement2.setString(1, jsonObj.getString("listName1"));
+                    preparedStatement2.setString(2, "null");
+                    preparedStatement2.setString(3, "null");
+                    preparedStatement2.setInt(4, 1);
+                    preparedStatement2.setInt(5, 1);
+                    preparedStatement2.setString(6, "null");
+                    preparedStatement2.setString(7, userName);
                 //java.sql.Date d=new java.sql.Date(i);
-                //SimpleDateFormat sd=new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-                //SimpleDateFormat sd=new SimpleDateFormat("YYYY-MM-dd HH24:mm:SS.0");
-                preparedStatement2.setTimestamp(8, DateUtility.getInstance().getCurrentDB2Timestamp());
-                updatedRows = preparedStatement.executeUpdate();
+                    //SimpleDateFormat sd=new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+                    //SimpleDateFormat sd=new SimpleDateFormat("YYYY-MM-dd HH24:mm:SS.0");
+                    preparedStatement2.setTimestamp(8, DateUtility.getInstance().getCurrentDB2Timestamp());
+                    updatedRows = preparedStatement.executeUpdate();
 
-                if (i == 0) {
-                    updatedRows1 = preparedStatement1.executeUpdate();
-                    updatedRows2 = preparedStatement2.executeUpdate();
+                    if (i == 0) {
+                        updatedRows1 = preparedStatement1.executeUpdate();
+                        updatedRows2 = preparedStatement2.executeUpdate();
+                    }
                 }
-            }
-             if (updatedRows > 0 && updatedRows1 > 0 && updatedRows2 > 0) {
-            return "Inserted successfully";
-        } else {
-            return "Please Try Again";
-        }
-            }
-            else{
-                   return "Code list name already exists ..Please try with new one ";
+                if (updatedRows > 0 && updatedRows1 > 0 && updatedRows2 > 0) {
+                    return "Inserted successfully";
+                } else {
+                    return "Please Try Again";
+                }
+            } else {
+                return "Code list name already exists ..Please try with new one ";
             }
         } catch (SQLException sql) {
             throw new ServiceLocatorException(sql);
@@ -5567,7 +5601,7 @@ public class AjaxHandlerServiceImpl implements AjaxHandlerService {
                 throw new ServiceLocatorException(ex);
             }
         }
-       return null;
+        return null;
     }
 
     @Override
@@ -5675,112 +5709,112 @@ public class AjaxHandlerServiceImpl implements AjaxHandlerService {
             int count = 0;
             int addVersion = 0;
             for (int i = 0; i < array.length(); i++) {
-                System.out.println("i value is "+i);
+                System.out.println("i value is " + i);
                 int listNameMap = 0;
 //                if (i < listitems) {
-                    jsonObj = array.getJSONObject(i);
-                    queryString = "SELECT  LIST_VERSION FROM CODELIST_XREF_VERS WHERE LIST_NAME ='" + jsonObj.getString("listName1") + "'";
-                    preparedStatement = connection.prepareStatement(queryString);
-                    resultSet = preparedStatement.executeQuery();
-                    while (resultSet.next()) {
-                        listNameMap = resultSet.getInt("LIST_VERSION");
+                jsonObj = array.getJSONObject(i);
+                queryString = "SELECT  LIST_VERSION FROM CODELIST_XREF_VERS WHERE LIST_NAME ='" + jsonObj.getString("listName1") + "'";
+                preparedStatement = connection.prepareStatement(queryString);
+                resultSet = preparedStatement.executeQuery();
+                while (resultSet.next()) {
+                    listNameMap = resultSet.getInt("LIST_VERSION");
+                }
+                if (listNameMap > 0) {
+                    if (i == 0) {
+                        addVersion = listNameMap + 1;
+                        updateQueryString = "UPDATE CODELIST_XREF_VERS SET LIST_VERSION=?, DEFAULT_VERSION=?, SENDER_ID=?, RECEIVER_ID=?  WHERE LIST_NAME=?";
+                        preparedStatement = connection.prepareStatement(updateQueryString);
+                        preparedStatement.setInt(1, addVersion);
+                        preparedStatement.setInt(2, addVersion);
+                        preparedStatement.setString(3, "null");
+                        preparedStatement.setString(4, "null");
+                        preparedStatement.setString(5, jsonObj.getString("listName1"));
+                        updatedRows = preparedStatement.executeUpdate();
                     }
-                    if (listNameMap > 0) {
-                        if (i == 0) {
-                            addVersion = listNameMap + 1;
-                            updateQueryString = "UPDATE CODELIST_XREF_VERS SET LIST_VERSION=?, DEFAULT_VERSION=?, SENDER_ID=?, RECEIVER_ID=?  WHERE LIST_NAME=?";
-                            preparedStatement = connection.prepareStatement(updateQueryString);
-                            preparedStatement.setInt(1, addVersion);
-                            preparedStatement.setInt(2, addVersion);
-                            preparedStatement.setString(3, "null");
-                            preparedStatement.setString(4, "null");
-                            preparedStatement.setString(5, jsonObj.getString("listName1"));
-                            updatedRows = preparedStatement.executeUpdate();
-                        }
-                        queryString1 = "INSERT INTO SI_USER.CODELIST_XREF_ITEM "
-                                + "(LIST_NAME, SENDER_ID, RECEIVER_ID, LIST_VERSION, SENDER_ITEM, RECEIVER_ITEM, TEXT1, TEXT2, TEXT3, TEXT4, DESCRIPTION, TEXT5, TEXT6, TEXT7, TEXT8, TEXT9)"
-                                + " VALUES (?, ?, ?,? , ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                    queryString1 = "INSERT INTO SI_USER.CODELIST_XREF_ITEM "
+                            + "(LIST_NAME, SENDER_ID, RECEIVER_ID, LIST_VERSION, SENDER_ITEM, RECEIVER_ITEM, TEXT1, TEXT2, TEXT3, TEXT4, DESCRIPTION, TEXT5, TEXT6, TEXT7, TEXT8, TEXT9)"
+                            + " VALUES (?, ?, ?,? , ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 //             queryString1 = "INSERT INTO SI_USER.CODELIST_XREF_VERS"
 //                    + "	(LIST_NAME, SENDER_ID, RECEIVER_ID, DEFAULT_VERSION, LIST_VERSION)"
 //                    + "VALUES (?, ?, ?, ?, ?)";
-                        queryString2 = "INSERT INTO SI_USER.CODE_LIST_XREF"
-                                + "(LIST_NAME, SENDER_ID, RECEIVER_ID, LIST_VERSION, STATUS, COMMENTS,  USERNAME, CREATE_DATE)"
-                                + "VALUES (?, ?, ?, ?,? ,?,?, ?)";
-                        // for (int i = 0; i < array.length(); i++) {
-                        jsonObj = array.getJSONObject(i);
-                        preparedStatement1 = connection.prepareStatement(queryString1);
-                        preparedStatement1.setString(1, jsonObj.getString("listName1"));
-                        preparedStatement1.setString(2, "null");
-                        preparedStatement1.setString(3, "null");
-                        preparedStatement1.setInt(4, addVersion);
-                        preparedStatement1.setString(5, jsonObj.getString("senderItem"));
-                        preparedStatement1.setString(6, jsonObj.getString("recItem"));
-                        if (!"".equalsIgnoreCase(jsonObj.getString("text1").trim()) && jsonObj.getString("text1") != null) {
-                            preparedStatement1.setString(7, jsonObj.getString("text1"));
-                        } else {
-                            preparedStatement1.setString(7, "null");
-                        }
-                        if (!"".equalsIgnoreCase(jsonObj.getString("text2").trim()) && jsonObj.getString("text2") != null) {
-                            preparedStatement1.setString(8, jsonObj.getString("text2"));
-                        } else {
-                            preparedStatement1.setString(8, "null");
-                        }
-                        if (!"".equalsIgnoreCase(jsonObj.getString("text3").trim()) && jsonObj.getString("text3") != null) {
-                            preparedStatement1.setString(9, jsonObj.getString("text3"));
-                        } else {
-                            preparedStatement1.setString(9, "null");
-                        }
-                        if (!"".equalsIgnoreCase(jsonObj.getString("text4").trim()) && jsonObj.getString("text4") != null) {
-                            preparedStatement1.setString(10, jsonObj.getString("text4"));
-                        } else {
-                            preparedStatement1.setString(10, "null");
-                        }
-                        preparedStatement1.setString(11, jsonObj.getString("desc"));
-                        if (!"".equalsIgnoreCase(jsonObj.getString("text5").trim()) && jsonObj.getString("text5") != null) {
-                            preparedStatement1.setString(12, jsonObj.getString("text5"));
-                        } else {
-                            preparedStatement1.setString(12, "null");
-                        }
-                        if (!"".equalsIgnoreCase(jsonObj.getString("text6").trim()) && jsonObj.getString("text6") != null) {
-                            preparedStatement1.setString(13, jsonObj.getString("text6"));
-                        } else {
-                            preparedStatement1.setString(13, "null");
-                        }
-                        if (!"".equalsIgnoreCase(jsonObj.getString("text7").trim()) && jsonObj.getString("text7") != null) {
-                            preparedStatement1.setString(14, jsonObj.getString("text7"));
-                        } else {
-                            preparedStatement1.setString(14, "null");
-                        }
-                        if (!"".equalsIgnoreCase(jsonObj.getString("text8").trim()) && jsonObj.getString("text8") != null) {
-                            preparedStatement1.setString(15, jsonObj.getString("text8"));
-                        } else {
-                            preparedStatement1.setString(15, "null");
-                        }
-                        if (!"".equalsIgnoreCase(jsonObj.getString("text9").trim()) && jsonObj.getString("text9") != null) {
-                            preparedStatement1.setString(16, jsonObj.getString("text9"));
-                        } else {
-                            preparedStatement1.setString(16, "null");
-                        }
-                        updatedRows1 = preparedStatement1.executeUpdate();
-                        if (i == 0) {
-                            System.out.println("i-----" + i);
-                            preparedStatement2 = connection.prepareStatement(queryString2);
-                            preparedStatement2.setString(1, jsonObj.getString("listName1"));
-                            preparedStatement2.setString(2, "null");
-                            preparedStatement2.setString(3, "null");
-                            preparedStatement2.setInt(4, addVersion);
-                            preparedStatement2.setInt(5, 1);
-                            preparedStatement2.setString(6, "null");
-                            preparedStatement2.setString(7, userName);
-                            //java.sql.Date d=new java.sql.Date(i);
-                            //SimpleDateFormat sd=new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-                            //SimpleDateFormat sd=new SimpleDateFormat("YYYY-MM-dd HH24:mm:SS.0");
-                            preparedStatement2.setTimestamp(8, DateUtility.getInstance().getCurrentDB2Timestamp());
-                            // updatedRows = preparedStatement.executeUpdate();
-                            updatedRows2 = preparedStatement2.executeUpdate();
-                        }
-                        //}
+                    queryString2 = "INSERT INTO SI_USER.CODE_LIST_XREF"
+                            + "(LIST_NAME, SENDER_ID, RECEIVER_ID, LIST_VERSION, STATUS, COMMENTS,  USERNAME, CREATE_DATE)"
+                            + "VALUES (?, ?, ?, ?,? ,?,?, ?)";
+                    // for (int i = 0; i < array.length(); i++) {
+                    jsonObj = array.getJSONObject(i);
+                    preparedStatement1 = connection.prepareStatement(queryString1);
+                    preparedStatement1.setString(1, jsonObj.getString("listName1"));
+                    preparedStatement1.setString(2, "null");
+                    preparedStatement1.setString(3, "null");
+                    preparedStatement1.setInt(4, addVersion);
+                    preparedStatement1.setString(5, jsonObj.getString("senderItem"));
+                    preparedStatement1.setString(6, jsonObj.getString("recItem"));
+                    if (!"".equalsIgnoreCase(jsonObj.getString("text1").trim()) && jsonObj.getString("text1") != null) {
+                        preparedStatement1.setString(7, jsonObj.getString("text1"));
+                    } else {
+                        preparedStatement1.setString(7, "null");
                     }
+                    if (!"".equalsIgnoreCase(jsonObj.getString("text2").trim()) && jsonObj.getString("text2") != null) {
+                        preparedStatement1.setString(8, jsonObj.getString("text2"));
+                    } else {
+                        preparedStatement1.setString(8, "null");
+                    }
+                    if (!"".equalsIgnoreCase(jsonObj.getString("text3").trim()) && jsonObj.getString("text3") != null) {
+                        preparedStatement1.setString(9, jsonObj.getString("text3"));
+                    } else {
+                        preparedStatement1.setString(9, "null");
+                    }
+                    if (!"".equalsIgnoreCase(jsonObj.getString("text4").trim()) && jsonObj.getString("text4") != null) {
+                        preparedStatement1.setString(10, jsonObj.getString("text4"));
+                    } else {
+                        preparedStatement1.setString(10, "null");
+                    }
+                    preparedStatement1.setString(11, jsonObj.getString("desc"));
+                    if (!"".equalsIgnoreCase(jsonObj.getString("text5").trim()) && jsonObj.getString("text5") != null) {
+                        preparedStatement1.setString(12, jsonObj.getString("text5"));
+                    } else {
+                        preparedStatement1.setString(12, "null");
+                    }
+                    if (!"".equalsIgnoreCase(jsonObj.getString("text6").trim()) && jsonObj.getString("text6") != null) {
+                        preparedStatement1.setString(13, jsonObj.getString("text6"));
+                    } else {
+                        preparedStatement1.setString(13, "null");
+                    }
+                    if (!"".equalsIgnoreCase(jsonObj.getString("text7").trim()) && jsonObj.getString("text7") != null) {
+                        preparedStatement1.setString(14, jsonObj.getString("text7"));
+                    } else {
+                        preparedStatement1.setString(14, "null");
+                    }
+                    if (!"".equalsIgnoreCase(jsonObj.getString("text8").trim()) && jsonObj.getString("text8") != null) {
+                        preparedStatement1.setString(15, jsonObj.getString("text8"));
+                    } else {
+                        preparedStatement1.setString(15, "null");
+                    }
+                    if (!"".equalsIgnoreCase(jsonObj.getString("text9").trim()) && jsonObj.getString("text9") != null) {
+                        preparedStatement1.setString(16, jsonObj.getString("text9"));
+                    } else {
+                        preparedStatement1.setString(16, "null");
+                    }
+                    updatedRows1 = preparedStatement1.executeUpdate();
+                    if (i == 0) {
+                        System.out.println("i-----" + i);
+                        preparedStatement2 = connection.prepareStatement(queryString2);
+                        preparedStatement2.setString(1, jsonObj.getString("listName1"));
+                        preparedStatement2.setString(2, "null");
+                        preparedStatement2.setString(3, "null");
+                        preparedStatement2.setInt(4, addVersion);
+                        preparedStatement2.setInt(5, 1);
+                        preparedStatement2.setString(6, "null");
+                        preparedStatement2.setString(7, userName);
+                            //java.sql.Date d=new java.sql.Date(i);
+                        //SimpleDateFormat sd=new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+                        //SimpleDateFormat sd=new SimpleDateFormat("YYYY-MM-dd HH24:mm:SS.0");
+                        preparedStatement2.setTimestamp(8, DateUtility.getInstance().getCurrentDB2Timestamp());
+                        // updatedRows = preparedStatement.executeUpdate();
+                        updatedRows2 = preparedStatement2.executeUpdate();
+                    }
+                    //}
+                }
 //                } else {
 //                    queryString = "INSERT INTO SI_USER.CODELIST_XREF_ITEM "
 //                            + "(LIST_NAME, SENDER_ID, RECEIVER_ID, LIST_VERSION, SENDER_ITEM, RECEIVER_ITEM, TEXT1, TEXT2, TEXT3, TEXT4, DESCRIPTION, TEXT5, TEXT6, TEXT7, TEXT8, TEXT9)"
@@ -5900,7 +5934,7 @@ public class AjaxHandlerServiceImpl implements AjaxHandlerService {
         }
 
     }
-    
+
     /**
      *
      * This method is used to get the Consultant Resumes

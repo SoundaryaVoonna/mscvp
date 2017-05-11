@@ -161,6 +161,7 @@ function populatePoDetails(responseXML)
         var TRANSACTION_TYPE = detail.getElementsByTagName("TRANSACTION_TYPE")[0].childNodes[0].nodeValue;
         var STATUS = detail.getElementsByTagName("STATUS")[0].childNodes[0].nodeValue;
         var FILE_TYPE = detail.getElementsByTagName("FILE_TYPE")[0].childNodes[0].nodeValue;
+        var ERROR_REPORT_FILEPATH = detail.getElementsByTagName("ERROR_REPORT_FILEPATH")[0].childNodes[0].nodeValue;
 
 
         // Sap Detals
@@ -351,9 +352,16 @@ function populatePoDetails(responseXML)
         } else {
             document.getElementById('POAckFileId').innerHTML = "<a href=\"../download/getAttachment.action?locationAvailable=" + ACKFILEID + "\">Download</a>";
         }
+        if (ERROR_REPORT_FILEPATH == "No File") {
+            document.getElementById('ErrReport').innerHTML = "--";
+
+        } else {
+            document.getElementById('ErrReport').innerHTML = "<a href=\"../download/getAttachment.action?locationAvailable=" + ERROR_REPORT_FILEPATH + "\">Download</a>";
+        }
 
         if (ERRMESSAGE != "NO MSG") {
             document.getElementById('errorDiv').style.display = "block";
+            document.getElementById('errorReportDiv').style.display = "block";
             document.getElementById('InvErrormessage').innerHTML = ERRMESSAGE;
         } else {
             document.getElementById('InvErrormessage').innerHTML = "--";
@@ -435,6 +443,7 @@ function populateASNDetails(responseXML) {
         var GS_CONTROL_NUMBER = detail.getElementsByTagName("GS_CONTROL_NUMBER")[0].childNodes[0].nodeValue;
         var TRANSACTION_TYPE = detail.getElementsByTagName("TRANSACTION_TYPE")[0].childNodes[0].nodeValue;
         var FILE_TYPE = detail.getElementsByTagName("FILE_TYPE")[0].childNodes[0].nodeValue;
+        var ERROR_REPORT_FILEPATH = detail.getElementsByTagName("ERROR_REPORT_FILEPATH")[0].childNodes[0].nodeValue;
         // Sap Detals
 
         var SAP_DETAILS = detail.getElementsByTagName("SAP_DETAILS")[0].childNodes[0].nodeValue;
@@ -561,9 +570,15 @@ function populateASNDetails(responseXML) {
 
         if (ERRMESSAGE != "NO MSG") {
             document.getElementById('errorDiv').style.display = "block";
+            document.getElementById('errorReportDiv').style.display = "block";
             document.getElementById('mserrormessage').innerHTML = ERRMESSAGE;
         } else {
             document.getElementById('mserrormessage').innerHTML = "--";
+        }
+        if (ERROR_REPORT_FILEPATH == "No File") {
+            document.getElementById('ErrReport').innerHTML = "--";
+        } else {
+            document.getElementById('ErrReport').innerHTML = "<a href=\"../download/getAttachment.action?locationAvailable=" + ERROR_REPORT_FILEPATH + "\">Download</a>";
         }
     }
     if (chk.childNodes[0].nodeValue == "false") {
@@ -632,6 +647,7 @@ function populateInvDetails(responseXML) {
         var ST_CONTROL_NUMBER = detail.getElementsByTagName("ST_CONTROL_NUMBER")[0].childNodes[0].nodeValue;
         var GS_CONTROL_NUMBER = detail.getElementsByTagName("GS_CONTROL_NUMBER")[0].childNodes[0].nodeValue;
         var FILETYPE = detail.getElementsByTagName("FILETYPE")[0].childNodes[0].nodeValue;
+        var ERROR_REPORT_FILEPATH = detail.getElementsByTagName("ERROR_REPORT_FILEPATH")[0].childNodes[0].nodeValue;
 
         // Sap Detals
         var SAP_DETAILS = detail.getElementsByTagName("SAP_DETAILS")[0].childNodes[0].nodeValue;
@@ -719,9 +735,15 @@ function populateInvDetails(responseXML) {
 
         if (ERRMESSAGE != "NO MSG") {
             document.getElementById('errorDiv').style.display = "block";
+            document.getElementById('errorReportDiv').style.display = "block";
             document.getElementById('mierrormessage').innerHTML = ERRMESSAGE;
         } else {
             document.getElementById('mierrormessage').innerHTML = "--";
+        }
+        if (ERROR_REPORT_FILEPATH == "No File") {
+            document.getElementById('ErrReport').innerHTML = "--";
+        } else {
+            document.getElementById('ErrReport').innerHTML = "<a href=\"../download/getAttachment.action?locationAvailable=" + ERROR_REPORT_FILEPATH + "\">Download</a>";
         }
 
     }
@@ -787,7 +809,7 @@ function populateDocDetails(responseXML)
         var PRI_KEY_TYPE = detail.getElementsByTagName("PRI_KEY_TYPE")[0].childNodes[0].nodeValue;
         var ACKFILEID = detail.getElementsByTagName("ACKFILEID")[0].childNodes[0].nodeValue;
         var ERRMESSAGE = detail.getElementsByTagName("ERR_MESSAGE")[0].childNodes[0].nodeValue;
-
+        var ERROR_REPORT_FILEPATH = detail.getElementsByTagName("ERROR_REPORT_FILEPATH")[0].childNodes[0].nodeValue;
         var TRANSACTION_TYPE = detail.getElementsByTagName("TRANSACTION_TYPE")[0].childNodes[0].nodeValue;
         var STATUS = detail.getElementsByTagName("STATUS")[0].childNodes[0].nodeValue;
 
@@ -863,9 +885,15 @@ function populateDocDetails(responseXML)
 
         if (ERRMESSAGE != "NO MSG") {
             document.getElementById('errorDiv').style.display = "block";
+            document.getElementById('errorReportDiv').style.display = "block";
             document.getElementById('InvErrormessage').innerHTML = ERRMESSAGE;
         } else {
             document.getElementById('InvErrormessage').innerHTML = "--";
+        }
+        if (ERROR_REPORT_FILEPATH == "No File") {
+            document.getElementById('ErrReport').innerHTML = "--";
+        } else {
+            document.getElementById('ErrReport').innerHTML = "<a href=\"../download/getAttachment.action?locationAvailable=" + ERROR_REPORT_FILEPATH + "\">Download</a>";
         }
 
       /*  if (SAP_DETAILS != 'NO') {
