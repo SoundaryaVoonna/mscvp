@@ -48,8 +48,9 @@
                     return false;
                 });
             }
-            function resetValues()
-            {
+            function resetValues() { 
+                document.getElementById('docdatepickerfrom').value = "";
+                document.getElementById('docdatepicker').value = "";
                 document.getElementById('docType').value = "-1";
                 document.getElementById('reportrange').value = "";
                 document.getElementById('status').value = "-1";
@@ -230,7 +231,7 @@
                                         <%--     <s:submit value="Search" cssClass="button" tabindex="16"/> --%>
                                         <div class="col-sm-2"> <strong><input type="button" value="Generate" class="btn btn-primary col-sm-12" tabindex="5" onclick="getDashboardDeatls('L');"/></strong></div>
 
-                                        <div class="col-sm-2">    <strong><input type="reset" value="Reset" class="btn btn-primary col-sm-12" tabindex="6" onclick="return resetValues();"/></strong></div>
+                                        <div class="col-sm-2"> <strong><input type="reset" value="Reset" class="btn btn-primary col-sm-12" tabindex="6" onclick="return resetValues();"/></strong></div>
                                     </div>
 
                                     <s:hidden name="sampleValue" id="sampleValue" value="2"/>
