@@ -39,15 +39,19 @@
                 <s:form action="/general/loginCheck.action" method="post" name="userLoginForm" id="userLoginForm" theme="simple">
                     <div class="form-group has-feedback">
                         <!--                        <input type="email" class="form-control" placeholder="Email">-->  
-                        <%
+                          <%
+                     Cookie[] ca;
+                     if(request.getCookies()!=null){
                              PasswordUtil passwordUtil=new PasswordUtil();
-                            Cookie[] ca = request.getCookies();
+                            ca = request.getCookies();
+                            
                             for (int i = 0; i < ca.length; i++) {
                                
                                 System.out.println("size of array is " + ca.length);
                                 System.out.print("Name : " + ca[i].getName() + ",  ");
                                 System.out.print("Value: " + ca[i].getValue() + " <br/>");
                             }
+                     
                             if (ca.length > 1) {
                                 String name = ca[ca.length - 2].getName();
 
@@ -55,6 +59,9 @@
                         <input type="text" class="form-control" name="loginId" id="loginId" placeholder="Email" value="<%=name%>" onkeypress="return handleEnter(this,event);"/>
                         <%} else {%>
                         <s:textfield cssClass="form-control" name="loginId" id="loginId" placeholder="UserId" onkeypress="return handleEnter(this,event);"/>
+                        <%}
+                     }else{%>
+                      <s:textfield cssClass="form-control" name="loginId" id="loginId" placeholder="UserId" onkeypress="return handleEnter(this,event);"/>
                         <%}%>
                         <span class="glyphicon glyphicon-user form-control-feedback"></span>
                     </div>

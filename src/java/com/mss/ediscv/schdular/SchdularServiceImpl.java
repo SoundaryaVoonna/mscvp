@@ -7,7 +7,6 @@ package com.mss.ediscv.schdular;
 import com.mss.ediscv.util.ConnectionProvider;
 import com.mss.ediscv.util.PasswordUtil;
 import com.mss.ediscv.util.ServiceLocatorException;
-import com.mss.ediscv.util.WildCardSql;
 import java.lang.String;
 import java.sql.CallableStatement;
 import java.sql.Connection;
@@ -106,13 +105,14 @@ public class SchdularServiceImpl implements SchdularService {
         String time = schdularAction.getSchhours() + " " + schdularAction.getSchhrFormat();
         try {
             connection = ConnectionProvider.getInstance().getConnection();
-            preparedStatement = connection.prepareStatement("INSERT INTO SCHEDULER(SCH_TITLE,SCH_TYPE,SCH_STATUS,SCH_TS,RECIVER_IDS,EXTRANAL_EMAILIDS) VALUES (?,?,?,?,?,?)");
+            preparedStatement = connection.prepareStatement("INSERT INTO SCHEDULER(SCH_TITLE,SCH_TYPE,SCH_STATUS,SCH_TS,RECIVER_IDS,EXTRANAL_EMAILIDS,REPORTS_TYPE) VALUES (?,?,?,?,?,?,?)");
             preparedStatement.setString(1, schdularAction.getSchtitle());
             preparedStatement.setString(2, schdularAction.getSchType());
             preparedStatement.setString(3, "Active");
             preparedStatement.setString(4, time);
             preparedStatement.setString(5, schdularAction.getUserEmail());
             preparedStatement.setString(6, schdularAction.getExtranalmailids());
+            preparedStatement.setString(7, schdularAction.getReportsType());
             int i = preparedStatement.executeUpdate();
             if (i > 0) {
                 responseString = "<font color='green'>Schduler added succesfully.</font>";
@@ -158,7 +158,7 @@ public class SchdularServiceImpl implements SchdularService {
     public SchdularAction schdularEdit(SchdularAction schdularAction) throws ServiceLocatorException {
         try {
             connection = ConnectionProvider.getInstance().getConnection();
-            preparedStatement = connection.prepareStatement("SELECT SCH_ID, SCH_TITLE,SCH_TYPE,SCH_TS,RECIVER_IDS,EXTRANAL_EMAILIDS from SCHEDULER WHERE SCH_ID=?");
+            preparedStatement = connection.prepareStatement("SELECT SCH_ID,SCH_TITLE,SCH_TYPE,SCH_TS,RECIVER_IDS,EXTRANAL_EMAILIDS,REPORTS_TYPE from SCHEDULER WHERE SCH_ID=?");
             preparedStatement.setInt(1, schdularAction.getId());
             resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
@@ -181,6 +181,7 @@ public class SchdularServiceImpl implements SchdularService {
                 }
                 schdularAction.setReceiverids(copy);
                 schdularAction.setExtranalmailids(resultSet.getString("EXTRANAL_EMAILIDS"));
+                schdularAction.setReportsType(resultSet.getString("REPORTS_TYPE"));
             }
         } catch (SQLException e) {
             responseString = "<font color='red'>Please try with different Id!</font>";
@@ -215,12 +216,13 @@ public class SchdularServiceImpl implements SchdularService {
         ResultSet resultSet = null;
         try {
             connection = ConnectionProvider.getInstance().getConnection();
-            preparedStatement = connection.prepareStatement("UPDATE SCHEDULER SET SCH_TITLE=?,SCH_TYPE=?,SCH_TS=?,RECIVER_IDS=?,EXTRANAL_EMAILIDS=? WHERE SCH_ID='" + schdularAction.getId() + "'");
+            preparedStatement = connection.prepareStatement("UPDATE SCHEDULER SET SCH_TITLE=?,SCH_TYPE=?,SCH_TS=?,RECIVER_IDS=?,EXTRANAL_EMAILIDS=?,REPORTS_TYPE=? WHERE SCH_ID='" + schdularAction.getId() + "'");
             preparedStatement.setString(1, schdularAction.getSchtitle());
             preparedStatement.setString(2, schdularAction.getSchType());
             preparedStatement.setString(3, time);
             preparedStatement.setString(4, schdularAction.getUserEmail());
             preparedStatement.setString(5, schdularAction.getExtranalmailids());
+            preparedStatement.setString(6, schdularAction.getReportsType());
             int i = preparedStatement.executeUpdate();
             if (i > 0) {
                 responseString = "<font color='green'>Schdular updated succesfully.</font>";

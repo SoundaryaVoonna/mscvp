@@ -289,7 +289,7 @@
                                                 <div class="col-sm-2"><strong><input type="button" value="Reset"  tabindex="9" class="btn btn-primary col-sm-12" onclick="return resetvalues();"/></strong></div>
                                                 <div class="col-sm-2">  <strong><input type="button" value="BackToList" class="btn btn-primary col-sm-12" onclick="return getUserList();" tabindex="10"/></strong></div>
                                                         <%} else {%>
-                                                <div class="col-sm-2"> <s:submit value="Update" cssClass="btn btn-primary col-sm-12"  tabindex="11"/></div>
+                                                <div class="col-sm-2"> <s:submit value="Update" cssClass="btn btn-primary col-sm-12"  tabindex="11" onclick="return checkUservalues();"/></div>
 
                                                 <div class="col-sm-2">  <strong><input type="button" value="BackToList" class="btn btn-primary col-sm-12" onclick="return getUserList();" tabindex="12"/></strong></div>
 

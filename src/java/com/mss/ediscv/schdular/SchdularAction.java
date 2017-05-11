@@ -157,6 +157,8 @@ public class SchdularAction extends ActionSupport implements ServletRequestAware
             setUserPageId("1");
             setUserMap(DataSourceDataProvider.getInstance().getUserMap());
             String resultMessage = ServiceLocator.getSchdularService().updateSchdular(this);
+             setId(getId());
+            getSchedularEdit();
             getHttpServletRequest().setAttribute(AppConstants.REQ_RESULT_MSG, resultMessage);
             resultType = SUCCESS;
         }
