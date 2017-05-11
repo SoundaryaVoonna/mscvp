@@ -259,7 +259,7 @@
                 <div class="content grid_space" id="gridDiv" style="display: none;overflow: hidden">
                     <div class="content_item">
 
-                        <div id="loadingImage" align="center"><img  src="../includes/images/ajax-loader.gif" /></div>
+<!--                        <div id="loadingImage" align="center"><img  src="../includes/images/ajax-loader.gif" /></div>-->
                             <s:hidden id="inboundTrans" name="inboundTrans"/>
                             <s:hidden id="outboundTrans" name="outboundTrans"/>
                         <div id="tblCharts" style="display: none" class="grid_space">

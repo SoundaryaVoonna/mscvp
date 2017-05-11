@@ -138,11 +138,11 @@
                 </section>   
             </s:if><s:elseif test="%{configFlowFlag == 'logistics'}">
                 <section class="content-header">
-                    <h1>Partner Search<small>Logistics</small></h1>
-                    <ol class="breadcrumb">
+                    <h1>Partner Search</h1>
+<!--                    <ol class="breadcrumb">
                         <li><a href="#"><i class="fa fa-truck"></i>Logistics</a></li>
                         <li class="active">  Partner Search</li>
-                    </ol>
+                    </ol>-->
                 </section>
             </s:elseif>
             <br>

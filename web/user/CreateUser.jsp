@@ -268,27 +268,27 @@
                                                     <div class="col-sm-12">
                                                         <div class="row">
                                                             <s:hidden name="id" value="%{id}"/>
-                                                            <div class="col-sm-3"> <label>First Name<font color="black">*</font></label>
+                                                            <div class="col-sm-3"> <label>First Name<font color="red">*</font></label>
                                                                     <s:textfield name="fname"  id="fname" cssClass="form-control " maxLength="50"  value="%{fname}"  /> 
                                                             </div>   
-                                                            <div class="col-sm-3"> <label>Last Name<font color="black">*</font></label>
+                                                            <div class="col-sm-3"> <label>Last Name<font color="red">*</font></label>
                                                                     <s:textfield name="lname"  id="lname" cssClass="form-control "  maxLength="50" value="%{lname}"  /> 
                                                             </div>
-                                                            <div class="col-sm-3"> <label>Email<font color="black">*</font></label>
+                                                            <div class="col-sm-3"> <label>Email<font color="red">*</font></label>
                                                                     <s:textfield name="email"  id="email" cssClass="form-control"  maxLength="100" value="%{email}" onblur="return validateEmail();" /> 
                                                             </div>
-                                                            <div class="col-sm-3"> <label>Office Phone<font color="black">*</font></label>
+                                                            <div class="col-sm-3"> <label>Office Phone<font color="red">*</font></label>
                                                                     <s:textfield name="ophno"  id="ophno" cssClass="form-control " maxLength="14" onchange="return formatPhone(this);" onblur="return validatenumber(this);"  value="%{ophno}"  /> 
                                                             </div>
 
                                                         </div> <br>                                                        <div class="row">
-                                                            <div class="col-sm-3"> <label>Status<font color="black">*</font></label>
+                                                            <div class="col-sm-3"> <label>Status<font color="red">*</font></label>
                                                                     <s:select name="status" id="status" headerKey="-1" headerValue="Select Status" list="#@java.util.LinkedHashMap@{'A':'Active','I':'Inactive','T':'Terminated'}"    cssClass="form-control " value="%{status}"  /> 
                                                             </div>  
-                                                            <div class="col-sm-3"> <label>Role<font color="black">*</font></label>
+                                                            <div class="col-sm-3"> <label>Role<font color="red">*</font></label>
                                                                     <s:select name="role" id="role" headerKey="-1" headerValue="Select Role" list="userRolesMap"    cssClass="form-control" value="%{role}"  /> 
                                                             </div>  
-                                                            <div class="col-sm-3"> <label>Department<font color="black">*</font></label>
+                                                            <div class="col-sm-3"> <label>Department<font color="red">*</font></label>
                                                                     <s:select name="deptId" id="deptId"  headerKey="-1" headerValue="Select Department" list=" #@java.util.LinkedHashMap@{'1':'Management','2':'Operations','3':'Developement'}"   cssClass="form-control" value="%{deptId}"  /> 
                                                             </div> 
                                                         </div>

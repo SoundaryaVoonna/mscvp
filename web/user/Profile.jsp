@@ -214,6 +214,14 @@
             function removeValue() {
                 document.getElementById("imageUpdate").value = "";
             }
+            function abc(x) {
+                if(x.length<8){
+                    alert('Password must be 8 to 15 characters');
+                }if(x.length>15){
+                    alert('Password must be less than or equal to 15 characters');
+                }
+               // alert(x.length);
+            }
         </script>
         <style>
             .inner-addon { 
@@ -317,7 +325,7 @@
                                                         <div class="col-sm-4">  <s:textfield name="organization"  id="organization" placeholder="Miracle Software Systems, Inc." cssClass="form-control pull-left"   value="%{userBean.organization}"  tabindex="5"/>
                                                         </div>
                                                         <div class="col-sm-2"> <label for="dob">DOB</label> </div>
-                                                        <div class="col-sm-4"><div class="inner-addon left-addon"><s:textfield name="dob" data-provide="datepicker"  id="dob" cssClass="form-control pull-left" placeholder="MM/DD/YYYY  &#xf063;"  value="%{userBean.dob}" style="padding: 0px 34px;" tabindex="6"  /><i class="fa fa-calendar glyphicon glyphicon-calendar" style="position: relative;right: -9px;top: -26px;"></i></div> 
+                                                        <div class="col-sm-4"><div class="inner-addon left-addon"><s:textfield name="dob" data-provide="datepicker"  id="dob" cssClass="form-control pull-left" placeholder="MM/DD/YYYY"  value="%{userBean.dob}" style="padding: 0px 34px;" tabindex="6"  /><i class="fa fa-calendar glyphicon glyphicon-calendar" style="position: relative;right: -9px;top: -26px;"></i></div> 
                                                                 <%-- <div class="col-sm-4"><div class="inner-addon"><s:textfield name="dob" data-provide="datepicker"  id="dob" cssClass="form-control pull-left" placeholder="MM/DD/YYYY"  value="%{userBean.dob}"  /></div> --%>
 
                                                         </div>
@@ -405,9 +413,9 @@
                                         <div style="text-align: center;">${resultMessage}</div>
                                         <div class="row">
                                             <div class="form-group" >
-                                                <label for="oldpassword" class="col-sm-2">Old Password</label>
+                                                <label for="oldpassword" class="col-sm-2">Old Password<font style="color:red">*</font></label>
                                                 <div class="col-sm-4">
-                                                    <s:password cssClass="form-control" placeholder="Old Password" name="oldPwd" id="oldPwd" tabindex="1"/>
+                                                    <s:password cssClass="form-control" placeholder="Old Password" name="oldPwd" id="oldPwd" tabindex="1" />
                                                 </div> 
                                                 <div class="col-sm-3"></div>
                                                 <div class="col-sm-3"></div>
@@ -416,22 +424,22 @@
                                         <br>
                                         <div class="row">
                                             <div class="form-group">
-                                                <label for="newpassword" class="col-sm-2">New Password</label>
+                                                <label for="newpassword" class="col-sm-2">New Password<font style="color:red">*</font></label>
                                                 <div class="col-sm-4">
-                                                    <s:password cssClass="form-control" placeholder="New Password" name="newPwd" id="newPwd" tabindex="2"/>
+                                                    <s:password cssClass="form-control" placeholder="New Password" name="newPwd" id="newPwd" tabindex="2" />
                                                 </div>
-                                                <div class="col-sm-3"></div>
+                                                <div class="col-sm-3">(Password should be 8 to 15 characters)</div>
                                                 <div class="col-sm-3"></div>
                                             </div>
                                         </div>
                                         <br>
                                         <div class="row">
                                             <div class="form-group">
-                                                <label for="confirmpassword" class="col-sm-2">Confirm Password</label>
+                                                <label for="confirmpassword" class="col-sm-2">Confirm Password<font style="color:red">*</font></label>
                                                 <div class="col-sm-4">
-                                                    <s:password cssClass="form-control" placeholder="Confirm Password" name="confirmPwd" id="confirmPwd" tabindex="3"/>
+                                                    <s:password cssClass="form-control" placeholder="Confirm Password" name="confirmPwd" id="confirmPwd" tabindex="3" />
                                                 </div>
-                                                <div class="col-sm-3"></div>
+                                                <div class="col-sm-3">(Enter New Password again)</div>
                                                 <div class="col-sm-3"></div>
                                             </div>
                                         </div>

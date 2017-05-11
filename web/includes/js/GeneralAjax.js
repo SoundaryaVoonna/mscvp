@@ -67,6 +67,7 @@ function readyStateHandlerLoadText(req, responseTextHandler) {
     return function () {
         if (req.readyState == 4) {
             if (req.status == 200) {
+                
                 (document.getElementById("loadingImage")).style.display = "none";
                 responseTextHandler(req.responseText);
             } else {
@@ -74,7 +75,6 @@ function readyStateHandlerLoadText(req, responseTextHandler) {
             }
         }
         else {
-
             (document.getElementById("loadingImage")).style.display = "block";
         }
     }
@@ -2870,7 +2870,7 @@ function getDashboardDeatls(flag) {
     document.getElementById("gridDiv").style.display = 'block';
 
     var req = getXMLHttpRequest();
-    req.onreadystatechange = readyStateHandlerLoadText(req, populateDashboardDetails);
+    req.onreadystatechange = readyStateHandlerLoadText2(req, populateDashboardDetails);
     // var url="../ajax/getDashboardDetails.action?startDate="+startDate+"&endDate="+endDate+"&docType="+docType+"&ackStatus="+ackStatus+"&status="+status+"&partnerId="+partnerId+"&direction="+direction;
     var url = "../ajax/getDashboardDetails.action?flag="+flag+"&startDate=" + startDate + "&endDate=" + endDate + "&docType=" + docType + "&status=" + status + "&partnerId=" + partnerId;
     //alert("url : "+url);
@@ -2882,7 +2882,6 @@ function getDashboardDeatls(flag) {
 }
 
 function populateDashboardDetails(resText) {
-
 
     var response = resText.split("*");
 
@@ -2896,6 +2895,7 @@ function populateDashboardDetails(resText) {
 
     drawInboundChart();
     drawOutboundChart();
+     
 //document.getElementById("tblCharts").style.display='block';
 //   google.setOnLoadCallback(drawInboundChart);
 //google.setOnLoadCallback(drawOutboundChart);
