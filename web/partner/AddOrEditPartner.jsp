@@ -112,7 +112,7 @@
                     </h1>
                     <ol class="breadcrumb">
                         <li><a href="#"><i class="fa fa-truck"></i>Logistics</a></li>
-                        <li class="active"> Partner Edit</li>
+                        <li class="active">Partner Edit</li>
                     </ol> 
                 </section>
             </s:elseif>
