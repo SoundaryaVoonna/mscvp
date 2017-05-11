@@ -557,6 +557,10 @@
                     <div class="col-sm-6"> <label class="labelw"> Error&nbsp;Message </label></div>
                     <div class="col-sm-6" id="InvErrormessage" style="color: red"></div>
                 </div>
+                        <div class="row col-sm-12" id="errorReportDiv" style="display: none">
+                            <div class="col-sm-6"> <label class="labelw">  Error&nbsp;Report </label></div>
+                            <div class="col-sm-6"><div id="ErrReport"></div></div>
+                        </div>
 
                 <div id="noresult"></div>
                 <br>
@@ -650,29 +654,29 @@
                         var corrval2 = document.getElementById('corrvalue2').value;
 
                         if ((corrattr != "-1") && (corrval == "")) {
-                            alert("please enter Correlation Value!!!");
+                            alert("Please enter Correlation Value !!");
                             return false;
                         }
                         if ((corrattr == "-1") && (corrval != "")) {
-                            alert("please select Correlation!");
+                            alert("Please select Correlation !!");
                             return false;
                         }
 
                         if ((corrattr1 != "-1") && (corrval1 == "")) {
-                            alert("please enter Correlation Value!!!");
+                            alert("Please enter Correlation Value !!");
                             return false;
                         }
                         if ((corrattr1 == "-1") && (corrval1 != "")) {
-                            alert("please select Correlation!");
+                            alert("Please select Correlation !!");
                             return false;
                         }
 
                         if ((corrattr2 != "-1") && (corrval2 == "")) {
-                            alert("please enter Correlation Value!!!");
+                            alert("Please enter Correlation Value !!");
                             return false;
                         }
                         if ((corrattr2 == "-1") && (corrval2 != "")) {
-                            alert("please select Correlation!");
+                            alert("Please select Correlation !!");
                             return false;
                         }
                         var res = Formvalidation(document.getElementById('poDateFrom').value, document.getElementById('poDateTo').value);

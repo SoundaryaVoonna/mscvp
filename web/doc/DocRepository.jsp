@@ -32,7 +32,7 @@
         <script language="JavaScript" src='<s:url value="/includes/js/downloadAjax.js"/>'></script>
 
         <script>
-            $(function() {
+            $(function () {
                 $('#results').DataTable({
                     "paging": true,
                     "lengthChange": true,
@@ -40,7 +40,7 @@
                     "ordering": true,
                     "info": true,
                     "autoWidth": false,
-                    order: [[ 0, 'desc' ]]
+                    order: [[0, 'desc']]
                 });
             });
         </script>
@@ -65,12 +65,12 @@
             <section class="content-header">
                 <h1>
                     Document Repository
-<!--                    <small>Manufacturing</small>-->
+                    <!--                    <small>Manufacturing</small>-->
                 </h1>
-<!--                <ol class="breadcrumb">
-                    <li><a href="#"><i class="fa fa-wrench"></i>Manufacturing</a></li>
-                    <li class="active">Document Repository</li>
-                </ol>-->
+                <!--                <ol class="breadcrumb">
+                                    <li><a href="#"><i class="fa fa-wrench"></i>Manufacturing</a></li>
+                                    <li class="active">Document Repository</li>
+                                </ol>-->
             </section>
             <br>
             <section class="content">
@@ -272,7 +272,7 @@
                                                                                     out.println("-");
                                                                                 }
                                                                                 //out.println(docRepositoryBean.getFile_type());
-                                                                            %>
+%>
                                                                         </td>
                                                                         <td><a href="javascript:getDetails('<%=docRepositoryBean.getFile_id()%>','<%=docRepositoryBean.getPoNumber()%>','<%=docRepositoryBean.getId()%>');">
                                                                                 <%
@@ -509,6 +509,10 @@
                             <div class="col-sm-6"> <label class="labelw">  Error&nbsp;Message </label></div>
                             <div class="col-sm-6" id="InvErrormessage" style="color: red"></div>
                         </div>
+                        <div class="row col-sm-12" id="errorReportDiv" style="display: none">
+                            <div class="col-sm-6"> <label class="labelw">  Error&nbsp;Report </label></div>
+                            <div class="col-sm-6"><div id="ErrReport"></div></div>
+                        </div>
                         <%--<div class="row col-sm-12 clear" style="visibility: hidden">
                             <div class="col-sm-6"> <label class="labelw"> SAP_USER </label>
                                 <s:textfield  cssClass="form-control"  required="required" placeholder="" id="SAP_USER" name="ManStatus" readonly="true"/>
@@ -587,32 +591,32 @@
                                 var corrval2 = document.getElementById('corrvalue2').value;
                                 if ((corrattr != "-1") && (corrval == "")) {
                                     // document.getElementById('resMsg').innerHTML = "please enter Correlation Value!";
-                                    alert("please enter Correlation Value!!!");
+                                    alert("Please enter Correlation Value !!");
                                     return false;
                                 }
                                 if ((corrattr == "-1") && (corrval != "")) {
                                     // document.getElementById('resMsg').innerHTML = "please select Correlation!";
-                                    alert("please select Correlation!");
+                                    alert("Please select Correlation !!");
                                     return false;
                                 }
                                 if ((corrattr1 != "-1") && (corrval1 == "")) {
                                     //document.getElementById('resMsg').innerHTML = "please enter Correlation Value!";
-                                    alert("please enter Correlation Value!!!");
+                                    alert("Please enter Correlation Value !!");
                                     return false;
                                 }
                                 if ((corrattr1 == "-1") && (corrval1 != "")) {
                                     //document.getElementById('resMsg').innerHTML = "please select Correlation!";
-                                    alert("please select Correlation!");
+                                    alert("Please select Correlation !!");
                                     return false;
                                 }
                                 if ((corrattr2 != "-1") && (corrval2 == "")) {
                                     //document.getElementById('resMsg').innerHTML = "please enter Correlation Value!";
-                                    alert("please enter Correlation Value!!!");
+                                    alert("Please enter Correlation Value !!");
                                     return false;
                                 }
                                 if ((corrattr2 == "-1") && (corrval2 != "")) {
                                     //document.getElementById('resMsg').innerHTML = "please select Correlation!";
-                                    alert("please select Correlation!");
+                                    alert("Please select Correlation !!");
                                     return false;
                                 }
                             }
@@ -669,7 +673,7 @@
                                 document.getElementById("docdatepicker").value = x;
                             }
                             var count = 0;
-                            $("#addButton").click(function() {
+                            $("#addButton").click(function () {
                                 count++;
                                 if (count == 1)
                                     document.getElementById("corr").style.display = "block";

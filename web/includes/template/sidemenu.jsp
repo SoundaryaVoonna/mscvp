@@ -155,10 +155,9 @@
                         <i class="fa fa-angle-left pull-right"></i>
                     </a>
                     <ul class="treeview-menu" >
-                        <% //100,101,0,0,106,107
-                            if (session.getAttribute(AppConstants.SES_ROLE_ID).equals("100") || session.getAttribute(AppConstants.SES_ROLE_ID).equals("102") || session.getAttribute(AppConstants.SES_ROLE_ID).equals("141") || session.getAttribute(AppConstants.SES_ROLE_ID).equals("142") || session.getAttribute(AppConstants.SES_ROLE_ID).equals("103")) {%>
+                   <% 
+                        if (session.getAttribute(AppConstants.SES_ROLE_ID).equals("100") || session.getAttribute(AppConstants.SES_ROLE_ID).equals("102") || session.getAttribute(AppConstants.SES_ROLE_ID).equals("141") || session.getAttribute(AppConstants.SES_ROLE_ID).equals("142") || session.getAttribute(AppConstants.SES_ROLE_ID).equals("103")) {%>
                         <li id="ltdocrepository"><a href="<s:url action="../logisticsdoc/Logistics.action"/>"><i class="fa fa-circle-o"></i> Doc Repository</a></li>
-
                         <li id="ltloadtendering">
                             <a href="<s:url action="../logisticsloadtendering/loadtendering.action"/>"><i class="fa fa-circle-o"></i> Load Tendering</a></li>
 
@@ -200,7 +199,8 @@
                     </ul>
                 </li>
 
-                <%  }
+                <% 
+ }
                     }
                     if (usrFlowMap.containsValue("Manufacturing")) {%>
                 <li class="treeview" id="manufacturing">
