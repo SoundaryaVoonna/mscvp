@@ -2621,4 +2621,43 @@ public class DataSourceDataProvider {
         }
         return listNameMap;
     }
+    
+     public String getPartnerNameById(String parterId) throws ServiceLocatorException {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        String queryString = null;
+        connection = ConnectionProvider.getInstance().getConnection();
+        String partnerName = null;
+        try {
+            queryString = "SELECT ID,NAME From TP WHERE ID='"+ parterId + "'";
+            preparedStatement = connection.prepareStatement(queryString);
+            resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                partnerName = resultSet.getString("NAME");
+            }
+
+        } catch (SQLException sql) {
+            throw new ServiceLocatorException(sql);
+        } finally {
+            try {
+                if (resultSet != null) {
+                    resultSet.close();
+                    resultSet = null;
+                }
+                if (preparedStatement != null) {
+                    preparedStatement.close();
+                    preparedStatement = null;
+                }
+                if (connection != null) {
+                    connection.close();
+                    connection = null;
+                }
+            } catch (SQLException ex) {
+                throw new ServiceLocatorException(ex);
+            }
+        }
+        System.out.println("partnerName=========" + partnerName);
+        return partnerName;
+    }
 }
