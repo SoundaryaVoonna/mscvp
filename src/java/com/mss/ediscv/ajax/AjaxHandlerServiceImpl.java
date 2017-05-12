@@ -5339,8 +5339,10 @@ public class AjaxHandlerServiceImpl implements AjaxHandlerService {
                     statement = connection.createStatement();
                     updatedRows = statement.executeUpdate(queryString);
                 } else {
-                    updatedRows = 2;
+                    updatedRows = 100;
                 }
+            } else {
+                updatedRows = 200;
             }
             System.out.println("after updation!! " + updatedRows);
 
@@ -5572,7 +5574,7 @@ public class AjaxHandlerServiceImpl implements AjaxHandlerService {
                     preparedStatement2.setInt(5, 1);
                     preparedStatement2.setString(6, "null");
                     preparedStatement2.setString(7, userName);
-                //java.sql.Date d=new java.sql.Date(i);
+                    //java.sql.Date d=new java.sql.Date(i);
                     //SimpleDateFormat sd=new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
                     //SimpleDateFormat sd=new SimpleDateFormat("YYYY-MM-dd HH24:mm:SS.0");
                     preparedStatement2.setTimestamp(8, DateUtility.getInstance().getCurrentDB2Timestamp());
@@ -5815,7 +5817,7 @@ public class AjaxHandlerServiceImpl implements AjaxHandlerService {
                         preparedStatement2.setInt(5, 1);
                         preparedStatement2.setString(6, "null");
                         preparedStatement2.setString(7, userName);
-                            //java.sql.Date d=new java.sql.Date(i);
+                        //java.sql.Date d=new java.sql.Date(i);
                         //SimpleDateFormat sd=new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
                         //SimpleDateFormat sd=new SimpleDateFormat("YYYY-MM-dd HH24:mm:SS.0");
                         preparedStatement2.setTimestamp(8, DateUtility.getInstance().getCurrentDB2Timestamp());
