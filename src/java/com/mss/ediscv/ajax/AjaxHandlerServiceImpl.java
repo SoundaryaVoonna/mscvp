@@ -3210,7 +3210,7 @@ public class AjaxHandlerServiceImpl implements AjaxHandlerService {
                 + "FILES.TRANSACTION_TYPE as TRANSACTION_TYPE,"
                 + "FILES.GS_CONTROL_NUMBER as GS_CONTROL_NUMBER,"
                 + "FILES.ST_CONTROL_NUMBER as ST_CONTROL_NUMBER,TP1.NAME as SENDER_NAME,"
-                + "TP2.NAME as RECEIVER_NAME,FILES.ERR_MESSAGE,"
+                + "TP2.NAME as RECEIVER_NAME,FILES.ERR_MESSAGE,FILES.ERROR_REPORT_FILEPATH as ERROR_REPORT_FILEPATH,"
                 + "FILES.ACK_FILE_ID as ACK_FILE_ID,FILES.ISA_DATE as ISA_DATE,"
                 + "FILES.ISA_TIME as ISA_TIME,FILES.STATUS as STATUS,FILES.DIRECTION as DIRECTION,tl.BOL_NUMBER as BOL_NUMBER ,tl.CO_NUMBER as CO_NUMBER,tl.PO_NUMBER as PO_NUMBER  "
                 + "FROM FILES LEFT OUTER JOIN Transport_loadtender tl on (tl.FILE_ID=FILES.FILE_ID and tl.SHIPMENT_ID=FILES.SEC_KEY_VAL) "
@@ -3392,6 +3392,15 @@ public class AjaxHandlerServiceImpl implements AjaxHandlerService {
                     // System.out.println("hiiii else");
                     sb.append("<ERR_MESSAGE>NO MSG</ERR_MESSAGE>");
                 }
+                if (resultSet.getString("ERROR_REPORT_FILEPATH") != null) {
+                    if (new File(resultSet.getString("ERROR_REPORT_FILEPATH")).exists() && new File(resultSet.getString("ERROR_REPORT_FILEPATH")).isFile()) {
+                        sb.append("<ERROR_REPORT_FILEPATH>" + resultSet.getString("ERROR_REPORT_FILEPATH") + "</ERROR_REPORT_FILEPATH>");
+                    } else {
+                        sb.append("<ERROR_REPORT_FILEPATH>No File</ERROR_REPORT_FILEPATH>");
+                    }
+                } else {
+                    sb.append("<ERROR_REPORT_FILEPATH>No File</ERROR_REPORT_FILEPATH>");
+                }
 
                 sb.append("</DETAIL>");
                 isGetting = true;
@@ -3445,7 +3454,7 @@ public class AjaxHandlerServiceImpl implements AjaxHandlerService {
                 + "FILES.TRANSACTION_TYPE as TRANSACTION_TYPE,FILES.GS_CONTROL_NUMBER as GS_CONTROL_NUMBER,"
                 + "FILES.ST_CONTROL_NUMBER as ST_CONTROL_NUMBER,TP1.NAME as SENDER_NAME,TP2.NAME as RECEIVER_NAME,"
                 + "FILES.ERR_MESSAGE,FILES.ACK_FILE_ID as ACK_FILE_ID,FILES.DIRECTION as DIRECTION , FILES.ISA_DATE as ISA_DATE,FILES.ISA_TIME as ISA_TIME,FILES.STATUS, "
-                + "  Transport_loadtender.BOL_NUMBER as BOL_NUMBER,Transport_loadtender.CO_NUMBER as CO_NUMBER, "
+                + "  Transport_loadtender.BOL_NUMBER as BOL_NUMBER,Transport_loadtender.CO_NUMBER as CO_NUMBER, FILES.ERROR_REPORT_FILEPATH as ERROR_REPORT_FILEPATH, "
                 + " Transport_loadtender.TOTAL_WEIGHT as TOTAL_WEIGHT,Transport_loadtender.TOTAL_VOLUME as TOTAL_VOLUME,"
                 + " Transport_loadtender.TOTAL_PIECES as TOTAL_PIECES,Transport_loadtender.PO_NUMBER as PO_NUMBER FROM FILES  LEFT OUTER JOIN Transport_loadtender  ON (FILES.FILE_ID=Transport_loadtender.FILE_ID and FILES.SEC_KEY_VAL=Transport_loadtender.SHIPMENT_ID)   LEFT OUTER JOIN TP TP1 ON(TP1.ID=FILES.SENDER_ID ) LEFT OUTER JOIN TP TP2 ON(TP2.ID=FILES.RECEIVER_ID)   "
                 + "where FILES.FILE_ID LIKE '%" + instanceid + "%' and FILES.SEC_KEY_VAL LIKE '%" + ponum + "%'";
@@ -3613,6 +3622,16 @@ public class AjaxHandlerServiceImpl implements AjaxHandlerService {
                 } else {
                     sb.append("<ACKFILEID>No File</ACKFILEID>");
                 }
+                
+                if (resultSet.getString("ERROR_REPORT_FILEPATH") != null) {
+                    if (new File(resultSet.getString("ERROR_REPORT_FILEPATH")).exists() && new File(resultSet.getString("ERROR_REPORT_FILEPATH")).isFile()) {
+                        sb.append("<ERROR_REPORT_FILEPATH>" + resultSet.getString("ERROR_REPORT_FILEPATH") + "</ERROR_REPORT_FILEPATH>");
+                    } else {
+                        sb.append("<ERROR_REPORT_FILEPATH>No File</ERROR_REPORT_FILEPATH>");
+                    }
+                } else {
+                    sb.append("<ERROR_REPORT_FILEPATH>No File</ERROR_REPORT_FILEPATH>");
+                }
 
                 if (resultSet.getString("ERR_MESSAGE") != null && !"".equals(resultSet.getString("ERR_MESSAGE"))) {
                     sb.append("<ERR_MESSAGE>" + resultSet.getString("ERR_MESSAGE").trim() + "</ERR_MESSAGE>");
@@ -3670,7 +3689,7 @@ public class AjaxHandlerServiceImpl implements AjaxHandlerService {
                 + "FILES.FILE_TYPE as FILE_TYPE,"
                 + "FILES.TRANSACTION_TYPE as TRANSACTION_TYPE,TP1.ID as SENDER_ID,TP1.NAME as SENDER_NAME,TP2.ID as RECEIVER_ID,"
                 + "TP2.NAME as RECEIVER_NAME,FILES.ISA_NUMBER as ISA_NUMBER,FILES.GS_CONTROL_NUMBER as GS_CONTROL_NUMBER,"
-                + "FILES.ST_CONTROL_NUMBER as ST_CONTROL_NUMBER,FILES.ISA_DATE as ISA_DATE,FILES.ISA_TIME as ISA_TIME,"
+                + "FILES.ST_CONTROL_NUMBER as ST_CONTROL_NUMBER,FILES.ISA_DATE as ISA_DATE,FILES.ISA_TIME as ISA_TIME, FILES.ERROR_REPORT_FILEPATH as ERROR_REPORT_FILEPATH,"
                 + "FILES.STATUS as STATUS,FILES.PRE_TRANS_FILEPATH,FILES.POST_TRANS_FILEPATH,FILES.ACK_FILE_ID,FILES.ERR_MESSAGE,FILES.SEC_KEY_VAL as REFERENCE"
                 + " FROM TRANSPORT_LT_RESPONSE LEFT OUTER JOIN FILES ON (TRANSPORT_LT_RESPONSE.FILE_ID =FILES.FILE_ID)"
                 + "LEFT OUTER JOIN TP TP1 ON (TP1.ID=FILES.SENDER_ID) LEFT OUTER JOIN TP TP2 ON (TP2.ID=FILES.RECEIVER_ID) "
@@ -3807,6 +3826,15 @@ public class AjaxHandlerServiceImpl implements AjaxHandlerService {
                 } else {
                     //  System.out.println("hiiii else");
                     sb.append("<ERR_MESSAGE>NO MSG</ERR_MESSAGE>");
+                }
+                if (resultSet.getString("ERROR_REPORT_FILEPATH") != null) {
+                    if (new File(resultSet.getString("ERROR_REPORT_FILEPATH")).exists() && new File(resultSet.getString("ERROR_REPORT_FILEPATH")).isFile()) {
+                        sb.append("<ERROR_REPORT_FILEPATH>" + resultSet.getString("ERROR_REPORT_FILEPATH") + "</ERROR_REPORT_FILEPATH>");
+                    } else {
+                        sb.append("<ERROR_REPORT_FILEPATH>No File</ERROR_REPORT_FILEPATH>");
+                    }
+                } else {
+                    sb.append("<ERROR_REPORT_FILEPATH>No File</ERROR_REPORT_FILEPATH>");
                 }
 
                 sb.append("</DETAIL>");
@@ -4068,7 +4096,7 @@ public class AjaxHandlerServiceImpl implements AjaxHandlerService {
                 + "TRANSPORT_SHIPMENT.TOTAL_WEIGHT as TOTAL_WEIGHT,TRANSPORT_SHIPMENT.TOTAL_VOLUME as TOTAL_VOLUME,"
                 + "FILES.ISA_NUMBER as ISA_NUMBER,FILES.ISA_DATE as ISA_DATE,FILES.ISA_TIME as ISA_TIME,"
                 + " FILES.PRE_TRANS_FILEPATH,FILES.POST_TRANS_FILEPATH,FILES.SENDER_ID,FILES.RECEIVER_ID,"
-                + "FILES.ORG_FILEPATH,FILES.ERR_MESSAGE,FILES.STATUS,"
+                + "FILES.ORG_FILEPATH,FILES.ERR_MESSAGE,FILES.STATUS,FILES.ERROR_REPORT_FILEPATH as ERROR_REPORT_FILEPATH,"
                 + "FILES.ACK_FILE_ID as ACK_FILE_ID,TP1.NAME as SENDER_NAME,TP2.NAME as RECEIVER_NAME "
                 + " FROM TRANSPORT_SHIPMENT "
                 + "LEFT OUTER JOIN FILES ON (TRANSPORT_SHIPMENT.FILE_ID =FILES.FILE_ID) "
@@ -4218,6 +4246,16 @@ public class AjaxHandlerServiceImpl implements AjaxHandlerService {
                 } else {
                     //  System.out.println("hiiii else");
                     sb.append("<GS_CONTROL_NUMBER>--</GS_CONTROL_NUMBER>");
+                }
+                
+                if (resultSet.getString("ERROR_REPORT_FILEPATH") != null) {
+                    if (new File(resultSet.getString("ERROR_REPORT_FILEPATH")).exists() && new File(resultSet.getString("ERROR_REPORT_FILEPATH")).isFile()) {
+                        sb.append("<ERROR_REPORT_FILEPATH>" + resultSet.getString("ERROR_REPORT_FILEPATH") + "</ERROR_REPORT_FILEPATH>");
+                    } else {
+                        sb.append("<ERROR_REPORT_FILEPATH>No File</ERROR_REPORT_FILEPATH>");
+                    }
+                } else {
+                    sb.append("<ERROR_REPORT_FILEPATH>No File</ERROR_REPORT_FILEPATH>");
                 }
 
                 sb.append("</DETAIL>");
