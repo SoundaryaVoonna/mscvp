@@ -236,16 +236,12 @@ public class UserServiceImpl implements UserService {
             }
             password = passwordUtility.decryptPwd(password);
             if (userAction.getOldPwd().equals(password)) {
-                if (userAction.getNewPwd().equals(userAction.getConfirmPwd())) {
                     String encryptPass = passwordUtility.encryptPwd(userAction.getNewPwd());
                     queryString = "UPDATE M_USER SET PASSWD='" + encryptPass + "' WHERE LOGINID='" + userAction.getLoginId() + "'";
                     statement = connection.createStatement();
                     updatedRows = statement.executeUpdate(queryString);
-                } else {
-                    updatedRows = 2;
-                }
             }else{
-                 updatedRows = 3;
+                 updatedRows = 100;
             }
         } catch (SQLException se) {
             throw new ServiceLocatorException(se);

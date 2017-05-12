@@ -5074,6 +5074,7 @@ public class AjaxHandlerServiceImpl implements AjaxHandlerService {
                 }
 
             } else {
+                String partnerName = DataSourceDataProvider.getInstance().getPartnerNameById(ajaxHandlerAction.getPartnerId());
                 //   inboundString = inboundString+ajaxHandlerAction.getPartnerId()+"|";
                 preparedStatement.setString(1, ajaxHandlerAction.getPartnerId());
                 preparedStatement.setString(2, ajaxHandlerAction.getPartnerId());
@@ -5091,14 +5092,14 @@ public class AjaxHandlerServiceImpl implements AjaxHandlerService {
                 preparedStatement.setString(3, "OUTBOUND");
                 resultSet = preparedStatement.executeQuery();
                 if (resultSet.next()) {
-                    outboundTotal = resultSet.getInt("total");
+                    outboundTotal = resultSet.getInt("total");//(String) key + "_" + partnerName
                 }
                 if (inboundTotal != 0) {
-                    inboundString = inboundString + ajaxHandlerAction.getPartnerId() + "|" + inboundTotal + "^";
+                    inboundString = inboundString + ajaxHandlerAction.getPartnerId() + "_" + partnerName + "|" + inboundTotal + "^";
 
                 }
                 if (outboundTotal != 0) {
-                    outboundString = outboundString + ajaxHandlerAction.getPartnerId() + "|" + outboundTotal + "^";
+                    outboundString = outboundString + ajaxHandlerAction.getPartnerId() + "_" + partnerName + "|" + outboundTotal + "^";
                 }
                 // outboundString = outboundString+resultSet.getInt("total")+"^";
 

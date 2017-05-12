@@ -54,17 +54,13 @@
                 // alert("test");
             }
 
-//            function getPartnerList() {
-//                var configFlowFlag1 = $('#configFlowFlag1').val();
-//             //   if ((configFlowFlag1 == 'manufacturing')) {
-//             //       location.href = "../partner/getPartnerList.action?configFlowFlag=" + configFlowFlag1;
-//             //   }
-//               // else if ((configFlowFlag1 == 'logistics')) {
-//                  location.href = "../partner/getPartnerList.action?configFlowFlag=" + configFlowFlag1;
-//                   //location.href = "../partner/partnerSearch.action";
-//               // }
-//             //   return true;
-//            }
+            function getPartnerList() {
+                var configFlowFlag1 = $('#configFlowFlag1').val();
+                var status = $('#status').val();
+                    location.href = "../partner/partnerSearch.action?configFlowFlag=" + configFlowFlag1 + "&status=" + status;
+                   // location.href = "../partner/partnerSearch.action?configFlowFlag=" + configFlowFlag1 + "&status=" + status;
+                //   return true;
+            }
         </script>
 
     </head>
@@ -99,168 +95,165 @@
             <s:if test="%{configFlowFlag1 == 'manufacturing'}">
                 <section class="content-header">
                     <h1>Partner Edit
-<!--                        <small>Manufacturing</small>-->
+                        <!--                        <small>Manufacturing</small>-->
                     </h1>
-<!--                    <ol class="breadcrumb">
-                        <li><a href="#"><i class="fa fa-wrench"></i>Manufacturing</a></li>
-                        <li class="active"> Partner Edit</li>
-                    </ol>  </section> -->
+                    <!--                    <ol class="breadcrumb">
+                                            <li><a href="#"><i class="fa fa-wrench"></i>Manufacturing</a></li>
+                                            <li class="active"> Partner Edit</li>
+                                        </ol>  </section> -->
                 </s:if><s:elseif test="%{configFlowFlag1 == 'logistics'}">
-                <section class="content-header">
-                    <h1>Partner Edit
-<!--                        <small>Logistics</small>-->
-                    </h1>
-<!--                    <ol class="breadcrumb">
-                        <li><a href="#"><i class="fa fa-truck"></i>Logistics</a></li>
-                        <li class="active">Partner Edit</li>
-                    </ol> -->
-                </section>
-            </s:elseif>
-            <s:if test="%{configFlowFlag == 'manufacturing'}">
-                <section class="content-header">
-                    <h1>Add Partner
-<!--                        <small>Manufacturing</small>-->
-                    </h1>
-<!--                    <ol class="breadcrumb">
-                        <li><a href="#"><i class="fa fa-wrench"></i>Manufacturing</a></li>
-                        <li class="active">  Add Partner</li>
-                    </ol>-->
-                </section>
-            </s:if><s:elseif test="%{configFlowFlag == 'logistics'}">
-                <section class="content-header">
-                    <h1>Add Partner
-<!--                        <small>Logistics</small>-->
-                    </h1>
-<!--                    <ol class="breadcrumb">
-                        <li><a href="#"><i class="fa fa-truck"></i>Logistics</a></li>
-                        <li class="active">  Add Partner</li>
-                    </ol>-->
-                </section>
-            </s:elseif>
-            <br>
-            <section class="content">
-                <div class="box box-primary">
-                    <div class="box-body">
-                        <div id="text">
-                            <!-- /.col (right) -->
-                            <!-- First Row -->
-                            <s:hidden name="tppageId" value="%{tppageId}" id="tppageId"/>
+                    <section class="content-header">
+                        <h1>Partner Edit
+                            <!--                        <small>Logistics</small>-->
+                        </h1>
+                        <!--                    <ol class="breadcrumb">
+                                                <li><a href="#"><i class="fa fa-truck"></i>Logistics</a></li>
+                                                <li class="active">Partner Edit</li>
+                                            </ol> -->
+                    </section>
+                </s:elseif>
+                <s:if test="%{configFlowFlag == 'manufacturing'}">
+                    <section class="content-header">
+                        <h1>Add Partner
+                            <!--                        <small>Manufacturing</small>-->
+                        </h1>
+                        <!--                    <ol class="breadcrumb">
+                                                <li><a href="#"><i class="fa fa-wrench"></i>Manufacturing</a></li>
+                                                <li class="active">  Add Partner</li>
+                                            </ol>-->
+                    </section>
+                </s:if><s:elseif test="%{configFlowFlag == 'logistics'}">
+                    <section class="content-header">
+                        <h1>Add Partner
+                            <!--                        <small>Logistics</small>-->
+                        </h1>
+                        <!--                    <ol class="breadcrumb">
+                                                <li><a href="#"><i class="fa fa-truck"></i>Logistics</a></li>
+                                                <li class="active">  Add Partner</li>
+                                            </ol>-->
+                    </section>
+                </s:elseif>
+                <br>
+                <section class="content">
+                    <div class="box box-primary">
+                        <div class="box-body">
+                            <div id="text">
+                                <!-- /.col (right) -->
+                                <!-- First Row -->
+                                <s:hidden name="tppageId" value="%{tppageId}" id="tppageId"/>
 
-                            <%--  <s:textfield value="%{formAction}"/>--%>
-                            <div class="content" >
-                                <div class="content_item" id="searchdiv">
-                                    <s:if test="%{formAction == 'doAddPartner'}">
-                                        <h3></h3>   
-                                    </s:if><s:else>
-                                        <h3></h3>   
-                                    </s:else>
-                                    <%                                        if (request.getAttribute(AppConstants.REQ_RESULT_MSG) != null) {
-                                            String reqponseString = request.getAttribute(AppConstants.REQ_RESULT_MSG).toString();
-                                            //request.getSession(false).removeAttribute("responseString");
-                                            out.println(reqponseString);
-                                        }
-                                    %>
-                                    <span id="resultMessage"></span>
-                                    <div  style="alignment-adjust:central;" >
-                                        <%String contextPath = request.getContextPath();
+                                <%--  <s:textfield value="%{formAction}"/>--%>
+                                <div class="content" >
+                                    <div class="content_item" id="searchdiv">
+                                        <s:if test="%{formAction == 'doAddPartner'}">
+                                            <h3></h3>   
+                                        </s:if><s:else>
+                                            <h3></h3>   
+                                        </s:else>
+                                        <%                                        if (request.getAttribute(AppConstants.REQ_RESULT_MSG) != null) {
+                                                String reqponseString = request.getAttribute(AppConstants.REQ_RESULT_MSG).toString();
+                                                //request.getSession(false).removeAttribute("responseString");
+                                                out.println(reqponseString);
+                                            }
                                         %>
+                                        <span id="resultMessage"></span>
+                                        <div  style="alignment-adjust:central;" >
+                                            <%String contextPath = request.getContextPath();
+                                            %>
 
-                                        <s:form action="%{formAction}" method="post" name="partnerForm" id="partnerForm" theme="simple" onsubmit="return doAddPartner();">
-                                            <s:hidden name="sampleValue" id="sampleValue" value="2"/>
-                                            <s:hidden name="configFlowFlag" value="%{configFlowFlag}" id="configFlowFlag"/> 
-                                            <s:hidden name="configFlowFlag1" value="%{configFlowFlag1}" id="configFlowFlag1"/> 
-                                            <s:hidden name="formAction" id="formAction" value="%{formAction}"/>
-                                            <div class="form-group">
-                                                <div class="row">
-                                                    <div class="col-sm-12">
-                                                        <div class="row">
-                                                            <s:hidden name="partnerId" value="%{partnerId}" id="partnerId"/>
-                                                            <div class="col-xs-3"> <label for="partnerName ">Partner Name <font color="red">*</font></label>
+                                            <s:form action="%{formAction}" method="post" name="partnerForm" id="partnerForm" theme="simple" onsubmit="return doAddPartner();">
+                                                <s:hidden name="sampleValue" id="sampleValue" value="2"/>
+                                                <s:hidden name="configFlowFlag" value="%{configFlowFlag}" id="configFlowFlag"/> 
+                                                <s:hidden name="configFlowFlag1" value="%{configFlowFlag1}" id="configFlowFlag1"/> 
+                                                <s:hidden name="formAction" id="formAction" value="%{formAction}"/>
+                                                <div class="form-group">
+                                                    <div class="row">
+                                                        <div class="col-sm-12">
+                                                            <div class="row">
+                                                                <s:hidden name="partnerId" value="%{partnerId}" id="partnerId"/>
+                                                                <div class="col-xs-3"> <label for="partnerName ">Partner Name <font color="red">*</font></label>
 
-                                                                <s:textfield cssClass="form-control" name="partnerName" id="partnerName" value="%{partnerName}" tabindex="1"/>
+                                                                    <s:textfield cssClass="form-control" name="partnerName" id="partnerName" value="%{partnerName}" tabindex="1"/>
+                                                                </div>
+
+
+
+                                                                <div  class="col-xs-3">
+                                                                    <label for="status">Status</label> 
+                                                                    <s:select list="#@java.util.LinkedHashMap@{'ACTIVE':'ACTIVE','INACTIVE':'INACTIVE'}" name="status" id="status" value="%{status}"  cssClass="form-control" tabindex="2"/>
+                                                                </div>
+
+                                                                <div  class="col-xs-3">
+                                                                    <label for="internalIdentifier">Internal Identifier </label>  
+                                                                    <s:textfield cssClass="form-control" name="internalIdentifier" id="internalIdentifier"  value="%{internalIdentifier}" tabindex="3"/>
+                                                                </div>
+
+                                                                <div  class="col-xs-3">
+                                                                    <label for="partnerIdentifier">Partner Identifier <font color="red">*</font></label>  
+                                                                        <s:textfield cssClass="form-control" name="partnerIdentifier" id="partnerIdentifier"  value="%{partnerIdentifier}" tabindex="4"/>
+                                                                </div>
+                                                                <div id="loadingAcoountSearch" class="loadingImg">
+                                                                    <span id ="LoadingContent" > <img src="<s:url value="/includes/images/Loader2.gif"/>"   ></span>
+                                                                </div>
+
                                                             </div>
+                                                            <br>
+                                                            <div class="row">
+                                                                <div class="col-xs-3">
+                                                                    <label for="applicationId">Application ID</label>
+                                                                    <s:textfield cssClass="form-control" name="applicationId" id="applicationId" value="%{applicationId}" tabindex="5" />
+                                                                </div>
+                                                                <div class="col-xs-3">
+                                                                    <label for="corrvalue">Country Code</label>
+                                                                    <s:textfield cssClass="form-control" name="countryCode" id="countryCode" value="%{countryCode}" tabindex="6" />
+                                                                </div>
 
-
-
-                                                            <div  class="col-xs-3">
-                                                                <label for="status">Status</label> 
-                                                                <s:select list="#@java.util.LinkedHashMap@{'ACTIVE':'ACTIVE','INACTIVE':'INACTIVE'}" name="status" id="status" value="%{status}"  cssClass="form-control" tabindex="2"/>
                                                             </div>
+                                                            <p>
 
-                                                            <div  class="col-xs-3">
-                                                                <label for="internalIdentifier">Internal Identifier </label>  
-                                                                <s:textfield cssClass="form-control" name="internalIdentifier" id="internalIdentifier"  value="%{internalIdentifier}" tabindex="3"/>
-                                                            </div>
+                                                            </p>
 
-                                                            <div  class="col-xs-3">
-                                                                <label for="partnerIdentifier">Partner Identifier <font color="red">*</font></label>  
-                                                                <s:textfield cssClass="form-control" name="partnerIdentifier" id="partnerIdentifier"  value="%{partnerIdentifier}" tabindex="4"/>
-                                                            </div>
-                                                            <div id="loadingAcoountSearch" class="loadingImg">
-                                                                <span id ="LoadingContent" > <img src="<s:url value="/includes/images/Loader2.gif"/>"   ></span>
-                                                            </div>
 
                                                         </div>
-                                                        <br>
-                                                        <div class="row">
-                                                            <div class="col-xs-3">
-                                                                <label for="applicationId">Application ID</label>
-                                                                <s:textfield cssClass="form-control" name="applicationId" id="applicationId" value="%{applicationId}" tabindex="5" />
-                                                            </div>
-                                                            <div class="col-xs-3">
-                                                                <label for="corrvalue">Country Code</label>
-                                                                <s:textfield cssClass="form-control" name="countryCode" id="countryCode" value="%{countryCode}" tabindex="6" />
-                                                            </div>
-
-                                                        </div>
-                                                        <p>
-
-                                                        </p>
-
 
                                                     </div>
+                                                    <div>
 
-                                                </div>
-                                                <div>
-
-                                                    <br>
-                                                    <div class="row">
-                                                        <s:if test="%{formAction == 'doAddPartner'}">
-                                                            <div class="col-sm-2"><s:submit value="Save" cssClass="btn btn-primary col-sm-12" tabindex="7"/></div>
-                                                            <div class="col-sm-2"> <strong><input type="button" value="Reset" onclick="return resetvalues1();" class="btn btn-primary col-sm-12" tabindex="8" /></strong></div>
-                                                                </s:if><s:else>
-                                                            <div class="col-sm-2"><s:submit value="Update" cssClass="btn btn-primary col-sm-12" tabindex="9"/></div>
-                                                                      <s:url var="myUrl" action="../partner/partnerSearch.action">
-
-                                                            <s:param name="status" value="%{status}"/>
-
-                                                        </s:url>
-                                                               <div class="col-sm-2">  <s:a href='%{#myUrl}' style="text-decoration:none;">
-                                                            <strong><input type="button" value="BackToList" class="btn btn-primary col-sm-12" tabindex="9"/></strong></s:a></div>        
-<!--                                                            <div class="col-sm-2"> <strong><input type="button" value="Reset" onclick="return resetPartvalues();" class="btn btn-primary col-sm-12" tabindex="10" /></strong></div>-->
-<!--                                                            <div class="col-sm-2">  <strong><input type="button" value="BackToList" class="btn btn-primary col-sm-12" onclick="return getPartnerList();" tabindex="11"/></strong></div>-->
-                                                           
-                                                                </s:else>
-                                                            </s:form>
+                                                        <br>
+                                                        <div class="row">
+                                                            <s:if test="%{formAction == 'doAddPartner'}">
+                                                                <div class="col-sm-2"><s:submit value="Save" cssClass="btn btn-primary col-sm-12" tabindex="7"/></div>
+                                                                <div class="col-sm-2"> <strong><input type="button" value="Reset" onclick="return resetvalues1();" class="btn btn-primary col-sm-12" tabindex="8" /></strong></div>
+                                                                    </s:if><s:else>
+                                                                <div class="col-sm-2"><s:submit value="Update" cssClass="btn btn-primary col-sm-12" tabindex="9"/></div>
+                                                             <%--   <s:url var="myUrl" action="../partner/partnerSearch.action">
+                                                                    <s:param name="status" value="%{status}"/>
+                                                                </s:url>  --%>
+                                                                <div class="col-sm-2">  
+                                                                    <strong><input type="button" value="BackToList" class="btn btn-primary col-sm-12" onclick="return getPartnerList();" tabindex="9"/></strong></div>        
+                                                                <!-- <div class="col-sm-2"> <strong><input type="button" value="Reset" onclick="return resetPartvalues();" class="btn btn-primary col-sm-12" tabindex="10" /></strong></div>-->
+                                                                <!-- <div class="col-sm-2">  <strong><input type="button" value="BackToList" class="btn btn-primary col-sm-12" onclick="return getPartnerList();" tabindex="11"/></strong></div>-->
+                                                            </s:else>
+                                                        </s:form>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            </div><!-- /.box-body -->
-                            <!-- /.box-footer -->
-                        </div><!-- /.box -->
+                                </div><!-- /.box-body -->
+                                <!-- /.box-footer -->
+                            </div><!-- /.box -->
 
-                        <!--box-->
+                            <!--box-->
 
 
+                        </div>
+                        <div class="col-sm-1"></div>
                     </div>
-                    <div class="col-sm-1"></div>
-                </div>
-            </section>
+                </section>
 
 
-            <!--main content-->
+                <!--main content-->
         </div><!-- /.content-wrapper -->
 
 

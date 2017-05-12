@@ -90,7 +90,8 @@
                 document.getElementById('schhours').value="-1";
                 document.getElementById('schhrFormat').value="AM"; 
                 document.getElementById('extranalmailids').value="";
-            }    document.getElementById('reportsType').value="";
+                 document.getElementById('reportsType').value="";
+            }   
             function getUserList(){
                   var configFlowFlag = $('#configFlowFlag').val();
                  if((configFlowFlag == 'manufacturing')){

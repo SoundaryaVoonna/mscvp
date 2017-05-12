@@ -202,18 +202,22 @@ public class UserAction extends ActionSupport implements ServletRequestAware, Se
             int userRoleId = Integer.parseInt(httpServletRequest.getSession(false).getAttribute(AppConstants.SES_ROLE_ID).toString());
             if (AuthorizationManager.getInstance().isAuthorizedUser("USER_EDIT", userRoleId)) {
                 try {
-                    if (!(getNewPwd().equals("")) && !(getConfirmPwd().equals(""))) {
-                        int updatedRows = ServiceLocator.getUserService().updateUserPwd(this);
-                        if (updatedRows == 1) {
-                            resetValues();
-                            resultMessage = "<font color=\"green\" size=\"3\">You have changed User password succesfully </font>";
-                            resultType = SUCCESS;
+                    if ((getNewPwd().length()) < 3) {
+                        if (!(getNewPwd().equals("")) && !(getConfirmPwd().equals(""))) {
+                            int updatedRows = ServiceLocator.getUserService().updateUserPwd(this);
+                            if (updatedRows == 1) {
+                                resetValues();
+                                resultMessage = "<font color=\"green\" size=\"3\">You have changed User password succesfully </font>";
+                                resultType = SUCCESS;
+                            } else {
+                                resultMessage = "<font color=\"red\" size=\"3\">Sorry!Please enter valid password! Or Your are not authorized person to change the above person password!</font>";
+                                resultType = INPUT;
+                            }
                         } else {
-                            resultMessage = "<font color=\"red\" size=\"3\">Sorry!Please enter valid password! Or Your are not authorized person to change the above person password!</font>";
-                            resultType = INPUT;
+                            resultMessage = "<font color=\"red\" size=\"3\">Sorry!Please enter password!</font> ";
                         }
                     } else {
-                        resultMessage = "<font color=\"red\" size=\"3\">Sorry!Please enter password!</font> ";
+                        resultMessage = "<font color=\"red\" size=\"3\">New Password must be grater than or equal to 3 characters!</font> ";
                     }
                     httpServletRequest.setAttribute("resultMessage", resultMessage);
                     resultType = SUCCESS;
@@ -232,20 +236,23 @@ public class UserAction extends ActionSupport implements ServletRequestAware, Se
             if (httpServletRequest.getSession(false).getAttribute(AppConstants.SES_USER_NAME) != null) {
                 try {
                     setLoginId(httpServletRequest.getSession(false).getAttribute(AppConstants.SES_LOGIN_ID).toString());
-                    int updatedRows = ServiceLocator.getUserService().updateMyPwd(this);
-                    if (updatedRows == 1) {
-                        resultMessage = "<font color=\"green\" size=\"3\">Congrats! You have changed your password succesfully </font>";
-                        resultType = SUCCESS;
-                    } else if (updatedRows == 2) {
-                        resultMessage = "<font color=\"red\" size=\"3\">Passwords do not match!</font>";
-                        resultType = SUCCESS;
-                    }  else if (updatedRows == 3) {
-                        resultMessage = "<font color=\"red\" size=\"3\">Please enter correct Old Password!</font>";
-                        resultType = SUCCESS;
-                    }else {
-                        resultMessage = "<font color=\"red\" size=\"3\">Sorry! We are not able to change your password. Please enter valid password! </font>";
-                        resultType = INPUT;
+                    if ((getNewPwd().length()) > 2) {
+                        if (getNewPwd().equals(getConfirmPwd())) {
+                            int updatedRows = ServiceLocator.getUserService().updateMyPwd(this);
+                            if (updatedRows == 1) {
+                                resultMessage = "<font color=\"green\" size=\"3\">Congrats! You have changed your password succesfully </font>";
+                            } else if (updatedRows == 100) {
+                                resultMessage = "<font color=\"red\" size=\"3\">Please enter correct Old Password!</font>";
+                            }else {
+                                resultMessage = "<font color=\"red\" size=\"3\">Sorry! We are not able to change your password. Please try again later! </font>";
+                            } 
+                        } else {
+                            resultMessage = "<font color=\"red\" size=\"3\">Passwords do not match!</font>";
+                        }
+                    } else {
+                        resultMessage = "<font color=\"red\" size=\"3\">New Password must be grater than or equal to 3 characters!</font> ";
                     }
+
                     getUserProfile();
                     httpServletRequest.setAttribute("resultMessage", resultMessage);
                     resultType = SUCCESS;
@@ -347,24 +354,21 @@ public class UserAction extends ActionSupport implements ServletRequestAware, Se
                     UserBean ub = ServiceLocator.getUserService().userDetails(getUserId());
                     setUserBean(ub);
                     setAssignedFlowsMap(dataSourceDataProvider.getAssignedFlows(getUserId()));
-                    
-                   Iterator<Map.Entry<String, String>> iterator = assignedFlowsMap.entrySet().iterator() ;
-                   while(iterator.hasNext()){
-            Map.Entry<String, String> entry = iterator.next();
-            if(entry.getValue().equals("Logistics"))
-            {
-                setLogistics(true);
-            }
-            
-            if(entry.getValue().equals("Manufacturing"))
-            {
-                setManufacturing(true);
-            }
-            if(entry.getValue().equals("DocumentVisibility"))
-            {
-                setDocvisibility(true);
-            }
-                   }
+
+                    Iterator<Map.Entry<String, String>> iterator = assignedFlowsMap.entrySet().iterator();
+                    while (iterator.hasNext()) {
+                        Map.Entry<String, String> entry = iterator.next();
+                        if (entry.getValue().equals("Logistics")) {
+                            setLogistics(true);
+                        }
+
+                        if (entry.getValue().equals("Manufacturing")) {
+                            setManufacturing(true);
+                        }
+                        if (entry.getValue().equals("DocumentVisibility")) {
+                            setDocvisibility(true);
+                        }
+                    }
                     setNotAssignedFlowsMap(dataSourceDataProvider.getNotAssignedFlows(getUserId()));
                     setPrimaryFlowsList(dataSourceDataProvider.getFlowbyflowKey(AppConstants.FLOWS_OPTIONS));
                     resultType = SUCCESS;
@@ -388,33 +392,30 @@ public class UserAction extends ActionSupport implements ServletRequestAware, Se
                 userRoleId = Integer.parseInt(httpServletRequest.getSession(false).getAttribute(AppConstants.SES_ROLE_ID).toString());
                 resultType = "accessFailed";
                 try {
-                    int count=0;
-                    addedFlowsList=new ArrayList();
+                    int count = 0;
+                    addedFlowsList = new ArrayList();
                     int[] rightParams = new int[3];
-                  int i=0;
-                  
-                    if(isLogistics())
-                      {
-                          rightParams[count]=3;
-                          count++;
-                      }
-                      if(isManufacturing())
-                      {
-                          rightParams[count]=2;
-                          count++;
-                      }
-                      if(isDocvisibility())
-                      {
-                           rightParams[count]=5;
-                      }
+                    int i = 0;
+
+                    if (isLogistics()) {
+                        rightParams[count] = 3;
+                        count++;
+                    }
+                    if (isManufacturing()) {
+                        rightParams[count] = 2;
+                        count++;
+                    }
+                    if (isDocvisibility()) {
+                        rightParams[count] = 5;
+                    }
                     String[] leftParams = (String[]) parameters.get("leftSideUserFlows");
                     int insertedRows = ServiceLocator.getUserService().insertFlows(rightParams, this.getUserId(), Integer.parseInt(getPrimaryFlow()));
-                    System.out.println("insertedRows "+insertedRows);
+                    System.out.println("insertedRows " + insertedRows);
                     resultType = SUCCESS;
                     resultMessage = "<font color=\"green\" size=\"3\">Flows has been successfully Added!</font>";
                     httpServletRequest.setAttribute(AppConstants.REQ_RESULT_MSG, resultMessage);
-                 
-                }catch (Exception ex) {
+
+                } catch (Exception ex) {
                     httpServletRequest.getSession(false).setAttribute("errorMessage", ex.toString());
                     resultType = ERROR;
                 }
@@ -492,23 +493,23 @@ public class UserAction extends ActionSupport implements ServletRequestAware, Se
     }
 
     /*    public void renderImage() {
-    byte[] image = null;
-    try {
-    byte[] imgData = (byte[]) httpServletRequest.getSession(false).getAttribute(AppConstants.SESSION_USER_IMAGE);
-    // display the image
-    httpServletResponse.setContentType("image/gif");
-    OutputStream o = httpServletResponse.getOutputStream();
-    o.write(imgData);
-    o.flush();
-    o.close();
-    } catch (Exception ex) {
-    httpServletRequest.getSession(false).setAttribute("errorMessage", ex);
-    } finally {
-    if (image != null) {
-    image = null;
-    }
-    }
-    } */
+     byte[] image = null;
+     try {
+     byte[] imgData = (byte[]) httpServletRequest.getSession(false).getAttribute(AppConstants.SESSION_USER_IMAGE);
+     // display the image
+     httpServletResponse.setContentType("image/gif");
+     OutputStream o = httpServletResponse.getOutputStream();
+     o.write(imgData);
+     o.flush();
+     o.close();
+     } catch (Exception ex) {
+     httpServletRequest.getSession(false).setAttribute("errorMessage", ex);
+     } finally {
+     if (image != null) {
+     image = null;
+     }
+     }
+     } */
     public void renderImage() {
         byte[] image = null;
         byte[] imgData = null;
@@ -1063,5 +1064,5 @@ public class UserAction extends ActionSupport implements ServletRequestAware, Se
     public void setDocvisibility(boolean docvisibility) {
         this.docvisibility = docvisibility;
     }
-    
+
 }
