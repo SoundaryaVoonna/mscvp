@@ -493,9 +493,9 @@
                                             <%--<strong><input type="button" value="ReSubmit" class="btn btn-effect-ripple btn-primary" onmouseover="Tip('Click here to Resubmit.')" onmouseout="UnTip()" onclick="return getloadTenderProcess(this, document.getElementById('sec_lt_list').value);" id="post"/></strong>
                                             <strong><input type="button" value="LifeCycle" class="btn btn-effect-ripple btn-primary" onmouseover="Tip('Click here to life cycle.')" onmouseout="UnTip()" onclick="return getLifeCycle(document.getElementById('sec_lt_list').value, 'logistics');" id="post"/></strong>
                                             <strong><input type="button" value="Generate Excel" class="btn btn-effect-ripple btn-primary" onclick="return gridDownload('loadTendering', 'xls');" onmouseover="Tip('Click here to generate an excel Report.')" onmouseout="UnTip()" id="excel"/> </strong>  --%>
-                                            
-                                            <strong><input type="button" value="ReSubmit" class="btn btn-effect-ripple btn-primary" onmouseover="Tip('Click here to Resubmit.')" onmouseout="UnTip()" onclick="return getloadTenderProcess(this, document.getElementById('sec_lt_list').value,'MSCVP');" id="post"/></strong>
-                                            <strong><input type="button" value="LifeCycle" class="btn btn-effect-ripple btn-primary" onmouseover="Tip('Click here to life cycle.')" onmouseout="UnTip()" onclick="return getLifeCycle(document.getElementById('sec_lt_list').value, 'logistics','MSCVP');" id="post"/></strong>
+
+                                            <strong><input type="button" value="ReSubmit" class="btn btn-effect-ripple btn-primary" onmouseover="Tip('Click here to Resubmit.')" onmouseout="UnTip()" onclick="return getloadTenderProcess(this, document.getElementById('sec_lt_list').value, 'MSCVP');" id="post"/></strong>
+                                            <strong><input type="button" value="LifeCycle" class="btn btn-effect-ripple btn-primary" onmouseover="Tip('Click here to life cycle.')" onmouseout="UnTip()" onclick="return getLifeCycle(document.getElementById('sec_lt_list').value, 'logistics', 'MSCVP');" id="post"/></strong>
                                             <strong><input type="button" value="Generate Excel" class="btn btn-effect-ripple btn-primary" onclick="return gridDownload('loadTendering', 'xls');" onmouseover="Tip('Click here to generate an excel Report.')" onmouseout="UnTip()" id="excel"/> </strong>  
 
                                         </div>
@@ -620,6 +620,10 @@
                     <div class="col-sm-6"> <label class="labelw"> Error Message </label></div>
                     <div  class="col-sm-6" id="errormessage" style="color:red;"></div>
                 </div>
+                <div class="row col-sm-12" id="errorReportDiv" style="display: none">
+                    <div class="col-sm-6"> <label class="labelw">  Error&nbsp;Report </label></div>
+                    <div class="col-sm-6"><div id="ErrReport"></div></div>
+                </div>
                 <div id="noresult"></div>
                 <div class="col-sm-12" style="margin-top:10px;"><button type="button" class="btn btn-primary col-sm-11" id="hide-menu" onclick="hide()" value="X">Close</button></div>
             </div>  </div>
@@ -659,29 +663,29 @@
             var corrval2 = document.getElementById('corrvalue2').value;
 
             if ((corrattr != "-1") && (corrval == "")) {
-                alert("please enter Correlation Value!!!");
+                alert("Please enter Correlation Value !!");
                 return false;
             }
             if ((corrattr == "-1") && (corrval != "")) {
-                alert("please select Correlation!");
+                alert("Please select Correlation !!");
                 return false;
             }
 
             if ((corrattr1 != "-1") && (corrval1 == "")) {
-                alert("please enter Correlation Value!!!");
+                alert("Please enter Correlation Value !!");
                 return false;
             }
             if ((corrattr1 == "-1") && (corrval1 != "")) {
-                alert("please select Correlation!");
+                alert("Please select Correlation !!");
                 return false;
             }
 
             if ((corrattr2 != "-1") && (corrval2 == "")) {
-                alert("please enter Correlation Value!!!");
+                alert("Please enter Correlation Value !!");
                 return false;
             }
             if ((corrattr2 == "-1") && (corrval2 != "")) {
-                alert("please select Correlation!");
+                alert("Please select Correlation !!");
                 return false;
             }
 

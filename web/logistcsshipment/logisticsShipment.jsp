@@ -131,10 +131,10 @@
                     Shipment
                     <!--<small>Logistics</small>-->
                 </h1>
-<!--                <ol class="breadcrumb">
-                    <li><a href="#"><i class="fa fa-truck"></i>Logistics</a></li>
-                    <li class="active">Shipment</li>
-                </ol>-->
+                <!--                <ol class="breadcrumb">
+                                    <li><a href="#"><i class="fa fa-truck"></i>Logistics</a></li>
+                                    <li class="active">Shipment</li>
+                                </ol>-->
             </section>
             <br>
             <div id="loadingAcoountSearch" class="loadingImg">
@@ -336,10 +336,10 @@
                                                                     <th >Partner</th>  
                                                                     <th >Carrier&nbsp;Status</th>  
                                                                         <%-- <th>Ship Date</th> --%>
-                                                                    
-                                                                        <%--<th>ISA #</th> --%>
-                                                                        <%-- <th>GS #</th>  --%>
-                                                                        <%-- <th>ST #</th> --%>
+
+                                                                    <%--<th>ISA #</th> --%>
+                                                                    <%-- <th>GS #</th>  --%>
+                                                                    <%-- <th>ST #</th> --%>
                                                                     <th>Direction</th>
                                                                     <th>Status</th>
 
@@ -429,7 +429,7 @@
                                                                             }
                                                                         %>
                                                                     </td>
-                                                                    
+
                                                                     <td>
                                                                         <%
                                                                             if (ltShipmentBean.getDirection() != null && !"".equals(ltShipmentBean.getDirection())) {
@@ -625,6 +625,10 @@
                     <div class="col-sm-6"> <label class="labelw"> Error&nbsp;Message </label></div>
                     <div class="col-sm-6" id="LSErrorMessage" style="color: red"></div>
                 </div>
+                <div class="row col-sm-12" id="errorReportDiv" style="display: none">
+                    <div class="col-sm-6"> <label class="labelw">  Error&nbsp;Report </label></div>
+                    <div class="col-sm-6"><div id="ErrReport"></div></div>
+                </div>
                 <div id="noresult"></div>
 
                 <div class="col-sm-12" style="margin-top:10px;"> <button type="button" class="btn btn-primary col-sm-11" id="hide-menu" onclick="hide()" value="X">Close</button></div>
@@ -636,7 +640,7 @@
 
 
 
-        
+
         <%--  <div id="footer">
                 <h2><font color="white">&#169 2013 Miracle Software Systems, Inc. All rights reserved</font></h2>
                        </div> --%>
@@ -698,20 +702,20 @@
 
 
             if ((corrattr != "-1") && (corrval == "")) {
-                alert("please enter Correlation Value!!!");
+                alert("Please enter Correlation Value !!");
                 return false;
             }
             if ((corrattr == "-1") && (corrval != "")) {
-                alert("please select Correlation!");
+                alert("Please select Correlation !!");
                 return false;
             }
 
             if ((corrattr1 != "-1") && (corrval1 == "")) {
-                alert("please enter Correlation Value!!!");
+                alert("Please enter Correlation Value !!");
                 return false;
             }
             if ((corrattr1 == "-1") && (corrval1 != "")) {
-                alert("please select Correlation!");
+                alert("Please select Correlation !!");
                 return false;
             }
 

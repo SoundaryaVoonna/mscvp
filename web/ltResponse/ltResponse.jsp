@@ -87,10 +87,10 @@
                     Response
                     <!--<small>Logistics</small>-->
                 </h1>
-<!--                <ol class="breadcrumb">
-                    <li><a href="#"><i class="fa fa-truck"></i>Logistics</a></li>
-                    <li class="active">Response</li>
-                </ol>-->
+                <!--                <ol class="breadcrumb">
+                                    <li><a href="#"><i class="fa fa-truck"></i>Logistics</a></li>
+                                    <li class="active">Response</li>
+                                </ol>-->
             </section>
             <br>
             <section class="content">
@@ -543,6 +543,11 @@
                     <div class="col-sm-6" id="resErrormessage" style="color: red"></div>
                 </div>
 
+                <div class="row col-sm-12" id="errorReportDiv" style="display: none">
+                    <div class="col-sm-6"> <label class="labelw">  Error&nbsp;Report </label></div>
+                    <div class="col-sm-6"><div id="ErrReport"></div></div>
+                </div>
+
                 <div id="noresult"></div>
                 <div class="col-sm-12" style="margin-top:10px;">  <button type="button" class="btn btn-primary col-sm-11" id="hide-menu" onclick="hide()" value="X">Close</button></div>
             </div>
@@ -583,20 +588,20 @@
         var corrattr1 = document.getElementById('corrattribute1').value;
         var corrval1 = document.getElementById('corrvalue1').value;
         if ((corrattr != "-1") && (corrval == "")) {
-            alert("please enter Correlation Value!!!");
+            alert("Please enter Correlation Value !!");
             return false;
         }
         if ((corrattr == "-1") && (corrval != "")) {
-            alert("please select Correlation!");
+            alert("Please select Correlation !!");
             return false;
         }
 
         if ((corrattr1 != "-1") && (corrval1 == "")) {
-            alert("please enter Correlation Value!!!");
+            alert("Please enter Correlation Value !!");
             return false;
         }
         if ((corrattr1 == "-1") && (corrval1 != "")) {
-            alert("please select Correlation!");
+            alert("Please select Correlation !!");
             return false;
         }
 

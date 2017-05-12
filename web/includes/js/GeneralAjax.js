@@ -1902,6 +1902,7 @@ function populateLogisticsDocDetails(responseXML)
         var BOL_NUMBER = detail.getElementsByTagName("BOL_NUMBER")[0].childNodes[0].nodeValue;
         var CO_NUMBER = detail.getElementsByTagName("CO_NUMBER")[0].childNodes[0].nodeValue;
         var PO_NUMBER = detail.getElementsByTagName("PO_NUMBER")[0].childNodes[0].nodeValue;
+        var ERROR_REPORT_FILEPATH = detail.getElementsByTagName("ERROR_REPORT_FILEPATH")[0].childNodes[0].nodeValue;
 
         document.getElementById('LogDocInstanceId').value = fileid;
         document.getElementById('LogDocShipment').value = PRI_KEY_VAL;
@@ -1944,9 +1945,15 @@ function populateLogisticsDocDetails(responseXML)
         }
         if (ERRMESSAGE != "NO MSG") {
             document.getElementById('errorDiv').style.display = "block";
+            document.getElementById('errorReportDiv').style.display = "block";
             document.getElementById('LogDocErrorMessage').innerHTML = ERRMESSAGE;
         } else {
             document.getElementById('LogDocErrorMessage').innerHTML = "--";
+        }
+        if (ERROR_REPORT_FILEPATH == "No File") {
+            document.getElementById('ErrReport').innerHTML = "--";
+        } else {
+            document.getElementById('ErrReport').innerHTML = "<a href=\"../download/getAttachment.action?locationAvailable=" + ERROR_REPORT_FILEPATH + "\">Download</a>";
         }
     }
     if (chk.childNodes[0].nodeValue == "false") {
@@ -2021,6 +2028,7 @@ function populateLoadTenderingDetails(responseXML)
         var totVolume = detail.getElementsByTagName("TOTAL_VOLUME")[0].childNodes[0].nodeValue;
         var totWeight = detail.getElementsByTagName("TOTAL_WEIGHT")[0].childNodes[0].nodeValue;
         var totpieces = detail.getElementsByTagName("TOTAL_PIECES")[0].childNodes[0].nodeValue;
+        var ERROR_REPORT_FILEPATH = detail.getElementsByTagName("ERROR_REPORT_FILEPATH")[0].childNodes[0].nodeValue;
 
 
         document.getElementById('instanceid').value = fileid;
@@ -2083,10 +2091,17 @@ function populateLoadTenderingDetails(responseXML)
 
         if (ERRMESSAGE != "NO MSG") {
             document.getElementById('errorDiv').style.display = "block";
+            document.getElementById('errorReportDiv').style.display = "block";
             document.getElementById('errormessage').innerHTML = ERRMESSAGE;
         } else {
             document.getElementById('errormessage').innerHTML = "--";
         }
+        
+        if (ERROR_REPORT_FILEPATH == "No File") {
+            document.getElementById('ErrReport').innerHTML = "--";
+        } else {
+            document.getElementById('ErrReport').innerHTML = "<a href=\"../download/getAttachment.action?locationAvailable=" + ERROR_REPORT_FILEPATH + "\">Download</a>";
+        }	
     }
     if (chk.childNodes[0].nodeValue == "false") {
         document.getElementById('noresult').innerHTML = " <h5 >Sorry ! No Results Found</h5>";
@@ -2151,6 +2166,7 @@ function populateLtResponseDetails(responseXML)
 
         var ACKFILEID = detail.getElementsByTagName("ACKFILEID")[0].childNodes[0].nodeValue;
         var ERR_MESSAGE = detail.getElementsByTagName("ERR_MESSAGE")[0].childNodes[0].nodeValue;
+        var ERROR_REPORT_FILEPATH = detail.getElementsByTagName("ERROR_REPORT_FILEPATH")[0].childNodes[0].nodeValue;
 
 
 
@@ -2198,9 +2214,15 @@ function populateLtResponseDetails(responseXML)
 
         if (ERR_MESSAGE != "NO MSG") {
             document.getElementById('errorDiv').style.display = "block";
+            document.getElementById('errorReportDiv').style.display = "block";
             document.getElementById('resErrormessage').innerHTML = ERR_MESSAGE;
         } else {
             document.getElementById('resErrormessage').innerHTML = "--";
+        }
+        if (ERROR_REPORT_FILEPATH == "No File") {
+            document.getElementById('ErrReport').innerHTML = "--";
+        } else {
+            document.getElementById('ErrReport').innerHTML = "<a href=\"../download/getAttachment.action?locationAvailable=" + ERROR_REPORT_FILEPATH + "\">Download</a>";
         }
     }
     if (chk.childNodes[0].nodeValue == "false") {
@@ -2405,6 +2427,7 @@ function populateLogisticsShipmentDetails(responseXML)
         var TRANSACTION_TYPE = detail.getElementsByTagName("TRANSACTION_TYPE")[0].childNodes[0].nodeValue;
         var ST_CONTROL_NUMBER = detail.getElementsByTagName("ST_CONTROL_NUMBER")[0].childNodes[0].nodeValue;
         var GS_CONTROL_NUMBER = detail.getElementsByTagName("GS_CONTROL_NUMBER")[0].childNodes[0].nodeValue;
+        var ERROR_REPORT_FILEPATH = detail.getElementsByTagName("ERROR_REPORT_FILEPATH")[0].childNodes[0].nodeValue;
 
         // alert(deilvaryName+" "+poValue+ " "+ routings+ " "+invoice+" "+itemQty);
         document.getElementById('LSInstanceId').value = fileID;
@@ -2463,9 +2486,15 @@ function populateLogisticsShipmentDetails(responseXML)
 //        }
         if (ERRMESSAGE != "NO MSG") {
             document.getElementById('errorDiv').style.display = "block";
+            document.getElementById('errorReportDiv').style.display = "block";
             document.getElementById('LSErrorMessage').innerHTML = ERRMESSAGE;
         } else {
             document.getElementById('LSErrorMessage').innerHTML = "--";
+        }
+        if (ERROR_REPORT_FILEPATH == "No File") {
+            document.getElementById('ErrReport').innerHTML = "--";
+        } else {
+            document.getElementById('ErrReport').innerHTML = "<a href=\"../download/getAttachment.action?locationAvailable=" + ERROR_REPORT_FILEPATH + "\">Download</a>";
         }
     }
     if (chk.childNodes[0].nodeValue == "false") {

@@ -637,6 +637,10 @@
                         <div class="col-sm-6"> <label class="labelw"> Error Message </label></div>
                         <div class="col-sm-6" id="LogDocErrorMessage" style="color: red"> </div>
                     </div>
+                    <div class="row col-sm-12" id="errorReportDiv" style="display: none">
+                        <div class="col-sm-6"> <label class="labelw">  Error&nbsp;Report </label></div>
+                        <div class="col-sm-6"><div id="ErrReport"></div></div>
+                    </div>
                     <div id="noresult"></div>
                     <div class="row col-sm-12" style="margin-top:10px;"><button type="button" class="btn btn-primary col-sm-11" id="hide-menu" onclick="hide()" style="margin-left:12px;" value="X">Close</button></div>
 
@@ -682,27 +686,27 @@
         var corrattr2 = document.getElementById('corrattribute2').value;
         var corrval2 = document.getElementById('corrvalue2').value;
         if ((corrattr != "-1") && (corrval == "")) {
-            alert("please enter Correlation Value!!!");
+            alert("Please enter Correlation Value !!");
             return  false;
         }
         if ((corrattr == "-1") && (corrval != "")) {
-            alert("please select Correlation!");
+            alert("Please select Correlation !!");
             return false;
         }
         if ((corrattr1 != "-1") && (corrval1 == "")) {
-            alert("please enter Correlation Value!!!");
+            alert("Please enter Correlation Value !!");
             return false;
         }
         if ((corrattr1 == "-1") && (corrval1 != "")) {
-            alert("please select Correlation!");
+            alert("Please select Correlation !!");
             return false;
         }
         if ((corrattr2 != "-1") && (corrval2 == "")) {
-            alert("please enter Correlation Value!!!");
+            alert("Please enter Correlation Value !!");
             return false;
         }
         if ((corrattr2 == "-1") && (corrval2 != "")) {
-            alert("please select Correlation!");
+            alert("Please select Correlation !!");
             return false;
         }
     }
