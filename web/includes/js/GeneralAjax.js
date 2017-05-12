@@ -1463,6 +1463,7 @@ function populatePaymentDetails(responseXML)
 //        var CO_NUMBER = detail.getElementsByTagName("CO_NUMBER")[0].childNodes[0].nodeValue;
         var SEC_KEY_VAL = detail.getElementsByTagName("SEC_KEY_VAL")[0].childNodes[0].nodeValue;
         var INVOICE_NUMBER = detail.getElementsByTagName("INVOICE_NUMBER")[0].childNodes[0].nodeValue;
+        var ERROR_REPORT_FILEPATH = detail.getElementsByTagName("ERROR_REPORT_FILEPATH")[0].childNodes[0].nodeValue;
         // Sap Detals
 
         var SAP_DETAILS = detail.getElementsByTagName("SAP_DETAILS")[0].childNodes[0].nodeValue;
@@ -1547,11 +1548,16 @@ function populatePaymentDetails(responseXML)
 
         if (ERRMESSAGE != "NO MSG") {
             document.getElementById('errorDiv').style.display = "block";
+            document.getElementById('errorReportDiv').style.display = "block";
             document.getElementById('errormessage').innerHTML = ERRMESSAGE;
         } else {
             document.getElementById('errormessage').innerHTML = "--";
         }
-
+        if (ERROR_REPORT_FILEPATH == "No File") {
+            document.getElementById('ErrReport').innerHTML = "--";
+        } else {
+            document.getElementById('ErrReport').innerHTML = "<a href=\"../download/getAttachment.action?locationAvailable=" + ERROR_REPORT_FILEPATH + "\">Download</a>";
+        }
 //        if (SAP_DETAILS != 'NO') {
 //            document.getElementById('SAP_USER').value = SAP_USER;
 //            document.getElementById('IDOC_NUMBER').value = IDOC_NUMBER;

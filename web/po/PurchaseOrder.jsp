@@ -22,7 +22,7 @@
         <link rel="stylesheet" href='<s:url value="/includes/plugins/daterangepicker/daterangepicker.css"/>'>
         <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
         <script type="text/javascript">
-            $(function() {
+            $(function () {
                 //$("#example1").DataTable();
                 $('#results').DataTable({
                     "paging": true,
@@ -63,12 +63,12 @@
             <!-- Main content --> 
             <section class="content-header">
                 <h1>Purchase Order
-<!--                    <small>Manufacturing</small>-->
+                    <!--                    <small>Manufacturing</small>-->
                 </h1>
-<!--                <ol class="breadcrumb">
-                    <li><a href="#"><i class="fa fa-wrench"></i>Manufacturing</a></li>
-                    <li class="active">Purchase Order</li>
-                </ol>-->
+                <!--                <ol class="breadcrumb">
+                                    <li><a href="#"><i class="fa fa-wrench"></i>Manufacturing</a></li>
+                                    <li class="active">Purchase Order</li>
+                                </ol>-->
             </section>
             <br>
             <section class="content">
@@ -157,7 +157,7 @@
                                                 </div>
                                                 <script>
                                                     var count = 0;
-                                                    $("#addButton").click(function() {
+                                                    $("#addButton").click(function () {
                                                         count++;
                                                         if (count == 1)
                                                             document.getElementById("corr").style.display = "block";
@@ -557,10 +557,10 @@
                     <div class="col-sm-6"> <label class="labelw"> Error&nbsp;Message </label></div>
                     <div class="col-sm-6" id="InvErrormessage" style="color: red"></div>
                 </div>
-                        <div class="row col-sm-12" id="errorReportDiv" style="display: none">
-                            <div class="col-sm-6"> <label class="labelw">  Error&nbsp;Report </label></div>
-                            <div class="col-sm-6"><div id="ErrReport"></div></div>
-                        </div>
+                <div class="row col-sm-12" id="errorReportDiv" style="display: none">
+                    <div class="col-sm-6"> <label class="labelw">  Error&nbsp;Report </label></div>
+                    <div class="col-sm-6"><div id="ErrReport"></div></div>
+                </div>
 
                 <div id="noresult"></div>
                 <br>
@@ -598,7 +598,7 @@
 
                     // New function to show the left grid
                     function demo() {
-                        $(function() {
+                        $(function () {
                             $('#detail_box').show();
                             return false;
                         });

@@ -859,7 +859,6 @@ public class AjaxHandlerServiceImpl implements AjaxHandlerService {
                     + "LEFT OUTER JOIN TP TP2 ON (TP2.ID = FILES.RECEIVER_ID) "
                     + "where FLOWFLAG like 'M' AND FILES.FILE_ID LIKE '%" + instanceid + "%' AND FILES.ID =" + id;
         }
-        System.out.println("queryString==========" + queryString);
         try {
             connection = ConnectionProvider.getInstance().getConnection();
             statement = connection.prepareStatement(queryString);
@@ -1072,7 +1071,7 @@ public class AjaxHandlerServiceImpl implements AjaxHandlerService {
                     + "ARCHIVE_FILES.TRANSACTION_TYPE,ARCHIVE_FILES.SEC_KEY_VAL,ARCHIVE_PAYMENT.INVOICE_NUMBER,ARCHIVE_FILES.FILE_ID as FILE_ID, ARCHIVE_PAYMENT.Check_Number as Check_Number, "
                     + "ARCHIVE_FILES.SENDER_ID as SENDER_ID, ARCHIVE_FILES.RECEIVER_ID as RECEIVER_ID,"
                     + "ARCHIVE_FILES.PRE_TRANS_FILEPATH as PRE_TRANS_FILEPATH, ARCHIVE_FILES.POST_TRANS_FILEPATH as POST_TRANS_FILEPATH, "
-                    + "ARCHIVE_FILES.ORG_FILEPATH as ORG_FILEPATH,ARCHIVE_FILES.ISA_DATE as ISA_DATE,ARCHIVE_FILES.ISA_TIME as ISA_TIME,"
+                    + "ARCHIVE_FILES.ORG_FILEPATH as ORG_FILEPATH,ARCHIVE_FILES.ISA_DATE as ISA_DATE,ARCHIVE_FILES.ISA_TIME as ISA_TIME,ARCHIVE_FILES.ERROR_REPORT_FILEPATH as ERROR_REPORT_FILEPATH,"
                     + "ARCHIVE_FILES.ERR_MESSAGE as ERR_MESSAGE,ARCHIVE_FILES.STATUS as STATUS, ARCHIVE_FILES.ACK_FILE_ID as ACK_FILE_ID,TP1.NAME as SENDER_NAME,TP2.NAME as RECEIVER_NAME "
                     + "FROM ARCHIVE_PAYMENT LEFT OUTER JOIN ARCHIVE_FILES ON (ARCHIVE_PAYMENT.FILE_ID=ARCHIVE_FILES.FILE_ID) "
                     + "LEFT OUTER JOIN TP TP1 ON (TP1.ID=ARCHIVE_FILES.SENDER_ID) LEFT OUTER JOIN TP TP2 ON (TP2.ID = ARCHIVE_FILES.RECEIVER_ID) "
@@ -1081,7 +1080,7 @@ public class AjaxHandlerServiceImpl implements AjaxHandlerService {
             queryString = "SELECT FILES.FILE_TYPE,FILES.ISA_NUMBER,FILES.GS_CONTROL_NUMBER,FILES.ST_CONTROL_NUMBER,FILES.TRANSACTION_TYPE,FILES.SEC_KEY_VAL,PAYMENT.INVOICE_NUMBER,FILES.FILE_ID as FILE_ID, PAYMENT.Check_Number as Check_Number, "
                     + "FILES.SENDER_ID as SENDER_ID, FILES.RECEIVER_ID as RECEIVER_ID,"
                     + "FILES.PRE_TRANS_FILEPATH as PRE_TRANS_FILEPATH, FILES.POST_TRANS_FILEPATH as POST_TRANS_FILEPATH, "
-                    + "FILES.ORG_FILEPATH as ORG_FILEPATH,FILES.ISA_DATE as ISA_DATE,FILES.ISA_TIME as ISA_TIME,"
+                    + "FILES.ORG_FILEPATH as ORG_FILEPATH,FILES.ISA_DATE as ISA_DATE,FILES.ISA_TIME as ISA_TIME,FILES.ERROR_REPORT_FILEPATH as ERROR_REPORT_FILEPATH,"
                     + "FILES.ERR_MESSAGE as ERR_MESSAGE,FILES.STATUS as STATUS, FILES.ACK_FILE_ID as ACK_FILE_ID,TP1.NAME as SENDER_NAME,TP2.NAME as RECEIVER_NAME "
                     + "FROM Payment LEFT OUTER JOIN FILES ON (PAYMENT.FILE_ID=FILES.FILE_ID) "
                     + "LEFT OUTER JOIN TP TP1 ON (TP1.ID=FILES.SENDER_ID) LEFT OUTER JOIN TP TP2 ON (TP2.ID = FILES.RECEIVER_ID) "
@@ -1216,6 +1215,15 @@ public class AjaxHandlerServiceImpl implements AjaxHandlerService {
                     sb.append("<ERR_MESSAGE>" + resultSet.getString("ERR_MESSAGE") + "</ERR_MESSAGE>");
                 } else {
                     sb.append("<ERR_MESSAGE>NO MSG</ERR_MESSAGE>");
+                }
+                if (resultSet.getString("ERROR_REPORT_FILEPATH") != null) {
+                    if (new File(resultSet.getString("ERROR_REPORT_FILEPATH")).exists() && new File(resultSet.getString("ERROR_REPORT_FILEPATH")).isFile()) {
+                        sb.append("<ERROR_REPORT_FILEPATH>" + resultSet.getString("ERROR_REPORT_FILEPATH") + "</ERROR_REPORT_FILEPATH>");
+                    } else {
+                        sb.append("<ERROR_REPORT_FILEPATH>No File</ERROR_REPORT_FILEPATH>");
+                    }
+                } else {
+                    sb.append("<ERROR_REPORT_FILEPATH>No File</ERROR_REPORT_FILEPATH>");
                 }
                 String sapDetails = DataSourceDataProvider.getInstance().getSapDetails(resultSet.getString("FILE_ID"), resultSet.getString("SEC_KEY_VAL"));
 
