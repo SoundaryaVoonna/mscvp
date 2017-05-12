@@ -557,8 +557,10 @@ public class AjaxHandlerAction extends ActionSupport implements ServletRequestAw
                 n = ServiceLocator.getAjaxHandlerService().updateMyPwd(this, loginId);
                 if (n == 1) {
                     responseString = "<font color=\"green\" size=\"3\">Password updated successfully</font>";
-                } else if (n == 2) {
-                    responseString = "<font color=\"red\" size=\"3\">Passwords do not match!</font>";
+                } else if (n == 100) {
+                    responseString = "<font color=\"red\" size=\"3\">New Password and Confirm Password must be same!</font>";
+                }else if (n == 200) {
+                    responseString = "<font color=\"red\" size=\"3\">Please enter correct Old Password!</font>";
                 } else {
                     responseString = "<font color=\"red\" size=\"3\">Password updation failed!</font>";
                 }
