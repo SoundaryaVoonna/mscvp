@@ -566,6 +566,11 @@
                         <div class="col-sm-6" id="InvErrormessage" style="color: red"></div>
                     </div>
 
+                    <div class="row col-sm-12" id="errorReportDiv" style="display: none">
+                        <div class="col-sm-6"> <label class="labelw">  Error&nbsp;Report </label></div>
+                        <div class="col-sm-6"><div id="ErrReport"></div></div>
+                    </div>
+
                     <div id="noresult"></div>
                     <div class="col-sm-12" style="margin-top:10px;"><button type="button" class="btn btn-primary col-sm-11" id="hide-menu" onclick="hide()" value="X">Close</button></div>   
                 </div> 
@@ -600,11 +605,11 @@
         var corrattr = document.getElementById('corrattribute').value;
         var corrval = document.getElementById('corrvalue').value;
         if ((corrattr != "-1") && (corrval == "")) {
-            alert("please enter Correlation Value!!!");
+            alert("Please enter Correlation Value !!");
             return false;
         }
         if ((corrattr == "-1") && (corrval != "")) {
-            alert("please select Correlation!");
+            alert("Please select Correlation !!");
             return false;
         }
     }

@@ -209,7 +209,7 @@
                         <i class="fa fa-angle-left pull-right"></i>
                     </a>
                     <ul class="treeview-menu">
-                        <% if (session.getAttribute(AppConstants.SES_ROLE_ID).equals("100") || session.getAttribute(AppConstants.SES_ROLE_ID).equals("101") || session.getAttribute(AppConstants.SES_ROLE_ID).equals("104") || session.getAttribute(AppConstants.SES_ROLE_ID).equals("105") || session.getAttribute(AppConstants.SES_ROLE_ID).equals("103")) {%>
+                        <% if (session.getAttribute(AppConstants.SES_ROLE_ID).equals("102") || session.getAttribute(AppConstants.SES_ROLE_ID).equals("100") || session.getAttribute(AppConstants.SES_ROLE_ID).equals("101") || session.getAttribute(AppConstants.SES_ROLE_ID).equals("104") || session.getAttribute(AppConstants.SES_ROLE_ID).equals("105") || session.getAttribute(AppConstants.SES_ROLE_ID).equals("103")) {%>
                         <li id="docrepository"><a href="<s:url action="../doc/orderToCash"/>"><i class="fa fa-circle-o"></i> Document Repository</a></li>
 
                         <li id="oredermanagement">
