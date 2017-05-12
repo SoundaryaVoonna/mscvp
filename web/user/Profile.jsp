@@ -428,7 +428,7 @@
                                                 <div class="col-sm-4">
                                                     <s:password cssClass="form-control" placeholder="New Password" name="newPwd" id="newPwd" tabindex="2" />
                                                 </div>
-                                                <div class="col-sm-3">(Password should be 8 to 15 characters)</div>
+                                                <div class="col-sm-3">(New Password should be 3 to 15 characters)</div>
                                                 <div class="col-sm-3"></div>
                                             </div>
                                         </div>
