@@ -110,6 +110,11 @@
                                         <div class="row">
                                             <div class="col-sm-12">
                                                 <div class="row">
+                                                    <div class="col-sm-3"><label>Database&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;</label>
+                                                        <s:radio cssClass="myRadio" id="database" name="database" value="%{database}" list="#@java.util.LinkedHashMap@{'MSCVP':'LIVE','ARCHIVE':'ARCHIVE'}"/>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
                                                     <div class="col-sm-3"> <label>Date Range</label>
                                                         <s:textfield name="reportrange"  id="reportrange" cssClass="form-control pull-left"   value="%{reportrange}" onchange="Date1();" tabindex="1"/> 
                                                     </div>
@@ -582,6 +587,11 @@
 //        getLtResponseDetails(fileId, refId);
 //    }
     function checkCorrelation() {
+        var db = document.forms["ltResponseForm"]["database"].value;
+        if (db == '') {
+            alert("Please select Database!!!");
+            return false;
+        }
         var corrattr = document.getElementById('corrattribute').value;
         var corrval = document.getElementById('corrvalue').value;
 

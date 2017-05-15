@@ -3676,7 +3676,7 @@ public class AjaxHandlerServiceImpl implements AjaxHandlerService {
         return sb.toString();
     }
 
-    public String getLtResponseDetails(String fileId, String refId) throws ServiceLocatorException {
+    public String getLtResponseDetails(String fileId, String refId, String database) throws ServiceLocatorException {
 
         boolean isGetting = false;
         Connection connection = null;
@@ -3685,7 +3685,18 @@ public class AjaxHandlerServiceImpl implements AjaxHandlerService {
         StringBuffer sb = new StringBuffer();
 
         // System.out.println("invNumber--->"+invNumber); 
-        queryString = "SELECT DISTINCT(FILES.FILE_ID) as FILE_ID,TRANSPORT_LT_RESPONSE.SHIPMENT_ID as SHIPMENT_ID,"
+        if ("ARCHIVE".equals(database)) {
+        queryString = "SELECT DISTINCT(ARCHIVE_FILES.FILE_ID) as FILE_ID,ARCHIVE_TRANSPORT_LT_RESPONSE.SHIPMENT_ID as SHIPMENT_ID,"
+                + "ARCHIVE_FILES.FILE_TYPE as FILE_TYPE,"
+                + "ARCHIVE_FILES.TRANSACTION_TYPE as TRANSACTION_TYPE,TP1.ID as SENDER_ID,TP1.NAME as SENDER_NAME,TP2.ID as RECEIVER_ID,"
+                + "TP2.NAME as RECEIVER_NAME,ARCHIVE_FILES.ISA_NUMBER as ISA_NUMBER,ARCHIVE_FILES.GS_CONTROL_NUMBER as GS_CONTROL_NUMBER,"
+                + "ARCHIVE_FILES.ST_CONTROL_NUMBER as ST_CONTROL_NUMBER,ARCHIVE_FILES.ISA_DATE as ISA_DATE,ARCHIVE_FILES.ISA_TIME as ISA_TIME, ARCHIVE_FILES.ERROR_REPORT_FILEPATH as ERROR_REPORT_FILEPATH,"
+                + "ARCHIVE_FILES.STATUS as STATUS,ARCHIVE_FILES.PRE_TRANS_FILEPATH,ARCHIVE_FILES.POST_TRANS_FILEPATH,ARCHIVE_FILES.ACK_FILE_ID,ARCHIVE_FILES.ERR_MESSAGE,ARCHIVE_FILES.SEC_KEY_VAL as REFERENCE"
+                + " FROM ARCHIVE_TRANSPORT_LT_RESPONSE LEFT OUTER JOIN ARCHIVE_FILES ON (ARCHIVE_TRANSPORT_LT_RESPONSE.FILE_ID =ARCHIVE_FILES.FILE_ID)"
+                + "LEFT OUTER JOIN TP TP1 ON (TP1.ID=ARCHIVE_FILES.SENDER_ID) LEFT OUTER JOIN TP TP2 ON (TP2.ID=ARCHIVE_FILES.RECEIVER_ID) "
+                + "WHERE 1=1 AND ARCHIVE_TRANSPORT_LT_RESPONSE.FILE_ID = '" + fileId + "' AND ARCHIVE_TRANSPORT_LT_RESPONSE.REF_ID='" + refId + "'  AND ARCHIVE_FILES.FLOWFLAG = 'L'  ";
+        }else{
+            queryString = "SELECT DISTINCT(FILES.FILE_ID) as FILE_ID,TRANSPORT_LT_RESPONSE.SHIPMENT_ID as SHIPMENT_ID,"
                 + "FILES.FILE_TYPE as FILE_TYPE,"
                 + "FILES.TRANSACTION_TYPE as TRANSACTION_TYPE,TP1.ID as SENDER_ID,TP1.NAME as SENDER_NAME,TP2.ID as RECEIVER_ID,"
                 + "TP2.NAME as RECEIVER_NAME,FILES.ISA_NUMBER as ISA_NUMBER,FILES.GS_CONTROL_NUMBER as GS_CONTROL_NUMBER,"
@@ -3694,8 +3705,8 @@ public class AjaxHandlerServiceImpl implements AjaxHandlerService {
                 + " FROM TRANSPORT_LT_RESPONSE LEFT OUTER JOIN FILES ON (TRANSPORT_LT_RESPONSE.FILE_ID =FILES.FILE_ID)"
                 + "LEFT OUTER JOIN TP TP1 ON (TP1.ID=FILES.SENDER_ID) LEFT OUTER JOIN TP TP2 ON (TP2.ID=FILES.RECEIVER_ID) "
                 + "WHERE 1=1 AND TRANSPORT_LT_RESPONSE.FILE_ID = '" + fileId + "' AND TRANSPORT_LT_RESPONSE.REF_ID='" + refId + "'  AND FILES.FLOWFLAG = 'L'  ";
-
-        // System.out.println("LT Response QUERY IS "+queryString);
+        }
+         //System.out.println("LT Response QUERY IS "+queryString);
         try {
             connection = ConnectionProvider.getInstance().getConnection();
             statement = connection.prepareStatement(queryString);
