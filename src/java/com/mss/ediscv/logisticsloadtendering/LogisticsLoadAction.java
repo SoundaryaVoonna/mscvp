@@ -62,6 +62,7 @@ public class LogisticsLoadAction extends ActionSupport implements ServletRequest
     private List docTypeList;
     private List<LogisticsLoadBean> loadList;
     private String reportrange;
+    private String database;
     private static Logger logger = Logger.getLogger(LogisticsAction.class.getName());
 
     public String execute() throws Exception {
@@ -83,6 +84,11 @@ public class LogisticsLoadAction extends ActionSupport implements ServletRequest
                     defaultFlowId = DataSourceDataProvider.getInstance().getFlowIdByFlowName("Logistics");
                     httpServletRequest.getSession(false).setAttribute(AppConstants.SES_USER_DEFAULT_FLOWID, defaultFlowId);
                 }
+                     if ("ARCHIVE".equals(getDatabase())) {
+                    setDatabase("ARCHIVE");
+                } else {
+                    setDatabase("MSCVP");
+                }
                 setResultType(SUCCESS);
             }
         }
@@ -102,7 +108,12 @@ public class LogisticsLoadAction extends ActionSupport implements ServletRequest
                     } else if (getCheck().equals("")) {
                         setCheck("1");
                     }
-                    loadList = ServiceLocator.getLoadService().buildLoadQuery(this);
+                    //loadList = ServiceLocator.getLoadService().buildLoadQuery(this);
+                        if ("ARCHIVE".equals(getDatabase())) {
+                        loadList = ServiceLocator.getLoadService().buildLoadQueryArchive(this);
+                    } else {
+                        loadList = ServiceLocator.getLoadService().buildLoadQuery(this);
+                    }
                     httpServletRequest.getSession(false).setAttribute(AppConstants.SES_LOAD_LIST, loadList);
                     setResultType(SUCCESS);
                 } catch (Exception ex) {
@@ -672,4 +683,13 @@ public class LogisticsLoadAction extends ActionSupport implements ServletRequest
     public void setReportrange(String reportrange) {
         this.reportrange = reportrange;
     }
+
+    public String getDatabase() {
+        return database;
+    }
+
+    public void setDatabase(String database) {
+        this.database = database;
+    }
+    
 }

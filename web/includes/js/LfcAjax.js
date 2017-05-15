@@ -74,7 +74,7 @@ function populateLifecycle(responseXML)
         var detail = details.childNodes[0];
         var fileid = detail.getElementsByTagName("FILEID")[0].childNodes[0].nodeValue;
         var PRE_TRANS_FILEPATH = detail.getElementsByTagName("PRETRANSFILEPATH")[0].childNodes[0].nodeValue;
-        var POST_TRANS_FILEPATH = detail.getElementsByTagName("PRETRANSFILEPATH")[0].childNodes[0].nodeValue;
+        var POST_TRANS_FILEPATH = detail.getElementsByTagName("POSTTRANSFILEPATH")[0].childNodes[0].nodeValue;
         var ACKFILEID = detail.getElementsByTagName("ACKFILE")[0].childNodes[0].nodeValue;
         var SENDER_ID = detail.getElementsByTagName("SENDER_ID")[0].childNodes[0].nodeValue;
         var RECEIVER_ID = detail.getElementsByTagName("RECEIVER_ID")[0].childNodes[0].nodeValue;
