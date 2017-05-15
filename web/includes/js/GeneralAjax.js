@@ -2290,6 +2290,7 @@ function populateLogisticsInvDetails(responseXML)
         var TRANSACTION_TYPE = detail.getElementsByTagName("TRANSACTION_TYPE")[0].childNodes[0].nodeValue;
         var ST_CONTROL_NUMBER = detail.getElementsByTagName("ST_CONTROL_NUMBER")[0].childNodes[0].nodeValue;
         var GS_CONTROL_NUMBER = detail.getElementsByTagName("GS_CONTROL_NUMBER")[0].childNodes[0].nodeValue;
+        var ERROR_REPORT_FILEPATH = detail.getElementsByTagName("ERROR_REPORT_FILEPATH")[0].childNodes[0].nodeValue;
 
         // alert(deilvaryName+" "+poValue+ " "+ routings+ " "+invoice+" "+itemQty);
 
@@ -2345,9 +2346,15 @@ function populateLogisticsInvDetails(responseXML)
 
         if (ERRMESSAGE != "NO MSG") {
             document.getElementById('errorDiv').style.display = "block";
+            document.getElementById('errorReportDiv').style.display = "block";
             document.getElementById('InvErrormessage').innerHTML = ERRMESSAGE;
         } else {
             document.getElementById('InvErrormessage').innerHTML = "--";
+        }
+        if (ERROR_REPORT_FILEPATH == "No File") {
+            document.getElementById('ErrReport').innerHTML = "--";
+        } else {
+            document.getElementById('ErrReport').innerHTML = "<a href=\"../download/getAttachment.action?locationAvailable=" + ERROR_REPORT_FILEPATH + "\">Download</a>";
         }
 
         if (chk.childNodes[0].nodeValue == "false") {
