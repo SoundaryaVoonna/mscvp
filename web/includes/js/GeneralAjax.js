@@ -1841,6 +1841,7 @@ function populateTpDetailInformation(responseXML)
 }
 
 function getLogisticsDocDetails(val, id) {
+      var db = document.forms["documentForm"]["database"].value;
     var num = val;
     var id = id;
     $(function () {
@@ -1851,7 +1852,7 @@ function getLogisticsDocDetails(val, id) {
     });
     var req = getXMLHttpRequest();
     req.onreadystatechange = readyStateHandlerText(req, populateLogisticsDocDetails);
-    var url = "../ajax/getLogisticsDocDetails.action?isaNumber=" + num + "&id=" + id;
+    var url = "../ajax/getLogisticsDocDetails.action?isaNumber=" + num + "&id=" + id + "&database=" + db;
     req.open("GET", url, "true");
     req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     req.send(null);
@@ -1968,7 +1969,7 @@ function populateLogisticsDocDetails(responseXML)
 function getLoadTenderingDetails(number, ponum) {
     //alert("hai");
     //alert("hiii222222"+number+"ponum------>"+ponum);
-
+ var db = document.forms["logisticsForm"]["database"].value;
     var num = number;
     var ponum = ponum;
     $(function () {
@@ -1979,7 +1980,7 @@ function getLoadTenderingDetails(number, ponum) {
     });
     var req = getXMLHttpRequest();
     req.onreadystatechange = readyStateHandlerText(req, populateLoadTenderingDetails);
-    var url = "../ajax/getLoadTenderingDetails.action?isaNumber=" + num + "&poNumber=" + ponum;
+    var url = "../ajax/getLoadTenderingDetails.action?isaNumber=" + num + "&poNumber=" + ponum+ "&database=" + db;
     req.open("GET", url, "true");
     req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     req.send(null);

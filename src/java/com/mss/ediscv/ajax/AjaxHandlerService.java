@@ -51,9 +51,9 @@ public interface AjaxHandlerService {
 
     public String getTpDetailInformation(String tpId, String defFlowId) throws ServiceLocatorException;
 
-    public String getLogisticsDocDetails(String instanceid, int id) throws ServiceLocatorException;
+    public String getLogisticsDocDetails(String instanceid, int id, String database) throws ServiceLocatorException;
 
-    public String getLoadTenderingDetails(String instanceid, String ponum) throws ServiceLocatorException;
+    public String getLoadTenderingDetails(String instanceid, String ponum,String database) throws ServiceLocatorException;
 
     public String getLtResponseDetails(String invNum, String ponum, String database) throws ServiceLocatorException;
 

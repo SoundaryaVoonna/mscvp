@@ -329,7 +329,7 @@ public class AjaxHandlerAction extends ActionSupport implements ServletRequestAw
     public String getLogisticsDocDetails() {
         if (httpServletRequest.getSession(false).getAttribute(AppConstants.SES_USER_NAME) != null) {
             try {
-                responseString = ServiceLocator.getAjaxHandlerService().getLogisticsDocDetails(getIsaNumber(), getId()).toString();
+                responseString = ServiceLocator.getAjaxHandlerService().getLogisticsDocDetails(getIsaNumber(), getId(),getDatabase()).toString();
                 httpServletResponse.setContentType("text/xml");
                 httpServletResponse.getWriter().write(responseString);
             } catch (Exception ex) {
@@ -342,7 +342,7 @@ public class AjaxHandlerAction extends ActionSupport implements ServletRequestAw
     public String getLoadTenderingDetails() {
         if (httpServletRequest.getSession(false).getAttribute(AppConstants.SES_USER_NAME) != null) {
             try {
-                responseString = ServiceLocator.getAjaxHandlerService().getLoadTenderingDetails(getIsaNumber(), getPoNumber()).toString();
+                responseString = ServiceLocator.getAjaxHandlerService().getLoadTenderingDetails(getIsaNumber(), getPoNumber(),getDatabase()).toString();
                 httpServletResponse.setContentType("text/xml");
                 httpServletResponse.getWriter().write(responseString);
             } catch (Exception ex) {

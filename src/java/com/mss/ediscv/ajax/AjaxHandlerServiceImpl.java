@@ -3194,7 +3194,7 @@ public class AjaxHandlerServiceImpl implements AjaxHandlerService {
         return sb.toString();
     }
 
-    public String getLogisticsDocDetails(String instanceid, int id) throws ServiceLocatorException {
+    public String getLogisticsDocDetails(String instanceid, int id, String database) throws ServiceLocatorException {
 
         boolean isGetting = false;
         Connection connection = null;
@@ -3202,7 +3202,25 @@ public class AjaxHandlerServiceImpl implements AjaxHandlerService {
         ResultSet resultSet = null;
         StringBuffer sb = new StringBuffer();
         //queryString = "select DOCUMENT.ISA_NUMBER,DOCUMENT.DOCUMENT_TYPE,FILES.SENDER_ID,FILES.RECEIVER_ID,FILES.PRE_TRANS_FILEPATH,FILES.POST_TRANS_FILEPATH from DOCUMENT LEFT OUTER JOIN FILES on (DOCUMENT.FILE_ID= FILES.FILE_ID) where FILES.ISA_NUMBER LIKE '%"+isaNumber+"%'";
-        queryString = "select FILES.FILE_ID,FILES.FILE_TYPE,FILES.SENDER_ID,"
+        if ("ARCHIVE".equals(database)) {
+              queryString = "select ARCHIVE_FILES.FILE_ID,ARCHIVE_FILES.FILE_TYPE,ARCHIVE_FILES.SENDER_ID,"
+                + "ARCHIVE_FILES.RECEIVER_ID,ARCHIVE_FILES.PRE_TRANS_FILEPATH,"
+                + "ARCHIVE_FILES.POST_TRANS_FILEPATH,ARCHIVE_FILES.SEC_KEY_VAL as SEC_KEY_VAL,"
+                + "ARCHIVE_FILES.PRI_KEY_TYPE as PRI_KEY_TYPE,ARCHIVE_FILES.PRI_KEY_VAL as PRI_KEY_VAL,"
+                + "ARCHIVE_FILES.ORG_FILEPATH as ORG_FILEPATH,ARCHIVE_FILES.ISA_NUMBER as ISA_NUMBER,"
+                + "ARCHIVE_FILES.TRANSACTION_TYPE as TRANSACTION_TYPE,"
+                + "ARCHIVE_FILES.GS_CONTROL_NUMBER as GS_CONTROL_NUMBER,"
+                + "ARCHIVE_FILES.ST_CONTROL_NUMBER as ST_CONTROL_NUMBER,TP1.NAME as SENDER_NAME,"
+                + "TP2.NAME as RECEIVER_NAME,ARCHIVE_FILES.ERR_MESSAGE,ARCHIVE_FILES.ERROR_REPORT_FILEPATH as ERROR_REPORT_FILEPATH,"
+                + "ARCHIVE_FILES.ACK_FILE_ID as ACK_FILE_ID,ARCHIVE_FILES.ISA_DATE as ISA_DATE,"
+                + "ARCHIVE_FILES.ISA_TIME as ISA_TIME,ARCHIVE_FILES.STATUS as STATUS,ARCHIVE_FILES.DIRECTION as DIRECTION,tl.BOL_NUMBER as BOL_NUMBER ,tl.CO_NUMBER as CO_NUMBER,tl.PO_NUMBER as PO_NUMBER  "
+                + "FROM ARCHIVE_FILES LEFT OUTER JOIN ARCHIVE_Transport_loadtender tl on (tl.FILE_ID=ARCHIVE_FILES.FILE_ID and tl.SHIPMENT_ID=ARCHIVE_FILES.SEC_KEY_VAL) "
+                + "LEFT OUTER JOIN TP TP1 "
+                + "ON (TP1.ID=ARCHIVE_FILES.SENDER_ID) LEFT OUTER JOIN TP TP2 "
+                + "ON (TP2.ID = ARCHIVE_FILES.RECEIVER_ID) "
+                + "where ARCHIVE_FILES.FILE_ID LIKE '%" + instanceid + "%' and ARCHIVE_FILES.ID =" + id;
+        }else{
+              queryString = "select FILES.FILE_ID,FILES.FILE_TYPE,FILES.SENDER_ID,"
                 + "FILES.RECEIVER_ID,FILES.PRE_TRANS_FILEPATH,"
                 + "FILES.POST_TRANS_FILEPATH,FILES.SEC_KEY_VAL as SEC_KEY_VAL,"
                 + "FILES.PRI_KEY_TYPE as PRI_KEY_TYPE,FILES.PRI_KEY_VAL as PRI_KEY_VAL,"
@@ -3218,6 +3236,8 @@ public class AjaxHandlerServiceImpl implements AjaxHandlerService {
                 + "ON (TP1.ID=FILES.SENDER_ID) LEFT OUTER JOIN TP TP2 "
                 + "ON (TP2.ID = FILES.RECEIVER_ID) "
                 + "where FILES.FILE_ID LIKE '%" + instanceid + "%' and FILES.ID =" + id;
+        }
+      
         System.out.println("QUERY IS " + queryString);
 
         try {
@@ -3439,7 +3459,7 @@ public class AjaxHandlerServiceImpl implements AjaxHandlerService {
         return sb.toString();
     }
 
-    public String getLoadTenderingDetails(String instanceid, String ponum) throws ServiceLocatorException {
+    public String getLoadTenderingDetails(String instanceid, String ponum,String database) throws ServiceLocatorException {
 
         boolean isGetting = false;
         Connection connection = null;
@@ -3447,17 +3467,33 @@ public class AjaxHandlerServiceImpl implements AjaxHandlerService {
         ResultSet resultSet = null;
         StringBuffer sb = new StringBuffer();
         //queryString = "select DOCUMENT.ISA_NUMBER,DOCUMENT.DOCUMENT_TYPE,FILES.SENDER_ID,FILES.RECEIVER_ID,FILES.PRE_TRANS_FILEPATH,FILES.POST_TRANS_FILEPATH from DOCUMENT LEFT OUTER JOIN FILES on (DOCUMENT.FILE_ID= FILES.FILE_ID) where FILES.ISA_NUMBER LIKE '%"+isaNumber+"%'";
-        queryString = "SELECT FILES.FILE_ID,FILES.FILE_TYPE,FILES.SENDER_ID,FILES.RECEIVER_ID,"
-                + "FILES.PRE_TRANS_FILEPATH,FILES.POST_TRANS_FILEPATH,FILES.SEC_KEY_VAL as SEC_KEY_VAL,"
-                + "FILES.PRI_KEY_TYPE as PRI_KEY_TYPE,FILES.PRI_KEY_VAL as PRI_KEY_VAL,"
-                + "FILES.ORG_FILEPATH as ORG_FILEPATH,FILES.ISA_NUMBER as ISA_NUMBER,"
-                + "FILES.TRANSACTION_TYPE as TRANSACTION_TYPE,FILES.GS_CONTROL_NUMBER as GS_CONTROL_NUMBER,"
-                + "FILES.ST_CONTROL_NUMBER as ST_CONTROL_NUMBER,TP1.NAME as SENDER_NAME,TP2.NAME as RECEIVER_NAME,"
-                + "FILES.ERR_MESSAGE,FILES.ACK_FILE_ID as ACK_FILE_ID,FILES.DIRECTION as DIRECTION , FILES.ISA_DATE as ISA_DATE,FILES.ISA_TIME as ISA_TIME,FILES.STATUS, "
-                + "  Transport_loadtender.BOL_NUMBER as BOL_NUMBER,Transport_loadtender.CO_NUMBER as CO_NUMBER, FILES.ERROR_REPORT_FILEPATH as ERROR_REPORT_FILEPATH, "
-                + " Transport_loadtender.TOTAL_WEIGHT as TOTAL_WEIGHT,Transport_loadtender.TOTAL_VOLUME as TOTAL_VOLUME,"
-                + " Transport_loadtender.TOTAL_PIECES as TOTAL_PIECES,Transport_loadtender.PO_NUMBER as PO_NUMBER FROM FILES  LEFT OUTER JOIN Transport_loadtender  ON (FILES.FILE_ID=Transport_loadtender.FILE_ID and FILES.SEC_KEY_VAL=Transport_loadtender.SHIPMENT_ID)   LEFT OUTER JOIN TP TP1 ON(TP1.ID=FILES.SENDER_ID ) LEFT OUTER JOIN TP TP2 ON(TP2.ID=FILES.RECEIVER_ID)   "
-                + "where FILES.FILE_ID LIKE '%" + instanceid + "%' and FILES.SEC_KEY_VAL LIKE '%" + ponum + "%'";
+            if ("ARCHIVE".equals(database)) {
+            queryString = "SELECT ARCHIVE_FILES.FILE_ID,ARCHIVE_FILES.FILE_TYPE,ARCHIVE_FILES.SENDER_ID,ARCHIVE_FILES.RECEIVER_ID,"
+                    + "ARCHIVE_FILES.PRE_TRANS_FILEPATH,ARCHIVE_FILES.POST_TRANS_FILEPATH,ARCHIVE_FILES.SEC_KEY_VAL as SEC_KEY_VAL,"
+                    + "ARCHIVE_FILES.PRI_KEY_TYPE as PRI_KEY_TYPE,ARCHIVE_FILES.PRI_KEY_VAL as PRI_KEY_VAL,"
+                    + "ARCHIVE_FILES.ORG_FILEPATH as ORG_FILEPATH,ARCHIVE_FILES.ISA_NUMBER as ISA_NUMBER,"
+                    + "ARCHIVE_FILES.TRANSACTION_TYPE as TRANSACTION_TYPE,ARCHIVE_FILES.GS_CONTROL_NUMBER as GS_CONTROL_NUMBER,"
+                    + "ARCHIVE_FILES.ST_CONTROL_NUMBER as ST_CONTROL_NUMBER,TP1.NAME as SENDER_NAME,TP2.NAME as RECEIVER_NAME,"
+                    + "ARCHIVE_FILES.ERR_MESSAGE,ARCHIVE_FILES.ACK_FILE_ID as ACK_FILE_ID,ARCHIVE_FILES.DIRECTION as DIRECTION , ARCHIVE_FILES.ISA_DATE as ISA_DATE,ARCHIVE_FILES.ISA_TIME as ISA_TIME,ARCHIVE_FILES.STATUS, "
+                    + "ARCHIVE_Transport_loadtender.BOL_NUMBER as BOL_NUMBER,ARCHIVE_Transport_loadtender.CO_NUMBER as CO_NUMBER, ARCHIVE_FILES.ERROR_REPORT_FILEPATH as ERROR_REPORT_FILEPATH, "
+                    + "ARCHIVE_Transport_loadtender.TOTAL_WEIGHT as TOTAL_WEIGHT,ARCHIVE_Transport_loadtender.TOTAL_VOLUME as TOTAL_VOLUME,"
+                    + "ARCHIVE_Transport_loadtender.TOTAL_PIECES as TOTAL_PIECES,ARCHIVE_Transport_loadtender.PO_NUMBER as PO_NUMBER FROM ARCHIVE_FILES  "
+                    + "LEFT OUTER JOIN ARCHIVE_Transport_loadtender  ON (ARCHIVE_FILES.FILE_ID=ARCHIVE_Transport_loadtender.FILE_ID and ARCHIVE_FILES.SEC_KEY_VAL=ARCHIVE_Transport_loadtender.SHIPMENT_ID)   "
+                    + "LEFT OUTER JOIN TP TP1 ON(TP1.ID=ARCHIVE_FILES.SENDER_ID ) LEFT OUTER JOIN TP TP2 ON(TP2.ID=ARCHIVE_FILES.RECEIVER_ID) "
+                    + "where ARCHIVE_FILES.FILE_ID LIKE '%" + instanceid + "%' and ARCHIVE_FILES.SEC_KEY_VAL LIKE '%" + ponum + "%'";
+        } else {
+            queryString = "SELECT FILES.FILE_ID,FILES.FILE_TYPE,FILES.SENDER_ID,FILES.RECEIVER_ID,"
+                    + "FILES.PRE_TRANS_FILEPATH,FILES.POST_TRANS_FILEPATH,FILES.SEC_KEY_VAL as SEC_KEY_VAL,"
+                    + "FILES.PRI_KEY_TYPE as PRI_KEY_TYPE,FILES.PRI_KEY_VAL as PRI_KEY_VAL,"
+                    + "FILES.ORG_FILEPATH as ORG_FILEPATH,FILES.ISA_NUMBER as ISA_NUMBER,"
+                    + "FILES.TRANSACTION_TYPE as TRANSACTION_TYPE,FILES.GS_CONTROL_NUMBER as GS_CONTROL_NUMBER,"
+                    + "FILES.ST_CONTROL_NUMBER as ST_CONTROL_NUMBER,TP1.NAME as SENDER_NAME,TP2.NAME as RECEIVER_NAME,"
+                    + "FILES.ERR_MESSAGE,FILES.ACK_FILE_ID as ACK_FILE_ID,FILES.DIRECTION as DIRECTION , FILES.ISA_DATE as ISA_DATE,FILES.ISA_TIME as ISA_TIME,FILES.STATUS, "
+                    + "Transport_loadtender.BOL_NUMBER as BOL_NUMBER,Transport_loadtender.CO_NUMBER as CO_NUMBER, FILES.ERROR_REPORT_FILEPATH as ERROR_REPORT_FILEPATH, "
+                    + "Transport_loadtender.TOTAL_WEIGHT as TOTAL_WEIGHT,Transport_loadtender.TOTAL_VOLUME as TOTAL_VOLUME, "
+                    + "Transport_loadtender.TOTAL_PIECES as TOTAL_PIECES,Transport_loadtender.PO_NUMBER as PO_NUMBER FROM FILES  LEFT OUTER JOIN Transport_loadtender  ON (FILES.FILE_ID=Transport_loadtender.FILE_ID and FILES.SEC_KEY_VAL=Transport_loadtender.SHIPMENT_ID)   LEFT OUTER JOIN TP TP1 ON(TP1.ID=FILES.SENDER_ID ) LEFT OUTER JOIN TP TP2 ON(TP2.ID=FILES.RECEIVER_ID) "
+                    + "where FILES.FILE_ID LIKE '%" + instanceid + "%' and FILES.SEC_KEY_VAL LIKE '%" + ponum + "%'";
+        }
         System.out.println("QUERY  of the data IS " + queryString);
 
         try {

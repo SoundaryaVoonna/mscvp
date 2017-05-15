@@ -236,7 +236,9 @@ public class UserAction extends ActionSupport implements ServletRequestAware, Se
             if (httpServletRequest.getSession(false).getAttribute(AppConstants.SES_USER_NAME) != null) {
                 try {
                     setLoginId(httpServletRequest.getSession(false).getAttribute(AppConstants.SES_LOGIN_ID).toString());
-                    if ((getNewPwd().length()) > 2) {
+                     if (!"".equals(getOldPwd())) {
+                          if ((!"".equals(getNewPwd())) && (!"".equals(getConfirmPwd()))) {
+                         if ((getNewPwd().length()) > 2) {
                         if (getNewPwd().equals(getConfirmPwd())) {
                             int updatedRows = ServiceLocator.getUserService().updateMyPwd(this);
                             if (updatedRows == 1) {
@@ -251,6 +253,12 @@ public class UserAction extends ActionSupport implements ServletRequestAware, Se
                         }
                     } else {
                         resultMessage = "<font color=\"red\" size=\"3\">New Password must be grater than or equal to 3 characters!</font> ";
+                    }
+                     }else {
+                        resultMessage = "<font color=\"red\" size=\"3\">Please enter both New Password and Confirm Password!</font> ";
+                    }
+                }else {
+                        resultMessage = "<font color=\"red\" size=\"3\">Please enter Old Password!</font> ";
                     }
 
                     getUserProfile();

@@ -13,4 +13,5 @@ import java.util.ArrayList;
 public interface LogisticsLoadService {
 
     public ArrayList<LogisticsLoadBean> buildLoadQuery(LogisticsLoadAction logisticsDocAction) throws ServiceLocatorException;
+     public ArrayList<LogisticsLoadBean> buildLoadQueryArchive(LogisticsLoadAction logisticsDocAction) throws ServiceLocatorException;
 }
