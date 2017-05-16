@@ -2121,7 +2121,9 @@ function getLtResponseDetails(fileId, refId) {
     //var num=number;
     //alert("inv number-->"+num);
     //  var req = new XMLHttpRequest();
+
     var db = document.forms["ltResponseForm"]["database"].value;
+
     $(function () {
 
         $('#detail_box').show();
@@ -2132,6 +2134,7 @@ function getLtResponseDetails(fileId, refId) {
     req.onreadystatechange = readyStateHandlerText(req, populateLtResponseDetails);
 
     var url = "../ajax/getLtResponseDetails.action?fileId=" + fileId + "&refId=" + refId + "&database=" + db;
+
 
     req.open("GET", url, "true");
     req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");

@@ -3756,7 +3756,9 @@ public class AjaxHandlerServiceImpl implements AjaxHandlerService {
         }
         // System.out.println("invNumber--->"+invNumber); 
 
+
         System.out.println("LT Response QUERY IS " + queryString);
+
         try {
             connection = ConnectionProvider.getInstance().getConnection();
             statement = connection.prepareStatement(queryString);

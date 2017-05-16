@@ -350,6 +350,7 @@ public class LtResponseServiceImpl implements LtResponseService {
             }
         }
         System.out.println("archive--ltResponseSearchQuery---> "+ltResponseSearchQuery);
+
         return ltResponseList;
     }
 }
