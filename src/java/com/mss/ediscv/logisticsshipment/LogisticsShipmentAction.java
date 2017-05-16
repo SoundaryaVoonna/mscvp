@@ -44,6 +44,7 @@ public class LogisticsShipmentAction extends ActionSupport implements ServletReq
     private String reportrange;
     private static Logger logger = Logger.getLogger(LogisticsShipmentAction.class.getName());
     private List<LtShipmentBean> ltShipmentList;
+    private String database;
 
     public String execute() throws Exception {
         setResultType(LOGIN);
@@ -69,6 +70,11 @@ public class LogisticsShipmentAction extends ActionSupport implements ServletReq
                     defaultFlowId = DataSourceDataProvider.getInstance().getFlowIdByFlowName("Logistics");
                     httpServletRequest.getSession(false).setAttribute(AppConstants.SES_USER_DEFAULT_FLOWID, defaultFlowId);
                 }
+                if ("ARCHIVE".equals(getDatabase())) {
+                    setDatabase("ARCHIVE");
+                } else {
+                    setDatabase("MSCVP");
+                }
                 setResultType(SUCCESS);
             }
         }
@@ -83,7 +89,11 @@ public class LogisticsShipmentAction extends ActionSupport implements ServletReq
             if (AuthorizationManager.getInstance().isAuthorizedUser("L_SHIPMENT", userRoleId)) {
                 try {
                     execute();
-                    ltShipmentList = ServiceLocator.getLogShipmentService().getLtResponseList(this);
+                    if ("ARCHIVE".equals(getDatabase())) {
+                      ltShipmentList = ServiceLocator.getLogShipmentService().getLtShipmentListArchive(this);
+                    } else {
+                      ltShipmentList = ServiceLocator.getLogShipmentService().getLtShipmentList(this);
+                    }
                     httpServletRequest.getSession(false).setAttribute(AppConstants.SES_LTSHIPMENT_LIST, ltShipmentList);
                     setResultType(SUCCESS);
                 } catch (Exception ex) {
@@ -388,4 +398,14 @@ public class LogisticsShipmentAction extends ActionSupport implements ServletReq
         this.reportrange = reportrange;
 
     }
+
+    public String getDatabase() {
+        return database;
+    }
+
+    public void setDatabase(String database) {
+        this.database = database;
+    }
+    
+    
 }

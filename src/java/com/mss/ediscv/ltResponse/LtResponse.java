@@ -41,10 +41,10 @@ public class LtResponse extends ActionSupport implements ServletRequestAware {
     private String corrattribute1;
     private String corrvalue1;
     private String reportrange;
-    private String database;
     private String check;
     private static Logger logger = Logger.getLogger(LtResponse.class.getName());
     private List<LtResponseBean> ltResponseList;
+    private String database;
 
     public String execute() throws Exception {
         setResultType(LOGIN);
@@ -69,6 +69,11 @@ public class LtResponse extends ActionSupport implements ServletRequestAware {
                     defaultFlowId = DataSourceDataProvider.getInstance().getFlowIdByFlowName("Logistics");
                     httpServletRequest.getSession(false).setAttribute(AppConstants.SES_USER_DEFAULT_FLOWID, defaultFlowId);
                 }
+                if ("ARCHIVE".equals(getDatabase())) {
+                    setDatabase("ARCHIVE");
+                } else {
+                    setDatabase("MSCVP");
+                }
                 setResultType(SUCCESS);
             }
         }
@@ -83,17 +88,19 @@ public class LtResponse extends ActionSupport implements ServletRequestAware {
             if (AuthorizationManager.getInstance().isAuthorizedUser("L_RESPONSE", userRoleId)) {
                 try {
                     execute();
+
                     if (getCheck() == null) {
                     setCheck("1");
                 } else if (getCheck().equals("")) {
                     setCheck("1");
                 }
                 if ("ARCHIVE".equals(getDatabase())) {
-                    ltResponseList = ServiceLocator.getLtResponseService().buildLtResponseQueryArchive(this);
+                    ltResponseList = ServiceLocator.getLtResponseService().getLtResponseListArchive(this);
                 } else {
                     ltResponseList = ServiceLocator.getLtResponseService().getLtResponseList(this);
                 }
                     
+
                     httpServletRequest.getSession(false).setAttribute(AppConstants.SES_LTRESPONSE_LIST, ltResponseList);
                     setResultType(SUCCESS);
                 } catch (Exception ex) {
@@ -405,7 +412,6 @@ public class LtResponse extends ActionSupport implements ServletRequestAware {
     public void setDatabase(String database) {
         this.database = database;
     }
-
     public String getCheck() {
         return check;
     }

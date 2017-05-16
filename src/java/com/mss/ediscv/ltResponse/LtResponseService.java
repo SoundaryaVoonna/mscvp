@@ -14,5 +14,7 @@ import java.util.ArrayList;
 public interface LtResponseService {
 
     public ArrayList<LtResponseBean> getLtResponseList(LtResponse ltResponse) throws ServiceLocatorException;
-    public ArrayList<LtResponseBean> buildLtResponseQueryArchive(LtResponse ltResponse) throws ServiceLocatorException;
+
+    public ArrayList<LtResponseBean> getLtResponseListArchive(LtResponse ltResponse) throws ServiceLocatorException;
+
 }

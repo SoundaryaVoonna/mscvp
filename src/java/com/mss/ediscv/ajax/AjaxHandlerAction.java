@@ -86,7 +86,6 @@ public class AjaxHandlerAction extends ActionSupport implements ServletRequestAw
 
     private String database;
 
-
     private String selectedName;
     private String newListName;
     private List listNameMap;
@@ -95,7 +94,6 @@ public class AjaxHandlerAction extends ActionSupport implements ServletRequestAw
     private int items;
     private String modifieddate;
     private String flag;
- 
 
     public AjaxHandlerAction() {
     }
@@ -234,7 +232,7 @@ public class AjaxHandlerAction extends ActionSupport implements ServletRequestAw
     public String getLoadCopy() {
         if (httpServletRequest.getSession(false).getAttribute(AppConstants.SES_USER_NAME) != null) {
             try {
-                responseString = ServiceLocator.getAjaxHandlerService().getLoadCopy(getLoadList().toString(), getType().toString());
+                responseString = ServiceLocator.getAjaxHandlerService().getLoadCopy(getLoadList().toString(), getType().toString(),getDatabase().toString());
                 httpServletResponse.setContentType("text/xml");
                 httpServletResponse.getWriter().write(responseString);
             } catch (Exception ex) {
@@ -329,7 +327,7 @@ public class AjaxHandlerAction extends ActionSupport implements ServletRequestAw
     public String getLogisticsDocDetails() {
         if (httpServletRequest.getSession(false).getAttribute(AppConstants.SES_USER_NAME) != null) {
             try {
-                responseString = ServiceLocator.getAjaxHandlerService().getLogisticsDocDetails(getIsaNumber(), getId(),getDatabase()).toString();
+                responseString = ServiceLocator.getAjaxHandlerService().getLogisticsDocDetails(getIsaNumber(), getId(), getDatabase()).toString();
                 httpServletResponse.setContentType("text/xml");
                 httpServletResponse.getWriter().write(responseString);
             } catch (Exception ex) {
@@ -342,7 +340,7 @@ public class AjaxHandlerAction extends ActionSupport implements ServletRequestAw
     public String getLoadTenderingDetails() {
         if (httpServletRequest.getSession(false).getAttribute(AppConstants.SES_USER_NAME) != null) {
             try {
-                responseString = ServiceLocator.getAjaxHandlerService().getLoadTenderingDetails(getIsaNumber(), getPoNumber(),getDatabase()).toString();
+                responseString = ServiceLocator.getAjaxHandlerService().getLoadTenderingDetails(getIsaNumber(), getPoNumber(), getDatabase()).toString();
                 httpServletResponse.setContentType("text/xml");
                 httpServletResponse.getWriter().write(responseString);
             } catch (Exception ex) {
@@ -368,7 +366,7 @@ public class AjaxHandlerAction extends ActionSupport implements ServletRequestAw
     public String getLogisticsInvDetails() {
         if (httpServletRequest.getSession(false).getAttribute(AppConstants.SES_USER_NAME) != null) {
             try {
-                responseString = ServiceLocator.getAjaxHandlerService().getLogisticsInvDetails(getInvNumber(), getId()).toString();
+                responseString = ServiceLocator.getAjaxHandlerService().getLogisticsInvDetails(getInvNumber(), getId(), getDatabase()).toString();
                 httpServletResponse.setContentType("text/xml");
                 httpServletResponse.getWriter().write(responseString);
             } catch (Exception ex) {
@@ -381,7 +379,7 @@ public class AjaxHandlerAction extends ActionSupport implements ServletRequestAw
     public String getLogisticsShipmentDetails() {
         if (httpServletRequest.getSession(false).getAttribute(AppConstants.SES_USER_NAME) != null) {
             try {
-                responseString = ServiceLocator.getAjaxHandlerService().getLogisticsShipmentDetails(getAsnNumber(), getPoNumber(), getId()).toString();
+                responseString = ServiceLocator.getAjaxHandlerService().getLogisticsShipmentDetails(getAsnNumber(), getPoNumber(), getId(), getDatabase()).toString();
                 httpServletResponse.setContentType("text/xml");
                 httpServletResponse.getWriter().write(responseString);
             } catch (Exception ex) {
@@ -559,7 +557,7 @@ public class AjaxHandlerAction extends ActionSupport implements ServletRequestAw
                     responseString = "<font color=\"green\" size=\"3\">Password updated successfully</font>";
                 } else if (n == 100) {
                     responseString = "<font color=\"red\" size=\"3\">New Password and Confirm Password must be same!</font>";
-                }else if (n == 200) {
+                } else if (n == 200) {
                     responseString = "<font color=\"red\" size=\"3\">Please enter correct Old Password!</font>";
                 } else {
                     responseString = "<font color=\"red\" size=\"3\">Password updation failed!</font>";
@@ -575,7 +573,6 @@ public class AjaxHandlerAction extends ActionSupport implements ServletRequestAw
     }
 
     //method to search whether sender item and receiver item exists in the database for code list or not 
-
     public String searchItems() {
         if (httpServletRequest.getSession(false).getAttribute(AppConstants.SES_USER_NAME) != null) {
             try {
@@ -654,12 +651,12 @@ public class AjaxHandlerAction extends ActionSupport implements ServletRequestAw
                 System.out.println("username is " + userName);
                 String resultMessage = "";
                 List codeList = new ArrayList();
-                resultMessage = ServiceLocator.getAjaxHandlerService().addCodeList(getJson(), userName,getNewListName());
+                resultMessage = ServiceLocator.getAjaxHandlerService().addCodeList(getJson(), userName, getNewListName());
                 httpServletRequest.getSession(false).removeAttribute(AppConstants.CODE_LIST);
                 resultType = SUCCESS;
                 httpServletResponse.setContentType("text");
                 httpServletResponse.getWriter().write(resultMessage);
-                
+
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -682,7 +679,7 @@ public class AjaxHandlerAction extends ActionSupport implements ServletRequestAw
                 resultType = SUCCESS;
                 httpServletResponse.setContentType("text");
                 httpServletResponse.getWriter().write(resultMessage);
-                
+
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -1239,7 +1236,6 @@ public class AjaxHandlerAction extends ActionSupport implements ServletRequestAw
         this.recItem = recItem;
     }
 
-
     public String getDatabase() {
         return database;
     }
@@ -1247,7 +1243,6 @@ public class AjaxHandlerAction extends ActionSupport implements ServletRequestAw
     public void setDatabase(String database) {
         this.database = database;
     }
-    
 
     public String getSelectedName() {
         return selectedName;
@@ -1313,7 +1308,6 @@ public class AjaxHandlerAction extends ActionSupport implements ServletRequestAw
         this.modifieddate = modifieddate;
     }
 
-
     public String getFlag() {
         return flag;
     }
@@ -1321,6 +1315,5 @@ public class AjaxHandlerAction extends ActionSupport implements ServletRequestAw
     public void setFlag(String flag) {
         this.flag = flag;
     }
-    
 
 }

@@ -48,7 +48,7 @@
 //               
 //            });
 
-            $(function () {
+            $(function() {
                 // $("#example1").DataTable();
                 $('#results').DataTable({
                     "paging": true,
@@ -109,6 +109,11 @@
                                     <div class="form-group">
                                         <div class="row">
                                             <div class="col-sm-12">
+                                                <div class="row">
+                                                    <div class="col-sm-3"><label>Database&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;</label>
+                                                        <s:radio cssClass="myRadio" id="database" name="database" value="%{database}" list="#@java.util.LinkedHashMap@{'MSCVP':'LIVE','ARCHIVE':'ARCHIVE'}"/>
+                                                    </div>
+                                                </div>
                                                 <div class="row">
                                                     <div class="col-sm-3"><label>Database&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;</label>
                                                         <s:radio cssClass="myRadio" id="database" name="database" value="%{database}" list="#@java.util.LinkedHashMap@{'MSCVP':'LIVE','ARCHIVE':'ARCHIVE'}"/>
@@ -195,7 +200,7 @@
                                                 </script>                                          
 
                                                 <script>
-                                                    $("#addButton").click(function () {
+                                                    $("#addButton").click(function() {
                                                         count++;
                                                         if (count == 1)
                                                             document.getElementById("corr").style.display = "block";
@@ -621,6 +626,7 @@
     }
     function resetvalues()
     {
+         $('.myRadio').attr('checked', false);
         document.getElementById('datepickerfrom').value = "";
         document.getElementById('datepickerTo').value = "";
         document.getElementById('senderId').value = "";

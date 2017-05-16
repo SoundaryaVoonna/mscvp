@@ -197,7 +197,7 @@ public class LtResponseServiceImpl implements LtResponseService {
         return ltResponseList;
     }
     
-    public ArrayList<LtResponseBean> buildLtResponseQueryArchive(LtResponse ltResponse) throws ServiceLocatorException {
+    public ArrayList<LtResponseBean> getLtResponseListArchive(LtResponse ltResponse) throws ServiceLocatorException {
         StringBuffer ltResponseSearchQuery = new StringBuffer();
         String datepickerTo = ltResponse.getDatepickerTo();
         String datepickerfrom = ltResponse.getDatepickerfrom();
@@ -215,7 +215,8 @@ public class LtResponseServiceImpl implements LtResponseService {
         String corrvalue1 = ltResponse.getCorrvalue1();
         String status = ltResponse.getStatus();
         String ackStatus = ltResponse.getAckStatus();
-        ltResponseSearchQuery.append("SELECT DISTINCT(ARCHIVE_FILES.FILE_ID) as FILE_ID,ARCHIVE_TRANSPORT_LT_RESPONSE.REF_ID,ARCHIVE_TRANSPORT_LT_RESPONSE.SHIPMENT_ID as SHIPMENT_ID,"
+        ltResponseSearchQuery.append("SELECT DISTINCT(ARCHIVE_FILES.FILE_ID) as FILE_ID,"
+                + "ARCHIVE_TRANSPORT_LT_RESPONSE.REF_ID,ARCHIVE_TRANSPORT_LT_RESPONSE.SHIPMENT_ID as SHIPMENT_ID,"
                 + "ARCHIVE_FILES.ISA_NUMBER as ISA_NUMBER,ARCHIVE_FILES.FILE_TYPE as FILE_TYPE,"
                 + "ARCHIVE_FILES.FILE_ORIGIN as FILE_ORIGIN,ARCHIVE_FILES.TRANSACTION_TYPE as TRANSACTION_TYPE,"
                 + "ARCHIVE_FILES.DIRECTION as DIRECTION,ARCHIVE_FILES.DATE_TIME_RECEIVED as DATE_TIME_RECEIVED,"
@@ -348,7 +349,8 @@ public class LtResponseServiceImpl implements LtResponseService {
                 throw new ServiceLocatorException(se);
             }
         }
-        System.out.println("ltResponseSearchQuery---> "+ltResponseSearchQuery);
+        System.out.println("archive--ltResponseSearchQuery---> "+ltResponseSearchQuery);
+
         return ltResponseList;
     }
 }

@@ -876,19 +876,28 @@ public class LifecycleUtility {
         return paymentLifecycleBean;
     }
 
-    public ArrayList<LtTenderBean> getLtLoadtender(String shipmentNumber) throws ServiceLocatorException {
+    public ArrayList<LtTenderBean> getLtLoadtender(String shipmentNumber,String database) throws ServiceLocatorException {
 
         ltTenderBeanList = new ArrayList<LtTenderBean>();
 
         StringBuffer lifeCycleQuery = new StringBuffer();
-        lifeCycleQuery.append("SELECT tf.FILE_ID as file_id,tf.ISA_NUMBER as isa_number,tl.SHIPMENT_ID as SHIPMENT_ID,"
+         if ("ARCHIVE".equals(database)) {
+              lifeCycleQuery.append("SELECT tf.FILE_ID as file_id,tf.ISA_NUMBER as isa_number,tl.SHIPMENT_ID as SHIPMENT_ID,"
+                + " tf.FILE_TYPE as file_type,tf.FILE_ORIGIN as file_origin,tf.TRANSACTION_TYPE as tran_type,tf.POST_TRANS_FILEPATH as file_path,"
+                + " tf.ACK_STATUS as ack_status,tf.DIRECTION as direction,tf.DATE_TIME_RECEIVED as datetime,"
+                + " tf.STATUS as status,tf.PRI_KEY_VAL as prival,tf.REPROCESSSTATUS as REPROCESSSTATUS "
+                + " FROM ARCHIVE_Transport_loadtender tl LEFT OUTER JOIN ARCHIVE_FILES TF ON "
+                + " (tl.FILE_ID=tf.FILE_ID and tl.SHIPMENT_ID=tf.PRI_KEY_VAL) "
+                + " where 1=1 and SHIPMENT_ID= '" + shipmentNumber + "' order by DATE_TIME_RECEIVED desc ");
+         }else{
+              lifeCycleQuery.append("SELECT tf.FILE_ID as file_id,tf.ISA_NUMBER as isa_number,tl.SHIPMENT_ID as SHIPMENT_ID,"
                 + " tf.FILE_TYPE as file_type,tf.FILE_ORIGIN as file_origin,tf.TRANSACTION_TYPE as tran_type,tf.POST_TRANS_FILEPATH as file_path,"
                 + " tf.ACK_STATUS as ack_status,tf.DIRECTION as direction,tf.DATE_TIME_RECEIVED as datetime,"
                 + " tf.STATUS as status,tf.PRI_KEY_VAL as prival,tf.REPROCESSSTATUS as REPROCESSSTATUS "
                 + " FROM Transport_loadtender tl LEFT OUTER JOIN FILES TF ON "
                 + " (tl.FILE_ID=tf.FILE_ID and tl.SHIPMENT_ID=tf.PRI_KEY_VAL) "
                 + " where 1=1 and SHIPMENT_ID= '" + shipmentNumber + "' order by DATE_TIME_RECEIVED desc ");
-
+         }
         System.out.println("getLtLoadtender query--->" + lifeCycleQuery.toString());
 
         String searchQuery = lifeCycleQuery.toString();
@@ -952,13 +961,23 @@ public class LifecycleUtility {
         return ltTenderBeanList;
     }
 
-    public ArrayList<LtTenderBean> getLtResponse(String shipmentNumber) throws ServiceLocatorException {
+    public ArrayList<LtTenderBean> getLtResponse(String shipmentNumber, String database) throws ServiceLocatorException {
         ltResponsesBeanList = new ArrayList<LtTenderBean>();
         StringBuffer lifeCycleQuery = new StringBuffer();
         //String poNum = poNumber;
         // System.out.println("LifeCycleUtill ASN---->"+poNum);
         // asnLifecycleBean.setRes("0");
-        lifeCycleQuery.append("SELECT tf.FILE_ID as file_id,tf.ISA_NUMBER as isa_number,tl.SHIPMENT_ID as SHIPMENT_ID,"
+            if ("ARCHIVE".equals(database)) {
+                lifeCycleQuery.append("SELECT tf.FILE_ID as file_id,tf.ISA_NUMBER as isa_number,tl.SHIPMENT_ID as SHIPMENT_ID,"
+                + " tf.FILE_TYPE as file_type,tf.FILE_ORIGIN as file_origin,tf.TRANSACTION_TYPE as tran_type,tf.POST_TRANS_FILEPATH"
+                + " as file_path,"
+                + " tf.ACK_STATUS as ack_status,tf.DIRECTION as direction,tf.DATE_TIME_RECEIVED as datetime,"
+                + " tf.STATUS as status,tf.PRI_KEY_VAL as prival,tf.REPROCESSSTATUS as REPROCESSSTATUS "
+                + " FROM ARCHIVE_TRANSPORT_LT_RESPONSE tl LEFT OUTER JOIN ARCHIVE_FILES TF ON"
+                + " (tl.FILE_ID=tf.FILE_ID and tl.SHIPMENT_ID=tf.PRI_KEY_VAL)"
+                + " where 1=1 and SHIPMENT_ID='" + shipmentNumber + "' order by DATE_TIME_RECEIVED desc ");
+            }else{
+                lifeCycleQuery.append("SELECT tf.FILE_ID as file_id,tf.ISA_NUMBER as isa_number,tl.SHIPMENT_ID as SHIPMENT_ID,"
                 + " tf.FILE_TYPE as file_type,tf.FILE_ORIGIN as file_origin,tf.TRANSACTION_TYPE as tran_type,tf.POST_TRANS_FILEPATH"
                 + " as file_path,"
                 + " tf.ACK_STATUS as ack_status,tf.DIRECTION as direction,tf.DATE_TIME_RECEIVED as datetime,"
@@ -966,6 +985,7 @@ public class LifecycleUtility {
                 + " FROM TRANSPORT_LT_RESPONSE tl LEFT OUTER JOIN FILES TF ON"
                 + " (tl.FILE_ID=tf.FILE_ID and tl.SHIPMENT_ID=tf.PRI_KEY_VAL)"
                 + " where 1=1 and SHIPMENT_ID='" + shipmentNumber + "' order by DATE_TIME_RECEIVED desc ");
+            }
 
         System.out.println("getResponse-->" + lifeCycleQuery.toString());
         String searchQuery = lifeCycleQuery.toString();
@@ -1028,14 +1048,23 @@ public class LifecycleUtility {
         return ltResponsesBeanList;
     }
 
-    public ArrayList<LtTenderBean> getLtShipment(String shipmentNumber) throws ServiceLocatorException {
+    public ArrayList<LtTenderBean> getLtShipment(String shipmentNumber, String database) throws ServiceLocatorException {
         ltShipmentBeanList = new ArrayList<LtTenderBean>();
         StringBuffer lifeCycleQuery = new StringBuffer();
         //String poNum = poNumber;
         // System.out.println("LifeCycleService impl INVOICE---->"+poNum);
         //invoiceLifecycleBean.setRes("0");
-
-        lifeCycleQuery.append("SELECT tf.FILE_ID as file_id,tf.ISA_NUMBER as isa_number,tl.SHIPMENT_ID as SHIPMENT_ID,"
+ if ("ARCHIVE".equals(database)) {
+     lifeCycleQuery.append("SELECT tf.FILE_ID as file_id,tf.ISA_NUMBER as isa_number,tl.SHIPMENT_ID as SHIPMENT_ID,"
+                + " tf.FILE_TYPE as file_type,tf.FILE_ORIGIN as file_origin,tf.TRANSACTION_TYPE as tran_type,tf.POST_TRANS_FILEPATH"
+                + " as file_path,"
+                + " tf.ACK_STATUS as ack_status,tf.DIRECTION as direction,tf.DATE_TIME_RECEIVED as datetime,"
+                + " tf.STATUS as status,tf.PRI_KEY_VAL as prival,tf.REPROCESSSTATUS as REPROCESSSTATUS"
+                + " FROM ARCHIVE_TRANSPORT_SHIPMENT tl LEFT OUTER JOIN ARCHIVE_FILES TF ON "
+                + " (tl.FILE_ID=tf.FILE_ID and tl.SHIPMENT_ID=tf.PRI_KEY_VAL)"
+                + " where 1=1 and SHIPMENT_ID='" + shipmentNumber + "' order by DATE_TIME_RECEIVED desc ");
+ }else{
+     lifeCycleQuery.append("SELECT tf.FILE_ID as file_id,tf.ISA_NUMBER as isa_number,tl.SHIPMENT_ID as SHIPMENT_ID,"
                 + " tf.FILE_TYPE as file_type,tf.FILE_ORIGIN as file_origin,tf.TRANSACTION_TYPE as tran_type,tf.POST_TRANS_FILEPATH"
                 + " as file_path,"
                 + " tf.ACK_STATUS as ack_status,tf.DIRECTION as direction,tf.DATE_TIME_RECEIVED as datetime,"
@@ -1043,7 +1072,8 @@ public class LifecycleUtility {
                 + " FROM TRANSPORT_SHIPMENT tl LEFT OUTER JOIN FILES TF ON "
                 + " (tl.FILE_ID=tf.FILE_ID and tl.SHIPMENT_ID=tf.PRI_KEY_VAL)"
                 + " where 1=1 and SHIPMENT_ID='" + shipmentNumber + "' order by DATE_TIME_RECEIVED desc ");
-
+ }
+        
         System.out.println("getShipment Query-->" + lifeCycleQuery.toString());
         String searchQuery = lifeCycleQuery.toString();
 
@@ -1104,14 +1134,24 @@ public class LifecycleUtility {
         return ltShipmentBeanList;
     }
 
-    public ArrayList<LtTenderBean> getLtInvoice(String shipmentNumber) throws ServiceLocatorException {
+    public ArrayList<LtTenderBean> getLtInvoice(String shipmentNumber, String database) throws ServiceLocatorException {
         ltInvoicesBeanList = new ArrayList<LtTenderBean>();
 
         StringBuffer lifeCycleQuery = new StringBuffer();
         // String poNum = poNumber;
         // System.out.println("LifeCycleService impl PAYMENTS---->"+poNum);
         // paymentLifecycleBean.setRes("1");
-        lifeCycleQuery.append("SELECT tf.FILE_ID as file_id,tf.ISA_NUMBER as isa_number,tl.SHIPMENT_ID as SHIPMENT_ID,"
+         if ("ARCHIVE".equals(database)) {
+              lifeCycleQuery.append("SELECT tf.FILE_ID as file_id,tf.ISA_NUMBER as isa_number,tl.SHIPMENT_ID as SHIPMENT_ID,"
+                + " tf.FILE_TYPE as file_type,tf.FILE_ORIGIN as file_origin,tf.TRANSACTION_TYPE as tran_type,tf.POST_TRANS_FILEPATH "
+                + " as file_path,"
+                + "  tf.ACK_STATUS as ack_status,tf.DIRECTION as direction,tf.DATE_TIME_RECEIVED as datetime,"
+                + " tf.STATUS as status,tf.PRI_KEY_VAL as prival,tf.REPROCESSSTATUS as REPROCESSSTATUS "
+                + " FROM ARCHIVE_TRANSPORT_INVOICE tl LEFT OUTER JOIN ARCHIVE_FILES TF ON"
+                + " (tl.FILE_ID=tf.FILE_ID and tl.SHIPMENT_ID=tf.PRI_KEY_VAL)  "
+                + " where 1=1 and SHIPMENT_ID='" + shipmentNumber + "' order by DATE_TIME_RECEIVED desc ");
+         }else{
+              lifeCycleQuery.append("SELECT tf.FILE_ID as file_id,tf.ISA_NUMBER as isa_number,tl.SHIPMENT_ID as SHIPMENT_ID,"
                 + " tf.FILE_TYPE as file_type,tf.FILE_ORIGIN as file_origin,tf.TRANSACTION_TYPE as tran_type,tf.POST_TRANS_FILEPATH "
                 + " as file_path,"
                 + "  tf.ACK_STATUS as ack_status,tf.DIRECTION as direction,tf.DATE_TIME_RECEIVED as datetime,"
@@ -1119,6 +1159,7 @@ public class LifecycleUtility {
                 + " FROM TRANSPORT_INVOICE tl LEFT OUTER JOIN FILES TF ON"
                 + " (tl.FILE_ID=tf.FILE_ID and tl.SHIPMENT_ID=tf.PRI_KEY_VAL)  "
                 + " where 1=1 and SHIPMENT_ID='" + shipmentNumber + "' order by DATE_TIME_RECEIVED desc ");
+         }
 
         System.out.println("getInvoice Query-->" + lifeCycleQuery.toString());
         String searchQuery = lifeCycleQuery.toString();

@@ -12,7 +12,9 @@ import com.mss.ediscv.util.ServiceLocatorException;
  */
 public interface AjaxHandlerService {
 
-    /** Creates a new instance of AjaxHandlerService */
+    /**
+     * Creates a new instance of AjaxHandlerService
+     */
     public String getPoDetails(String poNumber, String poInst, String database) throws ServiceLocatorException;
 
     public String getASNDetails(String asnNumber, String poNumber, String fileID, String database) throws ServiceLocatorException;
@@ -33,13 +35,13 @@ public interface AjaxHandlerService {
 
     public String getPaymentCopy(String paymentList, String type) throws ServiceLocatorException;
 
-    public String getLoadCopy(String loadList, String type) throws ServiceLocatorException;
+    public String getLoadCopy(String loadList, String type, String database) throws ServiceLocatorException;
 
     /**
-     *  Life cycle Actions
+     * Life cycle Actions
      */
     public String getLifeCycleDetails(String poNumber, String fileId, String type, String database) throws ServiceLocatorException;
-    
+
     public String getLtLifecycleDetails(String poNumber, String fileId, String type) throws ServiceLocatorException;
 
     /**
@@ -53,13 +55,13 @@ public interface AjaxHandlerService {
 
     public String getLogisticsDocDetails(String instanceid, int id, String database) throws ServiceLocatorException;
 
-    public String getLoadTenderingDetails(String instanceid, String ponum,String database) throws ServiceLocatorException;
+    public String getLoadTenderingDetails(String instanceid, String ponum, String database) throws ServiceLocatorException;
 
     public String getLtResponseDetails(String invNum, String ponum, String database) throws ServiceLocatorException;
 
-    public String getLogisticsInvDetails(String invNum, int id) throws ServiceLocatorException;
+    public String getLogisticsInvDetails(String invNum, int id, String database) throws ServiceLocatorException;
 
-    public String getLogisticsShipmentDetails(String asnNum, String ponum, int id) throws ServiceLocatorException;
+    public String getLogisticsShipmentDetails(String asnNum, String ponum, int id, String database) throws ServiceLocatorException;
 
     public String getDocVisibilityDetails(int docId) throws ServiceLocatorException;
 
@@ -84,18 +86,16 @@ public interface AjaxHandlerService {
     public String forgotPassword(String userid) throws ServiceLocatorException;
 
     public int updateMyPwd(AjaxHandlerAction ajaxhandleraction, String loginId) throws ServiceLocatorException;
-     
-   
-     //method to search whether sender item and receiver item exists in the database for code list or not 
-    public int searchItems(String senderItem,String recItem,String selectedName) throws ServiceLocatorException;
-     //method to check whether new code list nameexists in the database or not for adding new codeList  
+
+    //method to search whether sender item and receiver item exists in the database for code list or not 
+    public int searchItems(String senderItem, String recItem, String selectedName) throws ServiceLocatorException;
+
+    //method to check whether new code list nameexists in the database or not for adding new codeList  
     public int checkCodeListName(String newCodeListName) throws ServiceLocatorException;
-    
-    
-    
-       public String addCodeList(String jsonData, String userName , String newCodeListName) throws ServiceLocatorException;
-    
-    public String updateCodeList(String listName,String jsonData,String userName,int items) throws ServiceLocatorException;
+
+    public String addCodeList(String jsonData, String userName, String newCodeListName) throws ServiceLocatorException;
+
+    public String updateCodeList(String listName, String jsonData, String userName, int items) throws ServiceLocatorException;
 
     public String deleteCodeList(String jsonData) throws ServiceLocatorException;
 }

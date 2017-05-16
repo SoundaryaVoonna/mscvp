@@ -12,5 +12,6 @@ import java.util.ArrayList;
  */
 public interface LtShipmentService {
 
-    public ArrayList<LtShipmentBean> getLtResponseList(LogisticsShipmentAction logisticsShipmentAction) throws ServiceLocatorException;
+    public ArrayList<LtShipmentBean> getLtShipmentList(LogisticsShipmentAction logisticsShipmentAction) throws ServiceLocatorException;
+    public ArrayList<LtShipmentBean> getLtShipmentListArchive(LogisticsShipmentAction logisticsShipmentAction) throws ServiceLocatorException;
 }

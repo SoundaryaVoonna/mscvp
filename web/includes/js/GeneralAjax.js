@@ -1315,7 +1315,7 @@ function populateDocPaymentCopy(responseText) {
  * LoadTender copying using Ajax call
  * 
  */
-function getloadTenderProcess(btnValue, list) {
+function getloadTenderProcess(btnValue, list,db) {
 
     var load_Files = "";
     if ((btnValue.value == 'ReTransmit')) {
@@ -1348,7 +1348,7 @@ function getloadTenderProcess(btnValue, list) {
         if ((load_Files != "") && (load_Files != null)) {
             var r = confirm("Please confirm retransmission of the selected Load Files!");
             if (r == true) {
-                getLoadTenderCopy(load_Files, "POST");
+                getLoadTenderCopy(load_Files, "POST",db);
             }
             else {
                 return false;
@@ -1389,7 +1389,7 @@ function getloadTenderProcess(btnValue, list) {
         if ((load_Files != "") && (load_Files != null)) {
             var r = confirm("Please confirm resubmission of the selected Load Files!");
             if (r == true) {
-                getLoadTenderCopy(load_Files, "PRE");
+                getLoadTenderCopy(load_Files, "PRE",db);
             } else {
                 return false;
             }
@@ -1400,11 +1400,11 @@ function getloadTenderProcess(btnValue, list) {
     }
 }
 
-function getLoadTenderCopy(Load_LIST, type) {
+function getLoadTenderCopy(Load_LIST, type,db) {
     //var req = new XMLHttpRequest();
     var req = getXMLHttpRequest();
     req.onreadystatechange = readyStateHandlerString(req, populateLoadTenderCopy);
-    var url = "../ajax/getLoadCopy.action?loadList=" + Load_LIST + "&type=" + type;
+    var url = "../ajax/getLoadCopy.action?loadList=" + Load_LIST + "&type=" + type + "&database=" + db;
     req.open("GET", url, "true");
     req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     req.send(null);
@@ -2121,9 +2121,9 @@ function getLtResponseDetails(fileId, refId) {
     //var num=number;
     //alert("inv number-->"+num);
     //  var req = new XMLHttpRequest();
-    ltResponseForm
+
     var db = document.forms["ltResponseForm"]["database"].value;
-    
+
     $(function () {
 
         $('#detail_box').show();
@@ -2133,7 +2133,8 @@ function getLtResponseDetails(fileId, refId) {
     var req = getXMLHttpRequest();
     req.onreadystatechange = readyStateHandlerText(req, populateLtResponseDetails);
 
-    var url = "../ajax/getLtResponseDetails.action?fileId=" + fileId + "&refId=" + refId+ "&database="+ db;
+    var url = "../ajax/getLtResponseDetails.action?fileId=" + fileId + "&refId=" + refId + "&database=" + db;
+
 
     req.open("GET", url, "true");
     req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
@@ -2244,6 +2245,7 @@ function populateLtResponseDetails(responseXML)
 function getLogisticsInvDetails(number, id) {
     var num = number;
     var id = id;
+      var db = document.forms["logisticsForm"]["database"].value;
     //alert("inv number-->"+num);
     //  var req = new XMLHttpRequest();
     $(function () {
@@ -2255,7 +2257,7 @@ function getLogisticsInvDetails(number, id) {
     var req = getXMLHttpRequest();
     req.onreadystatechange = readyStateHandlerText(req, populateLogisticsInvDetails);
 
-    var url = "../ajax/getLogisticsInvDetails.action?invNumber=" + num + "&id=" + id;
+    var url = "../ajax/getLogisticsInvDetails.action?invNumber=" + num + "&id=" + id + "&database=" + db;
 
     req.open("GET", url, "true");
     req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
@@ -2376,10 +2378,8 @@ function populateLogisticsInvDetails(responseXML)
  * Author : santosh kola
  * 
  */
-function getLogisticsShipmentDetails(number, ponum, id)
-{
-    //  alert("hii");
-
+function getLogisticsShipmentDetails(number, ponum, id){
+var db = document.forms["ltshipmentForm"]["database"].value;
     var num = number;
     var ponumber = ponum;
     var id = id;
@@ -2396,7 +2396,7 @@ function getLogisticsShipmentDetails(number, ponum, id)
     var req = getXMLHttpRequest();
     req.onreadystatechange = readyStateHandlerText(req, populateLogisticsShipmentDetails);
 
-    var url = "../ajax/getLogisticsShipmentDetails.action?asnNumber=" + num + "&poNumber=" + ponum + "&id=" + id;
+    var url = "../ajax/getLogisticsShipmentDetails.action?asnNumber=" + num + "&poNumber=" + ponum + "&id=" + id + "&database=" + db;
 
     req.open("GET", url, "true");
     req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
