@@ -96,7 +96,7 @@ public class ReportsAction extends ActionSupport implements ServletRequestAware 
                    documentList = ServiceLocator.getReportsService().getDocumentList(this);
                    setDatabase("MSCVP");
                 }
-                
+                System.out.println("documentList size in manu reports : "+documentList.size());
                 if (httpServletRequest.getSession(false).getAttribute(AppConstants.SES_DOCREPORT_LIST) != null) {
                     httpServletRequest.getSession(false).removeAttribute(AppConstants.SES_DOCREPORT_LIST);
                 }
