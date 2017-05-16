@@ -63,8 +63,6 @@ public class PurgeAction extends ActionSupport implements ServletRequestAware {
         
          Map userFlow=  (Map)httpServletRequest.getSession(false).getAttribute(AppConstants.SES_USER_FLOW_MAP);
             setFlowName(DataSourceDataProvider.getInstance().getTransactionType(userFlow));
-        System.out.println(" =============== rajarajaraja");
-          
         return SUCCESS;
     }
     
@@ -153,7 +151,6 @@ public class PurgeAction extends ActionSupport implements ServletRequestAware {
              String username = (String)httpServletRequest.getSession(false).getAttribute(AppConstants.SES_USER_NAME);
         List purgeHistorylist = null;
         purgeHistorylist = ServiceLocator.getPurgeService().getPurHistoryData(username, getDatepickerfrom(),getDatepicker(), getTransType() );
-            System.out.println("purgeHistorylist"+purgeHistorylist.size());
          httpServletRequest.getSession(false).setAttribute(AppConstants.PURGEHISTORY_LIST, purgeHistorylist);
         
         }catch(Exception e){
@@ -173,7 +170,6 @@ public class PurgeAction extends ActionSupport implements ServletRequestAware {
           
              String username = (String)httpServletRequest.getSession(false).getAttribute(AppConstants.SES_USER_NAME);
          List archiveHistorylist = null;
-            System.out.println("to is  is "+getDatepicker());
         archiveHistorylist = ServiceLocator.getPurgeService().getArcHistoryData(username, getDatepickerfrom(),getDatepicker(), getTransType() );
          httpServletRequest.getSession(false).setAttribute(AppConstants.ARCHIVEHISTORY_LIST, archiveHistorylist);
         

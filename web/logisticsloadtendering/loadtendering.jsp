@@ -311,13 +311,13 @@
                                                                     <th >Status</th>
                                                                         <%-- <th >ACK_STATUS</th>  --%>
                                                                     <th >Reprocess</th>
-                                                                        <%
+                                                                        <%--<%
                                                                             // out.println(session.getAttribute(AppConstants.SES_ROLE_ID));
 
                                                                             if (session.getAttribute(AppConstants.SES_ROLE_ID).equals("100") || session.getAttribute(AppConstants.SES_ROLE_ID).equals("104")) {
-                                                                        %>
+                                                                        %> --%>
                                                                     <th>#</th>
-                                                                        <%}%>
+                                                                       <%-- <%}%> --%>
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
@@ -442,15 +442,15 @@
 
                                                                     </td>
 
-                                                                    <%
+                                                                    <%--<%
                                                                         if (session.getAttribute(AppConstants.SES_ROLE_ID).equals("100") || session.getAttribute(AppConstants.SES_ROLE_ID).equals("104")) {
-                                                                    %>
+                                                                    %>--%>
                                                                     <td> &nbsp; &nbsp; 
                                                                         <input type = "checkbox" name ="check_List<%=i%>" id = "check_List<%=i%>" value="<%= logisticsLoadBean.getFile_id()%>"/>&nbsp; &nbsp;  
                                                                     </td> 
-                                                                    <%
+                                                                    <%--<%
                                                                         }
-                                                                    %>
+                                                                    %>--%>
 
                                                                 </tr>  
                                                                 <%
@@ -488,11 +488,12 @@
 
 
                                         <%-- Process butttons  start --%>
-                                        <%
+                                        <%--<%
                                             // out.println(session.getAttribute(AppConstants.SES_ROLE_ID));
 
                                             if ((session.getAttribute(AppConstants.SES_ROLE_ID).equals("100") || session.getAttribute(AppConstants.SES_ROLE_ID).equals("104")) && list.size() != 0) {
-                                        %><br>
+                                        %> --%>
+                                        <br>
                                         <div class="row" style="margin-left: 65%">
                                             <%--    <strong><input type="button" value="ReTransmit" class="btn btn-effect-ripple btn-primary" onmouseover="Tip('Click here to ReTransmit.')" onmouseout="UnTip()" onclick="return getloadTenderProcess(this, document.getElementById('sec_lt_list').value);" id="pre"/></strong> --%>
                                             <%--<strong><input type="button" value="ReSubmit" class="btn btn-effect-ripple btn-primary" onmouseover="Tip('Click here to Resubmit.')" onmouseout="UnTip()" onclick="return getloadTenderProcess(this, document.getElementById('sec_lt_list').value);" id="post"/></strong>
@@ -505,7 +506,7 @@
 
                                         </div>
 
-                                        <%}%>
+                                        <%--<%}%> --%>
                                         <%-- process buttons end--%>
 
                                     </div>
