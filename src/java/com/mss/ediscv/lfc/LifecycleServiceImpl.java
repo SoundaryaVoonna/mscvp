@@ -60,23 +60,24 @@ public class LifecycleServiceImpl implements LifecycleService {
     public void buildLtLifeCycleBeans(LifecycleAction lifecycleAction, HttpServletRequest httpServletRequest) throws ServiceLocatorException {
         lifecycleBeans = new LifecycleBeans();
         String shipmentNum = lifecycleAction.getShipmentNumber();
+         String database = lifecycleAction.getDatabase();
         LifecycleUtility lifecycleUtility = new LifecycleUtility();
-        loadTenderBeanList = lifecycleUtility.getLtLoadtender(shipmentNum);
+        loadTenderBeanList = lifecycleUtility.getLtLoadtender(shipmentNum, database);
         // httpServletRequest.getSession(false).setAttribute(AppConstants.LFC_SES_PO_LIST, loadTenderBeanList);
         /**
          * ASN process*
          */
-        ltshipLifecycleBeanList = lifecycleUtility.getLtShipment(shipmentNum);
+        ltshipLifecycleBeanList = lifecycleUtility.getLtShipment(shipmentNum, database);
         //httpServletRequest.getSession(false).setAttribute(AppConstants.LFC_SES_ASN_LIST, ltshipLifecycleBeanList);
         /**
          * INVOICE *
          */
-        ltInvoiceLifecycleBeanList = lifecycleUtility.getLtInvoice(shipmentNum);
+        ltInvoiceLifecycleBeanList = lifecycleUtility.getLtInvoice(shipmentNum, database);
         // httpServletRequest.getSession(false).setAttribute(AppConstants.LFC_SES_INVOICE_LIST, ltInvoiceLifecycleBeanList);
         /**
          * PAYMENT *
          */
-        ltResponseLifecycleBeanList = lifecycleUtility.getLtResponse(shipmentNum);
+        ltResponseLifecycleBeanList = lifecycleUtility.getLtResponse(shipmentNum, database);
         // httpServletRequest.getSession(false).setAttribute(AppConstants.LFC_SES_PAYMENT_LIST, ltResponseLifecycleBeanList);
 
         ArrayList LfcList = new ArrayList();

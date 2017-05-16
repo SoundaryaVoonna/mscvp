@@ -68,7 +68,6 @@
 
             function getDetails(val, ponum) {
                 //  alert("hiiii");    
-
                 getLogisticsDocDetails(val, ponum);
             }
             //            function checkDates()
@@ -86,6 +85,7 @@
             //            }
             function resetvalues()
             {
+                  $('.myRadio').attr('checked', false);
                 document.getElementById('docdatepickerfrom').value = "";
                 document.getElementById('docdatepicker').value = "";
                 document.getElementById('docSenderId').value = "";
@@ -174,6 +174,11 @@
                                     <div class="form-group">
                                         <div class="row">
                                             <div class="col-sm-12">
+                                                <div class="row">
+                                                    <div class="col-sm-3"><label>Database&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;</label>
+                                                        <s:radio cssClass="myRadio" id="database" name="database" value="%{database}" list="#@java.util.LinkedHashMap@{'MSCVP':'LIVE','ARCHIVE':'ARCHIVE'}"/>
+                                                    </div>
+                                                </div>
                                                 <div class="row">
                                                     <div class="col-sm-3"> <label>Date Range</label>
                                                         <s:textfield name="reportrange"  id="reportrange" cssClass="form-control pull-left"   value="%{reportrange}" tabindex="1" /> 

@@ -12,7 +12,7 @@
 <%@ page import="com.mss.ediscv.util.ConnectionProvider"%>
 <%@ page import="java.sql.SQLException"%>
 <%@ page import = "java.util.ResourceBundle" %>
-<%--<%@page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>--%>
+<%--<%@page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>--%> 
 <%@page buffer="50kb" autoFlush="true" %>
 <%--<%@page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>--%>
 
@@ -128,6 +128,11 @@
                                     <div class="form-group">
                                         <div class="row">
                                             <div class="col-sm-12">
+                                                 <div class="row">
+                                                    <div class="col-sm-3"><label>Database&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;</label>
+                                                        <s:radio cssClass="myRadio" id="database" name="database" value="%{database}" list="#@java.util.LinkedHashMap@{'MSCVP':'LIVE','ARCHIVE':'ARCHIVE'}"/>
+                                                    </div>
+                                                </div>
                                                 <div class="row">
                                                     <div class="col-sm-3"> <label>Date Range</label>
                                                         <s:textfield name="reportrange"  id="reportrange" cssClass="form-control pull-left"   value="%{reportrange}" onchange="Date1();" tabindex="1"/> 
@@ -602,6 +607,11 @@
 <script type="text/javascript">
     function checkCorrelation()
     {
+         var db = document.forms["logisticsForm"]["database"].value;
+                                if (db == '') {
+                                    alert("Please select Database!!!");
+                                    return false;
+                                }
         var corrattr = document.getElementById('corrattribute').value;
         var corrval = document.getElementById('corrvalue').value;
         if ((corrattr != "-1") && (corrval == "")) {
@@ -615,6 +625,7 @@
     }
     function resetvalues()
     {
+         $('.myRadio').attr('checked', false);
         document.getElementById('datepickerfrom').value = "";
         document.getElementById('datepickerTo').value = "";
         document.getElementById('invSenderId').value = "";

@@ -76,7 +76,7 @@
                     //alert(po_Num);
                     //window.location = "../lfc/lifeCycle.action?poNumber="+po_Num; 
                     //purchaseForm.action = "../lfc/lifeCycle.action?poNumber="+po_Num;
-                    location.href = "../lfc/ltlifecycle.action?shipmentNumber=" + shipment_Num;
+                    location.href = "../lfc/ltlifecycle.action?shipmentNumber=" + shipment_Num+ "&database=" + db;
                     return true;
                 }
             }

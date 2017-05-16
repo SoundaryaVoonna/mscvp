@@ -162,6 +162,11 @@
                                     <div class="form-group">
                                         <div class="row">
                                             <div class="col-sm-12">
+                                                 <div class="row">
+                                                    <div class="col-sm-3"><label>Database&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;</label>
+                                                        <s:radio cssClass="myRadio" id="database" name="database" value="%{database}" list="#@java.util.LinkedHashMap@{'MSCVP':'LIVE','ARCHIVE':'ARCHIVE'}"/>
+                                                    </div>
+                                                </div>
                                                 <div class="row">
                                                     <div class="col-sm-3"> <label>Date Range</label>
                                                         <s:textfield name="reportrange"  id="reportrange" cssClass="form-control pull-left"   value="%{reportrange}" onchange="Date1();" tabindex="1"/> 
@@ -672,6 +677,7 @@
 //        }
         function resetvaluesLtShipment()
         {
+             $('.myRadio').attr('checked', false);
             document.getElementById('datepickerfrom').value = "";
             document.getElementById('datepickerTo').value = "";
             document.getElementById('docType').value = "-1";
@@ -692,7 +698,11 @@
 
         function checkCorrelation() {
 
-            //   alert("hiii");
+             var db = document.forms["ltshipmentForm"]["database"].value;
+                                if (db == '') {
+                                    alert("Please select Database!!!");
+                                    return false;
+                                }
             var corrattr = document.getElementById('corrattribute').value;
             var corrval = document.getElementById('corrvalue').value;
 

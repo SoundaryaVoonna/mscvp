@@ -56,6 +56,11 @@ public class LifecycleAction extends ActionSupport implements ServletRequestAwar
         if (httpServletRequest.getSession(false).getAttribute(AppConstants.SES_USER_NAME) != null) {
             HttpSession httpSession = httpServletRequest.getSession(false);
             try {
+                if ("ARCHIVE".equals(getDatabase())) {
+                    setDatabase("ARCHIVE");
+                } else {
+                    setDatabase("MSCVP");
+                }
                 ServiceLocator.getLifeCycleService().buildLtLifeCycleBeans(this, httpServletRequest);
                 resultType = SUCCESS;
             } catch (Exception ex) {

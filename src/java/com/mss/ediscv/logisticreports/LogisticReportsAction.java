@@ -39,6 +39,7 @@ public class LogisticReportsAction extends ActionSupport implements ServletReque
     private List<LogisticReportsBean> documentList;
     private Map partnerMap;
     private String reportrange;
+    private String database;
 
     public String getLogisticReports() throws Exception {
         setResultType(LOGIN);
@@ -60,6 +61,11 @@ public class LogisticReportsAction extends ActionSupport implements ServletReque
                 defaultFlowId = DataSourceDataProvider.getInstance().getFlowIdByFlowName("Logistics");
                 httpServletRequest.getSession(false).setAttribute(AppConstants.SES_USER_DEFAULT_FLOWID, defaultFlowId);
             }
+            if ("ARCHIVE".equals(getDatabase())) {
+                    setDatabase("ARCHIVE");
+                } else {
+                    setDatabase("MSCVP");
+                }
             setResultType(SUCCESS);
         }
         return getResultType();
@@ -82,7 +88,12 @@ public class LogisticReportsAction extends ActionSupport implements ServletReque
                 //setDocdatepicker(DateUtility.getInstance().getCurrentMySqlDateTime1());
                 setCorrelationList(corrList);
                 setDocTypeList(docList);
-                documentList = ServiceLocator.getLogisticReportsService().getDocumentList(this);
+                if ("ARCHIVE".equals(getDatabase())) {
+                      documentList = ServiceLocator.getLogisticReportsService().getDocumentListArchive(this);
+                    } else {
+                       documentList = ServiceLocator.getLogisticReportsService().getDocumentList(this);
+                    }
+                
                 httpServletRequest.getSession(false).setAttribute(AppConstants.SES_LOG_DOC_LIST, documentList);
                 setResultType(SUCCESS);
             } catch (Exception ex) {
@@ -313,4 +324,13 @@ public class LogisticReportsAction extends ActionSupport implements ServletReque
     public void setReportrange(String reportrange) {
         this.reportrange = reportrange;
     }
+
+    public String getDatabase() {
+        return database;
+    }
+
+    public void setDatabase(String database) {
+        this.database = database;
+    }
+    
 }
