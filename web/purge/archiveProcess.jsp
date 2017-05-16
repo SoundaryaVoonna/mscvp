@@ -114,7 +114,16 @@
                                                     </div>
                                                     <div class="col-sm-3">
                                                         <label>Transaction&nbsp;Type<font color="red">*</font></label>
+                                                     
+                                                         <s:select headerKey="-1" headerValue="Select Type" cssClass="form-control" list="flowName" name="transType" id="transType" tabindex="2"/> 
+                                                       <%--     <%
+                                                                String flowId=session.getAttribute("userDefaultFlowID").toString();
+                                                                if(flowId.equals("2"))
+                                                                {%>
                                                         <s:select headerKey="-1" headerValue="Select Type" cssClass="form-control" list="#@java.util.LinkedHashMap@{'850':'PO','856':'Shipments','810':'Invoice','820':'Payments'}" name="transType" id="transType" tabindex="2"/> 
+                                                        <%} else if(flowId.equals("3")){%>
+                                                          <s:select headerKey="-1" headerValue="Select Type" cssClass="form-control" list="#@java.util.LinkedHashMap@{'204':'Load Tender','990':'Response','214':'Shipment','210':'Invoice'}" name="transType" id="transType" tabindex="2"/> 
+                                                        <%}%> --%>
                                                     </div>
                                                     <div class="col-sm-3">
                                                         <label>Comments<font color = "red">*</font></label>

@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -142,8 +143,8 @@ public class DataSourceDataProvider {
         try {
           // System.out.println("st--->"+st);
 
-           // queryString = "SELECT unique(FILES.TRANSACTION_TYPE) FROM FILES where FILES.TRANSACTION_TYPE is not null";
-            queryString = "SELECT unique(FILES.TRANSACTION_TYPE) FROM FILES where FILES.FLOWFLAG='"+flowFlag+"' AND FILES.TRANSACTION_TYPE is not null";
+            // queryString = "SELECT unique(FILES.TRANSACTION_TYPE) FROM FILES where FILES.TRANSACTION_TYPE is not null";
+            queryString = "SELECT unique(FILES.TRANSACTION_TYPE) FROM FILES where FILES.FLOWFLAG='" + flowFlag + "' AND FILES.TRANSACTION_TYPE is not null";
             //System.out.println("queryString--->"+queryString);
             preparedStatement = connection.prepareStatement(queryString);
             resultSet = preparedStatement.executeQuery();
@@ -184,7 +185,6 @@ public class DataSourceDataProvider {
      * @return
      * @throws ServiceLocatorException
      */
-
     public List getDocumentTypeList(int st, int groupId) throws ServiceLocatorException {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
@@ -194,7 +194,7 @@ public class DataSourceDataProvider {
         List docTypeMap = new ArrayList();
 
         try {
-          // System.out.println("st--->"+st);
+            // System.out.println("st--->"+st);
 
             if (st == 0) {
                 queryString = "SELECT NAME FROM DOCUMENTTYPES where GROUP_ID=" + groupId;
@@ -842,7 +842,7 @@ public class DataSourceDataProvider {
         try {
             statement = connection.createStatement();
 
-           // resultSet = statement.executeQuery("SELECT ID,FLOWNAME FROM MSCVP_ROLES LEFT OUTER JOIN M_USER_ROLES on (MSCVP_ROLES.ID=M_USER_ROLES.ROLE_ID) where USER_ID="+userId+" AND ID != 1 ORDER BY ROLE_NAME");
+            // resultSet = statement.executeQuery("SELECT ID,FLOWNAME FROM MSCVP_ROLES LEFT OUTER JOIN M_USER_ROLES on (MSCVP_ROLES.ID=M_USER_ROLES.ROLE_ID) where USER_ID="+userId+" AND ID != 1 ORDER BY ROLE_NAME");
             // resultSet = statement.executeQuery("SELECT MSCVP_FLOWS.ID,MSCVP_FLOWS.FLOWNAME FROM MSCVP_FLOWS LEFT OUTER JOIN M_USER_FLOWS_ACTION ON (MSCVP_FLOWS.ID = M_USER_FLOWS_ACTION.FLOWID) where USER_ID="+userId+" AND MSCVP_FLOWS.ID != 1 ORDER BY FLOWID");
             //resultSet = statement.executeQuery("SELECT MSCVP_FLOWS.ID FROM MSCVP_FLOWS  LEFT OUTER JOIN M_USER_FLOWS_ACTION ON (MSCVP_FLOWS.ID = M_USER_FLOWS_ACTION.FLOWID) where USER_ID="+userId+" AND MSCVP_FLOWS.ID != 1 AND M_USER_FLOWS_ACTION.PRIORITY = 1");
             if (userId != 10000) {
@@ -893,7 +893,7 @@ public class DataSourceDataProvider {
         try {
             statement = connection.createStatement();
 
-           // resultSet = statement.executeQuery("SELECT ID,FLOWNAME FROM MSCVP_ROLES LEFT OUTER JOIN M_USER_ROLES on (MSCVP_ROLES.ID=M_USER_ROLES.ROLE_ID) where USER_ID="+userId+" AND ID != 1 ORDER BY ROLE_NAME");
+            // resultSet = statement.executeQuery("SELECT ID,FLOWNAME FROM MSCVP_ROLES LEFT OUTER JOIN M_USER_ROLES on (MSCVP_ROLES.ID=M_USER_ROLES.ROLE_ID) where USER_ID="+userId+" AND ID != 1 ORDER BY ROLE_NAME");
             // resultSet = statement.executeQuery("SELECT MSCVP_FLOWS.ID,MSCVP_FLOWS.FLOWNAME FROM MSCVP_FLOWS LEFT OUTER JOIN M_USER_FLOWS_ACTION ON (MSCVP_FLOWS.ID = M_USER_FLOWS_ACTION.FLOWID) where USER_ID="+userId+" AND MSCVP_FLOWS.ID != 1 ORDER BY FLOWID");
             resultSet = statement.executeQuery("SELECT FLOWNAME FROM MSCVP_FLOWS where Id =" + flowId);
             while (resultSet.next()) {
@@ -939,7 +939,7 @@ public class DataSourceDataProvider {
         try {
             statement = connection.createStatement();
 
-           // resultSet = statement.executeQuery("SELECT ID,FLOWNAME FROM MSCVP_ROLES LEFT OUTER JOIN M_USER_ROLES on (MSCVP_ROLES.ID=M_USER_ROLES.ROLE_ID) where USER_ID="+userId+" AND ID != 1 ORDER BY ROLE_NAME");
+            // resultSet = statement.executeQuery("SELECT ID,FLOWNAME FROM MSCVP_ROLES LEFT OUTER JOIN M_USER_ROLES on (MSCVP_ROLES.ID=M_USER_ROLES.ROLE_ID) where USER_ID="+userId+" AND ID != 1 ORDER BY ROLE_NAME");
             // resultSet = statement.executeQuery("SELECT MSCVP_FLOWS.ID,MSCVP_FLOWS.FLOWNAME FROM MSCVP_FLOWS LEFT OUTER JOIN M_USER_FLOWS_ACTION ON (MSCVP_FLOWS.ID = M_USER_FLOWS_ACTION.FLOWID) where USER_ID="+userId+" AND MSCVP_FLOWS.ID != 1 ORDER BY FLOWID");
             resultSet = statement.executeQuery("SELECT ID FROM MSCVP_FLOWS where FLOWNAME ='" + flowName + "'");
             while (resultSet.next()) {
@@ -1066,7 +1066,7 @@ public class DataSourceDataProvider {
 
     public String getSapDetails(String instanceId, String poNumber) throws ServiceLocatorException {
 
-         //System.out.println("instanceId DSDP SAP Details --> "+instanceId);
+        //System.out.println("instanceId DSDP SAP Details --> "+instanceId);
         //System.out.println("poNumber DSDP SAP Details --> "+poNumber);
         Connection connection = null;
         Statement statement = null;
@@ -1368,11 +1368,11 @@ public class DataSourceDataProvider {
         connection = ConnectionProvider.getInstance().getConnection();
         try {
             statement = connection.createStatement();
-            queryString="SELECT ID,NAME From TP WHERE FLOW_FLAG='"+ flowFlag + "'";
-            System.out.println("queryString partner"+queryString);
+            queryString = "SELECT ID,NAME From TP WHERE FLOW_FLAG='" + flowFlag + "'";
+            System.out.println("queryString partner" + queryString);
             // resultSet = statement.executeQuery("SELECT ID,FLOWNAME FROM MSCVP_ROLES LEFT OUTER JOIN M_USER_ROLES on (MSCVP_ROLES.ID=M_USER_ROLES.ROLE_ID) where USER_ID="+userId+" AND ID != 1 ORDER BY ROLE_NAME");
             resultSet = statement.executeQuery(queryString);
-            
+
             while (resultSet.next()) {
                 partnerMap.put(resultSet.getString("ID"), resultSet.getString("NAME"));
             }
@@ -2174,10 +2174,10 @@ public class DataSourceDataProvider {
         List sendeIdMap = new ArrayList();
         //String Transaction_Type=null;
         try {
-          // System.out.println("st--->"+st);
+            // System.out.println("st--->"+st);
 
-            queryString = "SELECT unique(TP.ID) FROM TP JOIN FILES ON (TP.ID=FILES.SENDER_ID) AND FILES.FLOWFLAG='"+flowFlag+"'";
-            System.out.println("queryString--->"+queryString);
+            queryString = "SELECT unique(TP.ID) FROM TP JOIN FILES ON (TP.ID=FILES.SENDER_ID) AND FILES.FLOWFLAG='" + flowFlag + "'";
+            System.out.println("queryString--->" + queryString);
             preparedStatement = connection.prepareStatement(queryString);
             resultSet = preparedStatement.executeQuery();
 
@@ -2220,9 +2220,9 @@ public class DataSourceDataProvider {
         List receiverIdMap = new ArrayList();
         //String Transaction_Type=null;
         try {
-          // System.out.println("st--->"+st);
+            // System.out.println("st--->"+st);
 
-            queryString = "SELECT unique(TP.ID) FROM TP JOIN FILES ON (TP.ID=FILES.RECEIVER_ID) AND FILES.FLOWFLAG='"+flowFlag+"'";
+            queryString = "SELECT unique(TP.ID) FROM TP JOIN FILES ON (TP.ID=FILES.RECEIVER_ID) AND FILES.FLOWFLAG='" + flowFlag + "'";
             //System.out.println("queryString--->"+queryString);
             preparedStatement = connection.prepareStatement(queryString);
             resultSet = preparedStatement.executeQuery();
@@ -2266,10 +2266,10 @@ public class DataSourceDataProvider {
         List SenderNameMap = new ArrayList();
         //String Transaction_Type=null;
         try {
-          // System.out.println("st--->"+st);
+            // System.out.println("st--->"+st);
 
-            queryString = "SELECT unique(TP.NAME) FROM TP JOIN FILES ON (TP.ID=FILES.SENDER_ID) AND FILES.FLOWFLAG='"+flowFlag+"'";
-            System.out.println("queryString--->"+queryString);
+            queryString = "SELECT unique(TP.NAME) FROM TP JOIN FILES ON (TP.ID=FILES.SENDER_ID) AND FILES.FLOWFLAG='" + flowFlag + "'";
+            System.out.println("queryString--->" + queryString);
             preparedStatement = connection.prepareStatement(queryString);
             resultSet = preparedStatement.executeQuery();
 
@@ -2312,10 +2312,10 @@ public class DataSourceDataProvider {
         List receiverNameMap = new ArrayList();
         //String Transaction_Type=null;
         try {
-          // System.out.println("st--->"+st);
+            // System.out.println("st--->"+st);
 
-            queryString = "SELECT unique(TP.NAME) FROM TP JOIN FILES ON (TP.ID=FILES.RECEIVER_ID) AND FILES.FLOWFLAG='"+flowFlag+"'";
-            System.out.println("queryString--->"+queryString);
+            queryString = "SELECT unique(TP.NAME) FROM TP JOIN FILES ON (TP.ID=FILES.RECEIVER_ID) AND FILES.FLOWFLAG='" + flowFlag + "'";
+            System.out.println("queryString--->" + queryString);
             preparedStatement = connection.prepareStatement(queryString);
             resultSet = preparedStatement.executeQuery();
 
@@ -2368,7 +2368,7 @@ public class DataSourceDataProvider {
                 // String responseString = "";
                 emialid = resultSet.getString("EMAIL");
                 responseString += emialid + "|";
-            // responseString = responseString+"|"+resultSet.getString("EMAIL")+"^"+resultSet.getString("cname")+"|";    
+                // responseString = responseString+"|"+resultSet.getString("EMAIL")+"^"+resultSet.getString("cname")+"|";    
                 //MailManager mail=new MailManager();
                 //  result=MailManager.sendMail(emialid);
                 // System.out.println("RESULT========="+result);
@@ -2501,7 +2501,7 @@ public class DataSourceDataProvider {
         List NetworkvanMap = new ArrayList();
         //String Transaction_Type=null;
         try {
-          // System.out.println("st--->"+st);
+            // System.out.println("st--->"+st);
 
             queryString = "SELECT unique(FILES.NETWORK_VAN) FROM FILES where FILES.NETWORK_VAN is not null";
             //System.out.println("queryString--->"+queryString);
@@ -2621,8 +2621,8 @@ public class DataSourceDataProvider {
         }
         return listNameMap;
     }
-    
-     public String getPartnerNameById(String parterId) throws ServiceLocatorException {
+
+    public String getPartnerNameById(String parterId) throws ServiceLocatorException {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
@@ -2630,7 +2630,7 @@ public class DataSourceDataProvider {
         connection = ConnectionProvider.getInstance().getConnection();
         String partnerName = null;
         try {
-            queryString = "SELECT ID,NAME From TP WHERE ID='"+ parterId + "'";
+            queryString = "SELECT ID,NAME From TP WHERE ID='" + parterId + "'";
             preparedStatement = connection.prepareStatement(queryString);
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
@@ -2660,4 +2660,25 @@ public class DataSourceDataProvider {
         System.out.println("partnerName=========" + partnerName);
         return partnerName;
     }
+
+//method that returns transaction map which is used to set transactions in archiving/purging according to the flows that user has
+    public Map getTransactionType(Map flowMap) {
+        Map flows = new LinkedHashMap();
+        if (flowMap.containsValue("Manufacturing")) {
+            flows.put("850", "Manufacturing PO");
+            flows.put("856", "Manufacturing Shipments");
+            flows.put("810", "Manufacturing Invoice");
+            flows.put("820", "Manufacturing Payments");
+        }
+        if (flowMap.containsValue("Logistics")) {
+            flows.put("204", "Logistics Load Tender");
+            flows.put("990", "Logistics Response");
+            flows.put("214", "Logistics Shipment");
+            flows.put("210", "Logistics Invoice");
+
+        }
+
+        return flows;
+    }
+
 }

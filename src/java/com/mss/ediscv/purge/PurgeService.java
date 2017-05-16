@@ -19,8 +19,8 @@ public interface PurgeService {
      * @return
      * @throws ServiceLocatorException
      */
-    public String purgeProcess(PurgeAction purgeAction, String username) throws ServiceLocatorException;
-    public String archiveProcess(PurgeAction purgeAction, String username) throws ServiceLocatorException;
+    public String purgeProcess(PurgeAction purgeAction, String username, String defaultFlowName) throws ServiceLocatorException;
+    public String archiveProcess(PurgeAction purgeAction, String username, String flowName) throws ServiceLocatorException;
     public List getPurHistoryData(String username, String from , String to, String tansType) throws ServiceLocatorException;
     public List getArcHistoryData(String username, String from , String to, String tansType) throws ServiceLocatorException;
 }
