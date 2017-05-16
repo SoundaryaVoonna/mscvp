@@ -115,11 +115,6 @@
                                                     </div>
                                                 </div>
                                                 <div class="row">
-                                                    <div class="col-sm-3"><label>Database&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;</label>
-                                                        <s:radio cssClass="myRadio" id="database" name="database" value="%{database}" list="#@java.util.LinkedHashMap@{'MSCVP':'LIVE','ARCHIVE':'ARCHIVE'}"/>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
                                                     <div class="col-sm-3"> <label>Date Range</label>
                                                         <s:textfield name="reportrange"  id="reportrange" cssClass="form-control pull-left"   value="%{reportrange}" onchange="Date1();" tabindex="1"/> 
                                                     </div>
@@ -626,6 +621,7 @@
     }
     function resetvalues()
     {
+        $('#hide-menu1').removeClass('show-menu');
          $('.myRadio').attr('checked', false);
         document.getElementById('datepickerfrom').value = "";
         document.getElementById('datepickerTo').value = "";
