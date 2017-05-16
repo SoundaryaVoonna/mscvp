@@ -640,6 +640,7 @@
             }
             function resetvalues()
             {
+                $('#hide-menu1').removeClass('show-menu');
                 document.getElementById('docdatepickerfrom').value = "";
                 document.getElementById('docdatepicker').value = "";
                 document.getElementById('docSenderId').value = "";

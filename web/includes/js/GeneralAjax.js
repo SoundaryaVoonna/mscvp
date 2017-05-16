@@ -2125,7 +2125,6 @@ function getLtResponseDetails(fileId, refId) {
     var db = document.forms["ltResponseForm"]["database"].value;
 
     $(function () {
-
         $('#detail_box').show();
         return false;
 

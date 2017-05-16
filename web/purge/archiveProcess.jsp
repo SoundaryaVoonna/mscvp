@@ -183,7 +183,7 @@
             var transactionType = document.getElementById('transType').value;
             var comment = document.getElementById('commentId').value;
         if (days == "") {
-                alert("Please Enter Day Count !!");
+                alert("Please enter Day Count !!");
                 return false;
             }
             if (transactionType == "-1")  {
