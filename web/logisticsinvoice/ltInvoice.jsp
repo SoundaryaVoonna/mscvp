@@ -626,7 +626,7 @@
     function resetvalues()
     {
         $('#hide-menu1').removeClass('show-menu');
-         $('.myRadio').attr('checked', false);
+        // $('.myRadio').attr('checked', false);
         document.getElementById('datepickerfrom').value = "";
         document.getElementById('datepickerTo').value = "";
         document.getElementById('invSenderId').value = "";

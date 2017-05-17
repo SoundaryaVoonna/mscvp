@@ -603,7 +603,7 @@
 
         function resetValuesPayments() {
             $('#hide-menu1').removeClass('show-menu');
-            $('.myRadio').attr('checked',false);
+          //  $('.myRadio').attr('checked',false);
             document.getElementById('paDateFrom').value = "";
             document.getElementById('paDateTo').value = "";
             document.getElementById('paSenderId').value = "-1";

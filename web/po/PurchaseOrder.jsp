@@ -611,7 +611,7 @@
 
                     function resetvaluesPO() {
                         $('#hide-menu1').removeClass('show-menu');
-                        $('.myRadio').attr('checked', false);
+                     //   $('.myRadio').attr('checked', false);
                         document.getElementById('poDateFrom').value = "";
                         document.getElementById('poDateTo').value = "";
                         document.getElementById('reportrange').value = ""

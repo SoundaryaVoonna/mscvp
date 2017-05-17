@@ -592,7 +592,7 @@
                         function resetvaluesInvoice()
                         {
                             $('#hide-menu1').removeClass('show-menu');
-                            $('.myRadio').attr('checked', false);
+                           // $('.myRadio').attr('checked', false);
                             document.getElementById('reportrange').value = '';
                             document.getElementById('invdatepickerfrom').value = '';
 

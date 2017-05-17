@@ -527,7 +527,7 @@
 
                     function resetvaluesShipment() {
                         $('#hide-menu1').removeClass('show-menu');
-                        $('.myRadio').attr('checked', false);
+                        //$('.myRadio').attr('checked', false);
                         document.getElementById('buId').value = "-1";
                         document.getElementById('datepickerfrom').value = "";
                         document.getElementById('datepicker').value = "";

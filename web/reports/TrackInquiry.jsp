@@ -152,13 +152,14 @@
                             <!-- First Row -->
                             <div class="row">
 
-                                <div class="col-sm-12">
+                                <div style="alignment-adjust:central;">
 
 
                                     <s:form action="../reports/trackInquirySearch.action" method="post" name="trackInquiryForm" id="trackInquiryForm" theme="simple">
 
                                         <div class="form-group">
                                             <div class="row">
+                                                <div class="col-sm-12">
                                                 <div class="col-sm-3"> <label>Date Range</label>
 
                                                     <s:textfield name="reportrange"  id="reportrange" cssClass="form-control pull-left"   value="%{reportrange}"  tabindex="1"/> 
@@ -190,6 +191,7 @@
 
                                                 <%-- return compareDates(document.getElementById('docdatepickerfrom').value,document.getElementById('docdatepicker').value); --%>
                                             </div>
+                                        </div>
                                             <br>
                                             <div clas="row">
                                                 <div class="col-sm-2">   <s:submit value="Search" cssClass="btn btn-primary col-sm-12"  onclick="Date1()" tabindex="4"/></div>

@@ -50,7 +50,7 @@
             }
 
             function resetvaluesExcelReport() {
-                $('.myRadio').attr('checked', false);
+               // $('.myRadio').attr('checked', false);
                 document.getElementById('docSenderId').value = "-1";
                 document.getElementById('docSenderName').value = "-1";
                 document.getElementById('docReceiverId').value = "-1";

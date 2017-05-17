@@ -704,7 +704,7 @@
         function resetvalues()
         {
             $('#hide-menu1').removeClass('show-menu');
-            $('.myRadio').attr('checked', false);
+           // $('.myRadio').attr('checked', false);
             document.getElementById('docdatepickerfrom').value = "";
             document.getElementById('docdatepicker').value = "";
             document.getElementById('docSenderId').value = "";
