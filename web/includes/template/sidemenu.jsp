@@ -267,7 +267,7 @@
                     </ul>
                 </li>
                 <% }%>
-                <% if (session.getAttribute(AppConstants.SES_ROLE_ID).equals("100") || session.getAttribute(AppConstants.SES_ROLE_ID).equals("101") || session.getAttribute(AppConstants.SES_ROLE_ID).equals("104") || session.getAttribute(AppConstants.SES_ROLE_ID).equals("105") || session.getAttribute(AppConstants.SES_ROLE_ID).equals("103")) {%>
+                <% if (session.getAttribute(AppConstants.SES_ROLE_ID).equals("100") || session.getAttribute(AppConstants.SES_ROLE_ID).equals("101") || session.getAttribute(AppConstants.SES_ROLE_ID).equals("104") || session.getAttribute(AppConstants.SES_ROLE_ID).equals("105") || session.getAttribute(AppConstants.SES_ROLE_ID).equals("103") || session.getAttribute(AppConstants.SES_ROLE_ID).equals("102")) {%>
                 <li class="treeview" id="utilities">
                     <a href="#">
                         <i class="fa fa-gavel"></i> <span>Utilities</span>

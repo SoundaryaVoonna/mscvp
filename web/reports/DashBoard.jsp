@@ -134,7 +134,7 @@
 
                 <div class="box box-primary">
                     <div class="box-header with-border">
-                        <h3 class="box-title">Dashboard</h3>
+                        <!--<h3 class="box-title">Dashboard</h3>-->
                         <div class="box-tools pull-right">
 
                         </div>
@@ -210,7 +210,7 @@
                                                         name="partnerMapId" 
                                                         id="partnerMapId"
                                                         headerKey="ALL"
-                                                        headerValue="ALL"
+                                                        headerValue="All"
                                                         list="partnerMap" 
                                                         tabindex="3" cssClass="form-control"
                                                         value="" />

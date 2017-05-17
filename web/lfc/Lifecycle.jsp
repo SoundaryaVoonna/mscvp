@@ -36,7 +36,8 @@
                     "searching": true,
                     "ordering": true,
                     "info": true,
-                    "autoWidth": false
+                    "autoWidth": false,
+                    order: [[0, 'desc']]
                 });
             });
         </script>
@@ -56,12 +57,12 @@
             <section class="content-header">
                 <h1>
                     LifeCycle
-                    <small>Manufacturing</small>
+                    <!--<small>Manufacturing</small>-->
                 </h1>
-                <ol class="breadcrumb">
+<!--                <ol class="breadcrumb">
                     <li><a href="#"><i class="fa fa-wrench"></i>Manufacturing</a></li>
                     <li class="active">LifeCycle</li>
-                </ol>
+                </ol>-->
             </section>
             <br>
             <div id="gridDiv">     
@@ -98,12 +99,12 @@
                                                         %>
 
                                                         <thead>  <tr>
+                                                                <th>DateTime</th> 
                                                                 <th>#</th>
                                                                 <th>PO #</th>
                                                                 <th>InstanceId</th>
                                                                 <th>Type</th>
                                                                 <th>Direction</th>
-                                                                <th>DateTime</th>  
                                                                     <%--<td >SENDER_ID</td>
                                                                     <td >RECEIVER_ID</td>   --%>
                                                                 <th>Status</th>
@@ -124,6 +125,15 @@
 
                                                             <%-- Po Start--%>
                                                             <tr>
+                                                                      <td>
+                                                                    <%
+                                                                        if (poLifeCycleBean.getDatetimeRec() != null && !"".equals(poLifeCycleBean.getDatetimeRec())) {
+                                                                            out.println(poLifeCycleBean.getDatetimeRec().toString().substring(0, poLifeCycleBean.getDatetimeRec().toString().lastIndexOf(":")));
+                                                                        } else {
+                                                                            out.println("-");
+                                                                        }
+                                                                    %>
+                                                                </td> 
                                                                 <td>
                                                                     <%
                                                                         if (poLifeCycleBean.getTranType() != null && !"".equals(poLifeCycleBean.getTranType())) {
@@ -177,15 +187,6 @@
                                                                         }
                                                                     %>
                                                                 </td>
-                                                                <td>
-                                                                    <%
-                                                                        if (poLifeCycleBean.getDatetimeRec() != null && !"".equals(poLifeCycleBean.getDatetimeRec())) {
-                                                                            out.println(poLifeCycleBean.getDatetimeRec().toString().substring(0, poLifeCycleBean.getDatetimeRec().toString().lastIndexOf(":")));
-                                                                        } else {
-                                                                            out.println("-");
-                                                                        }
-                                                                    %>
-                                                                </td>  
                                                                 <%--<td>
                                                                   <%
                                                                     out.println(poLifeCycleBean.getSenderId());
@@ -258,6 +259,15 @@
 
                                                             <%-- Asn Start--%>
                                                             <tr>
+                                                                      <td>
+                                                                    <%
+                                                                        if (asnLifecycleBean.getDatetimeRec() != null && !"".equals(asnLifecycleBean.getDatetimeRec())) {
+                                                                            out.println(asnLifecycleBean.getDatetimeRec().toString().substring(0, asnLifecycleBean.getDatetimeRec().toString().lastIndexOf(":")));
+                                                                        } else {
+                                                                            out.println("-");
+                                                                        }
+                                                                    %>
+                                                                </td>
                                                                 <td>
                                                                     <%
                                                                         if (asnLifecycleBean.getTranType() != null && !"".equals(asnLifecycleBean.getTranType())) {
@@ -306,16 +316,6 @@
                                                                         }
                                                                     %>
                                                                 </td>
-
-                                                                <td>
-                                                                    <%
-                                                                        if (asnLifecycleBean.getDatetimeRec() != null && !"".equals(asnLifecycleBean.getDatetimeRec())) {
-                                                                            out.println(asnLifecycleBean.getDatetimeRec().toString().substring(0, asnLifecycleBean.getDatetimeRec().toString().lastIndexOf(":")));
-                                                                        } else {
-                                                                            out.println("-");
-                                                                        }
-                                                                    %>
-                                                                </td> 
                                                                 <td>
                                                                     <%
                                                                         if (asnLifecycleBean.getStatus().equalsIgnoreCase("ERROR")) {
@@ -377,6 +377,15 @@
                                                             <tr>
                                                                 <td>
                                                                     <%
+                                                                        if (invoiceLifecycleBean.getDatetimeRec() != null && !"".equals(invoiceLifecycleBean.getDatetimeRec())) {
+                                                                            out.println(invoiceLifecycleBean.getDatetimeRec().toString().substring(0, invoiceLifecycleBean.getDatetimeRec().toString().lastIndexOf(":")));
+                                                                        } else {
+                                                                            out.println("-");
+                                                                        }
+                                                                    %>
+                                                                </td> 
+                                                                <td>
+                                                                    <%
                                                                         if (invoiceLifecycleBean.getTranType() != null && !"".equals(invoiceLifecycleBean.getTranType())) {
                                                                             out.println(invoiceLifecycleBean.getTranType());
                                                                         } else {
@@ -425,16 +434,6 @@
                                                                         }
                                                                     %>
                                                                 </td>
-
-                                                                <td>
-                                                                    <%
-                                                                        if (invoiceLifecycleBean.getDatetimeRec() != null && !"".equals(invoiceLifecycleBean.getDatetimeRec())) {
-                                                                            out.println(invoiceLifecycleBean.getDatetimeRec().toString().substring(0, invoiceLifecycleBean.getDatetimeRec().toString().lastIndexOf(":")));
-                                                                        } else {
-                                                                            out.println("-");
-                                                                        }
-                                                                    %>
-                                                                </td> 
                                                                 <%--  <td>
                                                                     <%
                                                                       out.println(invoiceLifecycleBean.getSenderId());
@@ -508,6 +507,15 @@
 
                                                             <%-- Payment Start--%>
                                                             <tr>
+                                                                   <td>
+                                                                    <%
+                                                                        if (paymentLifecycleBean.getDatetimeRec() != null && !"".equals(paymentLifecycleBean.getDatetimeRec())) {
+                                                                            out.println(paymentLifecycleBean.getDatetimeRec().toString().substring(0, paymentLifecycleBean.getDatetimeRec().toString().lastIndexOf(":")));
+                                                                        } else {
+                                                                            out.println("-");
+                                                                        }
+                                                                    %>
+                                                                </td>
                                                                 <td>
                                                                     <%
                                                                         if (paymentLifecycleBean.getTranType() != null && !"".equals(paymentLifecycleBean.getTranType())) {
@@ -550,16 +558,6 @@
                                                                     <%
                                                                         if (paymentLifecycleBean.getDirection() != null && !"".equals(paymentLifecycleBean.getDirection())) {
                                                                             out.println(paymentLifecycleBean.getDirection().toUpperCase());
-                                                                        } else {
-                                                                            out.println("-");
-                                                                        }
-                                                                    %>
-                                                                </td>
-
-                                                                <td>
-                                                                    <%
-                                                                        if (paymentLifecycleBean.getDatetimeRec() != null && !"".equals(paymentLifecycleBean.getDatetimeRec())) {
-                                                                            out.println(paymentLifecycleBean.getDatetimeRec().toString().substring(0, paymentLifecycleBean.getDatetimeRec().toString().lastIndexOf(":")));
                                                                         } else {
                                                                             out.println("-");
                                                                         }
