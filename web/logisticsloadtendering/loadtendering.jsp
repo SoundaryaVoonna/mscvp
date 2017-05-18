@@ -204,7 +204,7 @@
                                                         else if (count == 2)
                                                             document.getElementById("corr1").style.display = "block";
                                                         else
-                                                            alert('Limit exceded.... cannot add more fields !!');
+                                                            alert('Limit exceeded.... cannot add more fields !!');
                                                     })
 
                                                 </script>

@@ -206,7 +206,7 @@
                                                             document.getElementById("corr").style.display = "block";
 
                                                         else
-                                                            alert('Limit exceded.... cannot add more fields !!');
+                                                            alert('Limit exceeded.... cannot add more fields !!');
                                                     })
 
                                                 </script>

@@ -99,15 +99,7 @@
                                         <div class="row">
                                             <div class="col-sm-12">
                                                 <div class="row">
-                                                    
-                                                    <%
-                                                     //REQ_RESULT_MSG
-                                                    if (request.getAttribute(AppConstants.REQ_RESULT_MSG) != null) {
-                                                            String responseString = request.getAttribute(AppConstants.REQ_RESULT_MSG).toString();
-                                                            //request.getSession(false).removeAttribute("responseString");
-                                                            out.println(responseString);
-                                                        }
-                                                    %>
+                                                  
                                                     <div class="col-sm-3">
                                                         <label>Day Count<font color="red">*</font></label>
                                                             <s:textfield  cssClass="form-control"  name="dayCount" id="dayCount"  onblur="return validatenumber(this);" tabindex="1"/>
@@ -131,7 +123,7 @@
                                                         
                                                     </div></div>  </div></div>
                                         
-                                                        <br>      <div class="row">
+                                                        <br>   <div class="row">
                                             <div class="col-sm-2"><s:submit value="Purge Data"  onclick="return checkValues();" cssClass="btn btn-primary col-sm-12" tabindex="4"/></div>
 
                                             <div class="col-sm-2"><strong><input type="reset" value="Reset"  class="btn btn-primary col-sm-12" onclick="return resetvalues();"  tabindex="5"/></strong></div>

@@ -209,7 +209,6 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <br>
                                                 <div class="row">
                                                     <div class="col-sm-2"><s:submit value="Search"  onclick="Date1()" cssClass="btn btn-primary col-sm-12" tabindex="3"/></div>
                                                     <div class="col-sm-2">   <strong><input type="button" value="Reset" class="btn btn-primary col-sm-12"  onclick="return resetValues();" tabindex="4"/></strong></div>

@@ -167,7 +167,7 @@
                                                         //   else if(count==2)
                                                         //   document.getElementById("corr1").style.display = "block";
                                                         else
-                                                            alert('Limit exceded.... cannot add more fields !!');
+                                                            alert('Limit exceeded.... cannot add more fields !!');
                                                     })
                                                 </script>
                                                 <div id="corr" style="display: none">
@@ -331,7 +331,7 @@
                                             </table></div>
                                             <%-- Process butttons  start --%>
                                             <% // out.println(session.getAttribute(AppConstants.SES_ROLE_ID));
-                                                if ((session.getAttribute(AppConstants.SES_ROLE_ID).equals("100") || session.getAttribute(AppConstants.SES_ROLE_ID).equals("104")) && list.size() != 0) {
+                                                if ((session.getAttribute(AppConstants.SES_ROLE_ID).equals("100") || session.getAttribute(AppConstants.SES_ROLE_ID).equals("104") || session.getAttribute(AppConstants.SES_ROLE_ID).equals("101")) && list.size() != 0) {
                                             %><br>
                                         <div class="row">
                                             <div id="gridButtons" >

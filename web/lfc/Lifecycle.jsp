@@ -15,7 +15,8 @@
 <%@ page import="com.mss.ediscv.util.ConnectionProvider"%>
 <%@ page import="java.sql.SQLException"%>
 <%@ page import = "java.util.ResourceBundle" %>
-<%--<%@page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>--%>
+<%--<%@page language="java" contentType="text/html; 
+charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>--%>
 <%@page buffer="50kb" autoFlush="true" %>
 
 <html>
