@@ -215,7 +215,7 @@ public class DateUtility {
         String time = st.nextToken();
         st = new StringTokenizer(date, "/");
         int month = Integer.parseInt(st.nextToken());
-        String date1 = st.nextToken();
+        //String date1 = st.nextToken();
         int year = Integer.parseInt(st.nextToken());
         int ConvertedDateTime = 0;
         if (dateormonth.equalsIgnoreCase("month")) {

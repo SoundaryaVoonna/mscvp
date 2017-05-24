@@ -301,11 +301,11 @@ public class PurgeServiceImpl implements PurgeService {
             if (!(updateArchHistQueryFlag)) {
 
                 insertArchFilesQuery = "insert into ARCHIVE_FILES select f.* from files f where DATE(DATE_TIME_RECEIVED) <  DATE(CURRENT TIMESTAMP - " + dayCount + " DAYS) and Transaction_Type= '" + transType + "' ";
-                //deleteFilesQuery = "DELETE FROM FILES where DATE(DATE_TIME_RECEIVED) <  DATE(CURRENT TIMESTAMP - " + dayCount + " DAYS) and Transaction_Type= '"+transType+"' ";
+                deleteFilesQuery = "DELETE FROM FILES where DATE(DATE_TIME_RECEIVED) <  DATE(CURRENT TIMESTAMP - " + dayCount + " DAYS) and Transaction_Type= '"+transType+"' ";
                 updateArchHistQuery = "insert into ARCHIVE_HISTORY(TRANSACTION_TYPE, DAYS_COUNT, USER, COMMENTS, DATE, FLAG) values ('" + transType + "','" + dayCount + "','" + user + "','" + comments + "','" + date + "','" + flag + "')";
 
                 statement.addBatch(insertArchFilesQuery);
-                //statement.addBatch(deleteFilesQuery);
+                statement.addBatch(deleteFilesQuery);
                 statement.addBatch(updateArchHistQuery);
 
                 updateArchHistQueryFlag = true;
@@ -315,22 +315,22 @@ public class PurgeServiceImpl implements PurgeService {
             if (flowName.equalsIgnoreCase("Manufacturing")) {
                 if (transType.equals("850")) {
                     insertArchTransQuery = "INSERT INTO ARCHIVE_PO SELECT t.* FROM MSCVP.PO t where file_ID= '" + fileId + "' ";
-                    //deleteArchTransQuery = "DELETE FROM ARCHIVE_PO WHERE File_ID='" + fileId + "'";
+                    deleteArchTransQuery = "DELETE FROM PO WHERE File_ID='" + fileId + "'";
                 } else if (transType.equals("856")) {
                     insertArchTransQuery = "INSERT INTO ARCHIVE_ASN SELECT t.* FROM MSCVP.ASN t where file_ID= '" + fileId + "' ";
-                    //deleteArchTransQuery = "DELETE FROM ARCHIVE_ASN WHERE File_ID='" + fileId + "'";
+                    deleteArchTransQuery = "DELETE FROM ASN WHERE File_ID='" + fileId + "'";
                 } else if (transType.equals("810")) {
                     insertArchTransQuery = "INSERT INTO ARCHIVE_INVOICE SELECT t.* FROM MSCVP.INVOICE t where file_ID= '" + fileId + "' ";
-                    // deleteArchTransQuery = "DELETE FROM ARCHIVE_INVOICE WHERE File_ID='" + fileId + "'";
+                     deleteArchTransQuery = "DELETE FROM INVOICE WHERE File_ID='" + fileId + "'";
                 } else if (transType.equals("820")) {
                     insertArchTransQuery = "INSERT INTO ARCHIVE_PAYMENT SELECT t.* FROM MSCVP.PAYMENT t where file_ID= '" + fileId + "' ";
-                    // deleteArchTransQuery = "DELETE FROM ARCHIVE_PAYMENT WHERE File_ID='" + fileId + "'";
+                     deleteArchTransQuery = "DELETE FROM PAYMENT WHERE File_ID='" + fileId + "'";
                 }
 
                 //System.out.println("insertArchTransQuery -->" + insertArchTransQuery);
 
                 statement.addBatch(insertArchTransQuery);
-                //statement.addBatch(deleteArchTransQuery);
+                statement.addBatch(deleteArchTransQuery);
 
             } else if (flowName.equalsIgnoreCase("Logistics")) {
                 //System.out.println("In archive records of logistics flow");

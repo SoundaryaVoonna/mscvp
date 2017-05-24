@@ -19,7 +19,6 @@
         <link rel="stylesheet" href='<s:url value="/includes/bootstrap/css/userdefined.css"/>'>
         <link rel="stylesheet" href='<s:url value="/includes/plugins/daterangepicker/daterangepicker.css"/>' type="text/css"> 
         <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-        <script language="JavaScript"  src='<s:url value="/includes/js/DateValidation.js"/>'></script>
         <script>
             function doOnLoad()
             {
@@ -27,11 +26,11 @@
                 $("#manufacturing").addClass("active");
                 $("#reports").addClass("active");
                 $("#editrackinginout i").addClass("text-red");
-                document.getElementById('loadingAcoountSearch').style.display="none";
+                document.getElementById('loadingAcoountSearch').style.display = "none";
             }
         </script>
-        <script type="text/javascript"> 
-            $(function () {
+        <script type="text/javascript">
+            $(function() {
                 // $("#example1").DataTable();
                 $('#results').DataTable({
                     "paging": true,
@@ -44,17 +43,17 @@
             });
             function resetvalues()
             {
-   
-                document.getElementById('docdatepickerfrom').value="";
-                document.getElementById('docdatepicker').value="";
-                document.getElementById('reportrange').value="";
+
+                document.getElementById('docdatepickerfrom').value = "";
+                document.getElementById('docdatepicker').value = "";
+                document.getElementById('reportrange').value = "";
 
                 $('#gridDiv').hide();
-    
+
             }
         </script>
         <style>
-          
+
 
 
             /*plus_minus for grid */
@@ -164,7 +163,7 @@
             .CSSTableGenerator tr:first-child td:last-child{
                 border-width:0px 0px 1px 1px;
             }
-          
+
         </style>
     </head>
 
@@ -213,12 +212,12 @@
             <section class="content-header">
                 <h1>
                     EDI Tracking IN/OUT
-<!--                    <small>Manufacturing</small>-->
+                    <!--                    <small>Manufacturing</small>-->
                 </h1>
-<!--                <ol class="breadcrumb">
-                    <li><a href="#"><i class="fa fa-wrench"></i>Manufacturing</a></li>
-                    <li class="active">EDI Tracking IN/OUT</li>
-                </ol>-->
+                <!--                <ol class="breadcrumb">
+                                    <li><a href="#"><i class="fa fa-wrench"></i>Manufacturing</a></li>
+                                    <li class="active">EDI Tracking IN/OUT</li>
+                                </ol>-->
             </section>
             <br>
             <section class="content">
@@ -245,14 +244,14 @@
                                         <div class="form-group">
                                             <div class="row">
                                                 <div class="col-sm-3"> <label>Date Range</label><font style="color:red">*</font>
-                                                    <s:textfield name="reportrange"  id="reportrange" cssClass="form-control pull-left"   value="%{reportrange}"  tabindex="1"/> 
+                                                        <s:textfield name="reportrange"  id="reportrange" cssClass="form-control pull-left"   value="%{reportrange}"  tabindex="1"/> 
                                                 </div>
                                                 <div id="loadingAcoountSearch" class="loadingImg">
                                                     <span id ="LoadingContent" > <img src="<s:url value="/includes/images/Loader2.gif"/>"   ></span>
                                                 </div>
                                                 <s:hidden id="docdatepickerfrom" name="docdatepickerfrom" />
                                                 <s:hidden id="docdatepicker" name="docdatepicker"/>
-                                                                                             
+
                                             </div>
                                             <br>
                                             <div class="row">
@@ -310,7 +309,7 @@
                                                 }
                                             %>
                                             <div style="overflow-x:auto;">                 
-                                              
+
                                                 <table align="left" width="100%"
                                                        border="0" cellpadding="0" cellspacing="0" >
                                                     <tr>
@@ -340,7 +339,7 @@
                                                             <div id="track_in_out">EDI Tracking IN\OUT</div>
                                                         </td>
                                                     <tr><td>
-                                                    <table align="left" id="results" border="0" cellpadding="0" cellspacing="0" class="table table-bordered table-hover">
+                                                            <table align="left" id="results" border="0" cellpadding="0" cellspacing="0" class="table table-bordered table-hover">
                                                                 <tr>
                                                                     <th >TRANS TYPE</th> 
                                                                     <th >Direction</th>
@@ -394,9 +393,9 @@
                                                                     }
                                                                 %>
                                                                 <tr><th>Total</th></tr>
-                                                                <%
-                                                                    }
-                                                                %>
+                                                                        <%
+                                                                            }
+                                                                        %>
                                                                 <tr><td colspan="2" >Total</td></tr>
                                                                 <%-- <td >Status</td>--%>
                                                             </table>
@@ -411,7 +410,7 @@
                                                                     ArrayList olddoctype = new ArrayList();
                                                                     int total = 0;
                                                                     //System.out.println("list"+temp.get(0));
-%>
+                                                                %>
                                                                 <tr>
                                                                     <th><%=temp.get(0)%></th>
                                                                 </tr>
@@ -535,7 +534,6 @@
                                                                         <%
                                                                             // String contextPath = request.getContextPath();
                                                                             // out.println("<img  border='0' align='top'  src='"+contextPath+"/includes/images/alert.gif'/><b> No Records Found to Display!</b>");
-
                                                                             out.println("<img  border='0' align='top'  src='" + contextPath + "/includes/images/alert.gif'/><b>No records found for the given search criteria. Please try a different search criteria!</b>");
                                                                         %>
                                                                     </td>
@@ -544,24 +542,23 @@
 
                                                                 } else {
                                                                 %>
-                                                                <table align="left" id="results" width="690px"
-                                                                       border="0" cellpadding="0" cellspacing="0" class="table table-bordered table-hover">
-                                                                    <tr><td>
-                                                                            <%
-                                                                                // String contextPath = request.getContextPath();
-                                                                                // out.println("<img  border='0' align='top'  src='"+contextPath+"/includes/images/alert.gif'/><b> No Records Found to Display!</b>");
-
-                                                                                out.println("<img  border='0' align='top'  src='" + contextPath + "/includes/images/alert.gif'/><b>No records found for the given search criteria. Please try a different search criteria!</b>");
-                                                                            %>
-                                                                        </td>
-                                                                    </tr>
-                                                                    <% }%>
-
+                                                            <table align="left" id="results" width="690px"
+                                                                   border="0" cellpadding="0" cellspacing="0" class="table table-bordered table-hover">
+                                                                <tr><td>
+                                                                        <%
+                                                                            // String contextPath = request.getContextPath();
+                                                                            // out.println("<img  border='0' align='top'  src='"+contextPath+"/includes/images/alert.gif'/><b> No Records Found to Display!</b>");
+                                                                            out.println("<img  border='0' align='top'  src='" + contextPath + "/includes/images/alert.gif'/><b>No records found for the given search criteria. Please try a different search criteria!</b>");
+                                                                        %>
+                                                                    </td>
+                                                                </tr>
+                                                                <% }%>
 
 
-                                                                </table>
-                                                                </td>
-                                                      
+
+                                                            </table>
+                                                        </td>
+
                                                     </tr>
                                                     <%
                                                         total = 0;
@@ -599,7 +596,7 @@
                                             <table align="right">
                                                 <tr>
                                                     <td style="background-color: white;">
-                                                        <strong><input type="button" class="btn btn-effect-ripple btn-primary" value="Generate Excel" onclick="return gridDownload('trackInOut','xls');" onmouseover="Tip('Click here to generate an excel Report.')" onmouseout="UnTip()" id="excel"/></strong>
+                                                        <strong><input type="button" class="btn btn-effect-ripple btn-primary" value="Generate Excel" onclick="return gridDownload('trackInOut', 'xls');" onmouseover="Tip('Click here to generate an excel Report.')" onmouseout="UnTip()" id="excel"/></strong>
                                                     </td>
                                                 </tr>
                                             </table> 
@@ -619,77 +616,104 @@
             <script language="javascript">
                 function Date1()
                 {
-                    var date=document.trackInOutForm.reportrange.value;
-                    if(date==''){
+                    var date = document.trackInOutForm.reportrange.value;
+                    if (date == '') {
                         alert("Please select Date Range");
                         return false;
                     }
-                    var arr=date.split("-");
-                    var x=arr[1].trim();
+                    var arr = date.split("-");
+                    var x = arr[1].trim();
                     document.getElementById("docdatepickerfrom").value = arr[0];
-                    document.getElementById("docdatepicker").value =x ;
+                    document.getElementById("docdatepicker").value = x;
                 }
-                function toggle(docType,k,id) {
+                function toggle(docType, k, id) {
                     //  alert(document.getElementsByClassName("inboundvalue"+docType).length);
-                    var inbound = document.getElementById("inbound"+docType);
-                    var doctype = document.getElementById("doctype"+docType);
-                    var inboundvalue = document.getElementsByClassName("inboundvalue"+docType); 
-                    var outboundvalue = document.getElementsByClassName("outboundvalue"+docType); 
-                    var outbound = document.getElementById("outbound"+docType);
+                    var inbound = document.getElementById("inbound" + docType);
+                    var doctype = document.getElementById("doctype" + docType);
+                    var inboundvalue = document.getElementsByClassName("inboundvalue" + docType);
+                    var outboundvalue = document.getElementsByClassName("outboundvalue" + docType);
+                    var outbound = document.getElementById("outbound" + docType);
                     //alert(ele1.length);
                     //alert("value"+ele3[0]);      
                     var id = document.getElementById(id);
                     //alert(text);
-                    if(inbound!=null&&inbound!=''){
-                        if(inbound.style.display == "none") {
-            
+                    if (inbound != null && inbound != '') {
+                        if (inbound.style.display == "none") {
+
                             inbound.removeAttribute("style");
                             doctype.rowSpan = k;
                             for (var i = 0; i < inboundvalue.length; i++) {
                                 inboundvalue[i].removeAttribute("style");
                             }
                             //document.getElementById("toggleTd"+j).style.borderBottom="none";
-                
+
                             // 	id.innerHTML = "-";
-                            id.style.backgroundImage="url('../includes/images/minus.png')";
+                            id.style.backgroundImage = "url('../includes/images/minus.png')";
                         }
                         else {
-            
+
                             inbound.style.display = "none";
                             doctype.rowSpan = "2";
                             for (var i = 0; i < inboundvalue.length; i++) {
                                 inboundvalue[i].style.display = "none";
                             }
                             //id.innerHTML = "+";
-                            id.style.backgroundImage="url('../includes/images/plus.png')";
+                            id.style.backgroundImage = "url('../includes/images/plus.png')";
                         }
                     }
-                    if(outbound!=null&&outbound!=''){
-                        if(outbound.style.display == "none") {
-            
+                    if (outbound != null && outbound != '') {
+                        if (outbound.style.display == "none") {
+
                             outbound.removeAttribute("style");
                             doctype.rowSpan = k;
                             for (var i = 0; i < outboundvalue.length; i++) {
                                 outboundvalue[i].removeAttribute("style");
                             }
                             //document.getElementById("toggleTd"+j).style.borderBottom="none";
-                
+
                             //	id.innerHTML = "-";
-                            id.style.backgroundImage="url('../includes/images/minus.png')";
+                            id.style.backgroundImage = "url('../includes/images/minus.png')";
                         }
                         else {
-            
+
                             outbound.style.display = "none";
                             doctype.rowSpan = "2";
                             for (var i = 0; i < outboundvalue.length; i++) {
                                 outboundvalue[i].style.display = "none";
                             }
                             //id.innerHTML = "+";
-                            id.style.backgroundImage="url('../includes/images/plus.png')";
+                            id.style.backgroundImage = "url('../includes/images/plus.png')";
                         }
                     }
-   
+
                 }
+
+                $(function() {
+
+                    function cb(start, end) {
+                        $('#reportrange span').html(start.format('MM/YYYY  HH:MM') + ' - ' + end.format('MM/YYYY HH:MM'));
+                    }
+                    cb(moment().subtract(29, 'days'), moment());
+
+                    $('#reportrange').daterangepicker({
+                        ranges: {
+                            'Today': [moment(), moment()],
+                            'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+                            'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+                            'This Month': [moment().startOf('month'), moment().endOf('month')],
+                            'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')],
+                            'Transactions Until': [moment()]
+                        },
+                        timePicker: true,
+                        timePicker24Hour: true,
+                        timePickerIncrement: 1,
+                        locale: {
+                            format: 'MM/YYYY HH:mm'
+                        }
+                    }, cb);
+
+                });
+
             </script>
 
         </div>
@@ -701,8 +725,8 @@
         <script>
             $('input[name="daterange"]').daterangepicker();
         </script>
-              
-     
+
+
         <script language="JavaScript"  src='<s:url value="/includes/js/GeneralAjax.js"/>'></script>
         <script language="JavaScript"  src='<s:url value="/includes/js/downloadAjax.js"/>'></script>
         <script language="JavaScript"  src='<s:url value="/includes/js/overlay.js"/>'></script>
@@ -719,5 +743,5 @@
         <script src='<s:url value="../includes/bootstrap/js/bootstrap.min.js"/>'></script>
         <script src='<s:url value="../includes/plugins/daterangepicker/daterangepicker.js"/>'></script>
         <script src='<s:url value="../includes/bootstrap/js/app.min.js"/>'></script>
-           </body>
+    </body>
 </html>

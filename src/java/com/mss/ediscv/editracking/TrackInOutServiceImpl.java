@@ -311,8 +311,9 @@ public class TrackInOutServiceImpl implements TrackInOutService {
         }
         documentSearchQuery.append("SELECT FILES.TRANSACTION_TYPE as TRANSACTION_TYPE,FILES.DIRECTION as DIRECTION, "
                 + "FILES.DATE_TIME_RECEIVED as DATE_TIME_RECEIVED,FILES.ACK_STATUS as ACK_STATUS,"
-                + "TP.NAME as RECEIVER_NAME,TP.NAME as SENDER_NAME FROM FILES "
-                + "LEFT OUTER JOIN TP ON (TP.ID=FILES.SENDER_ID) OR (TP.ID=FILES.RECEIVER_ID)");
+                + "TP2.NAME as RECEIVER_NAME,TP1.NAME as SENDER_NAME FROM FILES "
+                  + "LEFT OUTER JOIN TP TP1 ON (TP1.ID=FILES.SENDER_ID) LEFT OUTER JOIN TP TP2 "
+                + "ON (TP2.ID=FILES.RECEIVER_ID)");
         documentSearchQuery.append(" WHERE 1=1 AND FLOWFLAG='M'");
         if (doctype != null && !"".equals(doctype.trim())) {
             documentSearchQuery.append(WildCardSql.getWildCardSql1("FILES.TRANSACTION_TYPE", doctype.trim()));
