@@ -177,7 +177,7 @@
                                                                         <th >DaysCount</th>
                                                                         <th >Transaction Type</th>
                                                                         <th >Comments</th>
-                                                                        <th >Archive Date</th>
+                                                                        <th >Purge Date</th>
                                                                 </thead>
                                                                 
                                                                 <tbody>
