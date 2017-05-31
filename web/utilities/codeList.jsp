@@ -208,12 +208,12 @@
             <section class="content-header">
                 <h1>
                     Code List Editor
-                    <small>Code List</small>
+                    <!--<small>Code List</small>-->
                 </h1>
-                <ol class="breadcrumb">
+<!--                <ol class="breadcrumb">
                     <li><a ><i class="fa fa-gavel"></i>Code List Editor</a></li>
                     <li class="active">Code List</li>
-                </ol>
+                </ol>-->
             </section>
             <center> <div id="responseString">
                  <%--   <%

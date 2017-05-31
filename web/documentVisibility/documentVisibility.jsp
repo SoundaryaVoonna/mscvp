@@ -131,11 +131,13 @@
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
             <section class="content-header">
-                <h1>Search Document Repository<small>Document Visibility</small></h1>
-                <ol class="breadcrumb">
+                <h1>Search Document Repository
+                    <!--<small>Document Visibility</small>-->
+                </h1>
+<!--                <ol class="breadcrumb">
                     <li><a href="#"><i class="fa fa-book"></i>Document Visibility</a></li>
                     <li class="active">Search Document Repository</li>
-                </ol>
+                </ol>-->
             </section>
             <br>
 
@@ -164,7 +166,7 @@
                                         <div class="row">
                                             <div class="col-sm-12">
                                                 <div class="row">
-                                                    <div class="col-sm-3"> <label>Date range</label>
+                                                    <div class="col-sm-3"> <label>Date Range</label>
                                                         <s:textfield name="reportrange"  id="reportrange" cssClass="form-control pull-left"   value="%{reportrange}" onchange="Date1();" /> 
                                                     </div>
                                                     <script type="text/javascript">
