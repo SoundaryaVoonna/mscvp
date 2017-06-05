@@ -27,7 +27,7 @@ import javax.mail.PasswordAuthentication;
  */
 public class MailManager {
     private static final String SMTP_AUTH_USER = "mscvp_alerts@miraclesoft.com";
-     private static final String SMTP_AUTH_PWD  = "Miracle@123";
+     private static final String SMTP_AUTH_PWD  = "Plokam@001";
      private static final String SMTP_HOST  = "smtp.miraclesoft.com";
      private static final String PORT="587";
      
