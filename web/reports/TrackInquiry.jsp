@@ -309,7 +309,7 @@
                                                                             if (trackInOutBean.getAckStatus().equalsIgnoreCase("REJECTED")) {
                                                                                 out.println("REJECTED");
                                                                             } else if (trackInOutBean.getAckStatus().equalsIgnoreCase("ACCEPTED")) {
-                                                                                out.println("A");
+                                                                                out.println("ACCEPTED");
                                                                             } else {
                                                                                 out.println("<font color='orange'>" + trackInOutBean.getAckStatus() + "</font>");
                                                                             }
