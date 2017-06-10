@@ -256,11 +256,11 @@ function populatePoDetails(responseXML)
          }
          */
 
-        if (sapIdocNum != "NO") {
-            document.getElementById('POSapIdocNum').value = sapIdocNum;
-        } else {
-            document.getElementById('POSapIdocNum').value = "--";
-        }
+//        if (sapIdocNum != "NO") {
+//            document.getElementById('POSapIdocNum').value = sapIdocNum;
+//        } else {
+//            document.getElementById('POSapIdocNum').value = "--";
+//        }
 //        if (deilvaryName != "NO") {
 //            document.getElementById('PODeilvaryName').value = deilvaryName;
 //        }
@@ -369,12 +369,12 @@ function populatePoDetails(responseXML)
 
         if (SAP_DETAILS != 'NO') {
             document.getElementById('sapDeatails').style.display = "block";
-            document.getElementById('SAP_USER').value = SAP_USER;
+            //document.getElementById('SAP_USER').value = SAP_USER;
             document.getElementById('IDOC_NUMBER').value = IDOC_NUMBER;
             document.getElementById('PO_NUMBER').value = PO_NUMBER;
-            document.getElementById('PO_DATE').value = PO_DATE;
+            //document.getElementById('PO_DATE').value = PO_DATE;
             document.getElementById('IDOC_STATUS_CODE').value = IDOC_STATUS_CODE;
-            document.getElementById('IDOC_STATUS_DESCRIPTION').value = IDOC_STATUS_DESCRIPTION;
+            //document.getElementById('IDOC_STATUS_DESCRIPTION').value = IDOC_STATUS_DESCRIPTION;
         } 
 
     }
