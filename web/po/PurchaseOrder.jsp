@@ -431,9 +431,12 @@
                         </div>
                         <div class="col-sm-6"> <label class="labelw">SO&nbsp;# :</label>
                             <s:textfield  cssClass="form-control"  required="required" placeholder="" id="POSoNumber" name="POSoNumber" readonly="true"/>
-                        </div> --%>
+                        </div> 
                     <div class="col-sm-6"> <label class="labelw">SAPIDOC # </label>
                         <s:textfield  cssClass="form-control"  required="required" placeholder="" id="POSapIdocNum" name="POSapIdocNum" readonly="true"/>
+                    </div> --%>
+                    <div class="col-sm-6"> <label class="labelw">DocumentType </label>
+                        <s:textfield  cssClass="form-control"  required="required" placeholder="" id="PODocumentType" name="PODocumentType" readonly="true"/>
                     </div>
                 </div>
                 <%--<div class="col-sm-6"> <label class="labelw">IDOC Status :</label>
@@ -441,9 +444,6 @@
                 </div>--%>
 
                 <div class="row col-sm-12">
-                    <div class="col-sm-6"> <label class="labelw">DocumentType </label>
-                        <s:textfield  cssClass="form-control"  required="required" placeholder="" id="PODocumentType" name="PODocumentType" readonly="true"/>
-                    </div>  
                     <div class="col-sm-6"> <label class="labelw">TransactionType</label>
                         <s:textfield  cssClass="form-control"  required="required" placeholder="" id="POTransactionType" name="POTransactionType" readonly="true"/>
                     </div>
@@ -529,29 +529,29 @@
                 <div id="sapDeatails" style="display: none;margin-top:10px;">
                     <div class="col-sm-6"> <h4>SAP Details:</h4></div>
                     <div class="row col-sm-12 clear">
-                        <div class="col-sm-6"> <label class="labelw"> SAP_USER </label>
+                        <%--<div class="col-sm-6"> <label class="labelw"> SAP_USER </label>
                             <s:textfield  cssClass="form-control"  required="required" placeholder="" id="SAP_USER" name="ManStatus" readonly="true"/>
-                        </div>
+                        </div> --%>
                         <div class="col-sm-6"> <label class="labelw"> PO_NUMBER </label>
                             <s:textfield  cssClass="form-control"  required="required" placeholder="" id="PO_NUMBER" name="ManStatus" readonly="true"/>
                         </div>
-                        <div class="col-sm-6"> <label class="labelw"> PO_DATE </label>
+                        <%--<div class="col-sm-6"> <label class="labelw"> PO_DATE </label>
                             <s:textfield  cssClass="form-control"  required="required" placeholder="" id="PO_DATE" name="ManStatus" readonly="true"/>
-                        </div>
+                        </div>--%>
                         <div class="col-sm-6"> <label class="labelw"> IDOC CODE </label>
                             <s:textfield  cssClass="form-control"  required="required" placeholder="" id="IDOC_STATUS_CODE" name="ManStatus" readonly="true"/>
                         </div>
                     </div>
                     <div class="row col-sm-12 clear">
                         <div class="col-sm-6"> <label class="labelw"> IDOC_NUMBER </label>
-                            <s:textfield  cssClass="form-control"  style="width: 217px;" required="required" placeholder="" id="IDOC_NUMBER" name="ManStatus" readonly="true"/>
+                            <s:textfield  cssClass="form-control"  style="width: 253px;" required="required" placeholder="" id="IDOC_NUMBER" name="ManStatus" readonly="true"/>
                         </div>
                     </div>
-                    <div class="row col-sm-12 clear">
+                    <%--<div class="row col-sm-12 clear">
                         <div class="col-sm-6"> <label class="labelw"> IDOC_DESCRIPTION </label>
-                            <s:textfield  cssClass="form-control" style="width: 217px;" required="required" placeholder="" id="IDOC_STATUS_DESCRIPTION" name="ManStatus" readonly="true"/>
+                            <s:textfield  cssClass="form-control" style="width: 253px;" required="required" placeholder="" id="IDOC_STATUS_DESCRIPTION" name="ManStatus" readonly="true"/>
                         </div>
-                    </div>
+                    </div>--%>
                 </div>
 
                 <div class="row col-sm-12" id="errorDiv" style="display: none">
@@ -612,7 +612,7 @@
 
                     function resetvaluesPO() {
                         $('#hide-menu1').removeClass('show-menu');
-                     //   $('.myRadio').attr('checked', false);
+                        //   $('.myRadio').attr('checked', false);
                         document.getElementById('poDateFrom').value = "";
                         document.getElementById('poDateTo').value = "";
                         document.getElementById('reportrange').value = ""
