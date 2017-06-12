@@ -2094,6 +2094,10 @@ public class AjaxHandlerServiceImpl implements AjaxHandlerService {
 
             sb.append("<STATUS>" + poLifecycleBean.getStatus() + "</STATUS>");
             sb.append("<DIRECTION>" + poLifecycleBean.getDirection().toLowerCase() + "</DIRECTION>");
+            sb.append("<GS_CONTROL_NUMBER>" + poLifecycleBean.getGsCtrlNum() + "</GS_CONTROL_NUMBER>");
+            sb.append("<ST_CONTROL_NUMBER>" + poLifecycleBean.getStCtrlNum() + "</ST_CONTROL_NUMBER>");
+            sb.append("<PRI_KEY_TYPE>" + poLifecycleBean.getPrimary_key_type()+ "</PRI_KEY_TYPE>");
+            sb.append("<PRI_KEY_VAL>" + poLifecycleBean.getPrimary_key_val()+ "</PRI_KEY_VAL>");
             /*
              * End
              */
@@ -2201,7 +2205,10 @@ public class AjaxHandlerServiceImpl implements AjaxHandlerService {
             sb.append("<TRANS_TYPE>" + asnLifecycleBean.getTranType() + "</TRANS_TYPE>");
 
             sb.append("<DIRECTION>" + asnLifecycleBean.getDirection().toLowerCase() + "</DIRECTION>");
-
+            sb.append("<GS_CONTROL_NUMBER>" + asnLifecycleBean.getGsCtrlNum() + "</GS_CONTROL_NUMBER>");
+            sb.append("<ST_CONTROL_NUMBER>" + asnLifecycleBean.getStCtrlNum() + "</ST_CONTROL_NUMBER>");
+            sb.append("<PRI_KEY_TYPE>" + asnLifecycleBean.getPrimary_key_type()+ "</PRI_KEY_TYPE>");
+            sb.append("<PRI_KEY_VAL>" + asnLifecycleBean.getPrimary_key_val()+ "</PRI_KEY_VAL>");
             if (asnLifecycleBean.getPreFile() != null) {
                 if (new File(asnLifecycleBean.getPreFile()).exists() && new File(asnLifecycleBean.getPreFile()).isFile()) {
                     sb.append("<PRETRANSFILEPATH>" + asnLifecycleBean.getPreFile() + "</PRETRANSFILEPATH>");
@@ -2307,7 +2314,10 @@ public class AjaxHandlerServiceImpl implements AjaxHandlerService {
             sb.append("<INV_AMOUNT>" + invoiceLifecycleBean.getInvAmt() + "</INV_AMOUNT>");
             sb.append("<CHEQUE_NUMBER>" + invoiceLifecycleBean.getChequeNum() + "</CHEQUE_NUMBER>");
             sb.append("<TRANS_TYPE>" + invoiceLifecycleBean.getTranType() + "</TRANS_TYPE>");
-
+            sb.append("<GS_CONTROL_NUMBER>" + invoiceLifecycleBean.getGsCtrlNum() + "</GS_CONTROL_NUMBER>");
+            sb.append("<ST_CONTROL_NUMBER>" + invoiceLifecycleBean.getStCtrlNum() + "</ST_CONTROL_NUMBER>");
+            sb.append("<PRI_KEY_TYPE>" + invoiceLifecycleBean.getPrimary_key_type()+ "</PRI_KEY_TYPE>");
+            sb.append("<PRI_KEY_VAL>" + invoiceLifecycleBean.getPrimary_key_val()+ "</PRI_KEY_VAL>");
             if (invoiceLifecycleBean.getPreFile() != null) {
                 if (new File(invoiceLifecycleBean.getPreFile()).exists() && new File(invoiceLifecycleBean.getPreFile()).isFile()) {
                     sb.append("<PRETRANSFILEPATH>" + invoiceLifecycleBean.getPreFile() + "</PRETRANSFILEPATH>");
@@ -2409,6 +2419,10 @@ public class AjaxHandlerServiceImpl implements AjaxHandlerService {
             sb.append("<ISA_TIME>" + paymentLifecycleBean.getIsaTime() + "</ISA_TIME>");
             sb.append("<INV_NUMBER>" + paymentLifecycleBean.getInvNumber() + "</INV_NUMBER>");
             sb.append("<INV_AMOUNT>" + paymentLifecycleBean.getInvAmt() + "</INV_AMOUNT>");
+            sb.append("<GS_CONTROL_NUMBER>" + paymentLifecycleBean.getGsCtrlNum() + "</GS_CONTROL_NUMBER>");
+            sb.append("<ST_CONTROL_NUMBER>" + paymentLifecycleBean.getStCtrlNum() + "</ST_CONTROL_NUMBER>");
+            sb.append("<PRI_KEY_TYPE>" + paymentLifecycleBean.getPrimary_key_type()+ "</PRI_KEY_TYPE>");
+            sb.append("<PRI_KEY_VAL>" + paymentLifecycleBean.getPrimary_key_val()+ "</PRI_KEY_VAL>");
             if (paymentLifecycleBean.getChequeNum() != null && !"".equals(paymentLifecycleBean.getChequeNum())) {
                 sb.append("<CHEQUE_NUMBER>" + paymentLifecycleBean.getChequeNum() + "</CHEQUE_NUMBER>");
             } else {
@@ -3755,7 +3769,6 @@ public class AjaxHandlerServiceImpl implements AjaxHandlerService {
                     + "WHERE 1=1 AND TRANSPORT_LT_RESPONSE.FILE_ID = '" + fileId + "' AND TRANSPORT_LT_RESPONSE.REF_ID='" + refId + "'  AND FILES.FLOWFLAG = 'L'  ";
         }
         // System.out.println("invNumber--->"+invNumber); 
-
 
         System.out.println("LT Response QUERY IS " + queryString);
 
@@ -5516,15 +5529,15 @@ public class AjaxHandlerServiceImpl implements AjaxHandlerService {
         System.out.println("selected name is " + selectedName);
         try {
             if (selectedName != null && !"-1".equals(selectedName)) {
-                
-                query = "SELECT DEFAULT_VERSION from CODELIST_XREF_VERS where LIST_NAME='" + selectedName + "'" ;
+
+                query = "SELECT DEFAULT_VERSION from CODELIST_XREF_VERS where LIST_NAME='" + selectedName + "'";
                 preparedStatement = connection.prepareStatement(query);
                 resultSet = preparedStatement.executeQuery();
                 while (resultSet.next()) {
                     ver = resultSet.getString("DEFAULT_VERSION");
                 }
-                
-                queryString = "SELECT COUNT(*) AS COUNT FROM CODELIST_XREF_ITEM WHERE SENDER_ITEM='" + senderItem + "' AND RECEIVER_ITEM='" + recItem + "' AND LIST_NAME='" + selectedName + "'AND LIST_VERSION='"+ ver + "'";
+
+                queryString = "SELECT COUNT(*) AS COUNT FROM CODELIST_XREF_ITEM WHERE SENDER_ITEM='" + senderItem + "' AND RECEIVER_ITEM='" + recItem + "' AND LIST_NAME='" + selectedName + "'AND LIST_VERSION='" + ver + "'";
 
 //            else
 //            {

@@ -63,8 +63,7 @@ function getlfcPODetails(number, id, type, db) {
 
 
 
-function populateLifecycle(responseXML)
-{
+function populateLifecycle(responseXML){
     var details = responseXML.getElementsByTagName("DETAILS")[0];
     var detail = details.childNodes[0];
     var chk = detail.getElementsByTagName("VALID")[0];
@@ -84,39 +83,47 @@ function populateLifecycle(responseXML)
 
         var STATUS = detail.getElementsByTagName("STATUS")[0].childNodes[0].nodeValue;
         var PO_NUMBER = detail.getElementsByTagName("PO_NUMBER")[0].childNodes[0].nodeValue;
-        var PO_DATE = detail.getElementsByTagName("PO_DATE")[0].childNodes[0].nodeValue;
-        var PO_STATUS = detail.getElementsByTagName("PO_STATUS")[0].childNodes[0].nodeValue;
-        var SO_NUMBER = detail.getElementsByTagName("SO_NUMBER")[0].childNodes[0].nodeValue;
-        var ITEM_QTY = detail.getElementsByTagName("ITEM_QTY")[0].childNodes[0].nodeValue;
+//        var PO_DATE = detail.getElementsByTagName("PO_DATE")[0].childNodes[0].nodeValue;
+//        var PO_STATUS = detail.getElementsByTagName("PO_STATUS")[0].childNodes[0].nodeValue;
+//        var SO_NUMBER = detail.getElementsByTagName("SO_NUMBER")[0].childNodes[0].nodeValue;
+//        var ITEM_QTY = detail.getElementsByTagName("ITEM_QTY")[0].childNodes[0].nodeValue;
 
         var ISA_NUMBER = detail.getElementsByTagName("ISA_NUMBER")[0].childNodes[0].nodeValue;
         var ISA_DATE = detail.getElementsByTagName("ISA_DATE")[0].childNodes[0].nodeValue;
         var ISA_TIME = detail.getElementsByTagName("ISA_TIME")[0].childNodes[0].nodeValue;
         var TRANS_TYPE = detail.getElementsByTagName("TRANS_TYPE")[0].childNodes[0].nodeValue;
+        var GS_CONTROL_NUMBER = detail.getElementsByTagName("GS_CONTROL_NUMBER")[0].childNodes[0].nodeValue;
+        var ST_CONTROL_NUMBER = detail.getElementsByTagName("ST_CONTROL_NUMBER")[0].childNodes[0].nodeValue;
+        var PRI_KEY_TYPE = detail.getElementsByTagName("PRI_KEY_TYPE")[0].childNodes[0].nodeValue;
+        var PRI_KEY_Val = detail.getElementsByTagName("PRI_KEY_VAL")[0].childNodes[0].nodeValue;
+        
         document.getElementById('LfcInstanceId').value = fileid;
         document.getElementById('LfcPONum').value = PO_NUMBER;
-        document.getElementById('LfcPONum').value = "--";
-        document.getElementById('LfcPODates').value = PO_DATE;
-        document.getElementById('LfcPODates').value = "--";
-        document.getElementById('LfcStatus1').value = PO_STATUS;
-        document.getElementById('LfcStatus1').value = "--";
-        document.getElementById('LfcSo').value = SO_NUMBER;
-        document.getElementById('LfcSo').value = "--";
-        document.getElementById('LfcPOQty').value = ITEM_QTY;
-        document.getElementById('LfcPOQty').value = "--";
+          document.getElementById('LfcManpri_key_type').value = PRI_KEY_TYPE;
+            document.getElementById('LfcManpri_key_value').value = PRI_KEY_Val;
+        //document.getElementById('LfcPONum').value = "--";
+//        document.getElementById('LfcPODates').value = PO_DATE;
+//        document.getElementById('LfcPODates').value = "--";
+//        document.getElementById('LfcStatus1').value = PO_STATUS;
+//        document.getElementById('LfcStatus1').value = "--";
+//        document.getElementById('LfcSo').value = SO_NUMBER;
+//        document.getElementById('LfcSo').value = "--";
+//        document.getElementById('LfcPOQty').value = ITEM_QTY;
+        //document.getElementById('LfcPOQty').value = "--";
         document.getElementById('LfcTransactionType').value = TRANS_TYPE;
-        document.getElementById('LfcTransactionType').value = "--";
+        //document.getElementById('LfcTransactionType').value = "--";
         document.getElementById('LycPOPartnerId').value = SENDER_ID;
         document.getElementById('LycPOPartnerName').value = SENDER_NAME;
         document.getElementById('LfcPOReceiverId').value = RECEIVER_ID;
         document.getElementById('LfcPOReceiverName').value = RECEIVER_NAME;
         document.getElementById('LfcPOIsa').value = ISA_NUMBER;
-        document.getElementById('LfcPOIsa').value = "--";
+        document.getElementById('LfcGS_CONTROL_NUMBER').value =GS_CONTROL_NUMBER;
+        document.getElementById('LfcST_CONTROL_NUMBER').value =ST_CONTROL_NUMBER;
         document.getElementById('LfcPOISADate').value = ISA_DATE;
-        document.getElementById('LfcPOISADate').value = "--";
+        //document.getElementById('LfcPOISADate').value = "--";
         document.getElementById('LfcPOIsATime').value = ISA_TIME;
-        document.getElementById('LfcPOIsATime').value = "--";
-
+        //document.getElementById('LfcPOIsATime').value = "--";
+        
         if (STATUS.toUpperCase() == "ERROR") {
             document.getElementById('LfcPOStatus').value = STATUS;
         } else if (STATUS.toUpperCase() == "SUCCESS") {

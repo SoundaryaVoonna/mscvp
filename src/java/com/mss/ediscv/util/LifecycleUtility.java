@@ -83,7 +83,7 @@ public class LifecycleUtility {
                 poLifecycleBean = new PoLifecycleBean();
                 poLifecycleBean.setFileType(resultSet.getString("FILE_TYPE"));
                 poLifecycleBean.setTranType(resultSet.getString("TRANSACTION_TYPE"));
-               // poLifecycleBean.setSenderId(resultSet.getString("SENDER_ID"));
+                // poLifecycleBean.setSenderId(resultSet.getString("SENDER_ID"));
                 // poLifecycleBean.setRecId(resultSet.getString("RECEIVER_ID"));
                 poLifecycleBean.setDirection(resultSet.getString("DIRECTION"));
                 poLifecycleBean.setDatetimeRec(resultSet.getTimestamp("DATE_TIME_RECEIVED"));
@@ -143,7 +143,7 @@ public class LifecycleUtility {
                 throw new ServiceLocatorException(se);
             }
         }
-          //System.out.println("poLifecycleBeanList-----"+poLifecycleBeanList.toString());
+        //System.out.println("poLifecycleBeanList-----"+poLifecycleBeanList.toString());
         //System.out.println("poLifecycleBeanList-----"+poLifecycleBeanList.size());
         return poLifecycleBeanList;
 
@@ -176,13 +176,13 @@ public class LifecycleUtility {
                 asnLifecycleBean = new AsnLifecycleBean();
                 asnLifecycleBean.setFileType(resultSet.getString("FILE_TYPE"));
                 asnLifecycleBean.setTranType(resultSet.getString("TRANSACTION_TYPE"));
-              //  asnLifecycleBean.setSenderId(resultSet.getString("SENDER_ID"));
+                //  asnLifecycleBean.setSenderId(resultSet.getString("SENDER_ID"));
                 // asnLifecycleBean.setRecId(resultSet.getString("RECEIVER_ID"));
                 asnLifecycleBean.setDirection(resultSet.getString("DIRECTION"));
                 asnLifecycleBean.setDatetimeRec(resultSet.getTimestamp("DATE_TIME_RECEIVED"));
                 asnLifecycleBean.setStatus(resultSet.getString("STATUS"));
                 asnLifecycleBean.setPoNumber(resultSet.getString("PO_NUMBER"));
-              //  asnLifecycleBean.setAsnNumber(resultSet.getString("ASN_NUMBER"));
+                //  asnLifecycleBean.setAsnNumber(resultSet.getString("ASN_NUMBER"));
                 //  asnLifecycleBean.setPoNumber(resultSet.getString("PO_NUMBER"));
                 asnLifecycleBean.setAckStatus(resultSet.getString("ACK_STATUS"));
 //                asnLifecycleBean.setBolNumber(resultSet.getString("BOL_NUMBER"));
@@ -420,160 +420,193 @@ public class LifecycleUtility {
         String poNum = poNumber;
         if ("ARCHIVE".equals(database)) {
             lifeCycleQuery.append("select ARCHIVE_FILES.FILE_ID, ARCHIVE_FILES.FILE_TYPE,ARCHIVE_FILES.TRANSACTION_TYPE, ARCHIVE_FILES.DIRECTION,ARCHIVE_FILES.DATE_TIME_RECEIVED, "
-                + "ARCHIVE_FILES.ST_CONTROL_NUMBER, ARCHIVE_FILES.GS_CONTROL_NUMBER,ARCHIVE_FILES.SENDER_ID,ARCHIVE_FILES.RECEIVER_ID, ARCHIVE_FILES.STATUS, ARCHIVE_PO.SAP_IDOC_NUMBER, "
-                + "ARCHIVE_FILES.ISA_NUMBER, ARCHIVE_FILES.ISA_DATE, ARCHIVE_FILES.ISA_TIME,ARCHIVE_PO.PO_NUMBER ,ARCHIVE_PO.ORDER_DATE,ARCHIVE_PO.PO_VALUE,ARCHIVE_PO.ORDER_STATUS,ARCHIVE_PO.SO_NUMBER, "
-                + "ARCHIVE_PO.ITEM_QTY,ARCHIVE_FILES.ACK_STATUS,TP1.NAME as SENDER_NAME,TP2.NAME as RECEIVER_NAME,ARCHIVE_FILES.PRE_TRANS_FILEPATH,ARCHIVE_FILES.POST_TRANS_FILEPATH, "
-                + "ARCHIVE_FILES.ORG_FILEPATH,ARCHIVE_FILES.ACK_FILE_ID as ACK_FILE_ID FROM ARCHIVE_PO LEFT OUTER JOIN ARCHIVE_FILES ON "
-                + "(ARCHIVE_PO.PO_NUMBER = ARCHIVE_FILES.PRI_KEY_VAL AND ARCHIVE_PO.FILE_ID = ARCHIVE_FILES.FILE_ID) "
-                + "LEFT OUTER JOIN TP TP1 ON (TP1.ID=ARCHIVE_FILES.SENDER_ID) LEFT OUTER JOIN TP TP2 ON (TP2.ID = ARCHIVE_FILES.RECEIVER_ID) "
-                + "WHERE FLOWFLAG like 'M' AND ARCHIVE_PO.PO_NUMBER LIKE '%" + poNum + "%' AND ARCHIVE_FILES.FILE_ID LIKE '%" + fileID + "%'"
-                + " ORDER BY ARCHIVE_FILES.DATE_TIME_RECEIVED");
-        }else{
+                    + "ARCHIVE_FILES.ST_CONTROL_NUMBER, ARCHIVE_FILES.GS_CONTROL_NUMBER,ARCHIVE_FILES.SENDER_ID,ARCHIVE_FILES.RECEIVER_ID, ARCHIVE_FILES.STATUS, ARCHIVE_PO.SAP_IDOC_NUMBER, "
+                    + "ARCHIVE_FILES.ISA_NUMBER, ARCHIVE_FILES.ISA_DATE, ARCHIVE_FILES.ISA_TIME,ARCHIVE_PO.PO_NUMBER ,ARCHIVE_PO.ORDER_DATE,ARCHIVE_PO.PO_VALUE,ARCHIVE_PO.ORDER_STATUS,ARCHIVE_PO.SO_NUMBER, "
+                    + "ARCHIVE_PO.ITEM_QTY,ARCHIVE_FILES.ACK_STATUS,TP1.NAME as SENDER_NAME,TP2.NAME as RECEIVER_NAME,ARCHIVE_FILES.PRE_TRANS_FILEPATH,ARCHIVE_FILES.POST_TRANS_FILEPATH, "
+                    + "ARCHIVE_FILES.ORG_FILEPATH,ARCHIVE_FILES.ACK_FILE_ID as ACK_FILE_ID,ARCHIVE_FILES.PRI_KEY_VAL as PRI_KEY_VAL,ARCHIVE_FILES.PRI_KEY_TYPE as PRI_KEY_TYPE FROM ARCHIVE_PO LEFT OUTER JOIN ARCHIVE_FILES ON "
+                    + "(ARCHIVE_PO.PO_NUMBER = ARCHIVE_FILES.PRI_KEY_VAL AND ARCHIVE_PO.FILE_ID = ARCHIVE_FILES.FILE_ID) "
+                    + "LEFT OUTER JOIN TP TP1 ON (TP1.ID=ARCHIVE_FILES.SENDER_ID) LEFT OUTER JOIN TP TP2 ON (TP2.ID = ARCHIVE_FILES.RECEIVER_ID) "
+                    + "WHERE FLOWFLAG like 'M' AND ARCHIVE_PO.PO_NUMBER LIKE '%" + poNum + "%' AND ARCHIVE_FILES.FILE_ID LIKE '%" + fileID + "%'"
+                    + " ORDER BY ARCHIVE_FILES.DATE_TIME_RECEIVED");
+        } else {
             lifeCycleQuery.append("select FILES.FILE_ID, FILES.FILE_TYPE,FILES.TRANSACTION_TYPE, FILES.DIRECTION,FILES.DATE_TIME_RECEIVED, "
-                + "FILES.ST_CONTROL_NUMBER, FILES.GS_CONTROL_NUMBER,FILES.SENDER_ID,FILES.RECEIVER_ID, FILES.STATUS, PO.SAP_IDOC_NUMBER, "
-                + "FILES.ISA_NUMBER, FILES.ISA_DATE, FILES.ISA_TIME,PO.PO_NUMBER ,PO.ORDER_DATE,PO.PO_VALUE,PO.ORDER_STATUS,PO.SO_NUMBER, "
-                + "PO.ITEM_QTY,FILES.ACK_STATUS,TP1.NAME as SENDER_NAME,TP2.NAME as RECEIVER_NAME,FILES.PRE_TRANS_FILEPATH,FILES.POST_TRANS_FILEPATH, "
-                + "FILES.ORG_FILEPATH,FILES.ACK_FILE_ID as ACK_FILE_ID FROM PO LEFT OUTER JOIN FILES ON "
-                + "(PO.PO_NUMBER = FILES.PRI_KEY_VAL AND PO.FILE_ID = FILES.FILE_ID) "
-                + "LEFT OUTER JOIN TP TP1 ON (TP1.ID=FILES.SENDER_ID) LEFT OUTER JOIN TP TP2 ON (TP2.ID = FILES.RECEIVER_ID) "
-                + "WHERE FLOWFLAG like 'M' AND PO.PO_NUMBER LIKE '%" + poNum + "%' AND FILES.FILE_ID LIKE '%" + fileID + "%'"
-                + " ORDER BY FILES.DATE_TIME_RECEIVED");
+                    + "FILES.GS_CONTROL_NUMBER,FILES.SENDER_ID,FILES.RECEIVER_ID, FILES.STATUS, PO.SAP_IDOC_NUMBER, "
+                    + "FILES.ISA_NUMBER, FILES.ISA_DATE, FILES.ISA_TIME,PO.PO_NUMBER ,PO.ORDER_DATE,PO.PO_VALUE,PO.ORDER_STATUS,PO.SO_NUMBER, "
+                    + "PO.ITEM_QTY,FILES.ACK_STATUS,TP1.NAME as SENDER_NAME,TP2.NAME as RECEIVER_NAME,FILES.PRE_TRANS_FILEPATH,FILES.POST_TRANS_FILEPATH, "
+                    + "FILES.ORG_FILEPATH,FILES.ACK_FILE_ID as ACK_FILE_ID,FILES.GS_CONTROL_NUMBER as GS_CONTROL_NUMBER,FILES.ST_CONTROL_NUMBER as ST_CONTROL_NUMBER,FILES.PRI_KEY_VAL as PRI_KEY_VAL,FILES.PRI_KEY_TYPE as PRI_KEY_TYPE FROM PO LEFT OUTER JOIN FILES ON "
+                    + "(PO.PO_NUMBER = FILES.PRI_KEY_VAL AND PO.FILE_ID = FILES.FILE_ID) "
+                    + "LEFT OUTER JOIN TP TP1 ON (TP1.ID=FILES.SENDER_ID) LEFT OUTER JOIN TP TP2 ON (TP2.ID = FILES.RECEIVER_ID) "
+                    + "WHERE FLOWFLAG like 'M' AND PO.PO_NUMBER LIKE '%" + poNum + "%' AND FILES.FILE_ID LIKE '%" + fileID + "%'"
+                    + " ORDER BY FILES.DATE_TIME_RECEIVED");
         }
         String searchQuery = lifeCycleQuery.toString();
-        System.out.println("lfc po query-->"+searchQuery);
+        System.out.println("lfc po query-->" + searchQuery);
         try {
             connection = ConnectionProvider.getInstance().getConnection();
             statement = connection.createStatement();
             resultSet = statement.executeQuery(searchQuery);
             while (resultSet.next()) {
+                System.out.println("FILE_TYPE-->" + resultSet.getString("FILE_TYPE"));
                 if ((resultSet.getString("FILE_TYPE") != null) && !"".equals(resultSet.getString("FILE_TYPE"))) {
                     poLifecycleBean.setFileType(resultSet.getString("FILE_TYPE"));
                 } else {
                     poLifecycleBean.setFileType("--");
                 }
+                System.out.println("TRANSACTION_TYPE-->" + resultSet.getString("TRANSACTION_TYPE"));
                 if ((resultSet.getString("TRANSACTION_TYPE") != null) && !"".equals(resultSet.getString("TRANSACTION_TYPE"))) {
                     poLifecycleBean.setTranType(resultSet.getString("TRANSACTION_TYPE"));
                 } else {
                     poLifecycleBean.setTranType("--");
                 }
+                System.out.println("SENDER_ID-->" + resultSet.getString("SENDER_ID"));
                 if ((resultSet.getString("SENDER_ID") != null) && !"".equals(resultSet.getString("SENDER_ID"))) {
                     poLifecycleBean.setSenderId(resultSet.getString("SENDER_ID"));
                 } else {
                     poLifecycleBean.setSenderId("--");
                 }
+                System.out.println("RECEIVER_ID-->" + resultSet.getString("RECEIVER_ID"));
                 if ((resultSet.getString("RECEIVER_ID") != null) && !"".equals(resultSet.getString("RECEIVER_ID"))) {
                     poLifecycleBean.setRecId(resultSet.getString("RECEIVER_ID"));
                 } else {
                     poLifecycleBean.setRecId("--");
                 }
+                System.out.println("DIRECTION-->" + resultSet.getString("DIRECTION"));
                 if ((resultSet.getString("DIRECTION") != null) && !"".equals(resultSet.getString("DIRECTION"))) {
                     poLifecycleBean.setDirection(resultSet.getString("DIRECTION"));
                 } else {
                     poLifecycleBean.setDirection("--");
                 }
+                System.out.println("DATE_TIME_RECEIVED-->" + resultSet.getString("DATE_TIME_RECEIVED"));
                 poLifecycleBean.setDatetimeRec(resultSet.getTimestamp("DATE_TIME_RECEIVED"));
+                System.out.println("STATUS-->" + resultSet.getString("STATUS"));
                 if ((resultSet.getString("STATUS") != null) && !"".equals(resultSet.getString("STATUS"))) {
                     poLifecycleBean.setStatus(resultSet.getString("STATUS"));
                 } else {
                     poLifecycleBean.setStatus("--");
                 }
+                System.out.println("PO_NUMBER-->" + resultSet.getString("PO_NUMBER"));
                 if ((resultSet.getString("PO_NUMBER") != null) && !"".equals(resultSet.getString("PO_NUMBER"))) {
                     poLifecycleBean.setPoNumber(resultSet.getString("PO_NUMBER"));
                 } else {
                     poLifecycleBean.setPoNumber("--");
                 }
+                System.out.println("SENDER_NAME-->" + resultSet.getString("SENDER_NAME"));
                 if ((resultSet.getString("SENDER_NAME") != null) && !"".equals(resultSet.getString("SENDER_NAME"))) {
                     poLifecycleBean.setSenName(resultSet.getString("SENDER_NAME"));
                 } else {
                     poLifecycleBean.setSenName("--");
                 }
+                System.out.println("RECEIVER_NAME-->" + resultSet.getString("RECEIVER_NAME"));
                 if ((resultSet.getString("RECEIVER_NAME") != null) && !"".equals(resultSet.getString("RECEIVER_NAME"))) {
                     poLifecycleBean.setRecName(resultSet.getString("RECEIVER_NAME"));
                 } else {
                     poLifecycleBean.setRecName("--");
                 }
+                System.out.println("FILE_ID-->" + resultSet.getString("FILE_ID"));
                 poLifecycleBean.setFileId(resultSet.getString("FILE_ID"));
-                if ((resultSet.getString("ST_CONTROL_NUMBER") != null) && !"".equals(resultSet.getString("ST_CONTROL_NUMBER"))) {
-                    poLifecycleBean.setStCtrlNum(resultSet.getString("ST_CONTROL_NUMBER"));
+                System.out.println("SAP_IDOC_NUMBER-->" + resultSet.getString("SAP_IDOC_NUMBER"));
+                if (resultSet.getString("SAP_IDOC_NUMBER") != null && !"".equals(resultSet.getString("SAP_IDOC_NUMBER"))) {
+                    poLifecycleBean.setSapIdocNum(resultSet.getString("SAP_IDOC_NUMBER"));
                 } else {
-                    poLifecycleBean.setStCtrlNum("--");
+                    poLifecycleBean.setSapIdocNum("0");
+                }
+                System.out.println("PRE_TRANS_FILEPATH-->" + resultSet.getString("PRE_TRANS_FILEPATH"));
+                if ((resultSet.getString("PRE_TRANS_FILEPATH") != null) && !"".equals(resultSet.getString("PRE_TRANS_FILEPATH"))) {
+                    poLifecycleBean.setPreFile(resultSet.getString("PRE_TRANS_FILEPATH"));
+                } else {
+                    poLifecycleBean.setPreFile("--");
+                }
+                System.out.println("POST_TRANS_FILEPATH-->" + resultSet.getString("POST_TRANS_FILEPATH"));
+                if ((resultSet.getString("POST_TRANS_FILEPATH") != null) && !"".equals(resultSet.getString("POST_TRANS_FILEPATH"))) {
+                    poLifecycleBean.setPostTranFile(resultSet.getString("POST_TRANS_FILEPATH"));
+                } else {
+                    poLifecycleBean.setPostTranFile("--");
+                }
+                System.out.println("ORG_FILEPATH-->" + resultSet.getString("ORG_FILEPATH"));
+                if ((resultSet.getString("ORG_FILEPATH") != null) && !"".equals(resultSet.getString("ORG_FILEPATH"))) {
+                    poLifecycleBean.setOrgFile(resultSet.getString("ORG_FILEPATH"));
+                } else {
+                    poLifecycleBean.setOrgFile("--");
+                }
+                System.out.println("ACK_FILE_ID-->" + resultSet.getString("ACK_FILE_ID"));
+                if ((resultSet.getString("ACK_FILE_ID") != null) && !"".equals(resultSet.getString("ACK_FILE_ID"))) {
+                    poLifecycleBean.setAckFile(resultSet.getString("ACK_FILE_ID"));
+                } else {
+                    poLifecycleBean.setAckFile("--");
+                }
+                System.out.println("ORDER_DATE-->" + resultSet.getString("ORDER_DATE"));
+                if ((resultSet.getString("ORDER_DATE") != null) && !"".equals(resultSet.getString("ORDER_DATE"))) {
+                    poLifecycleBean.setPodate(resultSet.getDate("ORDER_DATE").toString());
+                } else {
+                    poLifecycleBean.setPodate("--");
+                }
+                System.out.println("PO_VALUE-->" + resultSet.getString("PO_VALUE"));
+                if ((resultSet.getString("PO_VALUE") != null) && !"".equals(resultSet.getString("PO_VALUE"))) {
+                    poLifecycleBean.setPoValue(resultSet.getString("PO_VALUE"));
+                } else {
+                    poLifecycleBean.setPoValue("--");
+                }
+                System.out.println("ORDER_STATUS-->" + resultSet.getString("ORDER_STATUS"));
+                if ((resultSet.getString("ORDER_STATUS") != null) && !"".equals(resultSet.getString("ORDER_STATUS"))) {
+                    poLifecycleBean.setPoStatus(resultSet.getString("ORDER_STATUS"));
+                } else {
+                    poLifecycleBean.setPoStatus("--");
+                }
+                System.out.println("SO_NUMBER-->" + resultSet.getString("SO_NUMBER"));
+                if (resultSet.getString("SO_NUMBER") != null && !"".equals(resultSet.getString("SO_NUMBER"))) {
+                    poLifecycleBean.setSoNumber(resultSet.getString("SO_NUMBER"));
+                } else {
+                    poLifecycleBean.setSoNumber("0");
+                }
+                System.out.println("ITEM_QTY-->" + resultSet.getString("ITEM_QTY"));
+                if ((resultSet.getString("ITEM_QTY") != null) && !"".equals(resultSet.getString("ITEM_QTY"))) {
+                    poLifecycleBean.setIteamQty(resultSet.getString("ITEM_QTY"));
+                } else {
+                    poLifecycleBean.setIteamQty("--");
+                }
+                System.out.println("ACK_STATUS-->" + resultSet.getString("ACK_STATUS"));
+                if ((resultSet.getString("ACK_STATUS") != null) && !"".equals(resultSet.getString("ACK_STATUS"))) {
+                    poLifecycleBean.setAckStatus(resultSet.getString("ACK_STATUS"));
+                } else {
+                    poLifecycleBean.setAckStatus("--");
+                }
+                System.out.println("ISA_DATE-->" + resultSet.getString("ISA_DATE"));
+                if ((resultSet.getString("ISA_DATE") != null) && !"".equals(resultSet.getString("ISA_DATE"))) {
+                    poLifecycleBean.setIsaDate(resultSet.getString("ISA_DATE"));
+                } else {
+                    poLifecycleBean.setIsaDate("--");
+                }
+                System.out.println("ISA_TIME-->" + resultSet.getString("ISA_TIME"));
+                if ((resultSet.getString("ISA_TIME") != null) && !"".equals(resultSet.getString("ISA_TIME"))) {
+                    poLifecycleBean.setIsaTime(resultSet.getString("ISA_TIME"));
+                } else {
+                    poLifecycleBean.setIsaTime("--");
+                }
+                System.out.println("ISA_NUMBER-->" + resultSet.getString("ISA_NUMBER"));
+                if ((resultSet.getString("ISA_NUMBER") != null) && !"".equals(resultSet.getString("ISA_NUMBER"))) {
+                    poLifecycleBean.setIsaCtrlNum(resultSet.getString("ISA_NUMBER"));
+                } else {
+                    poLifecycleBean.setIsaCtrlNum("--");
                 }
                 if ((resultSet.getString("GS_CONTROL_NUMBER") != null) && !"".equals(resultSet.getString("GS_CONTROL_NUMBER"))) {
                     poLifecycleBean.setGsCtrlNum(resultSet.getString("GS_CONTROL_NUMBER"));
                 } else {
                     poLifecycleBean.setGsCtrlNum("--");
                 }
-                if (resultSet.getString("SAP_IDOC_NUMBER") != null && !"".equals(resultSet.getString("SAP_IDOC_NUMBER"))) {
-                    poLifecycleBean.setSapIdocNum(resultSet.getString("SAP_IDOC_NUMBER"));
+                if ((resultSet.getString("ST_CONTROL_NUMBER") != null) && !"".equals(resultSet.getString("ST_CONTROL_NUMBER"))) {
+                    poLifecycleBean.setStCtrlNum(resultSet.getString("ST_CONTROL_NUMBER"));
                 } else {
-                    poLifecycleBean.setSapIdocNum("0");
+                    poLifecycleBean.setStCtrlNum("--");
                 }
-                if ((resultSet.getString("PRE_TRANS_FILEPATH") != null) && !"".equals(resultSet.getString("PRE_TRANS_FILEPATH"))) {
-                    poLifecycleBean.setPreFile(resultSet.getString("PRE_TRANS_FILEPATH"));
-                } else {
-                    poLifecycleBean.setPreFile("--");
+                if (resultSet.getString("PRI_KEY_TYPE") != null && resultSet.getString("PRI_KEY_TYPE").equalsIgnoreCase("PO")) {
+                    poLifecycleBean.setPrimary_key_type("PO");
                 }
-                if ((resultSet.getString("POST_TRANS_FILEPATH") != null) && !"".equals(resultSet.getString("POST_TRANS_FILEPATH"))) {
-                    poLifecycleBean.setPostTranFile(resultSet.getString("POST_TRANS_FILEPATH"));
+                if (resultSet.getString("PRI_KEY_VAL") != null && !"".equals(resultSet.getString("PRI_KEY_VAL"))) {
+                    poLifecycleBean.setPrimary_key_val(resultSet.getString("PRI_KEY_VAL"));
                 } else {
-                    poLifecycleBean.setPostTranFile("--");
-                }
-                if ((resultSet.getString("ORG_FILEPATH") != null) && !"".equals(resultSet.getString("ORG_FILEPATH"))) {
-                    poLifecycleBean.setOrgFile(resultSet.getString("ORG_FILEPATH"));
-                } else {
-                    poLifecycleBean.setOrgFile("--");
-                }
-                if ((resultSet.getString("ACK_FILE_ID") != null) && !"".equals(resultSet.getString("ACK_FILE_ID"))) {
-                    poLifecycleBean.setAckFile(resultSet.getString("ACK_FILE_ID"));
-                } else {
-                    poLifecycleBean.setAckFile("--");
-                }
-                if ((resultSet.getString("ORDER_DATE") != null) && !"".equals(resultSet.getString("ORDER_DATE"))) {
-                    poLifecycleBean.setPodate(resultSet.getDate("ORDER_DATE").toString());
-                } else {
-                    poLifecycleBean.setPodate("--");
-                }
-                if ((resultSet.getString("PO_VALUE") != null) && !"".equals(resultSet.getString("PO_VALUE"))) {
-                    poLifecycleBean.setPoValue(resultSet.getString("PO_VALUE"));
-                } else {
-                    poLifecycleBean.setPoValue("--");
-                }
-                if ((resultSet.getString("ORDER_STATUS") != null) && !"".equals(resultSet.getString("ORDER_STATUS"))) {
-                    poLifecycleBean.setPoStatus(resultSet.getString("ORDER_STATUS"));
-                } else {
-                    poLifecycleBean.setPoStatus("--");
-                }
-                if (resultSet.getString("SO_NUMBER") != null && !"".equals(resultSet.getString("SO_NUMBER"))) {
-                    poLifecycleBean.setSoNumber(resultSet.getString("SO_NUMBER"));
-                } else {
-                    poLifecycleBean.setSoNumber("0");
-                }
-                if ((resultSet.getString("ITEM_QTY") != null) && !"".equals(resultSet.getString("ITEM_QTY"))) {
-                    poLifecycleBean.setIteamQty(resultSet.getString("ITEM_QTY"));
-                } else {
-                    poLifecycleBean.setIteamQty("--");
-                }
-                if ((resultSet.getString("ACK_STATUS") != null) && !"".equals(resultSet.getString("ACK_STATUS"))) {
-                    poLifecycleBean.setAckStatus(resultSet.getString("ACK_STATUS"));
-                } else {
-                    poLifecycleBean.setAckStatus("--");
+                    poLifecycleBean.setPrimary_key_val(resultSet.getString("PRI_KEY_VAL"));
                 }
                 poLifecycleBean.setBolNumber("0");
-                if ((resultSet.getString("ISA_DATE") != null) && !"".equals(resultSet.getString("ISA_DATE"))) {
-                    poLifecycleBean.setIsaDate(resultSet.getString("ISA_DATE"));
-                } else {
-                    poLifecycleBean.setIsaDate("--");
-                }
-                if ((resultSet.getString("ISA_TIME") != null) && !"".equals(resultSet.getString("ISA_TIME"))) {
-                    poLifecycleBean.setIsaTime(resultSet.getString("ISA_TIME"));
-                } else {
-                    poLifecycleBean.setIsaTime("--");
-                }
-                if ((resultSet.getString("ISA_NUMBER") != null) && !"".equals(resultSet.getString("ISA_NUMBER"))) {
-                    poLifecycleBean.setIsaCtrlNum(resultSet.getString("ISA_NUMBER"));
-                } else {
-                    poLifecycleBean.setIsaCtrlNum("--");
-                }
                 poLifecycleBean.setInvAmt("0");
                 poLifecycleBean.setChequeNum("0");
                 poLifecycleBean.setAsnNumber("0");
@@ -608,29 +641,29 @@ public class LifecycleUtility {
         asnLifecycleBean = new AsnLifecycleBean();
         StringBuffer lifeCycleQuery = new StringBuffer();
         String poNum = poNumber;
-         if ("ARCHIVE".equals(database)) {
-             lifeCycleQuery.append("SELECT ARCHIVE_ASN.ASN_NUMBER,ARCHIVE_FILES.FILE_ID,ARCHIVE_FILES.FILE_TYPE, ARCHIVE_FILES.TRANSACTION_TYPE, ARCHIVE_FILES.DIRECTION,"
-                + " ARCHIVE_FILES.DATE_TIME_RECEIVED, ARCHIVE_FILES.ST_CONTROL_NUMBER,ARCHIVE_FILES.GS_CONTROL_NUMBER,ARCHIVE_FILES.SENDER_ID, ARCHIVE_FILES.RECEIVER_ID, "
-                + " ARCHIVE_FILES.STATUS, ARCHIVE_ASN.PO_NUMBER ,TP1.NAME as SENDER_NAME,TP2.NAME as RECEIVER_NAME,"
-                + " ARCHIVE_FILES.PRE_TRANS_FILEPATH,ARCHIVE_FILES.POST_TRANS_FILEPATH,ARCHIVE_FILES.ISA_NUMBER,ARCHIVE_FILES.ISA_DATE,ARCHIVE_FILES.ISA_TIME,ARCHIVE_ASN.BOL_NUMBER,"
-                + " ARCHIVE_FILES.ORG_FILEPATH,ARCHIVE_FILES.ACK_STATUS,ARCHIVE_FILES.ACK_FILE_ID as ACK_FILE_ID "
-                + " FROM ARCHIVE_ASN LEFT OUTER JOIN ARCHIVE_FILES ON (ARCHIVE_ASN.FILE_ID=ARCHIVE_FILES.FILE_ID) "
-                + " LEFT OUTER JOIN TP TP1 ON (TP1.ID=ARCHIVE_FILES.SENDER_ID) LEFT OUTER JOIN TP TP2 ON (TP2.ID = ARCHIVE_FILES.RECEIVER_ID) "
-                + " WHERE FLOWFLAG like 'M' AND ARCHIVE_ASN.PO_NUMBER LIKE '%" + poNum + "%' AND ARCHIVE_FILES.FILE_ID LIKE '%" + fileId + "%'"
-                + " ORDER BY ARCHIVE_FILES.DATE_TIME_RECEIVED");
-         }else{
-             lifeCycleQuery.append("select ASN.ASN_NUMBER,FILES.FILE_ID,FILES.FILE_TYPE, FILES.TRANSACTION_TYPE, FILES.DIRECTION,"
-                + "FILES.DATE_TIME_RECEIVED, FILES.ST_CONTROL_NUMBER,FILES.GS_CONTROL_NUMBER,FILES.SENDER_ID, FILES.RECEIVER_ID, "
-                + "FILES.STATUS, ASN.PO_NUMBER ,TP1.NAME as SENDER_NAME,TP2.NAME as RECEIVER_NAME,"
-                + " FILES.PRE_TRANS_FILEPATH,FILES.POST_TRANS_FILEPATH,FILES.ISA_NUMBER,FILES.ISA_DATE,FILES.ISA_TIME,ASN.BOL_NUMBER,"
-                + "FILES.ORG_FILEPATH,FILES.ACK_STATUS,FILES.ACK_FILE_ID as ACK_FILE_ID "
-                + "from ASN LEFT OUTER JOIN FILES ON (ASN.FILE_ID=FILES.FILE_ID) "
-                + "LEFT OUTER JOIN TP TP1 ON (TP1.ID=FILES.SENDER_ID) LEFT OUTER JOIN TP TP2 ON (TP2.ID = FILES.RECEIVER_ID) "
-                + "WHERE FLOWFLAG like 'M' AND ASN.PO_NUMBER LIKE '%" + poNum + "%' AND FILES.FILE_ID LIKE '%" + fileId + "%'"
-                + " ORDER BY FILES.DATE_TIME_RECEIVED");
-         }
+        if ("ARCHIVE".equals(database)) {
+            lifeCycleQuery.append("SELECT ARCHIVE_ASN.ASN_NUMBER,ARCHIVE_FILES.FILE_ID,ARCHIVE_FILES.FILE_TYPE, ARCHIVE_FILES.TRANSACTION_TYPE, ARCHIVE_FILES.DIRECTION,"
+                    + " ARCHIVE_FILES.DATE_TIME_RECEIVED, ARCHIVE_FILES.ST_CONTROL_NUMBER,ARCHIVE_FILES.GS_CONTROL_NUMBER,ARCHIVE_FILES.SENDER_ID, ARCHIVE_FILES.RECEIVER_ID, "
+                    + " ARCHIVE_FILES.STATUS, ARCHIVE_ASN.PO_NUMBER ,TP1.NAME as SENDER_NAME,TP2.NAME as RECEIVER_NAME,"
+                    + " ARCHIVE_FILES.PRE_TRANS_FILEPATH,ARCHIVE_FILES.POST_TRANS_FILEPATH,ARCHIVE_FILES.ISA_NUMBER,ARCHIVE_FILES.ISA_DATE,ARCHIVE_FILES.ISA_TIME,ARCHIVE_ASN.BOL_NUMBER,"
+                    + " ARCHIVE_FILES.ORG_FILEPATH,ARCHIVE_FILES.ACK_STATUS,ARCHIVE_FILES.ACK_FILE_ID as ACK_FILE_ID,ARCHIVE_FILES.PRI_KEY_VAL as PRI_KEY_VAL,ARCHIVE_FILES.PRI_KEY_TYPE as PRI_KEY_TYPE "
+                    + " FROM ARCHIVE_ASN LEFT OUTER JOIN ARCHIVE_FILES ON (ARCHIVE_ASN.FILE_ID=ARCHIVE_FILES.FILE_ID) "
+                    + " LEFT OUTER JOIN TP TP1 ON (TP1.ID=ARCHIVE_FILES.SENDER_ID) LEFT OUTER JOIN TP TP2 ON (TP2.ID = ARCHIVE_FILES.RECEIVER_ID) "
+                    + " WHERE FLOWFLAG like 'M' AND ARCHIVE_ASN.PO_NUMBER LIKE '%" + poNum + "%' AND ARCHIVE_FILES.FILE_ID LIKE '%" + fileId + "%'"
+                    + " ORDER BY ARCHIVE_FILES.DATE_TIME_RECEIVED");
+        } else {
+            lifeCycleQuery.append("select ASN.ASN_NUMBER,FILES.FILE_ID,FILES.FILE_TYPE, FILES.TRANSACTION_TYPE, FILES.DIRECTION,"
+                    + "FILES.DATE_TIME_RECEIVED,FILES.GS_CONTROL_NUMBER,FILES.SENDER_ID, FILES.RECEIVER_ID, "
+                    + "FILES.STATUS, ASN.PO_NUMBER ,TP1.NAME as SENDER_NAME,TP2.NAME as RECEIVER_NAME,"
+                    + " FILES.PRE_TRANS_FILEPATH,FILES.POST_TRANS_FILEPATH,FILES.ISA_NUMBER,FILES.ISA_DATE,FILES.ISA_TIME,ASN.BOL_NUMBER,"
+                    + "FILES.ORG_FILEPATH,FILES.ACK_STATUS,FILES.ACK_FILE_ID as ACK_FILE_ID,FILES.GS_CONTROL_NUMBER as GS_CONTROL_NUMBER,FILES.ST_CONTROL_NUMBER as ST_CONTROL_NUMBER,FILES.PRI_KEY_VAL as PRI_KEY_VAL,FILES.PRI_KEY_TYPE as PRI_KEY_TYPE "
+                    + "from ASN LEFT OUTER JOIN FILES ON (ASN.FILE_ID=FILES.FILE_ID) "
+                    + "LEFT OUTER JOIN TP TP1 ON (TP1.ID=FILES.SENDER_ID) LEFT OUTER JOIN TP TP2 ON (TP2.ID = FILES.RECEIVER_ID) "
+                    + "WHERE FLOWFLAG like 'M' AND ASN.PO_NUMBER LIKE '%" + poNum + "%' AND FILES.FILE_ID LIKE '%" + fileId + "%'"
+                    + " ORDER BY FILES.DATE_TIME_RECEIVED");
+        }
         String searchQuery = lifeCycleQuery.toString();
-        System.out.println("lfc asn query-->"+searchQuery);
+        System.out.println("lfc asn query-->" + searchQuery);
         try {
             connection = ConnectionProvider.getInstance().getConnection();
             statement = connection.createStatement();
@@ -652,8 +685,6 @@ public class LifecycleUtility {
                 asnLifecycleBean.setIsaTime(resultSet.getString("ISA_TIME"));
                 asnLifecycleBean.setIsaCtrlNum(resultSet.getString("ISA_NUMBER"));
                 asnLifecycleBean.setFileId(resultSet.getString("FILE_ID"));
-                asnLifecycleBean.setStCtrlNum(resultSet.getString("ST_CONTROL_NUMBER"));
-                asnLifecycleBean.setGsCtrlNum(resultSet.getString("GS_CONTROL_NUMBER"));
                 asnLifecycleBean.setSapIdocNum("0");
                 asnLifecycleBean.setPreFile(resultSet.getString("PRE_TRANS_FILEPATH"));
                 asnLifecycleBean.setPostTranFile(resultSet.getString("POST_TRANS_FILEPATH"));
@@ -663,6 +694,12 @@ public class LifecycleUtility {
                 asnLifecycleBean.setInvNumber("0");
                 asnLifecycleBean.setSenName(resultSet.getString("SENDER_NAME"));
                 asnLifecycleBean.setRecName(resultSet.getString("RECEIVER_NAME"));
+                asnLifecycleBean.setGsCtrlNum(resultSet.getString("GS_CONTROL_NUMBER"));
+                asnLifecycleBean.setStCtrlNum(resultSet.getString("ST_CONTROL_NUMBER"));
+                if (resultSet.getString("PRI_KEY_TYPE") != null && resultSet.getString("PRI_KEY_TYPE").equalsIgnoreCase("ASN")) {
+                    asnLifecycleBean.setPrimary_key_type("ASN");
+                }
+                asnLifecycleBean.setPrimary_key_val(resultSet.getString("PRI_KEY_VAL"));
                 asnLifecycleBean.setPodate("0");
                 asnLifecycleBean.setPoValue("0");
                 asnLifecycleBean.setPoStatus("0");
@@ -701,27 +738,27 @@ public class LifecycleUtility {
         invoiceLifecycleBean = new InvoiceLifecycleBean();
         StringBuffer lifeCycleQuery = new StringBuffer();
         String poNum = poNumber;
-         if ("ARCHIVE".equals(database)) {
-              lifeCycleQuery.append("select ARCHIVE_INVOICE.INVOICE_NUMBER,ARCHIVE_FILES.FILE_ID, ARCHIVE_FILES.FILE_TYPE,ARCHIVE_FILES.TRANSACTION_TYPE, ARCHIVE_FILES.DIRECTION,"
-                + " ARCHIVE_FILES.DATE_TIME_RECEIVED, ARCHIVE_FILES.ST_CONTROL_NUMBER, ARCHIVE_FILES.GS_CONTROL_NUMBER,ARCHIVE_FILES.SENDER_ID, ARCHIVE_FILES.RECEIVER_ID, "
-                + " ARCHIVE_FILES.STATUS, ARCHIVE_INVOICE.PO_NUMBER,ARCHIVE_FILES.PRE_TRANS_FILEPATH,ARCHIVE_FILES.POST_TRANS_FILEPATH,ARCHIVE_FILES.ORG_FILEPATH,ARCHIVE_INVOICE.INVOICE_AMOUNT,"
-                + " ARCHIVE_INVOICE.INVOICE_DATE,ARCHIVE_FILES.ISA_NUMBER, ARCHIVE_FILES.ISA_DATE,ARCHIVE_FILES.ISA_TIME,TP1.NAME as SENDER_NAME,TP2.NAME as RECEIVER_NAME,"
-                + " ARCHIVE_FILES.ACK_FILE_ID as ACK_FILE_ID,ARCHIVE_FILES.ACK_STATUS from ARCHIVE_INVOICE LEFT OUTER JOIN ARCHIVE_FILES ON (ARCHIVE_INVOICE.FILE_ID=ARCHIVE_FILES.FILE_ID) "
-                + " LEFT OUTER JOIN TP TP1 ON (TP1.ID=ARCHIVE_FILES.SENDER_ID) LEFT OUTER JOIN TP TP2 ON (TP2.ID = ARCHIVE_FILES.RECEIVER_ID) "
-                + " WHERE FLOWFLAG like 'M' AND ARCHIVE_INVOICE.PO_NUMBER LIKE '%" + poNum + "%' AND ARCHIVE_FILES.FILE_ID LIKE '%" + fileId + "%'"
-                + " ORDER BY ARCHIVE_FILES.DATE_TIME_RECEIVED");
-         }else{
-              lifeCycleQuery.append("select INVOICE.INVOICE_NUMBER,FILES.FILE_ID, FILES.FILE_TYPE,FILES.TRANSACTION_TYPE, FILES.DIRECTION,"
-                + "FILES.DATE_TIME_RECEIVED, FILES.ST_CONTROL_NUMBER, FILES.GS_CONTROL_NUMBER,FILES.SENDER_ID, FILES.RECEIVER_ID, "
-                + "FILES.STATUS, INVOICE.PO_NUMBER,FILES.PRE_TRANS_FILEPATH,FILES.POST_TRANS_FILEPATH,FILES.ORG_FILEPATH,INVOICE.INVOICE_AMOUNT,"
-                + "INVOICE.INVOICE_DATE,FILES.ISA_NUMBER, FILES.ISA_DATE,FILES.ISA_TIME,TP1.NAME as SENDER_NAME,TP2.NAME as RECEIVER_NAME,"
-                + "FILES.ACK_FILE_ID as ACK_FILE_ID,FILES.ACK_STATUS from INVOICE LEFT OUTER JOIN FILES ON (INVOICE.FILE_ID=FILES.FILE_ID) "
-                + "LEFT OUTER JOIN TP TP1 ON (TP1.ID=FILES.SENDER_ID) LEFT OUTER JOIN TP TP2 ON (TP2.ID = FILES.RECEIVER_ID) "
-                + "WHERE FLOWFLAG like 'M' AND INVOICE.PO_NUMBER LIKE '%" + poNum + "%' AND FILES.FILE_ID LIKE '%" + fileId + "%'"
-                + " ORDER BY FILES.DATE_TIME_RECEIVED");
-         }
+        if ("ARCHIVE".equals(database)) {
+            lifeCycleQuery.append("select ARCHIVE_INVOICE.INVOICE_NUMBER,ARCHIVE_FILES.FILE_ID, ARCHIVE_FILES.FILE_TYPE,ARCHIVE_FILES.TRANSACTION_TYPE, ARCHIVE_FILES.DIRECTION,"
+                    + " ARCHIVE_FILES.DATE_TIME_RECEIVED, ARCHIVE_FILES.ST_CONTROL_NUMBER, ARCHIVE_FILES.GS_CONTROL_NUMBER,ARCHIVE_FILES.SENDER_ID, ARCHIVE_FILES.RECEIVER_ID, "
+                    + " ARCHIVE_FILES.STATUS, ARCHIVE_INVOICE.PO_NUMBER,ARCHIVE_FILES.PRE_TRANS_FILEPATH,ARCHIVE_FILES.POST_TRANS_FILEPATH,ARCHIVE_FILES.ORG_FILEPATH,ARCHIVE_INVOICE.INVOICE_AMOUNT,"
+                    + " ARCHIVE_INVOICE.INVOICE_DATE,ARCHIVE_FILES.ISA_NUMBER, ARCHIVE_FILES.ISA_DATE,ARCHIVE_FILES.ISA_TIME,TP1.NAME as SENDER_NAME,TP2.NAME as RECEIVER_NAME,"
+                    + " ARCHIVE_FILES.ACK_FILE_ID as ACK_FILE_ID,ARCHIVE_FILES.ACK_STATUS,ARCHIVE_FILES.PRI_KEY_VAL as PRI_KEY_VAL,ARCHIVE_FILES.PRI_KEY_TYPE as PRI_KEY_TYPE from ARCHIVE_INVOICE LEFT OUTER JOIN ARCHIVE_FILES ON (ARCHIVE_INVOICE.FILE_ID=ARCHIVE_FILES.FILE_ID) "
+                    + " LEFT OUTER JOIN TP TP1 ON (TP1.ID=ARCHIVE_FILES.SENDER_ID) LEFT OUTER JOIN TP TP2 ON (TP2.ID = ARCHIVE_FILES.RECEIVER_ID) "
+                    + " WHERE FLOWFLAG like 'M' AND ARCHIVE_INVOICE.PO_NUMBER LIKE '%" + poNum + "%' AND ARCHIVE_FILES.FILE_ID LIKE '%" + fileId + "%'"
+                    + " ORDER BY ARCHIVE_FILES.DATE_TIME_RECEIVED");
+        } else {
+            lifeCycleQuery.append("select INVOICE.INVOICE_NUMBER,FILES.FILE_ID, FILES.FILE_TYPE,FILES.TRANSACTION_TYPE, FILES.DIRECTION,"
+                    + "FILES.DATE_TIME_RECEIVED,FILES.GS_CONTROL_NUMBER,FILES.SENDER_ID, FILES.RECEIVER_ID, "
+                    + "FILES.STATUS, INVOICE.PO_NUMBER,FILES.PRE_TRANS_FILEPATH,FILES.POST_TRANS_FILEPATH,FILES.ORG_FILEPATH,INVOICE.INVOICE_AMOUNT,"
+                    + "INVOICE.INVOICE_DATE,FILES.ISA_NUMBER, FILES.ISA_DATE,FILES.ISA_TIME,TP1.NAME as SENDER_NAME,TP2.NAME as RECEIVER_NAME,"
+                    + "FILES.ACK_FILE_ID as ACK_FILE_ID,FILES.ACK_STATUS,FILES.GS_CONTROL_NUMBER as GS_CONTROL_NUMBER,FILES.ST_CONTROL_NUMBER as ST_CONTROL_NUMBER,FILES.PRI_KEY_VAL as PRI_KEY_VAL,FILES.PRI_KEY_TYPE as PRI_KEY_TYPE from INVOICE LEFT OUTER JOIN FILES ON (INVOICE.FILE_ID=FILES.FILE_ID) "
+                    + "LEFT OUTER JOIN TP TP1 ON (TP1.ID=FILES.SENDER_ID) LEFT OUTER JOIN TP TP2 ON (TP2.ID = FILES.RECEIVER_ID) "
+                    + "WHERE FLOWFLAG like 'M' AND INVOICE.PO_NUMBER LIKE '%" + poNum + "%' AND FILES.FILE_ID LIKE '%" + fileId + "%'"
+                    + " ORDER BY FILES.DATE_TIME_RECEIVED");
+        }
         String searchQuery = lifeCycleQuery.toString();
-        System.out.println("lfc invoice query-->"+searchQuery);
+        System.out.println("lfc invoice query-->" + searchQuery);
         try {
             connection = ConnectionProvider.getInstance().getConnection();
             statement = connection.createStatement();
@@ -736,8 +773,6 @@ public class LifecycleUtility {
                 invoiceLifecycleBean.setStatus(resultSet.getString("STATUS"));
                 invoiceLifecycleBean.setPoNumber(resultSet.getString("PO_NUMBER"));
                 invoiceLifecycleBean.setFileId(resultSet.getString("FILE_ID"));
-                invoiceLifecycleBean.setStCtrlNum(resultSet.getString("ST_CONTROL_NUMBER"));
-                invoiceLifecycleBean.setGsCtrlNum(resultSet.getString("GS_CONTROL_NUMBER"));
                 invoiceLifecycleBean.setSapIdocNum("0");
                 invoiceLifecycleBean.setIsaCtrlNum("0");
                 invoiceLifecycleBean.setAsnNumber("0");
@@ -761,6 +796,12 @@ public class LifecycleUtility {
                 invoiceLifecycleBean.setIsaTime(resultSet.getString("ISA_TIME"));
                 invoiceLifecycleBean.setIsaCtrlNum(resultSet.getString("ISA_NUMBER"));
                 invoiceLifecycleBean.setInvAmt(resultSet.getString("INVOICE_AMOUNT"));
+                invoiceLifecycleBean.setGsCtrlNum(resultSet.getString("GS_CONTROL_NUMBER"));
+                invoiceLifecycleBean.setStCtrlNum(resultSet.getString("ST_CONTROL_NUMBER"));
+                if (resultSet.getString("PRI_KEY_TYPE") != null && resultSet.getString("PRI_KEY_TYPE").equalsIgnoreCase("IN")) {
+                    invoiceLifecycleBean.setPrimary_key_type("IN");
+                }
+                invoiceLifecycleBean.setPrimary_key_val(resultSet.getString("PRI_KEY_VAL"));
                 invoiceLifecycleBean.setChequeNum("0");
                 invoiceLifecycleBean.setRes("1");
             }
@@ -793,26 +834,26 @@ public class LifecycleUtility {
         StringBuffer lifeCycleQuery = new StringBuffer();
         String poNum = poNumber;
         if ("ARCHIVE".equals(database)) {
-             lifeCycleQuery.append("select ARCHIVE_FILES.FILE_ID, ARCHIVE_FILES.FILE_TYPE, ARCHIVE_FILES.TRANSACTION_TYPE,ARCHIVE_FILES.DIRECTION,ARCHIVE_FILES.DATE_TIME_RECEIVED, "
-                + "ARCHIVE_FILES.ST_CONTROL_NUMBER,ARCHIVE_FILES.GS_CONTROL_NUMBER,ARCHIVE_FILES.SENDER_ID, ARCHIVE_FILES.RECEIVER_ID, ARCHIVE_FILES.STATUS,ARCHIVE_PAYMENT.PO_NUMBER ,"
-                + "ARCHIVE_FILES.ISA_NUMBER as ISA_NUMBER,ARCHIVE_FILES.ISA_DATE as ISA_DATE,ARCHIVE_FILES.ISA_TIME as ISA_TIME,ARCHIVE_FILES.PRE_TRANS_FILEPATH,"
-                + "ARCHIVE_FILES.POST_TRANS_FILEPATH,ARCHIVE_FILES.ORG_FILEPATH,ARCHIVE_FILES.ACK_STATUS,TP1.NAME as SENDER_NAME,TP2.NAME as RECEIVER_NAME,"
-                + "ARCHIVE_FILES.ACK_FILE_ID as ACK_FILE_ID, ARCHIVE_PAYMENT.CHECK_NUMBER from ARCHIVE_PAYMENT LEFT OUTER JOIN ARCHIVE_FILES ON (ARCHIVE_PAYMENT.FILE_ID=ARCHIVE_FILES.FILE_ID) "
-                + "LEFT OUTER JOIN TP TP1 ON (TP1.ID=ARCHIVE_FILES.SENDER_ID) LEFT OUTER JOIN TP TP2 ON (TP2.ID = ARCHIVE_FILES.RECEIVER_ID) "
-                + " WHERE FLOWFLAG like 'M' AND ARCHIVE_PAYMENT.PO_NUMBER LIKE '%" + poNum + "%' AND ARCHIVE_FILES.FILE_ID LIKE '%" + fileId + "%'"
-                + " ORDER BY ARCHIVE_FILES.DATE_TIME_RECEIVED");
-        }else{
-             lifeCycleQuery.append("select FILES.FILE_ID, FILES.FILE_TYPE, FILES.TRANSACTION_TYPE,FILES.DIRECTION,FILES.DATE_TIME_RECEIVED, "
-                + "FILES.ST_CONTROL_NUMBER,FILES.GS_CONTROL_NUMBER,FILES.SENDER_ID, FILES.RECEIVER_ID, FILES.STATUS,PAYMENT.PO_NUMBER ,"
-                + "FILES.ISA_NUMBER as ISA_NUMBER,FILES.ISA_DATE as ISA_DATE,FILES.ISA_TIME as ISA_TIME,FILES.PRE_TRANS_FILEPATH,"
-                + "FILES.POST_TRANS_FILEPATH,FILES.ORG_FILEPATH,FILES.ACK_STATUS,TP1.NAME as SENDER_NAME,TP2.NAME as RECEIVER_NAME,"
-                + "FILES.ACK_FILE_ID as ACK_FILE_ID, PAYMENT.CHECK_NUMBER from PAYMENT LEFT OUTER JOIN FILES ON (PAYMENT.FILE_ID=FILES.FILE_ID) "
-                + "LEFT OUTER JOIN TP TP1 ON (TP1.ID=FILES.SENDER_ID) LEFT OUTER JOIN TP TP2 ON (TP2.ID = FILES.RECEIVER_ID) "
-                + " WHERE FLOWFLAG like 'M' AND PAYMENT.PO_NUMBER LIKE '%" + poNum + "%' AND FILES.FILE_ID LIKE '%" + fileId + "%'"
-                + " ORDER BY FILES.DATE_TIME_RECEIVED");
+            lifeCycleQuery.append("select ARCHIVE_FILES.FILE_ID, ARCHIVE_FILES.FILE_TYPE, ARCHIVE_FILES.TRANSACTION_TYPE,ARCHIVE_FILES.DIRECTION,ARCHIVE_FILES.DATE_TIME_RECEIVED, "
+                    + "ARCHIVE_FILES.ST_CONTROL_NUMBER,ARCHIVE_FILES.GS_CONTROL_NUMBER,ARCHIVE_FILES.SENDER_ID, ARCHIVE_FILES.RECEIVER_ID, ARCHIVE_FILES.STATUS,ARCHIVE_PAYMENT.PO_NUMBER ,"
+                    + "ARCHIVE_FILES.ISA_NUMBER as ISA_NUMBER,ARCHIVE_FILES.ISA_DATE as ISA_DATE,ARCHIVE_FILES.ISA_TIME as ISA_TIME,ARCHIVE_FILES.PRE_TRANS_FILEPATH,"
+                    + "ARCHIVE_FILES.POST_TRANS_FILEPATH,ARCHIVE_FILES.ORG_FILEPATH,ARCHIVE_FILES.ACK_STATUS,TP1.NAME as SENDER_NAME,TP2.NAME as RECEIVER_NAME,"
+                    + "ARCHIVE_FILES.ACK_FILE_ID as ACK_FILE_ID, ARCHIVE_PAYMENT.CHECK_NUMBER,ARCHIVE_FILES.PRI_KEY_VAL as PRI_KEY_VAL,ARCHIVE_FILES.PRI_KEY_TYPE as PRI_KEY_TYPE from ARCHIVE_PAYMENT LEFT OUTER JOIN ARCHIVE_FILES ON (ARCHIVE_PAYMENT.FILE_ID=ARCHIVE_FILES.FILE_ID) "
+                    + "LEFT OUTER JOIN TP TP1 ON (TP1.ID=ARCHIVE_FILES.SENDER_ID) LEFT OUTER JOIN TP TP2 ON (TP2.ID = ARCHIVE_FILES.RECEIVER_ID) "
+                    + " WHERE FLOWFLAG like 'M' AND ARCHIVE_PAYMENT.PO_NUMBER LIKE '%" + poNum + "%' AND ARCHIVE_FILES.FILE_ID LIKE '%" + fileId + "%'"
+                    + " ORDER BY ARCHIVE_FILES.DATE_TIME_RECEIVED");
+        } else {
+            lifeCycleQuery.append("select FILES.FILE_ID, FILES.FILE_TYPE, FILES.TRANSACTION_TYPE,FILES.DIRECTION,FILES.DATE_TIME_RECEIVED, "
+                    + "FILES.GS_CONTROL_NUMBER,FILES.SENDER_ID, FILES.RECEIVER_ID, FILES.STATUS,PAYMENT.PO_NUMBER ,"
+                    + "FILES.ISA_NUMBER as ISA_NUMBER,FILES.ISA_DATE as ISA_DATE,FILES.ISA_TIME as ISA_TIME,FILES.PRE_TRANS_FILEPATH,"
+                    + "FILES.POST_TRANS_FILEPATH,FILES.ORG_FILEPATH,FILES.ACK_STATUS,TP1.NAME as SENDER_NAME,TP2.NAME as RECEIVER_NAME,"
+                    + "FILES.ACK_FILE_ID as ACK_FILE_ID, PAYMENT.CHECK_NUMBER,FILES.GS_CONTROL_NUMBER as GS_CONTROL_NUMBER,FILES.ST_CONTROL_NUMBER as ST_CONTROL_NUMBER,FILES.PRI_KEY_VAL as PRI_KEY_VAL,FILES.PRI_KEY_TYPE as PRI_KEY_TYPE from PAYMENT LEFT OUTER JOIN FILES ON (PAYMENT.FILE_ID=FILES.FILE_ID) "
+                    + "LEFT OUTER JOIN TP TP1 ON (TP1.ID=FILES.SENDER_ID) LEFT OUTER JOIN TP TP2 ON (TP2.ID = FILES.RECEIVER_ID) "
+                    + " WHERE FLOWFLAG like 'M' AND PAYMENT.PO_NUMBER LIKE '%" + poNum + "%' AND FILES.FILE_ID LIKE '%" + fileId + "%'"
+                    + " ORDER BY FILES.DATE_TIME_RECEIVED");
         }
         String searchQuery = lifeCycleQuery.toString();
-        System.out.println("lfc payment query-->"+searchQuery);
+        System.out.println("lfc payment query-->" + searchQuery);
         try {
             connection = ConnectionProvider.getInstance().getConnection();
             statement = connection.createStatement();
@@ -827,8 +868,6 @@ public class LifecycleUtility {
                 paymentLifecycleBean.setStatus(resultSet.getString("STATUS"));
                 paymentLifecycleBean.setPoNumber(resultSet.getString("PO_NUMBER"));
                 paymentLifecycleBean.setFileId(resultSet.getString("FILE_ID"));
-                paymentLifecycleBean.setStCtrlNum(resultSet.getString("ST_CONTROL_NUMBER"));
-                paymentLifecycleBean.setGsCtrlNum(resultSet.getString("GS_CONTROL_NUMBER"));
                 paymentLifecycleBean.setSapIdocNum("0");
                 paymentLifecycleBean.setAckStatus(resultSet.getString("ACK_STATUS"));
                 paymentLifecycleBean.setAsnNumber("0");
@@ -850,6 +889,12 @@ public class LifecycleUtility {
                 paymentLifecycleBean.setIsaTime(resultSet.getString("ISA_TIME"));
                 paymentLifecycleBean.setInvAmt("0");
                 paymentLifecycleBean.setChequeNum(resultSet.getString("CHECK_NUMBER"));
+                paymentLifecycleBean.setGsCtrlNum(resultSet.getString("GS_CONTROL_NUMBER"));
+                paymentLifecycleBean.setStCtrlNum(resultSet.getString("ST_CONTROL_NUMBER"));
+                if (resultSet.getString("PRI_KEY_TYPE") != null && resultSet.getString("PRI_KEY_TYPE").equalsIgnoreCase("PAYMENT")) {
+                    paymentLifecycleBean.setPrimary_key_type("PAYMENT");
+                }
+                paymentLifecycleBean.setPrimary_key_val(resultSet.getString("PRI_KEY_VAL"));
                 paymentLifecycleBean.setRes("1");
             }
         } catch (SQLException e) {
@@ -876,28 +921,28 @@ public class LifecycleUtility {
         return paymentLifecycleBean;
     }
 
-    public ArrayList<LtTenderBean> getLtLoadtender(String shipmentNumber,String database) throws ServiceLocatorException {
+    public ArrayList<LtTenderBean> getLtLoadtender(String shipmentNumber, String database) throws ServiceLocatorException {
 
         ltTenderBeanList = new ArrayList<LtTenderBean>();
 
         StringBuffer lifeCycleQuery = new StringBuffer();
-         if ("ARCHIVE".equals(database)) {
-              lifeCycleQuery.append("SELECT tf.FILE_ID as file_id,tf.ISA_NUMBER as isa_number,tl.SHIPMENT_ID as SHIPMENT_ID,"
-                + " tf.FILE_TYPE as file_type,tf.FILE_ORIGIN as file_origin,tf.TRANSACTION_TYPE as tran_type,tf.POST_TRANS_FILEPATH as file_path,"
-                + " tf.ACK_STATUS as ack_status,tf.DIRECTION as direction,tf.DATE_TIME_RECEIVED as datetime,"
-                + " tf.STATUS as status,tf.PRI_KEY_VAL as prival,tf.REPROCESSSTATUS as REPROCESSSTATUS "
-                + " FROM ARCHIVE_Transport_loadtender tl LEFT OUTER JOIN ARCHIVE_FILES TF ON "
-                + " (tl.FILE_ID=tf.FILE_ID and tl.SHIPMENT_ID=tf.PRI_KEY_VAL) "
-                + " where 1=1 and SHIPMENT_ID= '" + shipmentNumber + "' order by DATE_TIME_RECEIVED desc ");
-         }else{
-              lifeCycleQuery.append("SELECT tf.FILE_ID as file_id,tf.ISA_NUMBER as isa_number,tl.SHIPMENT_ID as SHIPMENT_ID,"
-                + " tf.FILE_TYPE as file_type,tf.FILE_ORIGIN as file_origin,tf.TRANSACTION_TYPE as tran_type,tf.POST_TRANS_FILEPATH as file_path,"
-                + " tf.ACK_STATUS as ack_status,tf.DIRECTION as direction,tf.DATE_TIME_RECEIVED as datetime,"
-                + " tf.STATUS as status,tf.PRI_KEY_VAL as prival,tf.REPROCESSSTATUS as REPROCESSSTATUS "
-                + " FROM Transport_loadtender tl LEFT OUTER JOIN FILES TF ON "
-                + " (tl.FILE_ID=tf.FILE_ID and tl.SHIPMENT_ID=tf.PRI_KEY_VAL) "
-                + " where 1=1 and SHIPMENT_ID= '" + shipmentNumber + "' order by DATE_TIME_RECEIVED desc ");
-         }
+        if ("ARCHIVE".equals(database)) {
+            lifeCycleQuery.append("SELECT tf.FILE_ID as file_id,tf.ISA_NUMBER as isa_number,tl.SHIPMENT_ID as SHIPMENT_ID,"
+                    + " tf.FILE_TYPE as file_type,tf.FILE_ORIGIN as file_origin,tf.TRANSACTION_TYPE as tran_type,tf.POST_TRANS_FILEPATH as file_path,"
+                    + " tf.ACK_STATUS as ack_status,tf.DIRECTION as direction,tf.DATE_TIME_RECEIVED as datetime,"
+                    + " tf.STATUS as status,tf.PRI_KEY_VAL as prival,tf.REPROCESSSTATUS as REPROCESSSTATUS "
+                    + " FROM ARCHIVE_Transport_loadtender tl LEFT OUTER JOIN ARCHIVE_FILES TF ON "
+                    + " (tl.FILE_ID=tf.FILE_ID and tl.SHIPMENT_ID=tf.PRI_KEY_VAL) "
+                    + " where 1=1 and SHIPMENT_ID= '" + shipmentNumber + "' order by DATE_TIME_RECEIVED desc ");
+        } else {
+            lifeCycleQuery.append("SELECT tf.FILE_ID as file_id,tf.ISA_NUMBER as isa_number,tl.SHIPMENT_ID as SHIPMENT_ID,"
+                    + " tf.FILE_TYPE as file_type,tf.FILE_ORIGIN as file_origin,tf.TRANSACTION_TYPE as tran_type,tf.POST_TRANS_FILEPATH as file_path,"
+                    + " tf.ACK_STATUS as ack_status,tf.DIRECTION as direction,tf.DATE_TIME_RECEIVED as datetime,"
+                    + " tf.STATUS as status,tf.PRI_KEY_VAL as prival,tf.REPROCESSSTATUS as REPROCESSSTATUS "
+                    + " FROM Transport_loadtender tl LEFT OUTER JOIN FILES TF ON "
+                    + " (tl.FILE_ID=tf.FILE_ID and tl.SHIPMENT_ID=tf.PRI_KEY_VAL) "
+                    + " where 1=1 and SHIPMENT_ID= '" + shipmentNumber + "' order by DATE_TIME_RECEIVED desc ");
+        }
         System.out.println("getLtLoadtender query--->" + lifeCycleQuery.toString());
 
         String searchQuery = lifeCycleQuery.toString();
@@ -967,25 +1012,25 @@ public class LifecycleUtility {
         //String poNum = poNumber;
         // System.out.println("LifeCycleUtill ASN---->"+poNum);
         // asnLifecycleBean.setRes("0");
-            if ("ARCHIVE".equals(database)) {
-                lifeCycleQuery.append("SELECT tf.FILE_ID as file_id,tf.ISA_NUMBER as isa_number,tl.SHIPMENT_ID as SHIPMENT_ID,"
-                + " tf.FILE_TYPE as file_type,tf.FILE_ORIGIN as file_origin,tf.TRANSACTION_TYPE as tran_type,tf.POST_TRANS_FILEPATH"
-                + " as file_path,"
-                + " tf.ACK_STATUS as ack_status,tf.DIRECTION as direction,tf.DATE_TIME_RECEIVED as datetime,"
-                + " tf.STATUS as status,tf.PRI_KEY_VAL as prival,tf.REPROCESSSTATUS as REPROCESSSTATUS "
-                + " FROM ARCHIVE_TRANSPORT_LT_RESPONSE tl LEFT OUTER JOIN ARCHIVE_FILES TF ON"
-                + " (tl.FILE_ID=tf.FILE_ID and tl.SHIPMENT_ID=tf.PRI_KEY_VAL)"
-                + " where 1=1 and SHIPMENT_ID='" + shipmentNumber + "' order by DATE_TIME_RECEIVED desc ");
-            }else{
-                lifeCycleQuery.append("SELECT tf.FILE_ID as file_id,tf.ISA_NUMBER as isa_number,tl.SHIPMENT_ID as SHIPMENT_ID,"
-                + " tf.FILE_TYPE as file_type,tf.FILE_ORIGIN as file_origin,tf.TRANSACTION_TYPE as tran_type,tf.POST_TRANS_FILEPATH"
-                + " as file_path,"
-                + " tf.ACK_STATUS as ack_status,tf.DIRECTION as direction,tf.DATE_TIME_RECEIVED as datetime,"
-                + " tf.STATUS as status,tf.PRI_KEY_VAL as prival,tf.REPROCESSSTATUS as REPROCESSSTATUS "
-                + " FROM TRANSPORT_LT_RESPONSE tl LEFT OUTER JOIN FILES TF ON"
-                + " (tl.FILE_ID=tf.FILE_ID and tl.SHIPMENT_ID=tf.PRI_KEY_VAL)"
-                + " where 1=1 and SHIPMENT_ID='" + shipmentNumber + "' order by DATE_TIME_RECEIVED desc ");
-            }
+        if ("ARCHIVE".equals(database)) {
+            lifeCycleQuery.append("SELECT tf.FILE_ID as file_id,tf.ISA_NUMBER as isa_number,tl.SHIPMENT_ID as SHIPMENT_ID,"
+                    + " tf.FILE_TYPE as file_type,tf.FILE_ORIGIN as file_origin,tf.TRANSACTION_TYPE as tran_type,tf.POST_TRANS_FILEPATH"
+                    + " as file_path,"
+                    + " tf.ACK_STATUS as ack_status,tf.DIRECTION as direction,tf.DATE_TIME_RECEIVED as datetime,"
+                    + " tf.STATUS as status,tf.PRI_KEY_VAL as prival,tf.REPROCESSSTATUS as REPROCESSSTATUS "
+                    + " FROM ARCHIVE_TRANSPORT_LT_RESPONSE tl LEFT OUTER JOIN ARCHIVE_FILES TF ON"
+                    + " (tl.FILE_ID=tf.FILE_ID and tl.SHIPMENT_ID=tf.PRI_KEY_VAL)"
+                    + " where 1=1 and SHIPMENT_ID='" + shipmentNumber + "' order by DATE_TIME_RECEIVED desc ");
+        } else {
+            lifeCycleQuery.append("SELECT tf.FILE_ID as file_id,tf.ISA_NUMBER as isa_number,tl.SHIPMENT_ID as SHIPMENT_ID,"
+                    + " tf.FILE_TYPE as file_type,tf.FILE_ORIGIN as file_origin,tf.TRANSACTION_TYPE as tran_type,tf.POST_TRANS_FILEPATH"
+                    + " as file_path,"
+                    + " tf.ACK_STATUS as ack_status,tf.DIRECTION as direction,tf.DATE_TIME_RECEIVED as datetime,"
+                    + " tf.STATUS as status,tf.PRI_KEY_VAL as prival,tf.REPROCESSSTATUS as REPROCESSSTATUS "
+                    + " FROM TRANSPORT_LT_RESPONSE tl LEFT OUTER JOIN FILES TF ON"
+                    + " (tl.FILE_ID=tf.FILE_ID and tl.SHIPMENT_ID=tf.PRI_KEY_VAL)"
+                    + " where 1=1 and SHIPMENT_ID='" + shipmentNumber + "' order by DATE_TIME_RECEIVED desc ");
+        }
 
         System.out.println("getResponse-->" + lifeCycleQuery.toString());
         String searchQuery = lifeCycleQuery.toString();
@@ -1054,26 +1099,26 @@ public class LifecycleUtility {
         //String poNum = poNumber;
         // System.out.println("LifeCycleService impl INVOICE---->"+poNum);
         //invoiceLifecycleBean.setRes("0");
- if ("ARCHIVE".equals(database)) {
-     lifeCycleQuery.append("SELECT tf.FILE_ID as file_id,tf.ISA_NUMBER as isa_number,tl.SHIPMENT_ID as SHIPMENT_ID,"
-                + " tf.FILE_TYPE as file_type,tf.FILE_ORIGIN as file_origin,tf.TRANSACTION_TYPE as tran_type,tf.POST_TRANS_FILEPATH"
-                + " as file_path,"
-                + " tf.ACK_STATUS as ack_status,tf.DIRECTION as direction,tf.DATE_TIME_RECEIVED as datetime,"
-                + " tf.STATUS as status,tf.PRI_KEY_VAL as prival,tf.REPROCESSSTATUS as REPROCESSSTATUS"
-                + " FROM ARCHIVE_TRANSPORT_SHIPMENT tl LEFT OUTER JOIN ARCHIVE_FILES TF ON "
-                + " (tl.FILE_ID=tf.FILE_ID and tl.SHIPMENT_ID=tf.PRI_KEY_VAL)"
-                + " where 1=1 and SHIPMENT_ID='" + shipmentNumber + "' order by DATE_TIME_RECEIVED desc ");
- }else{
-     lifeCycleQuery.append("SELECT tf.FILE_ID as file_id,tf.ISA_NUMBER as isa_number,tl.SHIPMENT_ID as SHIPMENT_ID,"
-                + " tf.FILE_TYPE as file_type,tf.FILE_ORIGIN as file_origin,tf.TRANSACTION_TYPE as tran_type,tf.POST_TRANS_FILEPATH"
-                + " as file_path,"
-                + " tf.ACK_STATUS as ack_status,tf.DIRECTION as direction,tf.DATE_TIME_RECEIVED as datetime,"
-                + " tf.STATUS as status,tf.PRI_KEY_VAL as prival,tf.REPROCESSSTATUS as REPROCESSSTATUS"
-                + " FROM TRANSPORT_SHIPMENT tl LEFT OUTER JOIN FILES TF ON "
-                + " (tl.FILE_ID=tf.FILE_ID and tl.SHIPMENT_ID=tf.PRI_KEY_VAL)"
-                + " where 1=1 and SHIPMENT_ID='" + shipmentNumber + "' order by DATE_TIME_RECEIVED desc ");
- }
-        
+        if ("ARCHIVE".equals(database)) {
+            lifeCycleQuery.append("SELECT tf.FILE_ID as file_id,tf.ISA_NUMBER as isa_number,tl.SHIPMENT_ID as SHIPMENT_ID,"
+                    + " tf.FILE_TYPE as file_type,tf.FILE_ORIGIN as file_origin,tf.TRANSACTION_TYPE as tran_type,tf.POST_TRANS_FILEPATH"
+                    + " as file_path,"
+                    + " tf.ACK_STATUS as ack_status,tf.DIRECTION as direction,tf.DATE_TIME_RECEIVED as datetime,"
+                    + " tf.STATUS as status,tf.PRI_KEY_VAL as prival,tf.REPROCESSSTATUS as REPROCESSSTATUS"
+                    + " FROM ARCHIVE_TRANSPORT_SHIPMENT tl LEFT OUTER JOIN ARCHIVE_FILES TF ON "
+                    + " (tl.FILE_ID=tf.FILE_ID and tl.SHIPMENT_ID=tf.PRI_KEY_VAL)"
+                    + " where 1=1 and SHIPMENT_ID='" + shipmentNumber + "' order by DATE_TIME_RECEIVED desc ");
+        } else {
+            lifeCycleQuery.append("SELECT tf.FILE_ID as file_id,tf.ISA_NUMBER as isa_number,tl.SHIPMENT_ID as SHIPMENT_ID,"
+                    + " tf.FILE_TYPE as file_type,tf.FILE_ORIGIN as file_origin,tf.TRANSACTION_TYPE as tran_type,tf.POST_TRANS_FILEPATH"
+                    + " as file_path,"
+                    + " tf.ACK_STATUS as ack_status,tf.DIRECTION as direction,tf.DATE_TIME_RECEIVED as datetime,"
+                    + " tf.STATUS as status,tf.PRI_KEY_VAL as prival,tf.REPROCESSSTATUS as REPROCESSSTATUS"
+                    + " FROM TRANSPORT_SHIPMENT tl LEFT OUTER JOIN FILES TF ON "
+                    + " (tl.FILE_ID=tf.FILE_ID and tl.SHIPMENT_ID=tf.PRI_KEY_VAL)"
+                    + " where 1=1 and SHIPMENT_ID='" + shipmentNumber + "' order by DATE_TIME_RECEIVED desc ");
+        }
+
         System.out.println("getShipment Query-->" + lifeCycleQuery.toString());
         String searchQuery = lifeCycleQuery.toString();
 
@@ -1141,25 +1186,25 @@ public class LifecycleUtility {
         // String poNum = poNumber;
         // System.out.println("LifeCycleService impl PAYMENTS---->"+poNum);
         // paymentLifecycleBean.setRes("1");
-         if ("ARCHIVE".equals(database)) {
-              lifeCycleQuery.append("SELECT tf.FILE_ID as file_id,tf.ISA_NUMBER as isa_number,tl.SHIPMENT_ID as SHIPMENT_ID,"
-                + " tf.FILE_TYPE as file_type,tf.FILE_ORIGIN as file_origin,tf.TRANSACTION_TYPE as tran_type,tf.POST_TRANS_FILEPATH "
-                + " as file_path,"
-                + "  tf.ACK_STATUS as ack_status,tf.DIRECTION as direction,tf.DATE_TIME_RECEIVED as datetime,"
-                + " tf.STATUS as status,tf.PRI_KEY_VAL as prival,tf.REPROCESSSTATUS as REPROCESSSTATUS "
-                + " FROM ARCHIVE_TRANSPORT_INVOICE tl LEFT OUTER JOIN ARCHIVE_FILES TF ON"
-                + " (tl.FILE_ID=tf.FILE_ID and tl.SHIPMENT_ID=tf.PRI_KEY_VAL)  "
-                + " where 1=1 and SHIPMENT_ID='" + shipmentNumber + "' order by DATE_TIME_RECEIVED desc ");
-         }else{
-              lifeCycleQuery.append("SELECT tf.FILE_ID as file_id,tf.ISA_NUMBER as isa_number,tl.SHIPMENT_ID as SHIPMENT_ID,"
-                + " tf.FILE_TYPE as file_type,tf.FILE_ORIGIN as file_origin,tf.TRANSACTION_TYPE as tran_type,tf.POST_TRANS_FILEPATH "
-                + " as file_path,"
-                + "  tf.ACK_STATUS as ack_status,tf.DIRECTION as direction,tf.DATE_TIME_RECEIVED as datetime,"
-                + " tf.STATUS as status,tf.PRI_KEY_VAL as prival,tf.REPROCESSSTATUS as REPROCESSSTATUS "
-                + " FROM TRANSPORT_INVOICE tl LEFT OUTER JOIN FILES TF ON"
-                + " (tl.FILE_ID=tf.FILE_ID and tl.SHIPMENT_ID=tf.PRI_KEY_VAL)  "
-                + " where 1=1 and SHIPMENT_ID='" + shipmentNumber + "' order by DATE_TIME_RECEIVED desc ");
-         }
+        if ("ARCHIVE".equals(database)) {
+            lifeCycleQuery.append("SELECT tf.FILE_ID as file_id,tf.ISA_NUMBER as isa_number,tl.SHIPMENT_ID as SHIPMENT_ID,"
+                    + " tf.FILE_TYPE as file_type,tf.FILE_ORIGIN as file_origin,tf.TRANSACTION_TYPE as tran_type,tf.POST_TRANS_FILEPATH "
+                    + " as file_path,"
+                    + "  tf.ACK_STATUS as ack_status,tf.DIRECTION as direction,tf.DATE_TIME_RECEIVED as datetime,"
+                    + " tf.STATUS as status,tf.PRI_KEY_VAL as prival,tf.REPROCESSSTATUS as REPROCESSSTATUS "
+                    + " FROM ARCHIVE_TRANSPORT_INVOICE tl LEFT OUTER JOIN ARCHIVE_FILES TF ON"
+                    + " (tl.FILE_ID=tf.FILE_ID and tl.SHIPMENT_ID=tf.PRI_KEY_VAL)  "
+                    + " where 1=1 and SHIPMENT_ID='" + shipmentNumber + "' order by DATE_TIME_RECEIVED desc ");
+        } else {
+            lifeCycleQuery.append("SELECT tf.FILE_ID as file_id,tf.ISA_NUMBER as isa_number,tl.SHIPMENT_ID as SHIPMENT_ID,"
+                    + " tf.FILE_TYPE as file_type,tf.FILE_ORIGIN as file_origin,tf.TRANSACTION_TYPE as tran_type,tf.POST_TRANS_FILEPATH "
+                    + " as file_path,"
+                    + "  tf.ACK_STATUS as ack_status,tf.DIRECTION as direction,tf.DATE_TIME_RECEIVED as datetime,"
+                    + " tf.STATUS as status,tf.PRI_KEY_VAL as prival,tf.REPROCESSSTATUS as REPROCESSSTATUS "
+                    + " FROM TRANSPORT_INVOICE tl LEFT OUTER JOIN FILES TF ON"
+                    + " (tl.FILE_ID=tf.FILE_ID and tl.SHIPMENT_ID=tf.PRI_KEY_VAL)  "
+                    + " where 1=1 and SHIPMENT_ID='" + shipmentNumber + "' order by DATE_TIME_RECEIVED desc ");
+        }
 
         System.out.println("getInvoice Query-->" + lifeCycleQuery.toString());
         String searchQuery = lifeCycleQuery.toString();

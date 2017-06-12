@@ -188,7 +188,7 @@
                                                                 %>
                                                                 <thead><tr>
                                                                         <th>User</th> 
-                                                                        <th >DaysCount</th>
+                                                                        <th >Days Count</th>
                                                                         <th >Transaction Type</th>
                                                                         <th >Comments</th>
                                                                         <th >Archive Date</th>

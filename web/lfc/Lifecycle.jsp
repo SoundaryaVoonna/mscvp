@@ -60,10 +60,10 @@ charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>--%>
                     LifeCycle
                     <!--<small>Manufacturing</small>-->
                 </h1>
-<!--                <ol class="breadcrumb">
-                    <li><a href="#"><i class="fa fa-wrench"></i>Manufacturing</a></li>
-                    <li class="active">LifeCycle</li>
-                </ol>-->
+                <!--                <ol class="breadcrumb">
+                                    <li><a href="#"><i class="fa fa-wrench"></i>Manufacturing</a></li>
+                                    <li class="active">LifeCycle</li>
+                                </ol>-->
             </section>
             <br>
             <div id="gridDiv">     
@@ -79,7 +79,7 @@ charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>--%>
                                 <div class="box-body">
                                     <div style="overflow-x:auto;">   
                                         <div align="right"><input type="button" value="Go back" class="btn btn-effect-ripple btn-primary" onclick="goBack()"></input></div>
-                                        <s:hidden id="database" name="database" value="%{database}"/>
+                                            <s:hidden id="database" name="database" value="%{database}"/>
                                         <br>
                                         <table align="left" width="100%" border="0" cellpadding="0" cellspacing="0">
                                             <tr>
@@ -94,7 +94,7 @@ charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>--%>
                                                              PaymentLifecycleBean paymentLifecycleBean = (PaymentLifecycleBean) lifecycleBeans.getPaymentLifecycleBean();*/
                                                             java.util.List list = (java.util.List) session.getAttribute(AppConstants.LFC_SES_PO_LIST);
                                                             //   out.println("NAG-----PO LIST size--->"+list.size()+"\n");
-
+                                                            System.out.println("list.size()-->" + list.size());
                                                             if (list.size() != 0) {
                                                                 PoLifecycleBean poLifeCycleBean;
                                                         %>
@@ -126,7 +126,7 @@ charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>--%>
 
                                                             <%-- Po Start--%>
                                                             <tr>
-                                                                      <td>
+                                                                <td>
                                                                     <%
                                                                         if (poLifeCycleBean.getDatetimeRec() != null && !"".equals(poLifeCycleBean.getDatetimeRec())) {
                                                                             out.println(poLifeCycleBean.getDatetimeRec().toString().substring(0, poLifeCycleBean.getDatetimeRec().toString().lastIndexOf(":")));
@@ -243,6 +243,7 @@ charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>--%>
                                                             <%
                                                                 java.util.List asnlist = (java.util.List) session.getAttribute(AppConstants.LFC_SES_ASN_LIST);
                                                                 // out.println("NAG-----ASN LIST size--->"+list.size()+"\n");
+                                                                System.out.println("asnlist.size()-->" + asnlist.size());
                                                                 if (asnlist.size() != 0) {
                                                                     AsnLifecycleBean asnLifecycleBean;
                                                             %>
@@ -260,7 +261,7 @@ charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>--%>
 
                                                             <%-- Asn Start--%>
                                                             <tr>
-                                                                      <td>
+                                                                <td>
                                                                     <%
                                                                         if (asnLifecycleBean.getDatetimeRec() != null && !"".equals(asnLifecycleBean.getDatetimeRec())) {
                                                                             out.println(asnLifecycleBean.getDatetimeRec().toString().substring(0, asnLifecycleBean.getDatetimeRec().toString().lastIndexOf(":")));
@@ -361,6 +362,7 @@ charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>--%>
                                                             <%
                                                                 java.util.List invoicelist = (java.util.List) session.getAttribute(AppConstants.LFC_SES_INVOICE_LIST);
                                                                 //  out.println("NAG-----INVOICE LIST size--->"+invoicelist.size()+"\n");
+                                                                System.out.println("invoicelist.size()-->" + invoicelist.size());
                                                                 if (invoicelist.size() != 0) {
                                                                     InvoiceLifecycleBean invoiceLifecycleBean;
                                                             %>
@@ -492,6 +494,7 @@ charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>--%>
                                                             <%
                                                                 java.util.List paymentlist = (java.util.List) session.getAttribute(AppConstants.LFC_SES_PAYMENT_LIST);
                                                                 //out.println("NAG-----INVOICE LIST size--->"+paymentlist.size()+"\n");
+                                                                System.out.println("paymentlist.size()-->" + paymentlist.size());
                                                                 if (paymentlist.size() != 0) {
                                                                     PaymentLifecycleBean paymentLifecycleBean;
                                                             %>
@@ -508,7 +511,7 @@ charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>--%>
 
                                                             <%-- Payment Start--%>
                                                             <tr>
-                                                                   <td>
+                                                                <td>
                                                                     <%
                                                                         if (paymentLifecycleBean.getDatetimeRec() != null && !"".equals(paymentLifecycleBean.getDatetimeRec())) {
                                                                             out.println(paymentLifecycleBean.getDatetimeRec().toString().substring(0, paymentLifecycleBean.getDatetimeRec().toString().lastIndexOf(":")));
@@ -667,22 +670,22 @@ charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>--%>
                             <s:textfield  cssClass="form-control"  required="required" placeholder="" id="LfcPONum" name="LfcPONum" readonly="true"/>
                         </div>
                     </div>
-                    <div class="row col-sm-12"> 
-                        <div class="col-sm-6"> <label class="labelw">PO Date</label>
-                            <s:textfield  cssClass="form-control"  required="required" placeholder="" id="LfcPODates" name="LfcPODates" readonly="true"/>
+                   <div class="row col-sm-12"> 
+                        <div class="col-sm-6"> <label class="labelw">PRI_KEY_TYPE</label>
+                            <s:textfield  cssClass="form-control"  required="required" placeholder="" id="LfcManpri_key_type" name="LfcManpri_key_type" readonly="true"/>
                         </div>
-                        <div class="col-sm-6"> <label class="labelw">PO Status</label>
-                            <s:textfield  cssClass="form-control"  required="required" placeholder="" id="LfcStatus1" name="LfcStatus1" readonly="true"/>
+                        <div class="col-sm-6"> <label class="labelw">PRI_KEY_VAL</label>
+                            <s:textfield  cssClass="form-control"  required="required" placeholder="" id="LfcManpri_key_value" name="LfcManpri_key_value" readonly="true"/>
                         </div>
                     </div>
-                    <div class="row col-sm-12">
+                   <%--  <div class="row col-sm-12">
                         <div class="col-sm-6"> <label class="labelw">SO # </label>
                             <s:textfield  cssClass="form-control"  required="required" placeholder="" id="LfcSo" name="LfcSo" readonly="true"/>
                         </div>
                         <div class="col-sm-6"> <label class="labelw">PO Qty </label>
                             <s:textfield  cssClass="form-control"  required="required" placeholder="" id="LfcPOQty" name="POShipDate" readonly="true"/>
                         </div>
-                    </div>
+                    </div>--%>
                     <div class="row col-sm-12">
                         <div class="col-sm-6"> <label class="labelw">Transaction Type </label>
                             <s:textfield  cssClass="form-control"  required="required" placeholder="" id="LfcTransactionType" name="LfcTransactionType" readonly="true"/>
@@ -698,10 +701,10 @@ charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>--%>
                         </div>
                         <br>
                         <div class="row col-sm-12">
-                            <div class="col-sm-6"> <label class="labelw">  Id </label>
+                            <div class="col-sm-6"> <label class="labelw">  Sender Id </label>
                                 <s:textfield  cssClass="form-control"  required="required" placeholder="" id="LycPOPartnerId" name="LycPOPartnerId" readonly="true"/>
                             </div>
-                            <div class="col-sm-6"> <label class="labelw"> Name </label>
+                            <div class="col-sm-6"> <label class="labelw"> Sender Name </label>
                                 <s:textfield  cssClass="form-control"  required="required" placeholder="" id="LycPOPartnerName" name="LycPOPartnerName" readonly="true"/>
                             </div>
                         </div>
@@ -716,10 +719,10 @@ charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>--%>
 
                         <br>
                         <div class="row col-sm-12 clear">
-                            <div class="col-sm-6"> <label class="labelw">  Id </label>
+                            <div class="col-sm-6"> <label class="labelw"> Receiver Id </label>
                                 <s:textfield  cssClass="form-control"  required="required" placeholder="" id="LfcPOReceiverId" name="LfcPOReceiverId" readonly="true"/>
                             </div>
-                            <div class="col-sm-6"> <label class="labelw"> Name </label>
+                            <div class="col-sm-6"> <label class="labelw"> Receiver Name </label>
                                 <s:textfield  cssClass="form-control"  required="required" placeholder="" id="LfcPOReceiverName" name="LfcPOReceiverName" readonly="true"/>
                             </div>
                         </div>
@@ -729,14 +732,23 @@ charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>--%>
                         <div class="col-sm-6"> <label class="labelw"> ISA # </label>
                             <s:textfield  cssClass="form-control"  required="required" placeholder="" id="LfcPOIsa" name="LfcPOIsa" readonly="true"/>
                         </div>
-                        <div class="col-sm-6"> <label class="labelw"> ISA Date </label>
-                            <s:textfield  cssClass="form-control"  required="required" placeholder="" id="LfcPOISADate" name="LfcPOISADate" readonly="true"/>
+                           <div class="col-sm-6"> <label class="labelw"> GS </label>
+                            <s:textfield  cssClass="form-control"  required="required" placeholder="" id="LfcGS_CONTROL_NUMBER" name="LfcGS_CONTROL_NUMBER" readonly="true"/>
                         </div>
                     </div>
 
 
-                    <div class="row col-sm-12" >
-
+                    <div class="row col-sm-12 clear">
+                           <div class="col-sm-6"> <label class="labelw"> ST</label>
+                            <s:textfield  cssClass="form-control"  required="required" placeholder="" id="LfcST_CONTROL_NUMBER" name="LfcST_CONTROL_NUMBER" readonly="true"/>
+                        </div>
+                           <div class="col-sm-6"> <label class="labelw"> ISA Date </label>
+                            <s:textfield  cssClass="form-control"  required="required" placeholder="" id="LfcPOISADate" name="LfcPOISADate" readonly="true"/>
+                        </div>
+                   
+                    </div>
+                        
+                           <div class="row col-sm-12">
                         <div class="col-sm-6"> <label class="labelw">  ISA TIME </label>
                             <s:textfield  cssClass="form-control"  required="required" placeholder="" id="LfcPOIsATime" name="LfcPOIsATime" readonly="true"/>
                         </div>
@@ -772,7 +784,7 @@ charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>--%>
                 </div>
             </div>
         </div>
-        
+
         <div>
             <s:include value="../includes/template/footer.jsp"/>
         </div>
@@ -780,50 +792,50 @@ charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>--%>
         <script src='<s:url value="../includes/plugins/datatables/jquery.dataTables.min.js"/>'></script>
         <script src='<s:url value="../includes/plugins/datatables/dataTables.bootstrap.min.js"/>'></script>
         <script src='<s:url value="../includes/bootstrap/js/app.min.js"/>'></script>
-        
+
         <script type="text/javascript">
-           $(function() {
-               $('#attach_box').click(function() {
-                   $('#sec_box').show();
-                   return false;
-               });
-           });
-           $(function() {
-               $('#detail_link').click(function() {
-                   $('#detail_box').show();
-                   return false;
-               });
-           });
-           // New function to show the left grid
-           function demo() {
-               $(function() {
-                   $('#detail_box').show();
-                   return false;
-               });
-           }
-           function getDetails(ponum, fileid, type) {
-               var db = document.getElementById('database').value;
-             // alert("db jsp---->"+db);
-               getlfcPODetails(ponum, fileid, type,db);
-           }
-           function goBack() {
-               window.history.go(-1)
-           }
+                            $(function() {
+                                $('#attach_box').click(function() {
+                                    $('#sec_box').show();
+                                    return false;
+                                });
+                            });
+                            $(function() {
+                                $('#detail_link').click(function() {
+                                    $('#detail_box').show();
+                                    return false;
+                                });
+                            });
+                            // New function to show the left grid
+                            function demo() {
+                                $(function() {
+                                    $('#detail_box').show();
+                                    return false;
+                                });
+                            }
+                            function getDetails(ponum, fileid, type) {
+                                var db = document.getElementById('database').value;
+                                // alert("db jsp---->"+db);
+                                getlfcPODetails(ponum, fileid, type, db);
+                            }
+                            function goBack() {
+                                window.history.go(-1)
+                            }
 
-           function hide() {
-               $('#hide-menu1').removeClass('show-menu');
-           }
-       //            $('body,html').click(function(e){
-       //                $('#hide-menu1').removeClass('show-menu');
-       //            });
+                            function hide() {
+                                $('#hide-menu1').removeClass('show-menu');
+                            }
+                            //            $('body,html').click(function(e){
+                            //                $('#hide-menu1').removeClass('show-menu');
+                            //            });
 
-           function doOnLoad() {
-               $("#purchaseorder").addClass("active");
-               $("#oredermanagement").addClass("active");
-               $("#manufacturing").addClass("active");
-               $("#purchaseorder i").addClass("text-red");
-              // document.getElementById('loadingAcoountSearch').style.display = "none";
-           }
+                            function doOnLoad() {
+                                $("#purchaseorder").addClass("active");
+                                $("#oredermanagement").addClass("active");
+                                $("#manufacturing").addClass("active");
+                                $("#purchaseorder i").addClass("text-red");
+                                // document.getElementById('loadingAcoountSearch').style.display = "none";
+                            }
         </script>
     </body>
 </html>

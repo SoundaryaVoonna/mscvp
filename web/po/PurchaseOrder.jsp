@@ -224,6 +224,7 @@
                                                         <table  id="results" class="table table-bordered table-hover">
                                                             <%
                                                                 java.util.List list = (java.util.List) session.getAttribute(AppConstants.SES_PO_LIST);
+                                                                 System.out.println("list.size()-->" + list.size());
                                                                 if (list.size() != 0) {
                                                                     PurchaseOrderBean purchaseOrderBean;
                                                             %>

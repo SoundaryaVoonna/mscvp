@@ -838,6 +838,8 @@ function populateDocDetails(responseXML)
               document.getElementById('prikeytypeandvalue').style.display = "block";
             document.getElementById('Manpri_key_type').value = PRI_KEY_TYPE;
             document.getElementById('Manpri_key_value').value = PRI_KEY_VAL;
+        }else{
+             document.getElementById('prikeytypeandvalue').style.display = "none";
         }
         if (SENDER_NAME == "NULL") {
             SENDER_NAME = "Null";

@@ -174,10 +174,10 @@
                                                                 %>
                                                                 <thead><tr>
                                                                         <th>User</th> 
-                                                                        <th >DaysCount</th>
-                                                                        <th >Transaction Type</th>
-                                                                        <th >Comments</th>
-                                                                        <th >Purge Date</th>
+                                                                        <th>Days Count</th>
+                                                                        <th>Transaction Type</th>
+                                                                        <th>Comments</th>
+                                                                        <th>Purge Date</th>
                                                                 </thead>
                                                                 
                                                                 <tbody>

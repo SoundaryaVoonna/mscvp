@@ -47,6 +47,8 @@ public class AsnLifecycleBean {
     private String senName;
     private String recName;
     private String reProcessStatus;
+    private String primary_key_val;
+    private String primary_key_type;
 
     /**
      * @return the fileId
@@ -537,4 +539,21 @@ public class AsnLifecycleBean {
     public void setReProcessStatus(String reProcessStatus) {
         this.reProcessStatus = reProcessStatus;
     }
+
+    public String getPrimary_key_val() {
+        return primary_key_val;
+    }
+
+    public void setPrimary_key_val(String primary_key_val) {
+        this.primary_key_val = primary_key_val;
+    }
+
+    public String getPrimary_key_type() {
+        return primary_key_type;
+    }
+
+    public void setPrimary_key_type(String primary_key_type) {
+        this.primary_key_type = primary_key_type;
+    }
+
 }
