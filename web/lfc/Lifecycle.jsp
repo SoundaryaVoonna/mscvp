@@ -671,10 +671,10 @@ charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>--%>
                         </div>
                     </div>
                    <div class="row col-sm-12"> 
-                        <div class="col-sm-6"> <label class="labelw">PRI_KEY_TYPE</label>
+                        <div class="col-sm-6"> <label class="labelw">Doc Type</label>
                             <s:textfield  cssClass="form-control"  required="required" placeholder="" id="LfcManpri_key_type" name="LfcManpri_key_type" readonly="true"/>
                         </div>
-                        <div class="col-sm-6"> <label class="labelw">PRI_KEY_VAL</label>
+                        <div class="col-sm-6"> <label class="labelw">Doc Number</label>
                             <s:textfield  cssClass="form-control"  required="required" placeholder="" id="LfcManpri_key_value" name="LfcManpri_key_value" readonly="true"/>
                         </div>
                     </div>
@@ -749,10 +749,10 @@ charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>--%>
                     </div>
                         
                            <div class="row col-sm-12">
-                        <div class="col-sm-6"> <label class="labelw">  ISA TIME </label>
+                        <div class="col-sm-6"> <label class="labelw">  ISA Time </label>
                             <s:textfield  cssClass="form-control"  required="required" placeholder="" id="LfcPOIsATime" name="LfcPOIsATime" readonly="true"/>
                         </div>
-                        <div class="col-sm-6"> <label class="labelw"> STATUS </label>
+                        <div class="col-sm-6"> <label class="labelw"> Status</label>
                             <s:textfield  cssClass="form-control"  required="required" placeholder="" id="LfcPOStatus" name="LfcPOStatus" readonly="true"/>
                         </div>
                     </div>

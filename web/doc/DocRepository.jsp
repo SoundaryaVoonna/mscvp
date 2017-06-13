@@ -412,15 +412,15 @@
                             </div>
                         </div>
                         <div class="row col-sm-12" id="prikeytypeandvalue" style="display:none"> 
-                            <div class="col-sm-6"><label class="labelw">PRI_KEY_TYPE</label>
+                            <div class="col-sm-6"><label class="labelw">Doc Type</label>
                                 <s:textfield cssClass="form-control"  required="required" placeholder="" id="Manpri_key_type" name="Manpri_key_type" readonly="true"/>
                             </div>
-                            <div class="col-sm-6"> <label class="labelw">PRI_KEY_VAL</label>
+                            <div class="col-sm-6"> <label class="labelw">Doc Number</label>
                                 <s:textfield  cssClass="form-control"  required="required" placeholder="" id="Manpri_key_value" name="Manpri_key_value" readonly="true"/>
                             </div>
                         </div>
                         <div class="row col-sm-12">
-                            <div class="col-sm-6"> <label class="labelw">  Document Type</label>
+                            <div class="col-sm-6"> <label class="labelw"> Doc Format</label>
                                 <s:textfield  cssClass="form-control"  required="required" placeholder="" id="ManDocumentType" name="ManDocumentType" readonly="true"/>
                             </div>
                             <div class="col-sm-6"> <label class="labelw"> Transaction Type</label>
@@ -486,7 +486,7 @@
                             <div class="col-sm-6"> <label class="labelw"> ISA Time</label>
                                 <s:textfield  cssClass="form-control"  required="required" placeholder="" id="ManIsATime" name="ManIsATime" readonly="true"/>
                             </div>
-                            <div class="col-sm-6"> <label class="labelw">  STATUS </label>
+                            <div class="col-sm-6"> <label class="labelw">  Status </label>
                                 <s:textfield  cssClass="form-control"  required="required" placeholder="" id="ManStatus" name="ManStatus" readonly="true"/>
                             </div>
                         </div>
