@@ -171,6 +171,7 @@ function getLtlfcPODetails(number, id, type) {
     var num = number;
     var id = id;
     var type = type;
+    var database = document.getElementById("database").value;
     $(function() {
 
         $('#detail_box').show();
@@ -180,7 +181,7 @@ function getLtlfcPODetails(number, id, type) {
     // alert("in js--->"+num+"-----"+type);
     var req = getXMLHttpRequest();
     req.onreadystatechange = readyStateHandlerText(req, populateLtLifecycle);
-    var url = "../ajax/ltLifecycleDetails.action?poNumber=" + num + "&fileId=" + id + "&type=" + type;
+    var url = "../ajax/ltLifecycleDetails.action?poNumber=" + num + "&fileId=" + id + "&type=" + type+ "&database="+database;
     req.open("GET", url, "true");
     // req.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
     req.send(null);

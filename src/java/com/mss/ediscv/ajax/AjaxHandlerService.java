@@ -42,7 +42,7 @@ public interface AjaxHandlerService {
      */
     public String getLifeCycleDetails(String poNumber, String fileId, String type, String database) throws ServiceLocatorException;
 
-    public String getLtLifecycleDetails(String poNumber, String fileId, String type) throws ServiceLocatorException;
+    public String getLtLifecycleDetails(String poNumber, String fileId, String type, String database) throws ServiceLocatorException;
 
     /**
      * TP Ajax cals

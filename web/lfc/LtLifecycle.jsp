@@ -152,6 +152,7 @@
                                 <div class="box-body">
                                     <div style="overflow-x:auto;">   
                                         <div align="right"><input type="button" value="Go back" class="btn btn-effect-ripple btn-primary" onclick="goBack()"></input></div>
+                                        <s:hidden id="database" name="database" value="%{database}"/>
                                         <br>
                                         <table align="left" width="100%"
                                                border="0" cellpadding="0" cellspacing="0">

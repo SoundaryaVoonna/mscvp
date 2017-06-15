@@ -2486,23 +2486,23 @@ public class AjaxHandlerServiceImpl implements AjaxHandlerService {
 
     }
 
-    public String getLtLifecycleDetails(String poNumber, String fileId, String type) throws ServiceLocatorException {
+    public String getLtLifecycleDetails(String poNumber, String fileId, String type, String database) throws ServiceLocatorException {
         String resultXml = "";
         LifecycleUtility lifecycleUtility = new LifecycleUtility();
         if (type.equalsIgnoreCase("LOADTENDER")) {
-            ltTenderBean = lifecycleUtility.getLtLoadtenderDetails(poNumber, fileId);
+            ltTenderBean = lifecycleUtility.getLtLoadtenderDetails(poNumber, fileId, database);
             resultXml = getLtLoadtenderDetailsXml(ltTenderBean);
         }
         if (type.equalsIgnoreCase("RESPONSE")) {
-            ltResponsesBean = lifecycleUtility.getLtResponseDetails(poNumber, fileId);
+            ltResponsesBean = lifecycleUtility.getLtResponseDetails(poNumber, fileId, database);
             resultXml = getLtResponseDetailsXml(ltResponsesBean);
         }
         if (type.equalsIgnoreCase("SHIPMENT")) {
-            ltShipmentsBean = lifecycleUtility.getLtShipmentDetails(poNumber, fileId);
+            ltShipmentsBean = lifecycleUtility.getLtShipmentDetails(poNumber, fileId, database);
             resultXml = getLtShipmentDetailsXml(ltShipmentsBean);
         }
         if (type.equalsIgnoreCase("INVOICE")) {
-            ltInvoicesBean = lifecycleUtility.getLtInvoiceDetails(poNumber, fileId);
+            ltInvoicesBean = lifecycleUtility.getLtInvoiceDetails(poNumber, fileId, database);
             resultXml = getLtInvoiceDetailsXml(ltInvoicesBean);
         }
         return resultXml;
