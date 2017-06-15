@@ -62,7 +62,7 @@
                 <!-- mini logo for sidebar mini 50x50 pixels -->
                 <span class="logo-mini"><b>SCV</b></span>
                 <!-- logo for regular state and mobile devices -->
-                <span class="logo-lg"><strong>Miracle </strong> SCVP</span>
+                <span class="logo-lg"><strong>NAPA </strong> SCVP</span>
             </a>
         </header> 
         <!-- sidebar: style can be found in sidebar.less -->
