@@ -5901,6 +5901,7 @@ public class AjaxHandlerServiceImpl implements AjaxHandlerService {
                         preparedStatement.setString(4, "");
                         preparedStatement.setString(5, jsonObj.getString("listName1"));
                         updatedRows = preparedStatement.executeUpdate();
+                        preparedStatement.close();
                     }
                     queryString1 = "INSERT INTO SI_USER.CODELIST_XREF_ITEM "
                             + "(LIST_NAME, SENDER_ID, RECEIVER_ID, LIST_VERSION, SENDER_ITEM, RECEIVER_ITEM, TEXT1, TEXT2, TEXT3, TEXT4, DESCRIPTION, TEXT5, TEXT6, TEXT7, TEXT8, TEXT9)"
@@ -5967,6 +5968,7 @@ public class AjaxHandlerServiceImpl implements AjaxHandlerService {
                         preparedStatement1.setString(16, "");
                     }
                     updatedRows1 = preparedStatement1.executeUpdate();
+                    preparedStatement1.close();
                     if (i == 0) {
                         System.out.println("i-----" + i);
                         preparedStatement2 = connection.prepareStatement(queryString2);
@@ -5983,6 +5985,7 @@ public class AjaxHandlerServiceImpl implements AjaxHandlerService {
                         preparedStatement2.setTimestamp(8, DateUtility.getInstance().getCurrentDB2Timestamp());
                         // updatedRows = preparedStatement.executeUpdate();
                         updatedRows2 = preparedStatement2.executeUpdate();
+                        preparedStatement2.close();
                     }
                     //}
                 }
