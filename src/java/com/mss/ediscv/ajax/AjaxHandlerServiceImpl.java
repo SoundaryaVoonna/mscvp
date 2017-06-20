@@ -5732,7 +5732,7 @@ public class AjaxHandlerServiceImpl implements AjaxHandlerService {
                     preparedStatement2.setString(3, "");
                     preparedStatement2.setInt(4, 1);
                     preparedStatement2.setInt(5, 1);
-                    preparedStatement2.setString(6, "null");
+                    preparedStatement2.setString(6, "");
                     preparedStatement2.setString(7, userName);
                     //java.sql.Date d=new java.sql.Date(i);
                     //SimpleDateFormat sd=new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
@@ -5975,7 +5975,7 @@ public class AjaxHandlerServiceImpl implements AjaxHandlerService {
                         preparedStatement2.setString(3, "");
                         preparedStatement2.setInt(4, addVersion);
                         preparedStatement2.setInt(5, 1);
-                        preparedStatement2.setString(6, "null");
+                        preparedStatement2.setString(6, "");
                         preparedStatement2.setString(7, userName);
                         //java.sql.Date d=new java.sql.Date(i);
                         //SimpleDateFormat sd=new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");

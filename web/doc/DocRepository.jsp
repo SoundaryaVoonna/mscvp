@@ -335,7 +335,7 @@
                                                                         <td>
                                                                             <%
                                                                                 if (docRepositoryBean.getAckStatus() != null && !"".equals(docRepositoryBean.getAckStatus())) {
-                                                                                    out.println(docRepositoryBean.getAckStatus());
+                                                                                    out.println(docRepositoryBean.getAckStatus().toUpperCase());
                                                                                 } else {
                                                                                     out.println("-");
                                                                                 }
