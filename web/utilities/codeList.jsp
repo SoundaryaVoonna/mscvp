@@ -492,7 +492,7 @@
                                                         alert("Cannot updae code list when no code list is selected");
                                                     }
                                                     else {
-                                                        listName = document.getElementById('listName1').value;
+                                                        listName = document.getElementById('listName1').value.trim();
                                                         var checkedCount = 0;
                                                         var ips = {"jsonData": []};
                                                         var rowCount = $('#results tr').length;
@@ -523,38 +523,38 @@
                                                                         document.getElementById('senderId' + i).value = "";
                                                                         document.getElementById('listVersion' + i).value = 1;
                                                                     }
-                                                                    if (document.getElementById('senderItem' + i).value == "")
+                                                                    if (document.getElementById('senderItem' + i).value.trim() == "")
                                                                     {
                                                                         alert("Please enter sender code");
                                                                         return false;
                                                                     }
-                                                                    if (document.getElementById('recItem' + i).value == "")
+                                                                    if (document.getElementById('recItem' + i).value.trim() == "")
                                                                     {
                                                                         alert("please enter receiver code");
                                                                         return false;
                                                                     }
-                                                                    if (document.getElementById('desc' + i).value == "")
+                                                                    if (document.getElementById('desc' + i).value.trim() == "")
                                                                     {
                                                                         alert("please enter description");
                                                                         return false;
                                                                     }
                                                                     ips["jsonData"].push({
                                                                         "listName1": listName,
-                                                                        "senderIdInst": document.getElementById('senderId' + i).value,
-                                                                        "recId": document.getElementById('recId' + i).value,
-                                                                        "listVerson": document.getElementById('listVersion' + i).value,
-                                                                        "senderItem": document.getElementById('senderItem' + i).value,
-                                                                        "recItem": document.getElementById('recItem' + i).value,
-                                                                        "text1": document.getElementById('text1' + i).value,
-                                                                        "text2": document.getElementById('text2' + i).value,
-                                                                        "text3": document.getElementById('text3' + i).value,
-                                                                        "text4": document.getElementById('text4' + i).value,
-                                                                        "desc": document.getElementById('desc' + i).value,
-                                                                        "text5": document.getElementById('text5' + i).value,
-                                                                        "text6": document.getElementById('text6' + i).value,
-                                                                        "text7": document.getElementById('text7' + i).value,
-                                                                        "text8": document.getElementById('text8' + i).value,
-                                                                        "text9": document.getElementById('text9' + i).value
+                                                                        "senderIdInst": document.getElementById('senderId' + i).value.trim(),
+                                                                        "recId": document.getElementById('recId' + i).value.trim(),
+                                                                        "listVerson": document.getElementById('listVersion' + i).value.trim(),
+                                                                        "senderItem": document.getElementById('senderItem' + i).value.trim(),
+                                                                        "recItem": document.getElementById('recItem' + i).value.trim(),
+                                                                        "text1": document.getElementById('text1' + i).value.trim(),
+                                                                        "text2": document.getElementById('text2' + i).value.trim(),
+                                                                        "text3": document.getElementById('text3' + i).value.trim(),
+                                                                        "text4": document.getElementById('text4' + i).value.trim(),
+                                                                        "desc": document.getElementById('desc' + i).value.trim(),
+                                                                        "text5": document.getElementById('text5' + i).value.trim(),
+                                                                        "text6": document.getElementById('text6' + i).value.trim(),
+                                                                        "text7": document.getElementById('text7' + i).value.trim(),
+                                                                        "text8": document.getElementById('text8' + i).value.trim(),
+                                                                        "text9": document.getElementById('text9' + i).value.trim()
                                                                     });
 
                                                                 }
@@ -664,23 +664,23 @@
                                                             else if (flag1 == false) {
                                                                 if (document.getElementById('check' + i).checked) {
                                                                     var listName = "";
-                                                                    listName = document.getElementById("newname").value;
+                                                                    listName = document.getElementById("newname").value.trim();
                                                                     if (listName == "") {
                                                                         alert("Please Enter New List Name");
                                                                         return false;
                                                                     }
 
-                                                                    if (document.getElementById('senderItem' + i).value == "")
+                                                                    if (document.getElementById('senderItem' + i).value.trim() == "")
                                                                     {
                                                                         alert("Please enter sender code");
                                                                         return false;
                                                                     }
-                                                                    if (document.getElementById('recItem' + i).value == "")
+                                                                    if (document.getElementById('recItem' + i).value.trim() == "")
                                                                     {
                                                                         alert("please enter receiver code");
                                                                         return false;
                                                                     }
-                                                                    if (document.getElementById('desc' + i).value == "")
+                                                                    if (document.getElementById('desc' + i).value.trim() == "")
                                                                     {
                                                                         alert("please enter description");
                                                                         return false;
@@ -688,21 +688,21 @@
 
                                                                     ips["jsonData"].push({
                                                                         "listName1": listName,
-                                                                        "senderIdInst": document.getElementById('senderId' + i).value,
-                                                                        "recId": document.getElementById('recId' + i).value,
-                                                                        "listVerson": document.getElementById('listVersion' + i).value,
-                                                                        "senderItem": document.getElementById('senderItem' + i).value,
-                                                                        "recItem": document.getElementById('recItem' + i).value,
-                                                                        "text1": document.getElementById('text1' + i).value,
-                                                                        "text2": document.getElementById('text2' + i).value,
-                                                                        "text3": document.getElementById('text3' + i).value,
-                                                                        "text4": document.getElementById('text4' + i).value,
-                                                                        "desc": document.getElementById('desc' + i).value,
-                                                                        "text5": document.getElementById('text5' + i).value,
-                                                                        "text6": document.getElementById('text6' + i).value,
-                                                                        "text7": document.getElementById('text7' + i).value,
-                                                                        "text8": document.getElementById('text8' + i).value,
-                                                                        "text9": document.getElementById('text9' + i).value
+                                                                        "senderIdInst": document.getElementById('senderId' + i).value.trim(),
+                                                                        "recId": document.getElementById('recId' + i).value.trim(),
+                                                                        "listVerson": document.getElementById('listVersion' + i).value.trim(),
+                                                                        "senderItem": document.getElementById('senderItem' + i).value.trim(),
+                                                                        "recItem": document.getElementById('recItem' + i).value.trim(),
+                                                                        "text1": document.getElementById('text1' + i).value.trim(),
+                                                                        "text2": document.getElementById('text2' + i).value.trim(),
+                                                                        "text3": document.getElementById('text3' + i).value.trim(),
+                                                                        "text4": document.getElementById('text4' + i).value.trim(),
+                                                                        "desc": document.getElementById('desc' + i).value.trim(),
+                                                                        "text5": document.getElementById('text5' + i).value.trim(),
+                                                                        "text6": document.getElementById('text6' + i).value.trim(),
+                                                                        "text7": document.getElementById('text7' + i).value.trim(),
+                                                                        "text8": document.getElementById('text8' + i).value.trim(),
+                                                                        "text9": document.getElementById('text9' + i).value.trim()
                                                                     });
 
 
