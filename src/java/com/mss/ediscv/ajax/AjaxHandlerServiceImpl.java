@@ -36,6 +36,8 @@ import com.mss.ediscv.util.MailManager;
 import com.mss.ediscv.util.PasswordUtil;
 import com.mss.ediscv.util.WildCardSql;
 import com.mss.ediscv.utilities.CertMonitorServiceImpl;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.sql.CallableStatement;
 import java.sql.Types;
 import java.util.Iterator;
@@ -5746,6 +5748,7 @@ public class AjaxHandlerServiceImpl implements AjaxHandlerService {
                     }
                 }
                 if (updatedRows > 0 && updatedRows1 > 0 && updatedRows2 > 0) {
+                    doCacheRefresh();
                     return "Inserted successfully";
                 } else {
                     return "Please Try Again";
@@ -6102,11 +6105,30 @@ public class AjaxHandlerServiceImpl implements AjaxHandlerService {
             }
         }
         if (updatedRows > 0 && updatedRows1 > 0 && updatedRows2 > 0) {
+            doCacheRefresh();
             return "Updated successfully";
         } else {
             return "Please Try Again";
         }
 
+    }
+    
+    public void doCacheRefresh(){
+        String response = "";
+        String https_url = "http://192.168.1.179:8765/Cache";
+        URL url;
+
+        try {
+            url = new URL(https_url);
+            HttpURLConnection con = (HttpURLConnection) url.openConnection();
+            con.setDoOutput(true);
+            con.connect();
+            response = con.getResponseMessage();
+            System.out.println("CodeList CacheRefresh response : " + response);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        //return response;
     }
 
     /**
