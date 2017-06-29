@@ -2664,6 +2664,7 @@ public class DataSourceDataProvider {
 //method that returns transaction map which is used to set transactions in archiving/purging according to the flows that user has
     public Map getTransactionType(Map flowMap) {
         Map flows = new LinkedHashMap();
+        flows.put("All", "All");
         if (flowMap.containsValue("Manufacturing")) {
             flows.put("850", "Manufacturing PO");
             flows.put("856", "Manufacturing Shipments");

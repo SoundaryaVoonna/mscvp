@@ -72,12 +72,12 @@
             <section class="content-header">
                 <h1>
                     Purge History
-<!--                    <small>History</small>-->
+                    <!--                    <small>History</small>-->
                 </h1>
-<!--                <ol class="breadcrumb">
-                    <li><a href="#"><i class="fa fa-remove"></i>History</a></li>
-                    <li class="active">Purge History</li>
-                </ol>-->
+                <!--                <ol class="breadcrumb">
+                                    <li><a href="#"><i class="fa fa-remove"></i>History</a></li>
+                                    <li class="active">Purge History</li>
+                                </ol>-->
             </section>
             <br>
 
@@ -115,7 +115,7 @@
                                                     </div>
                                                     <div class="col-sm-3">
                                                         <label>Transaction&nbsp;Type</label><font style="color:red">*</font>
-                                                       <s:select headerKey="-1" headerValue="Select Type" cssClass="form-control" list="flowName" name="transType" id="transType" tabindex="2"/> 
+                                                        <s:select headerKey="-1" headerValue="Select Type" cssClass="form-control" list="flowName" name="transType" id="transType" tabindex="2"/> 
                                                         <%--    <%
                                                                 String flowId=session.getAttribute("userDefaultFlowID").toString();
                                                                 if(flowId.equals("2"))
@@ -144,9 +144,9 @@
                             </div></div></div>
             </section>
 
-   <div id="gridDiv">   
-            <s:if test="#session.purgeHistorylist!=null"> 
-               
+            <div id="gridDiv">   
+                <s:if test="#session.purgeHistorylist!=null"> 
+
                     <%--- GRid start --%>
                     <%!String cssValue = "whiteStripe";
                         int resultsetTotal;%>
@@ -179,37 +179,31 @@
                                                                         <th>Comments</th>
                                                                         <th>Purge Date</th>
                                                                 </thead>
-                                                                
+
                                                                 <tbody>
-                                                                <%
-                                                                    for (int i = 0; i < list.size(); i++) {
-                                                                        purgeHistoryBean = (PurgeHistoryBean) list.get(i);
-                                                                %>
-                                                                
+                                                                    <%
+                                                                        for (int i = 0; i < list.size(); i++) {
+                                                                            purgeHistoryBean = (PurgeHistoryBean) list.get(i);
+                                                                    %>
+
                                                                     <tr>
                                                                         <td><%
-                                                                            
-                                                                                out.println(purgeHistoryBean.getUser());
+                                                                            out.println(purgeHistoryBean.getUser());
 
-                                                                           %></td>
-                                                                        <td><%
-                                                                           
-                                                                                out.println(purgeHistoryBean.getDaysCount());
+                                                                            %></td>
+                                                                        <td><%                                                                            out.println(purgeHistoryBean.getDaysCount());
                                                                             %></td>
                                                                         <td><%
-                                                                           
-                                                                                out.println(purgeHistoryBean.getTransactionType());
-                                                                           %></td>
+                                                                            out.println(purgeHistoryBean.getTransactionType());
+                                                                            %></td>
                                                                         <td><%
-                                                                           
-                                                                                out.println(purgeHistoryBean.getComments());
-                                                                           %></td>
-                                                                        <td><% 
-                                                                                out.println(purgeHistoryBean.getArchiveDate());
-                                                                            %></td></tr>
-                                                                
-                                                                <%}%>
-                                                                    </tbody><%
+                                                                            out.println(purgeHistoryBean.getComments());
+                                                                            %></td>
+                                                                        <td> <% out.println(purgeHistoryBean.getArchiveDate().toString().substring(0, purgeHistoryBean.getArchiveDate().toString().lastIndexOf(":")));%> </td>    
+                                                                    </tr>
+
+                                                                    <%}%>
+                                                                </tbody><%
                                                                 } else {
 
                                                                 %>
@@ -226,14 +220,14 @@
                                         </div></div>
                                 </div>
                             </div></section>
-               
-            </s:if>   
- </div>
+
+                </s:if>   
+            </div>
 
 
 
 
-           
+
         </div>
 
 
@@ -260,7 +254,7 @@
 
     <script type="text/javascript">
 
-      
+
         function checkValues() {
             var date = document.purgeHisForm.reportrange.value;
             var transType = document.getElementById("transType").value;
@@ -287,28 +281,28 @@
         }
 
 
-                $(function () {
-                    // $("#example1").DataTable();
-                    $('#results').DataTable({
-                        "paging": true,
-                        "lengthChange": true,
-                        "searching": true,
-                        "ordering": true,
-                        "info": true,
-                        "autoWidth": false
-                    });
-                });
-                function Date1()
-                {
-                    var date = document.purgeHisForm.reportrange.value;
-                    var arr = date.split("-");
-                    var x = arr[1].trim();
-                    document.getElementById("datepickerfrom").value = arr[0];
-                    document.getElementById("datepicker").value = x;
-                }
+        $(function() {
+            // $("#example1").DataTable();
+            $('#results').DataTable({
+                "paging": true,
+                "lengthChange": true,
+                "searching": true,
+                "ordering": true,
+                "info": true,
+                "autoWidth": false
+            });
+        });
+        function Date1()
+        {
+            var date = document.purgeHisForm.reportrange.value;
+            var arr = date.split("-");
+            var x = arr[1].trim();
+            document.getElementById("datepickerfrom").value = arr[0];
+            document.getElementById("datepicker").value = x;
+        }
 
 
-            </script>
+    </script>
 </body>
 
 </html>

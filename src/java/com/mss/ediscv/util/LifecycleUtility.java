@@ -28,6 +28,7 @@ public class LifecycleUtility {
         }
         return _instance;
     }
+
     private PoLifecycleBean poLifecycleBean;
     private AsnLifecycleBean asnLifecycleBean;
     private InvoiceLifecycleBean invoiceLifecycleBean;
@@ -49,7 +50,7 @@ public class LifecycleUtility {
     LtResponsesBean ltResponsesBean = null;
     LtShipmentsBean ltShipmentBean = null;
     LtInvoicesBean ltInvoicesBean = null;
-    //LtTenderBean ltTenderBean=null;
+//LtTenderBean ltTenderBean=null;
 
     public ArrayList<PoLifecycleBean> addPoLifeCycleBean(String poNumber, String database) throws ServiceLocatorException {
         poLifecycleBeanList = new ArrayList<PoLifecycleBean>();
@@ -58,7 +59,7 @@ public class LifecycleUtility {
         if ("ARCHIVE".equals(database)) {
             lifeCycleQuery.append("select DISTINCT(ARCHIVE_FILES.FILE_ID), ARCHIVE_FILES.FILE_TYPE, "
                     + "ARCHIVE_FILES.TRANSACTION_TYPE, ARCHIVE_FILES.DIRECTION,ARCHIVE_FILES.DATE_TIME_RECEIVED,ARCHIVE_FILES.STATUS, "
-                    + "ARCHIVE_FILES.ACK_STATUS,ARCHIVE_FILES.REPROCESSSTATUS,ARCHIVE_PO.PO_NUMBER  "
+                    + "ARCHIVE_FILES.ACK_STATUS,ARCHIVE_FILES.REPROCESSSTATUS,ARCHIVE_PO.PO_NUMBER "
                     + "FROM ARCHIVE_FILES LEFT OUTER JOIN ARCHIVE_PO ON "
                     + "(ARCHIVE_PO.PO_NUMBER = ARCHIVE_FILES.PRI_KEY_VAL AND ARCHIVE_PO.FILE_ID = ARCHIVE_FILES.FILE_ID) "
                     + "WHERE ARCHIVE_PO.PO_NUMBER LIKE '%" + poNum + "%'"
@@ -66,7 +67,7 @@ public class LifecycleUtility {
         } else {
             lifeCycleQuery.append("select DISTINCT(FILES.FILE_ID), FILES.FILE_TYPE, "
                     + "FILES.TRANSACTION_TYPE, FILES.DIRECTION,FILES.DATE_TIME_RECEIVED,FILES.STATUS, "
-                    + "FILES.ACK_STATUS,FILES.REPROCESSSTATUS,PO.PO_NUMBER  "
+                    + "FILES.ACK_STATUS,FILES.REPROCESSSTATUS,PO.PO_NUMBER "
                     + "FROM FILES LEFT OUTER JOIN PO ON "
                     + "(PO.PO_NUMBER = FILES.PRI_KEY_VAL AND PO.FILE_ID = FILES.FILE_ID) "
                     + "WHERE PO.PO_NUMBER LIKE '%" + poNum + "%'"
@@ -82,8 +83,8 @@ public class LifecycleUtility {
                 poLifecycleBean = new PoLifecycleBean();
                 poLifecycleBean.setFileType(resultSet.getString("FILE_TYPE"));
                 poLifecycleBean.setTranType(resultSet.getString("TRANSACTION_TYPE"));
-                // poLifecycleBean.setSenderId(resultSet.getString("SENDER_ID"));
-                // poLifecycleBean.setRecId(resultSet.getString("RECEIVER_ID"));
+// poLifecycleBean.setSenderId(resultSet.getString("SENDER_ID"));
+// poLifecycleBean.setRecId(resultSet.getString("RECEIVER_ID"));
                 poLifecycleBean.setDirection(resultSet.getString("DIRECTION"));
                 poLifecycleBean.setDatetimeRec(resultSet.getTimestamp("DATE_TIME_RECEIVED"));
                 poLifecycleBean.setStatus(resultSet.getString("STATUS"));
@@ -91,30 +92,30 @@ public class LifecycleUtility {
 
                 poLifecycleBean.setFileId(resultSet.getString("FILE_ID"));
 
-//                poLifecycleBean.setStCtrlNum(resultSet.getString("ST_CONTROL_NUMBER"));
-//                poLifecycleBean.setGsCtrlNum(resultSet.getString("GS_CONTROL_NUMBER"));
-//                if (resultSet.getString("SAP_IDOC_Number") != null && !"".equals(resultSet.getString("SAP_IDOC_Number"))) {
-//                    poLifecycleBean.setSapIdocNum(resultSet.getString("SAP_IDOC_NUMBER"));
-//                } else {
-//                    poLifecycleBean.setSapIdocNum("0");
-//                }
-//                poLifecycleBean.setPreFile(resultSet.getString("PRE_TRANS_FILEPATH"));
-//                poLifecycleBean.setPostTranFile(resultSet.getString("POST_TRANS_FILEPATH"));
-//                poLifecycleBean.setOrgFile(resultSet.getString("ORG_FILEPATH"));
-//                poLifecycleBean.setAckFile(resultSet.getString("ACK_FILE_ID"));
-//                if (resultSet.getString("ORDER_DATE") != null && !"".equals(resultSet.getString("ORDER_DATE"))) {
-//                poLifecycleBean.setPodate(resultSet.getDate("ORDER_DATE").toString());
-//                }else{
-//                    poLifecycleBean.setPodate("--");
-//                }
-//                poLifecycleBean.setPoValue(resultSet.getString("PO_VALUE"));
-//                poLifecycleBean.setPoStatus(resultSet.getString("ORDER_STATUS"));
-//                if (resultSet.getString("SO_NUMBER") != null && !"".equals(resultSet.getString("SO_NUMBER"))) {
-//                    poLifecycleBean.setSoNumber(resultSet.getString("SO_NUMBER"));
-//                } else {
-//                    poLifecycleBean.setSoNumber("0");
-//                }
-//                poLifecycleBean.setIteamQty(resultSet.getString("ITEM_QTY"));
+// poLifecycleBean.setStCtrlNum(resultSet.getString("ST_CONTROL_NUMBER"));
+// poLifecycleBean.setGsCtrlNum(resultSet.getString("GS_CONTROL_NUMBER"));
+// if (resultSet.getString("SAP_IDOC_Number") != null && !"".equals(resultSet.getString("SAP_IDOC_Number"))) {
+// poLifecycleBean.setSapIdocNum(resultSet.getString("SAP_IDOC_NUMBER"));
+// } else {
+// poLifecycleBean.setSapIdocNum("0");
+// }
+// poLifecycleBean.setPreFile(resultSet.getString("PRE_TRANS_FILEPATH"));
+// poLifecycleBean.setPostTranFile(resultSet.getString("POST_TRANS_FILEPATH"));
+// poLifecycleBean.setOrgFile(resultSet.getString("ORG_FILEPATH"));
+// poLifecycleBean.setAckFile(resultSet.getString("ACK_FILE_ID"));
+// if (resultSet.getString("ORDER_DATE") != null && !"".equals(resultSet.getString("ORDER_DATE"))) {
+// poLifecycleBean.setPodate(resultSet.getDate("ORDER_DATE").toString());
+// }else{
+// poLifecycleBean.setPodate("--");
+// }
+// poLifecycleBean.setPoValue(resultSet.getString("PO_VALUE"));
+// poLifecycleBean.setPoStatus(resultSet.getString("ORDER_STATUS"));
+// if (resultSet.getString("SO_NUMBER") != null && !"".equals(resultSet.getString("SO_NUMBER"))) {
+// poLifecycleBean.setSoNumber(resultSet.getString("SO_NUMBER"));
+// } else {
+// poLifecycleBean.setSoNumber("0");
+// }
+// poLifecycleBean.setIteamQty(resultSet.getString("ITEM_QTY"));
                 poLifecycleBean.setAckStatus(resultSet.getString("ACK_STATUS"));
                 poLifecycleBean.setRes("1");
                 poLifecycleBean.setReProcessStatus(resultSet.getString("REPROCESSSTATUS"));
@@ -142,8 +143,8 @@ public class LifecycleUtility {
                 throw new ServiceLocatorException(se);
             }
         }
-        //System.out.println("poLifecycleBeanList-----"+poLifecycleBeanList.toString());
-        //System.out.println("poLifecycleBeanList-----"+poLifecycleBeanList.size());
+//System.out.println("poLifecycleBeanList-----"+poLifecycleBeanList.toString());
+//System.out.println("poLifecycleBeanList-----"+poLifecycleBeanList.size());
         return poLifecycleBeanList;
 
     }
@@ -166,7 +167,7 @@ public class LifecycleUtility {
                     + " ORDER BY FILES.DATE_TIME_RECEIVED");
         }
         String searchQuery = lifeCycleQuery.toString();
-        System.out.println("searchQuery lfc ASN------   " + searchQuery);
+        System.out.println("searchQuery lfc ASN------ " + searchQuery);
         try {
             connection = ConnectionProvider.getInstance().getConnection();
             statement = connection.createStatement();
@@ -175,37 +176,37 @@ public class LifecycleUtility {
                 asnLifecycleBean = new AsnLifecycleBean();
                 asnLifecycleBean.setFileType(resultSet.getString("FILE_TYPE"));
                 asnLifecycleBean.setTranType(resultSet.getString("TRANSACTION_TYPE"));
-                //  asnLifecycleBean.setSenderId(resultSet.getString("SENDER_ID"));
-                // asnLifecycleBean.setRecId(resultSet.getString("RECEIVER_ID"));
+// asnLifecycleBean.setSenderId(resultSet.getString("SENDER_ID"));
+// asnLifecycleBean.setRecId(resultSet.getString("RECEIVER_ID"));
                 asnLifecycleBean.setDirection(resultSet.getString("DIRECTION"));
                 asnLifecycleBean.setDatetimeRec(resultSet.getTimestamp("DATE_TIME_RECEIVED"));
                 asnLifecycleBean.setStatus(resultSet.getString("STATUS"));
                 asnLifecycleBean.setPoNumber(resultSet.getString("PO_NUMBER"));
-                //  asnLifecycleBean.setAsnNumber(resultSet.getString("ASN_NUMBER"));
-                //  asnLifecycleBean.setPoNumber(resultSet.getString("PO_NUMBER"));
+// asnLifecycleBean.setAsnNumber(resultSet.getString("ASN_NUMBER"));
+// asnLifecycleBean.setPoNumber(resultSet.getString("PO_NUMBER"));
                 asnLifecycleBean.setAckStatus(resultSet.getString("ACK_STATUS"));
-//                asnLifecycleBean.setBolNumber(resultSet.getString("BOL_NUMBER"));
-//                asnLifecycleBean.setIsaDate(resultSet.getString("ISA_DATE"));
-//                asnLifecycleBean.setIsaTime(resultSet.getString("ISA_TIME"));
-//                asnLifecycleBean.setIsaCtrlNum(resultSet.getString("ISA_NUMBER"));
+// asnLifecycleBean.setBolNumber(resultSet.getString("BOL_NUMBER"));
+// asnLifecycleBean.setIsaDate(resultSet.getString("ISA_DATE"));
+// asnLifecycleBean.setIsaTime(resultSet.getString("ISA_TIME"));
+// asnLifecycleBean.setIsaCtrlNum(resultSet.getString("ISA_NUMBER"));
                 asnLifecycleBean.setFileId(resultSet.getString("FILE_ID"));
-//                asnLifecycleBean.setStCtrlNum(resultSet.getString("ST_CONTROL_NUMBER"));
-//                asnLifecycleBean.setGsCtrlNum(resultSet.getString("GS_CONTROL_NUMBER"));
-//                asnLifecycleBean.setSapIdocNum("0");
-//                asnLifecycleBean.setPreFile(resultSet.getString("PRE_TRANS_FILEPATH"));
-//                asnLifecycleBean.setPostTranFile(resultSet.getString("POST_TRANS_FILEPATH"));
-//                asnLifecycleBean.setOrgFile(resultSet.getString("ORG_FILEPATH"));
-//                asnLifecycleBean.setAckFile(resultSet.getString("ACK_FILE_ID"));
-//                asnLifecycleBean.setIsaCtrlNum("0");
-//                asnLifecycleBean.setInvNumber("0");
-//                asnLifecycleBean.setPodate("0");
-//                asnLifecycleBean.setPoValue("0");
-//                asnLifecycleBean.setPoStatus("0");
-//                asnLifecycleBean.setSoNumber("0");
-//                asnLifecycleBean.setIteamQty("0");
-//                asnLifecycleBean.setInvAmt("0");
-//                asnLifecycleBean.setChequeNum("0");
-//                asnLifecycleBean.setInvNumber("0");
+// asnLifecycleBean.setStCtrlNum(resultSet.getString("ST_CONTROL_NUMBER"));
+// asnLifecycleBean.setGsCtrlNum(resultSet.getString("GS_CONTROL_NUMBER"));
+// asnLifecycleBean.setSapIdocNum("0");
+// asnLifecycleBean.setPreFile(resultSet.getString("PRE_TRANS_FILEPATH"));
+// asnLifecycleBean.setPostTranFile(resultSet.getString("POST_TRANS_FILEPATH"));
+// asnLifecycleBean.setOrgFile(resultSet.getString("ORG_FILEPATH"));
+// asnLifecycleBean.setAckFile(resultSet.getString("ACK_FILE_ID"));
+// asnLifecycleBean.setIsaCtrlNum("0");
+// asnLifecycleBean.setInvNumber("0");
+// asnLifecycleBean.setPodate("0");
+// asnLifecycleBean.setPoValue("0");
+// asnLifecycleBean.setPoStatus("0");
+// asnLifecycleBean.setSoNumber("0");
+// asnLifecycleBean.setIteamQty("0");
+// asnLifecycleBean.setInvAmt("0");
+// asnLifecycleBean.setChequeNum("0");
+// asnLifecycleBean.setInvNumber("0");
                 asnLifecycleBean.setRes("1");
                 asnLifecycleBean.setReProcessStatus(resultSet.getString("REPROCESSSTATUS"));
                 asnLifecycleBeanList.add(asnLifecycleBean);
@@ -254,7 +255,7 @@ public class LifecycleUtility {
                     + " ORDER BY FILES.DATE_TIME_RECEIVED");
         }
         String searchQuery = lifeCycleQuery.toString();
-        System.out.println("searchQuery lfc Invoice------   " + searchQuery);
+        System.out.println("searchQuery lfc Invoice------ " + searchQuery);
         try {
             connection = ConnectionProvider.getInstance().getConnection();
             statement = connection.createStatement();
@@ -263,37 +264,37 @@ public class LifecycleUtility {
                 invoiceLifecycleBean = new InvoiceLifecycleBean();
                 invoiceLifecycleBean.setFileType(resultSet.getString("FILE_TYPE"));
                 invoiceLifecycleBean.setTranType(resultSet.getString("TRANSACTION_TYPE"));
-//                invoiceLifecycleBean.setSenderId(resultSet.getString("SENDER_ID"));
-//                invoiceLifecycleBean.setRecId(resultSet.getString("RECEIVER_ID"));
+// invoiceLifecycleBean.setSenderId(resultSet.getString("SENDER_ID"));
+// invoiceLifecycleBean.setRecId(resultSet.getString("RECEIVER_ID"));
                 invoiceLifecycleBean.setDirection(resultSet.getString("DIRECTION"));
                 invoiceLifecycleBean.setDatetimeRec(resultSet.getTimestamp("DATE_TIME_RECEIVED"));
                 invoiceLifecycleBean.setStatus(resultSet.getString("STATUS"));
                 invoiceLifecycleBean.setPoNumber(resultSet.getString("PO_NUMBER"));
                 invoiceLifecycleBean.setFileId(resultSet.getString("FILE_ID"));
-//                invoiceLifecycleBean.setStCtrlNum(resultSet.getString("ST_CONTROL_NUMBER"));
-//                invoiceLifecycleBean.setGsCtrlNum(resultSet.getString("GS_CONTROL_NUMBER"));
-//                invoiceLifecycleBean.setSapIdocNum("0");
-//                invoiceLifecycleBean.setIsaCtrlNum(" ");
-//                invoiceLifecycleBean.setAsnNumber("0");
-//                invoiceLifecycleBean.setInvNumber(resultSet.getString("INVOICE_NUMBER"));
-//                invoiceLifecycleBean.setPreFile(resultSet.getString("PRE_TRANS_FILEPATH"));
-//                invoiceLifecycleBean.setPostTranFile(resultSet.getString("POST_TRANS_FILEPATH"));
-//                invoiceLifecycleBean.setOrgFile(resultSet.getString("ORG_FILEPATH"));
-//                invoiceLifecycleBean.setAckFile(resultSet.getString("ACK_FILE_ID"));
+// invoiceLifecycleBean.setStCtrlNum(resultSet.getString("ST_CONTROL_NUMBER"));
+// invoiceLifecycleBean.setGsCtrlNum(resultSet.getString("GS_CONTROL_NUMBER"));
+// invoiceLifecycleBean.setSapIdocNum("0");
+// invoiceLifecycleBean.setIsaCtrlNum(" ");
+// invoiceLifecycleBean.setAsnNumber("0");
+// invoiceLifecycleBean.setInvNumber(resultSet.getString("INVOICE_NUMBER"));
+// invoiceLifecycleBean.setPreFile(resultSet.getString("PRE_TRANS_FILEPATH"));
+// invoiceLifecycleBean.setPostTranFile(resultSet.getString("POST_TRANS_FILEPATH"));
+// invoiceLifecycleBean.setOrgFile(resultSet.getString("ORG_FILEPATH"));
+// invoiceLifecycleBean.setAckFile(resultSet.getString("ACK_FILE_ID"));
                 invoiceLifecycleBean.setAckStatus(resultSet.getString("ACK_STATUS"));
-//                invoiceLifecycleBean.setIsaCtrlNum("0");
-//                invoiceLifecycleBean.setInvNumber("0");
-//                invoiceLifecycleBean.setBolNumber("0");
-//                invoiceLifecycleBean.setPodate("0");
-//                invoiceLifecycleBean.setPoValue("0");
-//                invoiceLifecycleBean.setPoStatus("0");
-//                invoiceLifecycleBean.setSoNumber("0");
-//                invoiceLifecycleBean.setIteamQty("0");
-//                invoiceLifecycleBean.setIsaDate(resultSet.getString("ISA_DATE"));
-//                invoiceLifecycleBean.setIsaTime(resultSet.getString("ISA_TIME"));
-//                invoiceLifecycleBean.setIsaCtrlNum(resultSet.getString("ISA_NUMBER"));
-//                invoiceLifecycleBean.setInvAmt(resultSet.getString("INVOICE_AMOUNT"));
-                //  invoiceLifecycleBean.setChequeNum("0");
+// invoiceLifecycleBean.setIsaCtrlNum("0");
+// invoiceLifecycleBean.setInvNumber("0");
+// invoiceLifecycleBean.setBolNumber("0");
+// invoiceLifecycleBean.setPodate("0");
+// invoiceLifecycleBean.setPoValue("0");
+// invoiceLifecycleBean.setPoStatus("0");
+// invoiceLifecycleBean.setSoNumber("0");
+// invoiceLifecycleBean.setIteamQty("0");
+// invoiceLifecycleBean.setIsaDate(resultSet.getString("ISA_DATE"));
+// invoiceLifecycleBean.setIsaTime(resultSet.getString("ISA_TIME"));
+// invoiceLifecycleBean.setIsaCtrlNum(resultSet.getString("ISA_NUMBER"));
+// invoiceLifecycleBean.setInvAmt(resultSet.getString("INVOICE_AMOUNT"));
+// invoiceLifecycleBean.setChequeNum("0");
                 invoiceLifecycleBean.setReProcessStatus(resultSet.getString("REPROCESSSTATUS"));
                 invoiceLifecycleBean.setRes("1");
                 invoiceLifecycleBeanList.add(invoiceLifecycleBean);
@@ -343,7 +344,7 @@ public class LifecycleUtility {
         }
 
         String searchQuery = lifeCycleQuery.toString();
-        System.out.println("searchQuery PAYMENT------   " + searchQuery);
+        System.out.println("searchQuery PAYMENT------ " + searchQuery);
         try {
             connection = ConnectionProvider.getInstance().getConnection();
             statement = connection.createStatement();
@@ -352,35 +353,35 @@ public class LifecycleUtility {
                 paymentLifecycleBean = new PaymentLifecycleBean();
                 paymentLifecycleBean.setFileType(resultSet.getString("FILE_TYPE"));
                 paymentLifecycleBean.setTranType(resultSet.getString("TRANSACTION_TYPE"));
-//                paymentLifecycleBean.setSenderId(resultSet.getString("SENDER_ID"));
-//                paymentLifecycleBean.setRecId(resultSet.getString("RECEIVER_ID"));
+// paymentLifecycleBean.setSenderId(resultSet.getString("SENDER_ID"));
+// paymentLifecycleBean.setRecId(resultSet.getString("RECEIVER_ID"));
                 paymentLifecycleBean.setDirection(resultSet.getString("DIRECTION"));
                 paymentLifecycleBean.setDatetimeRec(resultSet.getTimestamp("DATE_TIME_RECEIVED"));
                 paymentLifecycleBean.setStatus(resultSet.getString("STATUS"));
                 paymentLifecycleBean.setPoNumber(resultSet.getString("PO_NUMBER"));
                 paymentLifecycleBean.setFileId(resultSet.getString("FILE_ID"));
-//                paymentLifecycleBean.setStCtrlNum(resultSet.getString("ST_CONTROL_NUMBER"));
-//                paymentLifecycleBean.setGsCtrlNum(resultSet.getString("GS_CONTROL_NUMBER"));
-//                paymentLifecycleBean.setSapIdocNum("0");
+// paymentLifecycleBean.setStCtrlNum(resultSet.getString("ST_CONTROL_NUMBER"));
+// paymentLifecycleBean.setGsCtrlNum(resultSet.getString("GS_CONTROL_NUMBER"));
+// paymentLifecycleBean.setSapIdocNum("0");
                 paymentLifecycleBean.setAckStatus(resultSet.getString("ACK_STATUS"));
-//                paymentLifecycleBean.setAsnNumber("0");
-//                paymentLifecycleBean.setPreFile(resultSet.getString("PRE_TRANS_FILEPATH"));
-//                paymentLifecycleBean.setPostTranFile(resultSet.getString("POST_TRANS_FILEPATH"));
-//                paymentLifecycleBean.setOrgFile(resultSet.getString("ORG_FILEPATH"));
-//                paymentLifecycleBean.setAckFile(resultSet.getString("ACK_FILE_ID"));
-//                paymentLifecycleBean.setIsaCtrlNum("0");
-//                paymentLifecycleBean.setInvNumber("0");
-//                paymentLifecycleBean.setBolNumber("0");
-//                paymentLifecycleBean.setPodate("0");
-//                paymentLifecycleBean.setPoValue("0");
-//                paymentLifecycleBean.setPoStatus("0");
-//                paymentLifecycleBean.setSoNumber("0");
-//                paymentLifecycleBean.setIteamQty("0");
-//                paymentLifecycleBean.setIsaDate("0");
-//                paymentLifecycleBean.setIsaTime("0");
-//                paymentLifecycleBean.setIsaCtrlNum("0");
-//                paymentLifecycleBean.setInvAmt("0");
-//                paymentLifecycleBean.setChequeNum(resultSet.getString("CHECK_NUMBER"));
+// paymentLifecycleBean.setAsnNumber("0");
+// paymentLifecycleBean.setPreFile(resultSet.getString("PRE_TRANS_FILEPATH"));
+// paymentLifecycleBean.setPostTranFile(resultSet.getString("POST_TRANS_FILEPATH"));
+// paymentLifecycleBean.setOrgFile(resultSet.getString("ORG_FILEPATH"));
+// paymentLifecycleBean.setAckFile(resultSet.getString("ACK_FILE_ID"));
+// paymentLifecycleBean.setIsaCtrlNum("0");
+// paymentLifecycleBean.setInvNumber("0");
+// paymentLifecycleBean.setBolNumber("0");
+// paymentLifecycleBean.setPodate("0");
+// paymentLifecycleBean.setPoValue("0");
+// paymentLifecycleBean.setPoStatus("0");
+// paymentLifecycleBean.setSoNumber("0");
+// paymentLifecycleBean.setIteamQty("0");
+// paymentLifecycleBean.setIsaDate("0");
+// paymentLifecycleBean.setIsaTime("0");
+// paymentLifecycleBean.setIsaCtrlNum("0");
+// paymentLifecycleBean.setInvAmt("0");
+// paymentLifecycleBean.setChequeNum(resultSet.getString("CHECK_NUMBER"));
                 paymentLifecycleBean.setReProcessStatus(resultSet.getString("REPROCESSSTATUS"));
                 paymentLifecycleBean.setRes("1");
                 PaymentLifecycleBeanList.add(paymentLifecycleBean);
@@ -411,8 +412,8 @@ public class LifecycleUtility {
 
     /**
      * Detail info
-     *
-     */
+     *     
+*/
     public PoLifecycleBean getLFCPoDetails(String poNumber, String fileID, String database) throws ServiceLocatorException {
         poLifecycleBean = new PoLifecycleBean();
         StringBuffer lifeCycleQuery = new StringBuffer();
@@ -929,17 +930,21 @@ public class LifecycleUtility {
             lifeCycleQuery.append("SELECT tf.FILE_ID as file_id,tf.ISA_NUMBER as isa_number,tl.SHIPMENT_ID as SHIPMENT_ID,"
                     + " tf.FILE_TYPE as file_type,tf.FILE_ORIGIN as file_origin,tf.TRANSACTION_TYPE as tran_type,tf.POST_TRANS_FILEPATH as file_path,"
                     + " tf.ACK_STATUS as ack_status,tf.DIRECTION as direction,tf.DATE_TIME_RECEIVED as datetime,"
-                    + " tf.STATUS as status,tf.PRI_KEY_VAL as prival,tf.REPROCESSSTATUS as REPROCESSSTATUS "
+                    + " tf.STATUS as status,tf.PRI_KEY_VAL as prival,tp2.NAME as name,tf.REPROCESSSTATUS as REPROCESSSTATUS "
                     + " FROM ARCHIVE_Transport_loadtender tl LEFT OUTER JOIN ARCHIVE_FILES TF ON "
                     + " (tl.FILE_ID=tf.FILE_ID and tl.SHIPMENT_ID=tf.PRI_KEY_VAL) "
+                    + "LEFT OUTER JOIN TP TP1 ON(TP1.ID=TF.SENDER_ID ) "
+                    + "LEFT OUTER JOIN TP TP2 ON(TP2.ID=TF.RECEIVER_ID)"
                     + " where 1=1 and SHIPMENT_ID= '" + shipmentNumber + "' order by DATE_TIME_RECEIVED desc ");
         } else {
             lifeCycleQuery.append("SELECT tf.FILE_ID as file_id,tf.ISA_NUMBER as isa_number,tl.SHIPMENT_ID as SHIPMENT_ID,"
                     + " tf.FILE_TYPE as file_type,tf.FILE_ORIGIN as file_origin,tf.TRANSACTION_TYPE as tran_type,tf.POST_TRANS_FILEPATH as file_path,"
                     + " tf.ACK_STATUS as ack_status,tf.DIRECTION as direction,tf.DATE_TIME_RECEIVED as datetime,"
-                    + " tf.STATUS as status,tf.PRI_KEY_VAL as prival,tf.REPROCESSSTATUS as REPROCESSSTATUS "
+                    + " tf.STATUS as status,tf.PRI_KEY_VAL as prival,tp2.NAME as name,tf.REPROCESSSTATUS as REPROCESSSTATUS "
                     + " FROM Transport_loadtender tl LEFT OUTER JOIN FILES TF ON "
                     + " (tl.FILE_ID=tf.FILE_ID and tl.SHIPMENT_ID=tf.PRI_KEY_VAL) "
+                    + "LEFT OUTER JOIN TP TP1 ON(TP1.ID=TF.SENDER_ID ) "
+                    + "LEFT OUTER JOIN TP TP2 ON(TP2.ID=TF.RECEIVER_ID)"
                     + " where 1=1 and SHIPMENT_ID= '" + shipmentNumber + "' order by DATE_TIME_RECEIVED desc ");
         }
         System.out.println("getLtLoadtender query--->" + lifeCycleQuery.toString());
@@ -953,7 +958,7 @@ public class LifecycleUtility {
             while (resultSet.next()) {
                 ltTenderBean = new LtTenderBean();
 
-                // TP2.ID , tp2.NAME as name,
+// TP2.ID , tp2.NAME as name,
                 ltTenderBean.setFileId(resultSet.getString("file_id"));
                 ltTenderBean.setIsaNum(resultSet.getString("isa_number"));
                 ltTenderBean.setShipmentid(resultSet.getString("SHIPMENT_ID"));
@@ -962,6 +967,7 @@ public class LifecycleUtility {
                 ltTenderBean.setTran_type(resultSet.getString("tran_type"));
                 ltTenderBean.setFile_path(resultSet.getString("file_path"));
                 ltTenderBean.setAckStatus(resultSet.getString("ack_status"));
+                ltTenderBean.setRecName(resultSet.getString("name"));
 
                 ltTenderBean.setDirection(resultSet.getString("direction"));
                 ltTenderBean.setDatetime(resultSet.getTimestamp("datetime"));
@@ -973,14 +979,14 @@ public class LifecycleUtility {
                 ltTenderBeanList.add(ltTenderBean);
 
             }
-            // lifecycleBeans.setPoLifecycleBean(poLifecycleBean);
+// lifecycleBeans.setPoLifecycleBean(poLifecycleBean);
 
         } catch (SQLException e) {
-            //System.out.println("I am in catch block coming in IMpl");
-            // TODO Auto-generated catch block
-            //  e.printStackTrace();
+//System.out.println("I am in catch block coming in IMpl");
+// TODO Auto-generated catch block
+// e.printStackTrace();
         } catch (Exception ex) {
-            //System.out.println("hi"+ex.getMessage());
+//System.out.println("hi"+ex.getMessage());
         } finally {
             try {
                 if (resultSet != null) {
@@ -1001,33 +1007,37 @@ public class LifecycleUtility {
             }
         }
 
-        // System.out.println("Size in LFC PO Action --->"+ltTenderBeanList.size());
+// System.out.println("Size in LFC PO Action --->"+ltTenderBeanList.size());
         return ltTenderBeanList;
     }
 
     public ArrayList<LtTenderBean> getLtResponse(String shipmentNumber, String database) throws ServiceLocatorException {
         ltResponsesBeanList = new ArrayList<LtTenderBean>();
         StringBuffer lifeCycleQuery = new StringBuffer();
-        //String poNum = poNumber;
-        // System.out.println("LifeCycleUtill ASN---->"+poNum);
-        // asnLifecycleBean.setRes("0");
+//String poNum = poNumber;
+// System.out.println("LifeCycleUtill ASN---->"+poNum);
+// asnLifecycleBean.setRes("0");
         if ("ARCHIVE".equals(database)) {
             lifeCycleQuery.append("SELECT tf.FILE_ID as file_id,tf.ISA_NUMBER as isa_number,tl.SHIPMENT_ID as SHIPMENT_ID,"
                     + " tf.FILE_TYPE as file_type,tf.FILE_ORIGIN as file_origin,tf.TRANSACTION_TYPE as tran_type,tf.POST_TRANS_FILEPATH"
                     + " as file_path,"
                     + " tf.ACK_STATUS as ack_status,tf.DIRECTION as direction,tf.DATE_TIME_RECEIVED as datetime,"
-                    + " tf.STATUS as status,tf.PRI_KEY_VAL as prival,tf.REPROCESSSTATUS as REPROCESSSTATUS "
+                    + " tf.STATUS as status,tf.PRI_KEY_VAL as prival,tp2.NAME as name,tf.REPROCESSSTATUS as REPROCESSSTATUS "
                     + " FROM ARCHIVE_TRANSPORT_LT_RESPONSE tl LEFT OUTER JOIN ARCHIVE_FILES TF ON"
                     + " (tl.FILE_ID=tf.FILE_ID and tl.SHIPMENT_ID=tf.PRI_KEY_VAL)"
+                    + "LEFT OUTER JOIN TP TP1 ON(TP1.ID=TF.SENDER_ID ) "
+                    + "LEFT OUTER JOIN TP TP2 ON(TP2.ID=TF.RECEIVER_ID)"
                     + " where 1=1 and SHIPMENT_ID='" + shipmentNumber + "' order by DATE_TIME_RECEIVED desc ");
         } else {
             lifeCycleQuery.append("SELECT tf.FILE_ID as file_id,tf.ISA_NUMBER as isa_number,tl.SHIPMENT_ID as SHIPMENT_ID,"
                     + " tf.FILE_TYPE as file_type,tf.FILE_ORIGIN as file_origin,tf.TRANSACTION_TYPE as tran_type,tf.POST_TRANS_FILEPATH"
                     + " as file_path,"
                     + " tf.ACK_STATUS as ack_status,tf.DIRECTION as direction,tf.DATE_TIME_RECEIVED as datetime,"
-                    + " tf.STATUS as status,tf.PRI_KEY_VAL as prival,tf.REPROCESSSTATUS as REPROCESSSTATUS "
+                    + " tf.STATUS as status,tf.PRI_KEY_VAL as prival,tp2.NAME as name,tf.REPROCESSSTATUS as REPROCESSSTATUS "
                     + " FROM TRANSPORT_LT_RESPONSE tl LEFT OUTER JOIN FILES TF ON"
                     + " (tl.FILE_ID=tf.FILE_ID and tl.SHIPMENT_ID=tf.PRI_KEY_VAL)"
+                    + "LEFT OUTER JOIN TP TP1 ON(TP1.ID=TF.SENDER_ID ) "
+                    + "LEFT OUTER JOIN TP TP2 ON(TP2.ID=TF.RECEIVER_ID)"
                     + " where 1=1 and SHIPMENT_ID='" + shipmentNumber + "' order by DATE_TIME_RECEIVED desc ");
         }
 
@@ -1042,7 +1052,7 @@ public class LifecycleUtility {
             while (resultSet.next()) {
                 ltTenderBean = new LtTenderBean();
 
-                // TP2.ID , tp2.NAME as name,
+// TP2.ID , tp2.NAME as name,
                 ltTenderBean.setFileId(resultSet.getString("file_id"));
                 ltTenderBean.setIsaNum(resultSet.getString("isa_number"));
                 ltTenderBean.setShipmentid(resultSet.getString("SHIPMENT_ID"));
@@ -1051,7 +1061,7 @@ public class LifecycleUtility {
                 ltTenderBean.setTran_type(resultSet.getString("tran_type"));
                 ltTenderBean.setFile_path(resultSet.getString("file_path"));
                 ltTenderBean.setAckStatus(resultSet.getString("ack_status"));
-
+                ltTenderBean.setRecName(resultSet.getString("name"));
                 ltTenderBean.setDirection(resultSet.getString("direction"));
                 ltTenderBean.setDatetime(resultSet.getTimestamp("datetime"));
                 ltTenderBean.setStatus(resultSet.getString("status"));
@@ -1061,14 +1071,14 @@ public class LifecycleUtility {
                 ltResponsesBeanList.add(ltTenderBean);
 
             }
-            // lifecycleBeans.setAsnLifecycleBean(asnLifecycleBean);
+// lifecycleBeans.setAsnLifecycleBean(asnLifecycleBean);
 
         } catch (SQLException e) {
-            //System.out.println("I am in catch block coming in IMpl");
-            // TODO Auto-generated catch block
-            //  e.printStackTrace();
+//System.out.println("I am in catch block coming in IMpl");
+// TODO Auto-generated catch block
+// e.printStackTrace();
         } catch (Exception ex) {
-            //System.out.println("hi"+ex.getMessage());
+//System.out.println("hi"+ex.getMessage());
         } finally {
             try {
                 if (resultSet != null) {
@@ -1088,33 +1098,37 @@ public class LifecycleUtility {
                 throw new ServiceLocatorException(se);
             }
         }
-        // System.out.println("Size in LFC Response Action --->"+ltResponsesBeanList.size());
+// System.out.println("Size in LFC Response Action --->"+ltResponsesBeanList.size());
         return ltResponsesBeanList;
     }
 
     public ArrayList<LtTenderBean> getLtShipment(String shipmentNumber, String database) throws ServiceLocatorException {
         ltShipmentBeanList = new ArrayList<LtTenderBean>();
         StringBuffer lifeCycleQuery = new StringBuffer();
-        //String poNum = poNumber;
-        // System.out.println("LifeCycleService impl INVOICE---->"+poNum);
-        //invoiceLifecycleBean.setRes("0");
+//String poNum = poNumber;
+// System.out.println("LifeCycleService impl INVOICE---->"+poNum);
+//invoiceLifecycleBean.setRes("0");
         if ("ARCHIVE".equals(database)) {
             lifeCycleQuery.append("SELECT tf.FILE_ID as file_id,tf.ISA_NUMBER as isa_number,tl.SHIPMENT_ID as SHIPMENT_ID,"
                     + " tf.FILE_TYPE as file_type,tf.FILE_ORIGIN as file_origin,tf.TRANSACTION_TYPE as tran_type,tf.POST_TRANS_FILEPATH"
                     + " as file_path,"
                     + " tf.ACK_STATUS as ack_status,tf.DIRECTION as direction,tf.DATE_TIME_RECEIVED as datetime,"
-                    + " tf.STATUS as status,tf.PRI_KEY_VAL as prival,tf.REPROCESSSTATUS as REPROCESSSTATUS"
+                    + " tf.STATUS as status,tf.PRI_KEY_VAL as prival,tp2.NAME as name,tf.REPROCESSSTATUS as REPROCESSSTATUS"
                     + " FROM ARCHIVE_TRANSPORT_SHIPMENT tl LEFT OUTER JOIN ARCHIVE_FILES TF ON "
                     + " (tl.FILE_ID=tf.FILE_ID and tl.SHIPMENT_ID=tf.PRI_KEY_VAL)"
+                    + "LEFT OUTER JOIN TP TP1 ON(TP1.ID=TF.SENDER_ID ) "
+                    + "LEFT OUTER JOIN TP TP2 ON(TP2.ID=TF.RECEIVER_ID)"
                     + " where 1=1 and SHIPMENT_ID='" + shipmentNumber + "' order by DATE_TIME_RECEIVED desc ");
         } else {
             lifeCycleQuery.append("SELECT tf.FILE_ID as file_id,tf.ISA_NUMBER as isa_number,tl.SHIPMENT_ID as SHIPMENT_ID,"
                     + " tf.FILE_TYPE as file_type,tf.FILE_ORIGIN as file_origin,tf.TRANSACTION_TYPE as tran_type,tf.POST_TRANS_FILEPATH"
                     + " as file_path,"
                     + " tf.ACK_STATUS as ack_status,tf.DIRECTION as direction,tf.DATE_TIME_RECEIVED as datetime,"
-                    + " tf.STATUS as status,tf.PRI_KEY_VAL as prival,tf.REPROCESSSTATUS as REPROCESSSTATUS"
+                    + " tf.STATUS as status,tf.PRI_KEY_VAL as prival,tp2.NAME as name,tf.REPROCESSSTATUS as REPROCESSSTATUS"
                     + " FROM TRANSPORT_SHIPMENT tl LEFT OUTER JOIN FILES TF ON "
                     + " (tl.FILE_ID=tf.FILE_ID and tl.SHIPMENT_ID=tf.PRI_KEY_VAL)"
+                    + "LEFT OUTER JOIN TP TP1 ON(TP1.ID=TF.SENDER_ID ) "
+                    + "LEFT OUTER JOIN TP TP2 ON(TP2.ID=TF.RECEIVER_ID)"
                     + " where 1=1 and SHIPMENT_ID='" + shipmentNumber + "' order by DATE_TIME_RECEIVED desc ");
         }
 
@@ -1137,7 +1151,7 @@ public class LifecycleUtility {
                 ltTenderBean.setTran_type(resultSet.getString("tran_type"));
                 ltTenderBean.setFile_path(resultSet.getString("file_path"));
                 ltTenderBean.setAckStatus(resultSet.getString("ack_status"));
-
+                ltTenderBean.setRecName(resultSet.getString("name"));
                 ltTenderBean.setDirection(resultSet.getString("direction"));
                 ltTenderBean.setDatetime(resultSet.getTimestamp("datetime"));
                 ltTenderBean.setStatus(resultSet.getString("status"));
@@ -1147,14 +1161,14 @@ public class LifecycleUtility {
                 ltShipmentBeanList.add(ltTenderBean);
 
             }
-            // lifecycleBeans.setInvoiceLifecycleBean(invoiceLifecycleBean);
+// lifecycleBeans.setInvoiceLifecycleBean(invoiceLifecycleBean);
 
         } catch (SQLException e) {
-            //System.out.println("I am in catch block coming in IMpl");
-            // TODO Auto-generated catch block
-            //  e.printStackTrace();
+//System.out.println("I am in catch block coming in IMpl");
+// TODO Auto-generated catch block
+// e.printStackTrace();
         } catch (Exception ex) {
-            //System.out.println("hi"+ex.getMessage());
+//System.out.println("hi"+ex.getMessage());
         } finally {
             try {
                 if (resultSet != null) {
@@ -1174,7 +1188,7 @@ public class LifecycleUtility {
                 throw new ServiceLocatorException(se);
             }
         }
-        // System.out.println("Size in LFC Shipment Action --->"+ltShipmentBeanList.size());
+// System.out.println("Size in LFC Shipment Action --->"+ltShipmentBeanList.size());
         return ltShipmentBeanList;
     }
 
@@ -1182,26 +1196,30 @@ public class LifecycleUtility {
         ltInvoicesBeanList = new ArrayList<LtTenderBean>();
 
         StringBuffer lifeCycleQuery = new StringBuffer();
-        // String poNum = poNumber;
-        // System.out.println("LifeCycleService impl PAYMENTS---->"+poNum);
-        // paymentLifecycleBean.setRes("1");
+// String poNum = poNumber;
+// System.out.println("LifeCycleService impl PAYMENTS---->"+poNum);
+// paymentLifecycleBean.setRes("1");
         if ("ARCHIVE".equals(database)) {
             lifeCycleQuery.append("SELECT tf.FILE_ID as file_id,tf.ISA_NUMBER as isa_number,tl.SHIPMENT_ID as SHIPMENT_ID,"
                     + " tf.FILE_TYPE as file_type,tf.FILE_ORIGIN as file_origin,tf.TRANSACTION_TYPE as tran_type,tf.POST_TRANS_FILEPATH "
                     + " as file_path,"
-                    + "  tf.ACK_STATUS as ack_status,tf.DIRECTION as direction,tf.DATE_TIME_RECEIVED as datetime,"
-                    + " tf.STATUS as status,tf.PRI_KEY_VAL as prival,tf.REPROCESSSTATUS as REPROCESSSTATUS "
+                    + " tf.ACK_STATUS as ack_status,tf.DIRECTION as direction,tf.DATE_TIME_RECEIVED as datetime,"
+                    + " tf.STATUS as status,tf.PRI_KEY_VAL as prival,tp2.NAME as name,tf.REPROCESSSTATUS as REPROCESSSTATUS "
                     + " FROM ARCHIVE_TRANSPORT_INVOICE tl LEFT OUTER JOIN ARCHIVE_FILES TF ON"
-                    + " (tl.FILE_ID=tf.FILE_ID and tl.SHIPMENT_ID=tf.PRI_KEY_VAL)  "
+                    + " (tl.FILE_ID=tf.FILE_ID and tl.SHIPMENT_ID=tf.PRI_KEY_VAL) "
+                    + "LEFT OUTER JOIN TP TP1 ON(TP1.ID=TF.SENDER_ID ) "
+                    + "LEFT OUTER JOIN TP TP2 ON(TP2.ID=TF.RECEIVER_ID)"
                     + " where 1=1 and SHIPMENT_ID='" + shipmentNumber + "' order by DATE_TIME_RECEIVED desc ");
         } else {
             lifeCycleQuery.append("SELECT tf.FILE_ID as file_id,tf.ISA_NUMBER as isa_number,tl.SHIPMENT_ID as SHIPMENT_ID,"
                     + " tf.FILE_TYPE as file_type,tf.FILE_ORIGIN as file_origin,tf.TRANSACTION_TYPE as tran_type,tf.POST_TRANS_FILEPATH "
                     + " as file_path,"
-                    + "  tf.ACK_STATUS as ack_status,tf.DIRECTION as direction,tf.DATE_TIME_RECEIVED as datetime,"
-                    + " tf.STATUS as status,tf.PRI_KEY_VAL as prival,tf.REPROCESSSTATUS as REPROCESSSTATUS "
+                    + " tf.ACK_STATUS as ack_status,tf.DIRECTION as direction,tf.DATE_TIME_RECEIVED as datetime,"
+                    + " tf.STATUS as status,tf.PRI_KEY_VAL as prival,tp2.NAME as name,tf.REPROCESSSTATUS as REPROCESSSTATUS "
                     + " FROM TRANSPORT_INVOICE tl LEFT OUTER JOIN FILES TF ON"
-                    + " (tl.FILE_ID=tf.FILE_ID and tl.SHIPMENT_ID=tf.PRI_KEY_VAL)  "
+                    + " (tl.FILE_ID=tf.FILE_ID and tl.SHIPMENT_ID=tf.PRI_KEY_VAL) "
+                    + "LEFT OUTER JOIN TP TP1 ON(TP1.ID=TF.SENDER_ID ) "
+                    + "LEFT OUTER JOIN TP TP2 ON(TP2.ID=TF.RECEIVER_ID)"
                     + " where 1=1 and SHIPMENT_ID='" + shipmentNumber + "' order by DATE_TIME_RECEIVED desc ");
         }
 
@@ -1224,7 +1242,7 @@ public class LifecycleUtility {
                 ltTenderBean.setTran_type(resultSet.getString("tran_type"));
                 ltTenderBean.setFile_path(resultSet.getString("file_path"));
                 ltTenderBean.setAckStatus(resultSet.getString("ack_status"));
-
+                ltTenderBean.setRecName(resultSet.getString("name"));
                 ltTenderBean.setDirection(resultSet.getString("direction"));
                 ltTenderBean.setDatetime(resultSet.getTimestamp("datetime"));
                 ltTenderBean.setStatus(resultSet.getString("status"));
@@ -1235,14 +1253,14 @@ public class LifecycleUtility {
                 ltInvoicesBeanList.add(ltTenderBean);
 
             }
-            //lifecycleBeans.setPaymentLifecycleBean(paymentLifecycleBean);
+//lifecycleBeans.setPaymentLifecycleBean(paymentLifecycleBean);
 
         } catch (SQLException e) {
-            //System.out.println("I am in catch block coming in IMpl");
-            // TODO Auto-generated catch block
-            // e.printStackTrace();
+//System.out.println("I am in catch block coming in IMpl");
+// TODO Auto-generated catch block
+// e.printStackTrace();
         } catch (Exception ex) {
-            //System.out.println("hi"+ex.getMessage());
+//System.out.println("hi"+ex.getMessage());
         } finally {
             try {
                 if (resultSet != null) {
@@ -1262,7 +1280,7 @@ public class LifecycleUtility {
                 throw new ServiceLocatorException(se);
             }
         }
-        //System.out.println("Size in LFC Invoice Action --->"+ltInvoicesBeanList.size());
+//System.out.println("Size in LFC Invoice Action --->"+ltInvoicesBeanList.size());
         return ltInvoicesBeanList;
     }
 
@@ -1270,8 +1288,8 @@ public class LifecycleUtility {
 
         StringBuffer lifeCycleQuery = new StringBuffer();
         String poNum = poNumber;
-        // System.out.println("IN getLtLoadtender-->" + poNum);
-        // poLifecycleBean.setRes("0");
+// System.out.println("IN getLtLoadtender-->" + poNum);
+// poLifecycleBean.setRes("0");
         if ("ARCHIVE".equals(database)) {
             lifeCycleQuery.append("SELECT ARCHIVE_ARCHIVE_FILES.REPROCESSSTATUS,ARCHIVE_TRANSPORT_LOADTENDER.SHIPMENT_ID,ARCHIVE_FILES.FILE_ID,ARCHIVE_FILES.FILE_TYPE,ARCHIVE_FILES.SENDER_ID,ARCHIVE_FILES.RECEIVER_ID,"
                     + " ARCHIVE_FILES.PRE_TRANS_FILEPATH,ARCHIVE_FILES.POST_TRANS_FILEPATH,ARCHIVE_FILES.PRI_KEY_VAL as PRI_KEY_VAL,"
@@ -1283,8 +1301,8 @@ public class LifecycleUtility {
                     + " ARCHIVE_TRANSPORT_LOADTENDER.CO_NUMBER as CO_NUMBER, "
                     + " ARCHIVE_TRANSPORT_LOADTENDER.TOTAL_WEIGHT as TOTAL_WEIGHT,ARCHIVE_TRANSPORT_LOADTENDER.TOTAL_VOLUME as TOTAL_VOLUME,"
                     + " ARCHIVE_TRANSPORT_LOADTENDER.TOTAL_PIECES as TOTAL_PIECES,ARCHIVE_TRANSPORT_LOADTENDER.PO_NUMBER as PO_NUMBER "
-                    + " FROM ARCHIVE_FILES  LEFT OUTER JOIN ARCHIVE_TRANSPORT_LOADTENDER  ON (ARCHIVE_FILES.FILE_ID=ARCHIVE_TRANSPORT_LOADTENDER.FILE_ID and ARCHIVE_FILES.PRI_KEY_VAL=ARCHIVE_TRANSPORT_LOADTENDER.SHIPMENT_ID)"
-                    + " LEFT OUTER JOIN TP TP1 ON(TP1.ID=ARCHIVE_FILES.SENDER_ID AND TP1.STATUS='ACTIVE') LEFT OUTER JOIN TP TP2 ON(TP2.ID=ARCHIVE_FILES.RECEIVER_ID AND TP2.STATUS='ACTIVE')   "
+                    + " FROM ARCHIVE_FILES LEFT OUTER JOIN ARCHIVE_TRANSPORT_LOADTENDER ON (ARCHIVE_FILES.FILE_ID=ARCHIVE_TRANSPORT_LOADTENDER.FILE_ID and ARCHIVE_FILES.PRI_KEY_VAL=ARCHIVE_TRANSPORT_LOADTENDER.SHIPMENT_ID)"
+                    + " LEFT OUTER JOIN TP TP1 ON(TP1.ID=ARCHIVE_FILES.SENDER_ID AND TP1.STATUS='ACTIVE') LEFT OUTER JOIN TP TP2 ON(TP2.ID=ARCHIVE_FILES.RECEIVER_ID AND TP2.STATUS='ACTIVE') "
                     + " where ARCHIVE_FILES.FILE_ID LIKE '%" + fileId + "%' and ARCHIVE_FILES.PRI_KEY_VAL LIKE '%" + poNum + "%'");
         } else {
             lifeCycleQuery.append("SELECT FILES.REPROCESSSTATUS,Transport_loadtender.SHIPMENT_ID,FILES.FILE_ID,FILES.FILE_TYPE,FILES.SENDER_ID,FILES.RECEIVER_ID,"
@@ -1297,8 +1315,8 @@ public class LifecycleUtility {
                     + " Transport_loadtender.CO_NUMBER as CO_NUMBER, "
                     + " Transport_loadtender.TOTAL_WEIGHT as TOTAL_WEIGHT,Transport_loadtender.TOTAL_VOLUME as TOTAL_VOLUME,"
                     + " Transport_loadtender.TOTAL_PIECES as TOTAL_PIECES,Transport_loadtender.PO_NUMBER as PO_NUMBER "
-                    + " FROM FILES  LEFT OUTER JOIN Transport_loadtender  ON (FILES.FILE_ID=Transport_loadtender.FILE_ID and FILES.PRI_KEY_VAL=Transport_loadtender.SHIPMENT_ID)"
-                    + " LEFT OUTER JOIN TP TP1 ON(TP1.ID=FILES.SENDER_ID AND TP1.STATUS='ACTIVE') LEFT OUTER JOIN TP TP2 ON(TP2.ID=FILES.RECEIVER_ID AND TP2.STATUS='ACTIVE')   "
+                    + " FROM FILES LEFT OUTER JOIN Transport_loadtender ON (FILES.FILE_ID=Transport_loadtender.FILE_ID and FILES.PRI_KEY_VAL=Transport_loadtender.SHIPMENT_ID)"
+                    + " LEFT OUTER JOIN TP TP1 ON(TP1.ID=FILES.SENDER_ID AND TP1.STATUS='ACTIVE') LEFT OUTER JOIN TP TP2 ON(TP2.ID=FILES.RECEIVER_ID AND TP2.STATUS='ACTIVE') "
                     + " where FILES.FILE_ID LIKE '%" + fileId + "%' and FILES.PRI_KEY_VAL LIKE '%" + poNum + "%'");
         }
         System.out.println("getLtLoadtender query--->" + lifeCycleQuery.toString());
@@ -1311,19 +1329,19 @@ public class LifecycleUtility {
             while (resultSet.next()) {
                 ltTenderBean = new LtTenderBean();
 
-                // TP2.ID , tp2.NAME as name,
+// TP2.ID , tp2.NAME as name,
                 ltTenderBean.setFileId(resultSet.getString("FILE_ID"));
                 ltTenderBean.setIsaNum(resultSet.getString("ISA_NUMBER"));
                 ltTenderBean.setShipmentid(resultSet.getString("SHIPMENT_ID"));
                 ltTenderBean.setFileType(resultSet.getString("FILE_TYPE"));
-                //  ltTenderBean.setFile_origin(resultSet.getString("file_origin"));
+// ltTenderBean.setFile_origin(resultSet.getString("file_origin"));
                 ltTenderBean.setTran_type(resultSet.getString("TRANSACTION_TYPE"));
                 ltTenderBean.setPreFile(resultSet.getString("PRE_TRANS_FILEPATH"));
                 ltTenderBean.setPostTranFile(resultSet.getString("POST_TRANS_FILEPATH"));
                 ltTenderBean.setAckFile(resultSet.getString("ACK_FILE_ID"));
 
                 ltTenderBean.setDirection(resultSet.getString("DIRECTION"));
-                // ltTenderBean.setDatetime(resultSet.getTimestamp("datetime"));
+// ltTenderBean.setDatetime(resultSet.getTimestamp("datetime"));
                 ltTenderBean.setStatus(resultSet.getString("STATUS"));
 
                 ltTenderBean.setSecval(resultSet.getString("PRI_KEY_VAL"));
@@ -1331,7 +1349,7 @@ public class LifecycleUtility {
                 ltTenderBean.setReProcessStatus(resultSet.getString("REPROCESSSTATUS"));
 
                 ltTenderBean.setSenderId(resultSet.getString("SENDER_ID"));
-                //ltTenderBean.setBolNumber(resultSet.getString("BOL_NUMBER")) ; 
+//ltTenderBean.setBolNumber(resultSet.getString("BOL_NUMBER")) ; 
                 ltTenderBean.setPoNumber(resultSet.getString("PO_NUMBER"));
 
                 ltTenderBean.setSenName(resultSet.getString("SENDER_NAME"));
@@ -1343,42 +1361,40 @@ public class LifecycleUtility {
                 ltTenderBean.setIsaNum(resultSet.getString("ISA_NUMBER"));
 
                 ltTenderBean.setRecName(resultSet.getString("RECEIVER_NAME"));
-                ltTenderBean.setStCtrlNum(resultSet.getString("ST_CONTROL_NUMBER"));
-                ltTenderBean.setGsCtrlNum(resultSet.getString("GS_CONTROL_NUMBER"));
 
-//                if (resultSet.getString("comments") != null && !"".equals(resultSet.getString("comments"))) {
-//                    // System.out.println("hiiii");
-//                    ltTenderBean.setComments(resultSet.getString("comments"));
-//                } else {
-//                    // System.out.println("hiiii else");
-//                    ltTenderBean.setComments("");
-//                }
+// if (resultSet.getString("comments") != null && !"".equals(resultSet.getString("comments"))) {
+// // System.out.println("hiiii");
+// ltTenderBean.setComments(resultSet.getString("comments"));
+// } else {
+// // System.out.println("hiiii else");
+// ltTenderBean.setComments("");
+// }
 //
-//                // System.out.println("mod file--->"+resultSet.getString("modFilePath"));
-//                if (resultSet.getString("modFilePath") != null) {
-//                    if (new File(resultSet.getString("modFilePath")).exists()) {
-//                        ltTenderBean.setModFilePath(resultSet.getString("modFilePath"));
-//                    } else {
-//                        ltTenderBean.setModFilePath("");
-//                    }
-//                } else {
-//                    ltTenderBean.setModFilePath("");
-//                }
+// // System.out.println("mod file--->"+resultSet.getString("modFilePath"));
+// if (resultSet.getString("modFilePath") != null) {
+// if (new File(resultSet.getString("modFilePath")).exists()) {
+// ltTenderBean.setModFilePath(resultSet.getString("modFilePath"));
+// } else {
+// ltTenderBean.setModFilePath("");
+// }
+// } else {
+// ltTenderBean.setModFilePath("");
+// }
 //
-//                ltTenderBean.setModFlag(resultSet.getString("MOD_FLAG"));
+// ltTenderBean.setModFlag(resultSet.getString("MOD_FLAG"));
                 ltTenderBean.setErrorMessage(resultSet.getString("ERR_MESSAGE"));
 
-                //  sb.append("<MODFLAG>" + resultSet.getInt("MOD_FLAG") + "</MODFLAG>");
+// sb.append("<MODFLAG>" + resultSet.getInt("MOD_FLAG") + "</MODFLAG>");
                 ltTenderBean.setRes("1");
             }
-            // lifecycleBeans.setPoLifecycleBean(poLifecycleBean);
+// lifecycleBeans.setPoLifecycleBean(poLifecycleBean);
 
         } catch (SQLException e) {
-            //System.out.println("I am in catch block coming in IMpl");
-            // TODO Auto-generated catch block
-            // e.printStackTrace();
+//System.out.println("I am in catch block coming in IMpl");
+// TODO Auto-generated catch block
+// e.printStackTrace();
         } catch (Exception ex) {
-            //System.out.println("hi"+ex.getMessage());
+//System.out.println("hi"+ex.getMessage());
         } finally {
             try {
                 if (resultSet != null) {
@@ -1399,7 +1415,7 @@ public class LifecycleUtility {
             }
         }
 
-        //  System.out.println("Size in LFC PO Action --->"+poLifecycleBeanList.size());
+// System.out.println("Size in LFC PO Action --->"+poLifecycleBeanList.size());
         return ltTenderBean;
     }
 
@@ -1407,8 +1423,8 @@ public class LifecycleUtility {
 
         StringBuffer lifeCycleQuery = new StringBuffer();
         String poNum = poNumber;
-        // System.out.println("LifeCycleUtill ASN---->"+poNum);
-        // asnLifecycleBean.setRes("0");
+// System.out.println("LifeCycleUtill ASN---->"+poNum);
+// asnLifecycleBean.setRes("0");
         if ("ARCHIVE".equals(database)) {
             lifeCycleQuery.append("SELECT DISTINCT(ARCHIVE_FILES.FILE_ID) as FILE_ID,ARCHIVE_TRANSPORT_LT_RESPONSE.SHIPMENT_ID as SHIPMENT_ID,"
                     + " ARCHIVE_FILES.FILE_TYPE as FILE_TYPE,ARCHIVE_FILES.REPROCESSSTATUS,ARCHIVE_FILES.DIRECTION as DIRECTION,"
@@ -1439,20 +1455,20 @@ public class LifecycleUtility {
             while (resultSet.next()) {
                 ltResponsesBean = new LtResponsesBean();
 
-                // TP2.ID , tp2.NAME as name,
-                // TP2.ID , tp2.NAME as name,
+// TP2.ID , tp2.NAME as name,
+// TP2.ID , tp2.NAME as name,
                 ltResponsesBean.setFileId(resultSet.getString("FILE_ID"));
                 ltResponsesBean.setIsaNum(resultSet.getString("ISA_NUMBER"));
                 ltResponsesBean.setShipmentid(resultSet.getString("SHIPMENT_ID"));
                 ltResponsesBean.setFileType(resultSet.getString("FILE_TYPE"));
-                //  ltTenderBean.setFile_origin(resultSet.getString("file_origin"));
+// ltTenderBean.setFile_origin(resultSet.getString("file_origin"));
                 ltResponsesBean.setTran_type(resultSet.getString("TRANSACTION_TYPE"));
                 ltResponsesBean.setPreFile(resultSet.getString("PRE_TRANS_FILEPATH"));
                 ltResponsesBean.setPostTranFile(resultSet.getString("POST_TRANS_FILEPATH"));
                 ltResponsesBean.setAckFile(resultSet.getString("ACK_FILE_ID"));
 
                 ltResponsesBean.setDirection(resultSet.getString("DIRECTION"));
-                // ltTenderBean.setBolNumber(resultSet.getString("BOL_NUMBER"));
+// ltTenderBean.setBolNumber(resultSet.getString("BOL_NUMBER"));
                 ltResponsesBean.setStatus(resultSet.getString("STATUS"));
 
                 ltResponsesBean.setSecval(resultSet.getString("PRI_KEY_VAL"));
@@ -1461,7 +1477,7 @@ public class LifecycleUtility {
 
                 ltResponsesBean.setSenderId(resultSet.getString("SENDER_ID"));
 
-                //  ltResponsesBean.setPoNumber(resultSet.getString("PO_NUMBER"));
+// ltResponsesBean.setPoNumber(resultSet.getString("PO_NUMBER"));
                 ltResponsesBean.setSenName(resultSet.getString("SENDER_NAME"));
                 ltResponsesBean.setRecId(resultSet.getString("RECEIVER_ID"));
 
@@ -1472,19 +1488,18 @@ public class LifecycleUtility {
 
                 ltResponsesBean.setRecName(resultSet.getString("RECEIVER_NAME"));
                 ltResponsesBean.setErrorMessage(resultSet.getString("ERR_MESSAGE"));
-                ltResponsesBean.setStCtrlNum(resultSet.getString("ST_CONTROL_NUMBER"));
-                ltResponsesBean.setGsCtrlNum(resultSet.getString("GS_CONTROL_NUMBER"));
+
                 ltResponsesBean.setRes("1");
 
             }
-            // lifecycleBeans.setAsnLifecycleBean(asnLifecycleBean);
+// lifecycleBeans.setAsnLifecycleBean(asnLifecycleBean);
 
         } catch (SQLException e) {
-            //System.out.println("I am in catch block coming in IMpl");
-            // TODO Auto-generated catch block
-            //e.printStackTrace();
+//System.out.println("I am in catch block coming in IMpl");
+// TODO Auto-generated catch block
+//e.printStackTrace();
         } catch (Exception ex) {
-            //System.out.println("hi"+ex.getMessage());
+//System.out.println("hi"+ex.getMessage());
         } finally {
             try {
                 if (resultSet != null) {
@@ -1504,7 +1519,7 @@ public class LifecycleUtility {
                 throw new ServiceLocatorException(se);
             }
         }
-        // System.out.println("LifeCycleService impl ltResponsesBean---->"+ltResponsesBean.toString());
+// System.out.println("LifeCycleService impl ltResponsesBean---->"+ltResponsesBean.toString());
         return ltResponsesBean;
     }
 
@@ -1512,8 +1527,8 @@ public class LifecycleUtility {
 
         StringBuffer lifeCycleQuery = new StringBuffer();
         String poNum = poNumber;
-        // System.out.println("LifeCycleService impl INVOICE---->"+poNum);
-        //invoiceLifecycleBean.setRes("0");
+// System.out.println("LifeCycleService impl INVOICE---->"+poNum);
+//invoiceLifecycleBean.setRes("0");
         if ("ARCHIVE".equals(database)) {
             lifeCycleQuery.append("SELECT ARCHIVE_FILES.REPROCESSSTATUS,ARCHIVE_FILES.TRANSACTION_TYPE as TRANSACTION_TYPE,ARCHIVE_FILES.ST_CONTROL_NUMBER as ST_CONTROL_NUMBER,ARCHIVE_FILES.GS_CONTROL_NUMBER as GS_CONTROL_NUMBER,"
                     + " ARCHIVE_TRANSPORT_SHIPMENT.FILE_ID as FILE_ID,ARCHIVE_TRANSPORT_SHIPMENT.SHIPMENT_ID as SHIPMENT_ID,ARCHIVE_TRANSPORT_SHIPMENT.PO_NUMBER as PO_NUMBER,"
@@ -1551,14 +1566,14 @@ public class LifecycleUtility {
                 ltShipmentBean.setIsaNum(resultSet.getString("ISA_NUMBER"));
                 ltShipmentBean.setShipmentid(resultSet.getString("SHIPMENT_ID"));
                 ltShipmentBean.setFileType(resultSet.getString("FILE_TYPE"));
-                //  ltTenderBean.setFile_origin(resultSet.getString("file_origin"));
+// ltTenderBean.setFile_origin(resultSet.getString("file_origin"));
                 ltShipmentBean.setTran_type(resultSet.getString("TRANSACTION_TYPE"));
                 ltShipmentBean.setPreFile(resultSet.getString("PRE_TRANS_FILEPATH"));
                 ltShipmentBean.setPostTranFile(resultSet.getString("POST_TRANS_FILEPATH"));
                 ltShipmentBean.setAckFile(resultSet.getString("ACK_FILE_ID"));
 
                 ltShipmentBean.setDirection(resultSet.getString("DIRECTION"));
-                // ltTenderBean.setDatetime(resultSet.getTimestamp("datetime"));
+// ltTenderBean.setDatetime(resultSet.getTimestamp("datetime"));
                 ltShipmentBean.setStatus(resultSet.getString("STATUS"));
 
                 ltShipmentBean.setSecval(resultSet.getString("PRI_KEY_VAL"));
@@ -1579,19 +1594,18 @@ public class LifecycleUtility {
 
                 ltShipmentBean.setRecName(resultSet.getString("RECEIVER_NAME"));
                 ltShipmentBean.setErrorMessage(resultSet.getString("ERR_MESSAGE"));
-                ltShipmentBean.setStCtrlNum(resultSet.getString("ST_CONTROL_NUMBER"));
-                ltShipmentBean.setGsCtrlNum(resultSet.getString("GS_CONTROL_NUMBER"));
+
                 ltShipmentBean.setRes("1");
 
             }
-            // lifecycleBeans.setInvoiceLifecycleBean(invoiceLifecycleBean);
+// lifecycleBeans.setInvoiceLifecycleBean(invoiceLifecycleBean);
 
         } catch (SQLException e) {
-            //System.out.println("I am in catch block coming in IMpl");
-            // TODO Auto-generated catch block
-            // e.printStackTrace();
+//System.out.println("I am in catch block coming in IMpl");
+// TODO Auto-generated catch block
+// e.printStackTrace();
         } catch (Exception ex) {
-            //System.out.println("hi"+ex.getMessage());
+//System.out.println("hi"+ex.getMessage());
         } finally {
             try {
                 if (resultSet != null) {
@@ -1611,15 +1625,15 @@ public class LifecycleUtility {
                 throw new ServiceLocatorException(se);
             }
         }
-        //System.out.println("LifeCycleService impl ltShipmentBean---->"+ltShipmentBean.toString());
+//System.out.println("LifeCycleService impl ltShipmentBean---->"+ltShipmentBean.toString());
         return ltShipmentBean;
     }
 
     public LtInvoicesBean getLtInvoiceDetails(String poNumber, String fileId, String database) throws ServiceLocatorException {
         StringBuffer lifeCycleQuery = new StringBuffer();
         String poNum = poNumber;
-        // System.out.println("LifeCycleService impl PAYMENTS---->"+poNum);
-        // paymentLifecycleBean.setRes("1");
+// System.out.println("LifeCycleService impl PAYMENTS---->"+poNum);
+// paymentLifecycleBean.setRes("1");
         if ("ARCHIVE".equals(database)) {
             lifeCycleQuery.append("SELECT ARCHIVE_TRANSPORT_INVOICE.SHIPMENT_ID,ARCHIVE_FILES.REPROCESSSTATUS,ARCHIVE_FILES.TRANSACTION_TYPE as TRANSACTION_TYPE,ARCHIVE_FILES.ST_CONTROL_NUMBER as ST_CONTROL_NUMBER,ARCHIVE_FILES.GS_CONTROL_NUMBER as GS_CONTROL_NUMBER,"
                     + "ARCHIVE_TRANSPORT_INVOICE.FILE_ID as FILE_ID,ARCHIVE_TRANSPORT_INVOICE.INVOICE_NUMBER as INVOICE_NUMBER,ARCHIVE_TRANSPORT_INVOICE.PO_NUMBER as PO_NUMBER,"
@@ -1655,14 +1669,14 @@ public class LifecycleUtility {
                 ltInvoicesBean.setIsaNum(resultSet.getString("ISA_NUMBER"));
                 ltInvoicesBean.setShipmentid(resultSet.getString("SHIPMENT_ID"));
                 ltInvoicesBean.setFileType(resultSet.getString("FILE_TYPE"));
-                //  ltTenderBean.setFile_origin(resultSet.getString("file_origin"));
+// ltTenderBean.setFile_origin(resultSet.getString("file_origin"));
                 ltInvoicesBean.setTran_type(resultSet.getString("TRANSACTION_TYPE"));
                 ltInvoicesBean.setPreFile(resultSet.getString("PRE_TRANS_FILEPATH"));
                 ltInvoicesBean.setPostTranFile(resultSet.getString("POST_TRANS_FILEPATH"));
                 ltInvoicesBean.setAckFile(resultSet.getString("ACK_FILE_ID"));
 
                 ltInvoicesBean.setDirection(resultSet.getString("DIRECTION"));
-                // ltTenderBean.setDatetime(resultSet.getTimestamp("datetime"));
+// ltTenderBean.setDatetime(resultSet.getTimestamp("datetime"));
                 ltInvoicesBean.setStatus(resultSet.getString("STATUS"));
 
                 ltInvoicesBean.setSecval(resultSet.getString("PRI_KEY_VAL"));
@@ -1683,19 +1697,18 @@ public class LifecycleUtility {
 
                 ltInvoicesBean.setRecName(resultSet.getString("RECEIVER_NAME"));
                 ltInvoicesBean.setErrorMessage(resultSet.getString("ERR_MESSAGE"));
-                ltInvoicesBean.setStCtrlNum(resultSet.getString("ST_CONTROL_NUMBER"));
-                ltInvoicesBean.setGsCtrlNum(resultSet.getString("GS_CONTROL_NUMBER"));
+
                 ltInvoicesBean.setRes("1");
 
             }
-            //lifecycleBeans.setPaymentLifecycleBean(paymentLifecycleBean);
+//lifecycleBeans.setPaymentLifecycleBean(paymentLifecycleBean);
 
         } catch (SQLException e) {
-            //System.out.println("I am in catch block coming in IMpl");
-            // TODO Auto-generated catch block
-            //   e.printStackTrace();
+//System.out.println("I am in catch block coming in IMpl");
+// TODO Auto-generated catch block
+// e.printStackTrace();
         } catch (Exception ex) {
-            //System.out.println("hi"+ex.getMessage());
+//System.out.println("hi"+ex.getMessage());
         } finally {
             try {
                 if (resultSet != null) {
@@ -1717,4 +1730,5 @@ public class LifecycleUtility {
         }
         return ltInvoicesBean;
     }
+
 }

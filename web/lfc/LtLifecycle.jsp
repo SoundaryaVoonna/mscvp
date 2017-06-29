@@ -12,7 +12,7 @@
 <%@ taglib uri="/WEB-INF/tlds/dbgrid.tld" prefix="grd"%>
 <%@ page import="com.freeware.gridtag.*"%>
 <%@page import="java.sql.Connection"%>
-<%@  page import="com.mss.ediscv.util.AppConstants"%>
+<%@ page import="com.mss.ediscv.util.AppConstants"%>
 <%@ page import="com.mss.ediscv.util.ConnectionProvider"%>
 <%@ page import="java.sql.SQLException"%>
 <%@ page import = "java.util.ResourceBundle" %>
@@ -38,23 +38,23 @@
 
 
         <script type="text/javascript">
-            $(function () {
-                $('#attach_box').click(function () {
+            $(function() {
+                $('#attach_box').click(function() {
                     $('#sec_box').show();
                     return false;
                 });
             });
-            $(function () {
-                $('#detail_link').click(function () {
+            $(function() {
+                $('#detail_link').click(function() {
                     $('#detail_box').show();
                     return false;
                 });
             });
 
-            // New function to show the left grid
+        // New function to show the left grid
 
             function demo() {
-                $(function () {
+                $(function() {
 
                     $('#detail_box').show();
                     return false;
@@ -75,20 +75,20 @@
 
                 $('#hide-menu1').removeClass('show-menu');
             }
-            //            $('body,html').click(function(e){
-            //                $('#hide-menu1').removeClass('show-menu');
-            //            });
+        // $('body,html').click(function(e){
+        // $('#hide-menu1').removeClass('show-menu');
+        // });
 
-            //            function doOnLoad() {
-            //
-            //                $("#purchaseorder").addClass("active");
-            //                $("#oredermanagement").addClass("active");
-            //
-            //                $("#manufacturing").addClass("active");
-            //
-            //                $("#purchaseorder i").addClass("text-red");
-            //                document.getElementById('loadingAcoountSearch').style.display = "none";
-            //            }
+        // function doOnLoad() {
+        //
+        // $("#purchaseorder").addClass("active");
+        // $("#oredermanagement").addClass("active");
+        //
+        // $("#manufacturing").addClass("active");
+        //
+        // $("#purchaseorder i").addClass("text-red");
+        // document.getElementById('loadingAcoountSearch').style.display = "none";
+        // }
 
             function doOnLoad()
             {
@@ -98,9 +98,9 @@
 
                 document.getElementById('loadingAcoountSearch').style.display = "none";
             }
-            
-            $(function () {
-                //$("#example1").DataTable();
+
+            $(function() {
+        //$("#example1").DataTable();
                 $('#results').DataTable({
                     "paging": true,
                     "lengthChange": true,
@@ -116,7 +116,7 @@
 
 
     </head>
-    <body class="hold-transition skin-blue sidebar-mini"  onload="doOnLoad()">
+    <body class="hold-transition skin-blue sidebar-mini" onload="doOnLoad()">
         <div>
             <s:include value="../includes/template/header.jsp"/>
         </div>
@@ -133,15 +133,15 @@
                     LifeCycle
                     <!--<small>Logistics</small>-->
                 </h1>
-                <!--                <ol class="breadcrumb">
-                                    <li><a href="#"><i class="fa fa-truck"></i>Logistics</a></li>
-                                    <li class="active">LifeCycle</li>
-                                </ol>-->
+                <!-- <ol class="breadcrumb">
+                <li><a ><i class="fa fa-truck"></i>Logistics</a></li>
+                <li class="active">LifeCycle</li>
+                </ol>-->
             </section>
             <br>
-            <div id="gridDiv">     
+            <div id="gridDiv"> 
                 <%!String cssValue = "whiteStripe";
-                    int resultsetTotal;%>
+    int resultsetTotal;%>
                 <section class="content">
                     <div class="row">
                         <div class="col-xs-12">
@@ -150,7 +150,7 @@
                                     <h3 class="box-title">Table</h3>
                                 </div><!-- /.box-header -->
                                 <div class="box-body">
-                                    <div style="overflow-x:auto;">   
+                                    <div style="overflow-x:auto;"> 
                                         <div align="right"><input type="button" value="Go back" class="btn btn-effect-ripple btn-primary" onclick="goBack()"></input></div>
                                             <s:hidden id="database" name="database" value="%{database}"/>
                                         <br>
@@ -159,20 +159,20 @@
                                             <tr>
                                                 <td style="background-color: white;">
 
-                                                    <table id="results"  class="table table-bordered table-hover">
+                                                    <table id="results" class="table table-bordered table-hover">
                                                         <%
                                                             java.util.List list = (java.util.List) session.getAttribute(AppConstants.LFC_SES_LTTENDER_LIST);
-                                                            System.out.println("list------------   " + list.size());
+                                                            System.out.println("list------------ " + list.size());
                                                             if (list.size() != 0) {
 
                                                                 LtTenderBean ltTenderBean;
                                                         %>
 
-                                                        <thead>  <tr class="gridHeader">
+                                                        <thead> <tr class="gridHeader">
                                                                 <th>DateTime</th>
                                                                 <th>Trans&nbsp;Type</th>
                                                                 <th>Shipment&nbsp;#</th>
-                                                                <th>Instance&nbsp;#</th>
+                                                                <th>Partner</th>
                                                                 <th>Type</th>
                                                                 <th>Direction</th>
 
@@ -266,8 +266,8 @@
                                                                 </td>
                                                                 <td>
                                                                     <%
-                                                                        if (ltTenderBean.getFileId() != null) {
-                                                                            out.println(ltTenderBean.getFileId());
+                                                                        if (ltTenderBean.getRecName() != null) {
+                                                                            out.println(ltTenderBean.getRecName());
                                                                         } else {
                                                                             out.println("--");
                                                                         }
@@ -282,6 +282,9 @@
                                                                         }
                                                                     %>
                                                                 </td>
+
+
+
                                                                 <td>
                                                                     <%
                                                                         if (ltTenderBean.getDirection() != null) {
@@ -293,15 +296,15 @@
                                                                 </td>
 
                                                                 <%--<td>
-                                                                  <%
-                                                                    out.println(poLifeCycleBean.getSenderId());
-                                                                    %>
+                                                                <%
+                                                                out.println(poLifeCycleBean.getSenderId());
+                                                                %>
                                                                 </td>
                                                                 <td>
-                                                                  <%
-                                                                    out.println(poLifeCycleBean.getRecId());
-                                                                    %>
-                                                                </td>  --%>
+                                                                <%
+                                                                out.println(poLifeCycleBean.getRecId());
+                                                                %>
+                                                                </td> --%>
 
                                                                 <td>
                                                                     <%
@@ -321,7 +324,7 @@
                                                                 <td>
                                                                     <%
                                                                         if (ltTenderBean.getAckStatus() != null) {
-                                                                            //out.println(poLifeCycleBean.getAckStatus());
+                                                                    //out.println(poLifeCycleBean.getAckStatus());
                                                                             if (ltTenderBean.getAckStatus().equalsIgnoreCase("REJECTED")) {
                                                                                 out.println("<font color='red'>" + ltTenderBean.getAckStatus().toUpperCase() + "</font>");
                                                                             } else if (ltTenderBean.getAckStatus().equalsIgnoreCase("ACCEPTED")) {
@@ -344,21 +347,21 @@
                                                                 %>
                                                                 <td>
                                                                     <%
-                                                                            out.println("<img  border='0' align='top'  src='" + contextPath + "/includes/images/alert.gif'/><b>No records found for the given search criteria. Please try a different search criteria!</b>");
+                                                                            out.println("<img border='0' align='top' src='" + contextPath + "/includes/images/alert.gif'/><b>No records found for the given search criteria. Please try a different search criteria!</b>");
                                                                         }
                                                                     %>
                                                                 </td>
 
                                                             </tr>
 
-                                                        </tbody>          
-                                                    </table>  
+                                                        </tbody> 
+                                                    </table> 
                                                 </td>
                                             </tr>
                                         </table>
 
                                     </div>
-                                    <%-- Process butttons  start --%>
+                                    <%-- Process butttons start --%>
 
                                     <%-- process buttons end--%>
                                     <%-- Grid End --%>
@@ -372,41 +375,31 @@
                 <div class="row col-sm-12">
                     <br>
                     <div class="col-sm-6"> <label class="labelw">Instance Id </label>
-                        <s:textfield  cssClass="form-control"  required="required" placeholder="" id="LfcInstanceId" name="LfcInstanceId" readonly="true"/>
-                    </div>
-                    <div class="col-sm-6"> <label class="labelw"> Shipment # </label>
-                        <s:textfield cssClass="form-control" required="required" placeholder="" id="LfcShipment" name="LfcShipment" readonly="true"/>
+                        <s:textfield cssClass="form-control" required="required" placeholder="" id="LfcInstanceId" name="LfcInstanceId" readonly="true"/>
                     </div>
 
-                    <%--                    <div class="col-sm-6"> <label class="labelw">PO # </label>
-                                            <s:textfield  cssClass="form-control"  required="required" placeholder="" id="LfcPONum" name="LfcPONum" readonly="true"/>
-                                        </div>--%> </div>
 
-                <%--          <div class="col-sm-6"> <label class="labelw">PO Date :</label>
-                              <s:textfield  cssClass="form-control"  required="required" placeholder="" id="LfcPODates" name="LfcPODates" readonly="true"/>
-                          </div>
-                          <div class="col-sm-6"> <label class="labelw">PO Status :</label>
-                              <s:textfield  cssClass="form-control"  required="required" placeholder="" id="LfcStatus1" name="LfcStatus1" readonly="true"/>
-                          </div>
-                          <div class="col-sm-6"> <label class="labelw">SO # :</label>
-                              <s:textfield  cssClass="form-control"  required="required" placeholder="" id="LfcSo" name="LfcSo" readonly="true"/>
-                          </div>
-                          <div class="col-sm-6"> <label class="labelw">PO Qty :</label>
-                              <s:textfield  cssClass="form-control"  required="required" placeholder="" id="LfcPOQty" name="POShipDate" readonly="true"/>
-                          </div> 
+                    <div class="col-sm-6"> <label class="labelw">PO # </label>
+                        <s:textfield cssClass="form-control" required="required" placeholder="" id="LfcPONum" name="LfcPONum" readonly="true"/>
+                    </div> </div>
+
+                <%-- <div class="col-sm-6"> <label class="labelw">PO Date :</label>
+                <s:textfield cssClass="form-control" required="required" placeholder="" id="LfcPODates" name="LfcPODates" readonly="true"/>
+                </div>
+                <div class="col-sm-6"> <label class="labelw">PO Status :</label>
+                <s:textfield cssClass="form-control" required="required" placeholder="" id="LfcStatus1" name="LfcStatus1" readonly="true"/>
+                </div>
+                <div class="col-sm-6"> <label class="labelw">SO # :</label>
+                <s:textfield cssClass="form-control" required="required" placeholder="" id="LfcSo" name="LfcSo" readonly="true"/>
+                </div>
+                <div class="col-sm-6"> <label class="labelw">PO Qty :</label>
+                <s:textfield cssClass="form-control" required="required" placeholder="" id="LfcPOQty" name="POShipDate" readonly="true"/>
+                </div> --%>
                 <div class="row col-sm-12"> 
                     <div class="col-sm-6"> <label class="labelw">Trans Type </label>
-                        <s:textfield  cssClass="form-control"  required="required" placeholder="" id="LfcTransactionType" name="LfcTransactionType" readonly="true"/>
-                    </div>
-                </div>--%>
-                <div class="row col-sm-12">
-                    <div class="col-sm-6"> <label class="labelw"> Document Type </label>
-                        <s:textfield cssClass="form-control" required="required" placeholder="" id="LfcDocumentType" name="LfcDocumentType" readonly="true"/>
-                    </div>
-                    <div class="col-sm-6"> <label class="labelw">Transaction Type </label>
                         <s:textfield cssClass="form-control" required="required" placeholder="" id="LfcTransactionType" name="LfcTransactionType" readonly="true"/>
                     </div>
-                </div>    
+                </div>
                 <br>
                 <div id="senderinfo">
                     <div class="row col-sm-12">
@@ -417,11 +410,11 @@
                     </div>
                     <br>
                     <div class="row col-sm-12">
-                        <div class="col-sm-6"> <label class="labelw">  Id </label>
-                            <s:textfield  cssClass="form-control"  required="required" placeholder="" id="LycPOPartnerId" name="LycPOPartnerId" readonly="true"/>
+                        <div class="col-sm-6"> <label class="labelw"> Id </label>
+                            <s:textfield cssClass="form-control" required="required" placeholder="" id="LycPOPartnerId" name="LycPOPartnerId" readonly="true"/>
                         </div>
                         <div class="col-sm-6"> <label class="labelw"> Name </label>
-                            <s:textfield  cssClass="form-control"  required="required" placeholder="" id="LycPOPartnerName" name="LycPOPartnerName" readonly="true"/>
+                            <s:textfield cssClass="form-control" required="required" placeholder="" id="LycPOPartnerName" name="LycPOPartnerName" readonly="true"/>
                         </div>
                     </div>
                 </div>
@@ -435,11 +428,11 @@
 
                     <br>
                     <div class="row col-sm-12 clear">
-                        <div class="col-sm-6"> <label class="labelw">  Id </label>
-                            <s:textfield  cssClass="form-control"  required="required" placeholder="" id="LfcPOReceiverId" name="LfcPOReceiverId" readonly="true"/>
+                        <div class="col-sm-6"> <label class="labelw"> Id </label>
+                            <s:textfield cssClass="form-control" required="required" placeholder="" id="LfcPOReceiverId" name="LfcPOReceiverId" readonly="true"/>
                         </div>
                         <div class="col-sm-6"> <label class="labelw"> Name </label>
-                            <s:textfield  cssClass="form-control"  required="required" placeholder="" id="LfcPOReceiverName" name="LfcPOReceiverName" readonly="true"/>
+                            <s:textfield cssClass="form-control" required="required" placeholder="" id="LfcPOReceiverName" name="LfcPOReceiverName" readonly="true"/>
                         </div>
                     </div>
                 </div> 
@@ -447,38 +440,36 @@
                 <div class="row col-sm-12 clear">
                     <br/>
                     <div class="col-sm-6"> <label class="labelw"> ISA # </label>
-                        <s:textfield  cssClass="form-control"  required="required" placeholder="" id="LfcPOIsa" name="LfcPOIsa" readonly="true"/>
+                        <s:textfield cssClass="form-control" required="required" placeholder="" id="LfcPOIsa" name="LfcPOIsa" readonly="true"/>
                     </div>
-                    <div class="col-sm-6"> <label class="labelw"> GS # </label>
-                        <s:textfield cssClass="form-control" required="required" placeholder="" id="LofcGs" name="LofcGs" readonly="true"/>
+                    <div class="col-sm-6"> <label class="labelw"> ISA Date </label>
+                        <s:textfield cssClass="form-control" required="required" placeholder="" id="LfcPOISADate" name="LfcPOISADate" readonly="true"/>
                     </div>
-                    <div class="col-sm-6"> <label class="labelw">  ST # </label>
-                        <s:textfield cssClass="form-control" required="required" placeholder="" id="LfccSt" name="LfccSt" readonly="true"/>
-                    </div>
-                    <div class="col-sm-6"> <label class="labelw"> ISA Date  </label>
-                        <s:textfield  cssClass="form-control"  required="required" placeholder="" id="LfcPOISADate" name="LfcPOISADate" readonly="true"/>
-                    </div>
-                    <div class="col-sm-6"> <label class="labelw">  ISA TIME  </label>
-                        <s:textfield  cssClass="form-control"  required="required" placeholder="" id="LfcPOIsATime" name="LfcPOIsATime" readonly="true"/>
+                </div>
+
+                <div class="row col-sm-12" >
+
+                    <div class="col-sm-6"> <label class="labelw"> ISA TIME </label>
+                        <s:textfield cssClass="form-control" required="required" placeholder="" id="LfcPOIsATime" name="LfcPOIsATime" readonly="true"/>
                     </div>
                     <div class="col-sm-6"> <label class="labelw"> STATUS </label>
-                        <s:textfield  cssClass="form-control"  required="required" placeholder="" id="LfcPOStatus" name="LfcPOStatus" readonly="true"/>
+                        <s:textfield cssClass="form-control" required="required" placeholder="" id="LfcPOStatus" name="LfcPOStatus" readonly="true"/>
                     </div>
                 </div>
                 <div class="row col-sm-12" style="margin-top:10px;">
-                    <div class="col-sm-6"> <label class="labelw">  PreTranslation  </label></div>
+                    <div class="col-sm-6"> <label class="labelw"> ACK FileId </label></div>
+                    <div class="col-sm-6"><div id="LfcPOAckFileId"></div>
+                    </div>
+                </div>
+                <div class="row col-sm-12" >
+                    <div class="col-sm-6"> <label class="labelw"> PreTranslation </label></div>
                     <div class="col-sm-6"><div id="LfcPOPreTransition"></div></div>
                 </div>
                 <div class="row col-sm-12">
                     <div class="col-sm-6"> <label class="labelw"> PostTranslation </label></div>
                     <div class="col-sm-6"><div id="LfcPOPostTransition"></div></div>
                 </div>
-                <div class="row col-sm-12" >
-                    <div class="col-sm-6"> <label class="labelw"> 997 ACKFile </label></div>
-                    <div class="col-sm-6"><div id="LfcPOAckFileId"></div>
-                    </div>
-                </div>
-                <%--  <div class="col-sm-6"> <label class="labelw">997ACKFile </label></div>   --%>                   
+                <%-- <div class="col-sm-6"> <label class="labelw">997ACKFile </label></div> --%> 
 
                 <div class="row col-sm-12" id="errorDiv" style="display: none">
                     <div class="col-sm-6"> <label class="labelw"> Error&nbsp;Message </label></div>
@@ -494,9 +485,9 @@
 
 
 
-        <%--  <div id="footer">
-           <h2><font color="white">&#169 2013 Miracle Software Systems, Inc. All rights reserved</font></h2>
-                  </div>--%>
+        <%-- <div id="footer">
+        <h2><font color="white">&#169 2013 Miracle Software Systems, Inc. All rights reserved</font></h2>
+        </div>--%>
 
         <script src='<s:url value="../includes/plugins/datatables/jquery.dataTables.min.js"/>'></script>
         <script src='<s:url value="../includes/plugins/datatables/dataTables.bootstrap.min.js"/>'></script>

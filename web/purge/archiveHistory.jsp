@@ -41,18 +41,18 @@
 
                 // document.getElementById('loadingAcoountSearch').style.display = "none";
             }
-            
-            $(function () {
-                    // $("#example1").DataTable();
-                    $('#results').DataTable({
-                        "paging": true,
-                        "lengthChange": true,
-                        "searching": true,
-                        "ordering": true,
-                        "info": true,
-                        "autoWidth": false
-                    });
+
+            $(function() {
+                // $("#example1").DataTable();
+                $('#results').DataTable({
+                    "paging": true,
+                    "lengthChange": true,
+                    "searching": true,
+                    "ordering": true,
+                    "info": true,
+                    "autoWidth": false
                 });
+            });
         </script>
 
 
@@ -83,12 +83,12 @@
             <section class="content-header">
                 <h1>
                     Archive History
-<!--                    <small>History</small>-->
+                    <!--                    <small>History</small>-->
                 </h1>
-<!--                <ol class="breadcrumb">
-                    <li><a href="#"><i class="fa fa-remove"></i>History</a></li>
-                    <li class="active">Archive History</li>
-                </ol>-->
+                <!--                <ol class="breadcrumb">
+                                    <li><a href="#"><i class="fa fa-remove"></i>History</a></li>
+                                    <li class="active">Archive History</li>
+                                </ol>-->
             </section>
             <br>
 
@@ -130,20 +130,20 @@
                                                     </div>
                                                     <div class="col-sm-3">
                                                         <label>Transaction&nbsp;Type<font color="red">*</font></label>
-                                                 
-                                                  <s:select headerKey="-1" headerValue="Select Type" cssClass="form-control"  list="flowName"  name="transType" id="transType" tabindex="2"/> 
-                                                         <%--   <%
-                                                                String flowId=session.getAttribute("userDefaultFlowID").toString();
-                                                                if(flowId.equals("2"))
-                                                                {%>
-                                                        <s:select headerKey="-1" headerValue="Select Type" cssClass="form-control" list="#@java.util.LinkedHashMap@{'850':'PO','856':'Shipments','810':'Invoice','820':'Payments'}" name="transType" id="transType" tabindex="2"/> 
-                                                        <%} else if(flowId.equals("3")){%>
-                                                          <s:select headerKey="-1" headerValue="Select Type" cssClass="form-control" list="#@java.util.LinkedHashMap@{'204':'Load Tender','990':'Response','214':'Shipment','210':'Invoice'}" name="transType" id="transType" tabindex="2"/> 
-                                                        <%}%> --%>
+
+                                                        <s:select headerKey="-1" headerValue="Select Type" cssClass="form-control"  list="flowName"  name="transType" id="transType" tabindex="2"/> 
+                                                        <%--   <%
+                                                               String flowId=session.getAttribute("userDefaultFlowID").toString();
+                                                               if(flowId.equals("2"))
+                                                               {%>
+                                                       <s:select headerKey="-1" headerValue="Select Type" cssClass="form-control" list="#@java.util.LinkedHashMap@{'850':'PO','856':'Shipments','810':'Invoice','820':'Payments'}" name="transType" id="transType" tabindex="2"/> 
+                                                       <%} else if(flowId.equals("3")){%>
+                                                         <s:select headerKey="-1" headerValue="Select Type" cssClass="form-control" list="#@java.util.LinkedHashMap@{'204':'Load Tender','990':'Response','214':'Shipment','210':'Invoice'}" name="transType" id="transType" tabindex="2"/> 
+                                                       <%}%> --%>
                                                     </div>
                                                 </div>
                                                 <br>
-                                                
+
 
                                                 <div class ="row">
                                                     <div class="col-sm-2"><s:submit value="Search History"  onclick="return checkValues();"  cssClass="btn btn-primary col-sm-12" tabindex="3"/></div>
@@ -194,11 +194,11 @@
                                                                         <th >Archive Date</th>
                                                                 </thead>
                                                                 <tbody>
-                                                                <%
-                                                                    for (int i = 0; i < list.size(); i++) {
-                                                                        purgeHistoryBean = (PurgeHistoryBean) list.get(i);
-                                                                %>
-                                                                
+                                                                    <%
+                                                                        for (int i = 0; i < list.size(); i++) {
+                                                                            purgeHistoryBean = (PurgeHistoryBean) list.get(i);
+                                                                    %>
+
                                                                     <tr>
                                                                         <td><%
                                                                             out.println(purgeHistoryBean.getUser());
@@ -212,13 +212,13 @@
                                                                         <td><%
                                                                             out.println(purgeHistoryBean.getComments());
                                                                             %></td>
-                                                                        <td><%
-                                                                            out.println(purgeHistoryBean.getArchiveDate());
-                                                                            %></td></tr>
-                                                               
-                                                                <%}%>
-                                                                
-                                                                     </tbody><%
+                                                                        <td> <% out.println(purgeHistoryBean.getArchiveDate().toString().substring(0, purgeHistoryBean.getArchiveDate().toString().lastIndexOf(":")));%> </td>
+
+                                                                    </tr>
+
+                                                                    <%}%>
+
+                                                                </tbody><%
                                                                 } else {
                                                                 %>
                                                                 <tr><td>
@@ -239,19 +239,18 @@
                 </s:if>   
 
             </div>
-    <script>
-             $(function() {
+            <script>
+                $(function() {
                 //$("#example1").DataTable();
                 $('#results').DataTable({
-                    "paging": true,
-                    "lengthChange": true,
-                    "searching": true,
-                    "ordering": true,
-                    "info": true,
-                    "autoWidth": false,
-                    order: [[0, 'desc']]
-                });
-            </script>
+                "paging": true,
+                        "lengthChange": true,
+                        "searching": true,
+                        "ordering": true,
+                        "info": true,
+                        "autoWidth": false,
+                        order: [[0, 'desc']]
+                });            </script>
         </div>
 
         <div>
@@ -269,38 +268,37 @@
         <script type="text/javascript">
 
                 function checkValues() {
-                    var date = document.arcHisForm.reportrange.value;
-                    var transType = document.getElementById("transType").value;
-                    if (date == "")
-                    {
-                        alert("Please enter Date Range !!");
-                        return false;
-                    }
-                    if (transType == "-1")
-                    {
-                        alert("Please select Transaction Type !!");
-                        return false;
-                    }
-                }
-                function Date1()
+                var date = document.arcHisForm.reportrange.value;
+                        var transType = document.getElementById("transType").value;
+                        if (date == "")
                 {
-                    var date = document.arcHisForm.reportrange.value;
-                    var arr = date.split("-");
-                    var x = arr[1].trim();
-                    document.getElementById("datepickerfrom").value = arr[0];
-                    document.getElementById("datepicker").value = x;
+                alert("Please enter Date Range !!");
+                        return false;
                 }
-
-                function resetvalues()
+                if (transType == "-1")
                 {
-                    document.getElementById('reportrange').value = "";
-                    document.getElementById('transType').value = "-1";
-                    //document.getElementById("datepickerfrom").value = "";
-                    //document.getElementById("datepicker").value = "";
-
-                    $('#gridDiv').hide();
-
+                alert("Please select Transaction Type !!");
+                        return false;
                 }
+                }
+        function Date1()
+        {
+        var date = document.arcHisForm.reportrange.value;
+                var arr = date.split("-");
+                var x = arr[1].trim();
+                document.getElementById("datepickerfrom").value = arr[0];
+                document.getElementById("datepicker").value = x;
+        }
+
+        function resetvalues()
+        {
+        document.getElementById('reportrange').value = "";
+                document.getElementById('transType').value = "-1";
+                //document.getElementById("datepickerfrom").value = "";
+                //document.getElementById("datepicker").value = "";
+
+                $('#gridDiv').hide();
+        }
 
         </script>
     </body>
