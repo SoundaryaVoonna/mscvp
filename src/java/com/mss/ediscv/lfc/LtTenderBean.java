@@ -33,6 +33,8 @@ public class LtTenderBean {
     private String recName;
     private String bolNumber;
     private String isaCtrlNum;
+    private String gsCtrlNum;
+    private String stCtrlNum;
     private String isaDate;
     private String isaTime;
     private String preFile;
@@ -299,6 +301,23 @@ public class LtTenderBean {
     public void setErrorMessage(String errorMessage) {
         this.errorMessage = errorMessage;
     }
+
+    public String getGsCtrlNum() {
+        return gsCtrlNum;
+    }
+
+    public void setGsCtrlNum(String gsCtrlNum) {
+        this.gsCtrlNum = gsCtrlNum;
+    }
+
+    public String getStCtrlNum() {
+        return stCtrlNum;
+    }
+
+    public void setStCtrlNum(String stCtrlNum) {
+        this.stCtrlNum = stCtrlNum;
+    }
+    
     /**
      * @return the fileId
      */

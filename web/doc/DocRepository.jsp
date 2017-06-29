@@ -501,7 +501,7 @@
                             <div class="col-sm-6"> <div id="ManPostTranslation"></div></div>
                         </div>
                         <div class="row col-sm-12" >
-                            <div class="col-sm-6"> <label class="labelw"> 997AcknowledgeFile</label></div>
+                            <div class="col-sm-6"> <label class="labelw"> 997 ACKFile</label></div>
                             <div class="col-sm-6"> <div id="ManAckFileId"></div></div>   
                         </div>
 

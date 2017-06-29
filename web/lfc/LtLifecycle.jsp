@@ -75,20 +75,20 @@
 
                 $('#hide-menu1').removeClass('show-menu');
             }
-//            $('body,html').click(function(e){
-//                $('#hide-menu1').removeClass('show-menu');
-//            });
+            //            $('body,html').click(function(e){
+            //                $('#hide-menu1').removeClass('show-menu');
+            //            });
 
-//            function doOnLoad() {
-//
-//                $("#purchaseorder").addClass("active");
-//                $("#oredermanagement").addClass("active");
-//
-//                $("#manufacturing").addClass("active");
-//
-//                $("#purchaseorder i").addClass("text-red");
-//                document.getElementById('loadingAcoountSearch').style.display = "none";
-//            }
+            //            function doOnLoad() {
+            //
+            //                $("#purchaseorder").addClass("active");
+            //                $("#oredermanagement").addClass("active");
+            //
+            //                $("#manufacturing").addClass("active");
+            //
+            //                $("#purchaseorder i").addClass("text-red");
+            //                document.getElementById('loadingAcoountSearch').style.display = "none";
+            //            }
 
             function doOnLoad()
             {
@@ -133,10 +133,10 @@
                     LifeCycle
                     <!--<small>Logistics</small>-->
                 </h1>
-<!--                <ol class="breadcrumb">
-                    <li><a href="#"><i class="fa fa-truck"></i>Logistics</a></li>
-                    <li class="active">LifeCycle</li>
-                </ol>-->
+                <!--                <ol class="breadcrumb">
+                                    <li><a href="#"><i class="fa fa-truck"></i>Logistics</a></li>
+                                    <li class="active">LifeCycle</li>
+                                </ol>-->
             </section>
             <br>
             <div id="gridDiv">     
@@ -152,7 +152,7 @@
                                 <div class="box-body">
                                     <div style="overflow-x:auto;">   
                                         <div align="right"><input type="button" value="Go back" class="btn btn-effect-ripple btn-primary" onclick="goBack()"></input></div>
-                                        <s:hidden id="database" name="database" value="%{database}"/>
+                                            <s:hidden id="database" name="database" value="%{database}"/>
                                         <br>
                                         <table align="left" width="100%"
                                                border="0" cellpadding="0" cellspacing="0">
@@ -175,7 +175,7 @@
                                                                 <th>Instance&nbsp;#</th>
                                                                 <th>Type</th>
                                                                 <th>Direction</th>
-                                                                  
+
                                                                 <th>Status</th>
                                                                 <th>Ack Status</th> 
                                                             </tr></thead>
@@ -282,9 +282,6 @@
                                                                         }
                                                                     %>
                                                                 </td>
-
-
-
                                                                 <td>
                                                                     <%
                                                                         if (ltTenderBean.getDirection() != null) {
@@ -294,7 +291,7 @@
                                                                         }
                                                                     %>
                                                                 </td>
-                                                                  
+
                                                                 <%--<td>
                                                                   <%
                                                                     out.println(poLifeCycleBean.getSenderId());
@@ -377,11 +374,13 @@
                     <div class="col-sm-6"> <label class="labelw">Instance Id </label>
                         <s:textfield  cssClass="form-control"  required="required" placeholder="" id="LfcInstanceId" name="LfcInstanceId" readonly="true"/>
                     </div>
+                    <div class="col-sm-6"> <label class="labelw"> Shipment # </label>
+                        <s:textfield cssClass="form-control" required="required" placeholder="" id="LfcShipment" name="LfcShipment" readonly="true"/>
+                    </div>
 
-
-                    <div class="col-sm-6"> <label class="labelw">PO # </label>
-                        <s:textfield  cssClass="form-control"  required="required" placeholder="" id="LfcPONum" name="LfcPONum" readonly="true"/>
-                    </div> </div>
+                    <%--                    <div class="col-sm-6"> <label class="labelw">PO # </label>
+                                            <s:textfield  cssClass="form-control"  required="required" placeholder="" id="LfcPONum" name="LfcPONum" readonly="true"/>
+                                        </div>--%> </div>
 
                 <%--          <div class="col-sm-6"> <label class="labelw">PO Date :</label>
                               <s:textfield  cssClass="form-control"  required="required" placeholder="" id="LfcPODates" name="LfcPODates" readonly="true"/>
@@ -394,80 +393,90 @@
                           </div>
                           <div class="col-sm-6"> <label class="labelw">PO Qty :</label>
                               <s:textfield  cssClass="form-control"  required="required" placeholder="" id="LfcPOQty" name="POShipDate" readonly="true"/>
-                          </div> --%>
+                          </div> 
                 <div class="row col-sm-12"> 
                     <div class="col-sm-6"> <label class="labelw">Trans Type </label>
                         <s:textfield  cssClass="form-control"  required="required" placeholder="" id="LfcTransactionType" name="LfcTransactionType" readonly="true"/>
                     </div>
-                </div>
-                    <br>
-                    <div id="senderinfo">
-                        <div class="row col-sm-12">
-                            <div class="col-sm-6"> <h5>Seder Info :</h5></div>
-                            <div class="col-sm-6"></div>
-                            <div class="col-sm-6"></div>
+                </div>--%>
+                <div class="row col-sm-12">
+                    <div class="col-sm-6"> <label class="labelw"> Document Type </label>
+                        <s:textfield cssClass="form-control" required="required" placeholder="" id="LfcDocumentType" name="LfcDocumentType" readonly="true"/>
+                    </div>
+                    <div class="col-sm-6"> <label class="labelw">Transaction Type </label>
+                        <s:textfield cssClass="form-control" required="required" placeholder="" id="LfcTransactionType" name="LfcTransactionType" readonly="true"/>
+                    </div>
+                </div>    
+                <br>
+                <div id="senderinfo">
+                    <div class="row col-sm-12">
+                        <div class="col-sm-6"> <h5>Seder Info :</h5></div>
+                        <div class="col-sm-6"></div>
+                        <div class="col-sm-6"></div>
 
-                        </div>
-                        <br>
-                        <div class="row col-sm-12">
-                            <div class="col-sm-6"> <label class="labelw">  Id </label>
-                                <s:textfield  cssClass="form-control"  required="required" placeholder="" id="LycPOPartnerId" name="LycPOPartnerId" readonly="true"/>
-                            </div>
-                            <div class="col-sm-6"> <label class="labelw"> Name </label>
-                                <s:textfield  cssClass="form-control"  required="required" placeholder="" id="LycPOPartnerName" name="LycPOPartnerName" readonly="true"/>
-                            </div>
-                        </div>
                     </div>
                     <br>
-                    <div id="receiverinfo">
-                        <div class="row col-sm-12">
-                            <div class="col-sm-6"> <h5>Receiver Info:</h5></div>
-                            <div class="col-sm-6"></div>
-                            <div class="col-sm-6"></div>
+                    <div class="row col-sm-12">
+                        <div class="col-sm-6"> <label class="labelw">  Id </label>
+                            <s:textfield  cssClass="form-control"  required="required" placeholder="" id="LycPOPartnerId" name="LycPOPartnerId" readonly="true"/>
                         </div>
-
-                        <br>
-                        <div class="row col-sm-12 clear">
-                            <div class="col-sm-6"> <label class="labelw">  Id </label>
-                                <s:textfield  cssClass="form-control"  required="required" placeholder="" id="LfcPOReceiverId" name="LfcPOReceiverId" readonly="true"/>
-                            </div>
-                            <div class="col-sm-6"> <label class="labelw"> Name </label>
-                                <s:textfield  cssClass="form-control"  required="required" placeholder="" id="LfcPOReceiverName" name="LfcPOReceiverName" readonly="true"/>
-                            </div>
+                        <div class="col-sm-6"> <label class="labelw"> Name </label>
+                            <s:textfield  cssClass="form-control"  required="required" placeholder="" id="LycPOPartnerName" name="LycPOPartnerName" readonly="true"/>
                         </div>
-                    </div> 
-                            
-                            <div class="row col-sm-12 clear">
-                                <br/>
-                        <div class="col-sm-6"> <label class="labelw"> ISA # </label>
-                            <s:textfield  cssClass="form-control"  required="required" placeholder="" id="LfcPOIsa" name="LfcPOIsa" readonly="true"/>
-                        </div>
-                        <div class="col-sm-6"> <label class="labelw"> ISA Date  </label>
-                            <s:textfield  cssClass="form-control"  required="required" placeholder="" id="LfcPOISADate" name="LfcPOISADate" readonly="true"/>
-                        </div>
-                    </div>
-
-                    <div class="row col-sm-12" >
-
-                        <div class="col-sm-6"> <label class="labelw">  ISA TIME  </label>
-                            <s:textfield  cssClass="form-control"  required="required" placeholder="" id="LfcPOIsATime" name="LfcPOIsATime" readonly="true"/>
-                        </div>
-                        <div class="col-sm-6"> <label class="labelw"> STATUS </label>
-                            <s:textfield  cssClass="form-control"  required="required" placeholder="" id="LfcPOStatus" name="LfcPOStatus" readonly="true"/>
-                        </div>
-                    </div>
-                        <div class="row col-sm-12" style="margin-top:10px;">
-                    <div class="col-sm-6"> <label class="labelw"> ACK FileId </label></div>
-                    <div class="col-sm-6"><div id="LfcPOAckFileId"></div>
                     </div>
                 </div>
-                <div class="row col-sm-12" >
+                <br>
+                <div id="receiverinfo">
+                    <div class="row col-sm-12">
+                        <div class="col-sm-6"> <h5>Receiver Info:</h5></div>
+                        <div class="col-sm-6"></div>
+                        <div class="col-sm-6"></div>
+                    </div>
+
+                    <br>
+                    <div class="row col-sm-12 clear">
+                        <div class="col-sm-6"> <label class="labelw">  Id </label>
+                            <s:textfield  cssClass="form-control"  required="required" placeholder="" id="LfcPOReceiverId" name="LfcPOReceiverId" readonly="true"/>
+                        </div>
+                        <div class="col-sm-6"> <label class="labelw"> Name </label>
+                            <s:textfield  cssClass="form-control"  required="required" placeholder="" id="LfcPOReceiverName" name="LfcPOReceiverName" readonly="true"/>
+                        </div>
+                    </div>
+                </div> 
+
+                <div class="row col-sm-12 clear">
+                    <br/>
+                    <div class="col-sm-6"> <label class="labelw"> ISA # </label>
+                        <s:textfield  cssClass="form-control"  required="required" placeholder="" id="LfcPOIsa" name="LfcPOIsa" readonly="true"/>
+                    </div>
+                    <div class="col-sm-6"> <label class="labelw"> GS # </label>
+                        <s:textfield cssClass="form-control" required="required" placeholder="" id="LofcGs" name="LofcGs" readonly="true"/>
+                    </div>
+                    <div class="col-sm-6"> <label class="labelw">  ST # </label>
+                        <s:textfield cssClass="form-control" required="required" placeholder="" id="LfccSt" name="LfccSt" readonly="true"/>
+                    </div>
+                    <div class="col-sm-6"> <label class="labelw"> ISA Date  </label>
+                        <s:textfield  cssClass="form-control"  required="required" placeholder="" id="LfcPOISADate" name="LfcPOISADate" readonly="true"/>
+                    </div>
+                    <div class="col-sm-6"> <label class="labelw">  ISA TIME  </label>
+                        <s:textfield  cssClass="form-control"  required="required" placeholder="" id="LfcPOIsATime" name="LfcPOIsATime" readonly="true"/>
+                    </div>
+                    <div class="col-sm-6"> <label class="labelw"> STATUS </label>
+                        <s:textfield  cssClass="form-control"  required="required" placeholder="" id="LfcPOStatus" name="LfcPOStatus" readonly="true"/>
+                    </div>
+                </div>
+                <div class="row col-sm-12" style="margin-top:10px;">
                     <div class="col-sm-6"> <label class="labelw">  PreTranslation  </label></div>
                     <div class="col-sm-6"><div id="LfcPOPreTransition"></div></div>
                 </div>
                 <div class="row col-sm-12">
                     <div class="col-sm-6"> <label class="labelw"> PostTranslation </label></div>
                     <div class="col-sm-6"><div id="LfcPOPostTransition"></div></div>
+                </div>
+                <div class="row col-sm-12" >
+                    <div class="col-sm-6"> <label class="labelw"> 997 ACKFile </label></div>
+                    <div class="col-sm-6"><div id="LfcPOAckFileId"></div>
+                    </div>
                 </div>
                 <%--  <div class="col-sm-6"> <label class="labelw">997ACKFile </label></div>   --%>                   
 
@@ -484,7 +493,7 @@
         </div>
 
 
-        
+
         <%--  <div id="footer">
            <h2><font color="white">&#169 2013 Miracle Software Systems, Inc. All rights reserved</font></h2>
                   </div>--%>

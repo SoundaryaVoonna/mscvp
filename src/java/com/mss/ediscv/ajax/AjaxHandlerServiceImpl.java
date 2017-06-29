@@ -2098,8 +2098,8 @@ public class AjaxHandlerServiceImpl implements AjaxHandlerService {
             sb.append("<DIRECTION>" + poLifecycleBean.getDirection().toLowerCase() + "</DIRECTION>");
             sb.append("<GS_CONTROL_NUMBER>" + poLifecycleBean.getGsCtrlNum() + "</GS_CONTROL_NUMBER>");
             sb.append("<ST_CONTROL_NUMBER>" + poLifecycleBean.getStCtrlNum() + "</ST_CONTROL_NUMBER>");
-            sb.append("<PRI_KEY_TYPE>" + poLifecycleBean.getPrimary_key_type()+ "</PRI_KEY_TYPE>");
-            sb.append("<PRI_KEY_VAL>" + poLifecycleBean.getPrimary_key_val()+ "</PRI_KEY_VAL>");
+            sb.append("<PRI_KEY_TYPE>" + poLifecycleBean.getPrimary_key_type() + "</PRI_KEY_TYPE>");
+            sb.append("<PRI_KEY_VAL>" + poLifecycleBean.getPrimary_key_val() + "</PRI_KEY_VAL>");
             /*
              * End
              */
@@ -2172,9 +2172,9 @@ public class AjaxHandlerServiceImpl implements AjaxHandlerService {
         if (asnLifecycleBean.getRes().equals("1")) {
             sb.append("<DETAIL><VALID>true</VALID>");
             /*sb.append("<FILEID>" +asnLifecycleBean.getFileId() + "</FILEID>");
-             sb.append("<SENDER_ID>" +asnLifecycleBean.getSenderId() + "</SENDER_ID>");
-             sb.append("<RECEIVER_ID>" +asnLifecycleBean.getRecId() + "</RECEIVER_ID>");
-             sb.append("<TRAN_NUMBER>" +asnLifecycleBean.getTranType() + "</TRAN_NUMBER>");*/
+            sb.append("<SENDER_ID>" +asnLifecycleBean.getSenderId() + "</SENDER_ID>");
+            sb.append("<RECEIVER_ID>" +asnLifecycleBean.getRecId() + "</RECEIVER_ID>");
+            sb.append("<TRAN_NUMBER>" +asnLifecycleBean.getTranType() + "</TRAN_NUMBER>");*/
 
             sb.append("<FILEID>" + asnLifecycleBean.getFileId() + "</FILEID>");
             sb.append("<SENDER_ID>" + asnLifecycleBean.getSenderId() + "</SENDER_ID>");
@@ -2209,8 +2209,8 @@ public class AjaxHandlerServiceImpl implements AjaxHandlerService {
             sb.append("<DIRECTION>" + asnLifecycleBean.getDirection().toLowerCase() + "</DIRECTION>");
             sb.append("<GS_CONTROL_NUMBER>" + asnLifecycleBean.getGsCtrlNum() + "</GS_CONTROL_NUMBER>");
             sb.append("<ST_CONTROL_NUMBER>" + asnLifecycleBean.getStCtrlNum() + "</ST_CONTROL_NUMBER>");
-            sb.append("<PRI_KEY_TYPE>" + asnLifecycleBean.getPrimary_key_type()+ "</PRI_KEY_TYPE>");
-            sb.append("<PRI_KEY_VAL>" + asnLifecycleBean.getPrimary_key_val()+ "</PRI_KEY_VAL>");
+            sb.append("<PRI_KEY_TYPE>" + asnLifecycleBean.getPrimary_key_type() + "</PRI_KEY_TYPE>");
+            sb.append("<PRI_KEY_VAL>" + asnLifecycleBean.getPrimary_key_val() + "</PRI_KEY_VAL>");
             if (asnLifecycleBean.getPreFile() != null) {
                 if (new File(asnLifecycleBean.getPreFile()).exists() && new File(asnLifecycleBean.getPreFile()).isFile()) {
                     sb.append("<PRETRANSFILEPATH>" + asnLifecycleBean.getPreFile() + "</PRETRANSFILEPATH>");
@@ -2279,9 +2279,9 @@ public class AjaxHandlerServiceImpl implements AjaxHandlerService {
         if (invoiceLifecycleBean.getRes().equals("1")) {
             sb.append("<DETAIL><VALID>true</VALID>");
             /*   sb.append("<FILEID>" +invoiceLifecycleBean.getFileId() + "</FILEID>");
-             sb.append("<SENDER_ID>" +invoiceLifecycleBean.getSenderId() + "</SENDER_ID>");
-             sb.append("<RECEIVER_ID>" +invoiceLifecycleBean.getRecId() + "</RECEIVER_ID>");
-             sb.append("<TRAN_NUMBER>" +invoiceLifecycleBean.getTranType() + "</TRAN_NUMBER>");*/
+            sb.append("<SENDER_ID>" +invoiceLifecycleBean.getSenderId() + "</SENDER_ID>");
+            sb.append("<RECEIVER_ID>" +invoiceLifecycleBean.getRecId() + "</RECEIVER_ID>");
+            sb.append("<TRAN_NUMBER>" +invoiceLifecycleBean.getTranType() + "</TRAN_NUMBER>");*/
 
             sb.append("<FILEID>" + invoiceLifecycleBean.getFileId() + "</FILEID>");
             sb.append("<SENDER_ID>" + invoiceLifecycleBean.getSenderId() + "</SENDER_ID>");
@@ -2318,8 +2318,8 @@ public class AjaxHandlerServiceImpl implements AjaxHandlerService {
             sb.append("<TRANS_TYPE>" + invoiceLifecycleBean.getTranType() + "</TRANS_TYPE>");
             sb.append("<GS_CONTROL_NUMBER>" + invoiceLifecycleBean.getGsCtrlNum() + "</GS_CONTROL_NUMBER>");
             sb.append("<ST_CONTROL_NUMBER>" + invoiceLifecycleBean.getStCtrlNum() + "</ST_CONTROL_NUMBER>");
-            sb.append("<PRI_KEY_TYPE>" + invoiceLifecycleBean.getPrimary_key_type()+ "</PRI_KEY_TYPE>");
-            sb.append("<PRI_KEY_VAL>" + invoiceLifecycleBean.getPrimary_key_val()+ "</PRI_KEY_VAL>");
+            sb.append("<PRI_KEY_TYPE>" + invoiceLifecycleBean.getPrimary_key_type() + "</PRI_KEY_TYPE>");
+            sb.append("<PRI_KEY_VAL>" + invoiceLifecycleBean.getPrimary_key_val() + "</PRI_KEY_VAL>");
             if (invoiceLifecycleBean.getPreFile() != null) {
                 if (new File(invoiceLifecycleBean.getPreFile()).exists() && new File(invoiceLifecycleBean.getPreFile()).isFile()) {
                     sb.append("<PRETRANSFILEPATH>" + invoiceLifecycleBean.getPreFile() + "</PRETRANSFILEPATH>");
@@ -2389,9 +2389,9 @@ public class AjaxHandlerServiceImpl implements AjaxHandlerService {
         if (paymentLifecycleBean.getRes().equals("1")) {
             sb.append("<DETAIL><VALID>true</VALID>");
             /* sb.append("<FILEID>" +paymentLifecycleBean.getFileId() + "</FILEID>");
-             sb.append("<SENDER_ID>" +paymentLifecycleBean.getSenderId() + "</SENDER_ID>");
-             sb.append("<RECEIVER_ID>" +paymentLifecycleBean.getRecId() + "</RECEIVER_ID>");
-             sb.append("<TRAN_NUMBER>" +paymentLifecycleBean.getTranType() + "</TRAN_NUMBER>");*/
+            sb.append("<SENDER_ID>" +paymentLifecycleBean.getSenderId() + "</SENDER_ID>");
+            sb.append("<RECEIVER_ID>" +paymentLifecycleBean.getRecId() + "</RECEIVER_ID>");
+            sb.append("<TRAN_NUMBER>" +paymentLifecycleBean.getTranType() + "</TRAN_NUMBER>");*/
 
             sb.append("<FILEID>" + paymentLifecycleBean.getFileId() + "</FILEID>");
             sb.append("<SENDER_ID>" + paymentLifecycleBean.getSenderId() + "</SENDER_ID>");
@@ -2423,8 +2423,8 @@ public class AjaxHandlerServiceImpl implements AjaxHandlerService {
             sb.append("<INV_AMOUNT>" + paymentLifecycleBean.getInvAmt() + "</INV_AMOUNT>");
             sb.append("<GS_CONTROL_NUMBER>" + paymentLifecycleBean.getGsCtrlNum() + "</GS_CONTROL_NUMBER>");
             sb.append("<ST_CONTROL_NUMBER>" + paymentLifecycleBean.getStCtrlNum() + "</ST_CONTROL_NUMBER>");
-            sb.append("<PRI_KEY_TYPE>" + paymentLifecycleBean.getPrimary_key_type()+ "</PRI_KEY_TYPE>");
-            sb.append("<PRI_KEY_VAL>" + paymentLifecycleBean.getPrimary_key_val()+ "</PRI_KEY_VAL>");
+            sb.append("<PRI_KEY_TYPE>" + paymentLifecycleBean.getPrimary_key_type() + "</PRI_KEY_TYPE>");
+            sb.append("<PRI_KEY_VAL>" + paymentLifecycleBean.getPrimary_key_val() + "</PRI_KEY_VAL>");
             if (paymentLifecycleBean.getChequeNum() != null && !"".equals(paymentLifecycleBean.getChequeNum())) {
                 sb.append("<CHEQUE_NUMBER>" + paymentLifecycleBean.getChequeNum() + "</CHEQUE_NUMBER>");
             } else {
@@ -2521,6 +2521,8 @@ public class AjaxHandlerServiceImpl implements AjaxHandlerService {
         if (ltTenderBean.getRes().equals("1")) {
             sb.append("<DETAIL><VALID>true</VALID>");
             sb.append("<FILEID>" + ltTenderBean.getFileId() + "</FILEID>");
+            sb.append("<FILETYPE>" + ltTenderBean.getFileType() + "</FILETYPE>");
+            sb.append("<SHIPMENTID>" + ltTenderBean.getShipmentid() + "</SHIPMENTID>");
             sb.append("<SENDER_ID>" + ltTenderBean.getSenderId() + "</SENDER_ID>");
             sb.append("<RECEIVER_ID>" + ltTenderBean.getRecId() + "</RECEIVER_ID>");
             sb.append("<SENDER_NAME>" + ltTenderBean.getSenName() + "</SENDER_NAME>");
@@ -2533,6 +2535,8 @@ public class AjaxHandlerServiceImpl implements AjaxHandlerService {
             sb.append("<TRANS_TYPE>" + ltTenderBean.getTran_type() + "</TRANS_TYPE>");
             sb.append("<DATETIME>" + ltTenderBean.getDatetime() + "</DATETIME>");
             sb.append("<STATUS>" + ltTenderBean.getStatus() + "</STATUS>");
+            sb.append("<STCTRLNUM>" + ltTenderBean.getStCtrlNum() + "</STCTRLNUM>");
+            sb.append("<GSCTRLNUM>" + ltTenderBean.getGsCtrlNum() + "</GSCTRLNUM>");
             sb.append("<DIRECTION>" + ltTenderBean.getDirection().toLowerCase() + "</DIRECTION>");
             if (ltTenderBean.getPreFile() != null) {
                 if (new File(ltTenderBean.getPreFile()).exists()) {
@@ -2600,6 +2604,8 @@ public class AjaxHandlerServiceImpl implements AjaxHandlerService {
         if (ltResponsesBean.getRes() != null && ltResponsesBean.getRes().equals("1")) {
             sb.append("<DETAIL><VALID>true</VALID>");
             sb.append("<FILEID>" + ltResponsesBean.getFileId() + "</FILEID>");
+            sb.append("<FILETYPE>" + ltResponsesBean.getFileType() + "</FILETYPE>");
+            sb.append("<SHIPMENTID>" + ltResponsesBean.getShipmentid() + "</SHIPMENTID>");
             sb.append("<SENDER_ID>" + ltResponsesBean.getSenderId() + "</SENDER_ID>");
             sb.append("<RECEIVER_ID>" + ltResponsesBean.getRecId() + "</RECEIVER_ID>");
             sb.append("<SENDER_NAME>" + ltResponsesBean.getSenName() + "</SENDER_NAME>");
@@ -2613,6 +2619,8 @@ public class AjaxHandlerServiceImpl implements AjaxHandlerService {
             sb.append("<ISA_TIME>" + ltResponsesBean.getIsaTime() + "</ISA_TIME>");
             sb.append("<TRANS_TYPE>" + ltResponsesBean.getTran_type() + "</TRANS_TYPE>");
             sb.append("<DIRECTION>" + ltResponsesBean.getDirection().toLowerCase() + "</DIRECTION>");
+            sb.append("<STCTRLNUM>" + ltResponsesBean.getStCtrlNum() + "</STCTRLNUM>");
+            sb.append("<GSCTRLNUM>" + ltResponsesBean.getGsCtrlNum() + "</GSCTRLNUM>");
             if (ltResponsesBean.getPreFile() != null) {
                 if (new File(ltResponsesBean.getPreFile()).exists()) {
                     sb.append("<PRETRANSFILEPATH>" + ltResponsesBean.getPreFile() + "</PRETRANSFILEPATH>");
@@ -2664,6 +2672,8 @@ public class AjaxHandlerServiceImpl implements AjaxHandlerService {
         if (ltShipmentsBean.getRes().equals("1")) {
             sb.append("<DETAIL><VALID>true</VALID>");
             sb.append("<FILEID>" + ltShipmentsBean.getFileId() + "</FILEID>");
+            sb.append("<FILETYPE>" + ltShipmentsBean.getFileType() + "</FILETYPE>");
+            sb.append("<SHIPMENTID>" + ltShipmentsBean.getShipmentid() + "</SHIPMENTID>");
             sb.append("<SENDER_ID>" + ltShipmentsBean.getSenderId() + "</SENDER_ID>");
             sb.append("<RECEIVER_ID>" + ltShipmentsBean.getRecId() + "</RECEIVER_ID>");
             sb.append("<SENDER_NAME>" + ltShipmentsBean.getSenName() + "</SENDER_NAME>");
@@ -2677,6 +2687,8 @@ public class AjaxHandlerServiceImpl implements AjaxHandlerService {
             sb.append("<ISA_DATE>" + ltShipmentsBean.getIsaDate() + "</ISA_DATE>");
             sb.append("<ISA_TIME>" + ltShipmentsBean.getIsaTime() + "</ISA_TIME>");
             sb.append("<TRANS_TYPE>" + ltShipmentsBean.getTran_type() + "</TRANS_TYPE>");
+            sb.append("<STCTRLNUM>" + ltShipmentsBean.getStCtrlNum() + "</STCTRLNUM>");
+            sb.append("<GSCTRLNUM>" + ltShipmentsBean.getGsCtrlNum() + "</GSCTRLNUM>");
             if (ltShipmentsBean.getPreFile() != null) {
                 if (new File(ltShipmentsBean.getPreFile()).exists()) {
                     sb.append("<PRETRANSFILEPATH>" + ltShipmentsBean.getPreFile() + "</PRETRANSFILEPATH>");
@@ -2728,6 +2740,8 @@ public class AjaxHandlerServiceImpl implements AjaxHandlerService {
         if (ltInvoicesBean.getRes().equals("1")) {
             sb.append("<DETAIL><VALID>true</VALID>");
             sb.append("<FILEID>" + ltInvoicesBean.getFileId() + "</FILEID>");
+            sb.append("<FILETYPE>" + ltInvoicesBean.getFileType() + "</FILETYPE>");
+            sb.append("<SHIPMENTID>" + ltInvoicesBean.getShipmentid() + "</SHIPMENTID>");
             sb.append("<SENDER_ID>" + ltInvoicesBean.getSenderId() + "</SENDER_ID>");
             sb.append("<RECEIVER_ID>" + ltInvoicesBean.getRecId() + "</RECEIVER_ID>");
             sb.append("<SENDER_NAME>" + ltInvoicesBean.getSenName() + "</SENDER_NAME>");
@@ -2741,6 +2755,8 @@ public class AjaxHandlerServiceImpl implements AjaxHandlerService {
             sb.append("<ISA_DATE>" + ltInvoicesBean.getIsaDate() + "</ISA_DATE>");
             sb.append("<ISA_TIME>" + ltInvoicesBean.getIsaTime() + "</ISA_TIME>");
             sb.append("<TRANS_TYPE>" + ltInvoicesBean.getTran_type() + "</TRANS_TYPE>");
+            sb.append("<STCTRLNUM>" + ltInvoicesBean.getStCtrlNum() + "</STCTRLNUM>");
+            sb.append("<GSCTRLNUM>" + ltInvoicesBean.getGsCtrlNum() + "</GSCTRLNUM>");
             if (ltInvoicesBean.getPreFile() != null) {
                 if (new File(ltInvoicesBean.getPreFile()).exists()) {
                     sb.append("<PRETRANSFILEPATH>" + ltInvoicesBean.getPreFile() + "</PRETRANSFILEPATH>");
@@ -3877,15 +3893,15 @@ public class AjaxHandlerServiceImpl implements AjaxHandlerService {
                     sb.append("<POSTTRANSFILEPATH>No File</POSTTRANSFILEPATH>");
                 }
                 /*   
-                 if(resultSet.getString("ORG_FILEPATH")!=null){ 
-                 if(new File(resultSet.getString("ORG_FILEPATH")).exists()){
-                 sb.append("<ORGFILEPATH>" +resultSet.getString("ORG_FILEPATH") + "</ORGFILEPATH>");
-                 }else{
-                 sb.append("<ORGFILEPATH>No File</ORGFILEPATH>"); 
-                 }
-                 }else{
-                 sb.append("<ORGFILEPATH>No File</ORGFILEPATH>"); 
-                 } 
+                if(resultSet.getString("ORG_FILEPATH")!=null){ 
+                if(new File(resultSet.getString("ORG_FILEPATH")).exists()){
+                sb.append("<ORGFILEPATH>" +resultSet.getString("ORG_FILEPATH") + "</ORGFILEPATH>");
+                }else{
+                sb.append("<ORGFILEPATH>No File</ORGFILEPATH>"); 
+                }
+                }else{
+                sb.append("<ORGFILEPATH>No File</ORGFILEPATH>"); 
+                } 
                  */
                 if (resultSet.getString("ACK_FILE_ID") != null && !"".equals(resultSet.getString("ACK_FILE_ID"))) {
                     if (new File(resultSet.getString("ACK_FILE_ID")).exists() && new File(resultSet.getString("ACK_FILE_ID")).isFile()) {
@@ -3985,7 +4001,7 @@ public class AjaxHandlerServiceImpl implements AjaxHandlerService {
                     + "FILES.ISA_NUMBER as ISA_NUMBER,FILES.ISA_DATE as ISA_DATE,FILES.ISA_TIME as ISA_TIME,"
                     + " FILES.PRE_TRANS_FILEPATH,FILES.POST_TRANS_FILEPATH,FILES.SENDER_ID,FILES.RECEIVER_ID,"
                     + "FILES.ORG_FILEPATH,FILES.ERR_MESSAGE,FILES.STATUS,FILES.ERROR_REPORT_FILEPATH as ERROR_REPORT_FILEPATH,"
-                    + "FILES.ACK_FILE_ID as ACK_FILE_ID,TP1.NAME as SENDER_NAME,TP2.NAME as RECEIVER_NAME "
+                    + "FILES.ACK_FILE_ID as ACK_FILE_ID,TP1.NAME as SENDER_NAME,TP2.NAME as RECEIVER_NAME,FILES.FILE_TYPE as FILE_TYPE "
                     + " FROM TRANSPORT_INVOICE "
                     + "LEFT OUTER JOIN FILES ON (TRANSPORT_INVOICE.FILE_ID =FILES.FILE_ID) "
                     //+ "LEFT OUTER JOIN FILES ON (TRANSPORT_INVOICE.INVOICE_NUMBER = FILES.PRI_KEY_VAL AND TRANSPORT_INVOICE.FILE_ID = FILES.FILE_ID) "
@@ -4008,6 +4024,11 @@ public class AjaxHandlerServiceImpl implements AjaxHandlerService {
                     sb.append("<FILEID>" + resultSet.getString("FILE_ID") + "</FILEID>");
                 } else {
                     sb.append("<FILEID>--</FILEID>");
+                }
+                if (resultSet.getString("FILE_TYPE") != null && !"".equals(resultSet.getString("FILE_TYPE"))) {
+                    sb.append("<FILETYPE>" + resultSet.getString("FILE_TYPE") + "</FILETYPE>");
+                } else {
+                    sb.append("<FILETYPE>--</FILETYPE>");
                 }
                 if (resultSet.getString("INVOICE_NUMBER") != null && !"".equals(resultSet.getString("INVOICE_NUMBER"))) {
                     sb.append("<INVNUMBER>" + resultSet.getString("INVOICE_NUMBER") + "</INVNUMBER>");
@@ -4197,7 +4218,7 @@ public class AjaxHandlerServiceImpl implements AjaxHandlerService {
                     + "ARCHIVE_FILES.ISA_NUMBER as ISA_NUMBER,ARCHIVE_FILES.ISA_DATE as ISA_DATE,ARCHIVE_FILES.ISA_TIME as ISA_TIME,"
                     + " ARCHIVE_FILES.PRE_TRANS_FILEPATH,ARCHIVE_FILES.POST_TRANS_FILEPATH,ARCHIVE_FILES.SENDER_ID,ARCHIVE_FILES.RECEIVER_ID,"
                     + "ARCHIVE_FILES.ORG_FILEPATH,ARCHIVE_FILES.ERR_MESSAGE,ARCHIVE_FILES.STATUS,ARCHIVE_FILES.ERROR_REPORT_FILEPATH as ERROR_REPORT_FILEPATH,"
-                    + "ARCHIVE_FILES.ACK_FILE_ID as ACK_FILE_ID,TP1.NAME as SENDER_NAME,TP2.NAME as RECEIVER_NAME "
+                    + "ARCHIVE_FILES.ACK_FILE_ID as ACK_FILE_ID,TP1.NAME as SENDER_NAME,TP2.NAME as RECEIVER_NAME,ARCHIVE_FILES.FILE_TYPE as FILE_TYPE "
                     + " FROM ARCHIVE_TRANSPORT_SHIPMENT "
                     + "LEFT OUTER JOIN ARCHIVE_FILES ON (ARCHIVE_TRANSPORT_SHIPMENT.FILE_ID =ARCHIVE_FILES.FILE_ID) "
                     // + "LEFT OUTER JOIN ARCHIVE_FILES ON ((ARCHIVE_TRANSPORT_SHIPMENT.SHIPMENT_ID =ARCHIVE_FILES.SEC_KEY_VAL) AND ((ARCHIVE_TRANSPORT_SHIPMENT.BOL_NUMBER =ARCHIVE_FILES.PRI_KEY_VAL) OR (ARCHIVE_TRANSPORT_SHIPMENT.STOP_SEQ_NUM =ARCHIVE_FILES.PRI_KEY_VAL))) "
@@ -4210,7 +4231,7 @@ public class AjaxHandlerServiceImpl implements AjaxHandlerService {
                     + "FILES.ISA_NUMBER as ISA_NUMBER,FILES.ISA_DATE as ISA_DATE,FILES.ISA_TIME as ISA_TIME,"
                     + " FILES.PRE_TRANS_FILEPATH,FILES.POST_TRANS_FILEPATH,FILES.SENDER_ID,FILES.RECEIVER_ID,"
                     + "FILES.ORG_FILEPATH,FILES.ERR_MESSAGE,FILES.STATUS,FILES.ERROR_REPORT_FILEPATH as ERROR_REPORT_FILEPATH,"
-                    + "FILES.ACK_FILE_ID as ACK_FILE_ID,TP1.NAME as SENDER_NAME,TP2.NAME as RECEIVER_NAME "
+                    + "FILES.ACK_FILE_ID as ACK_FILE_ID,TP1.NAME as SENDER_NAME,TP2.NAME as RECEIVER_NAME,FILES.FILE_TYPE as FILE_TYPE "
                     + " FROM TRANSPORT_SHIPMENT "
                     + "LEFT OUTER JOIN FILES ON (TRANSPORT_SHIPMENT.FILE_ID =FILES.FILE_ID) "
                     // + "LEFT OUTER JOIN FILES ON ((TRANSPORT_SHIPMENT.SHIPMENT_ID =FILES.SEC_KEY_VAL) AND ((TRANSPORT_SHIPMENT.BOL_NUMBER =FILES.PRI_KEY_VAL) OR (TRANSPORT_SHIPMENT.STOP_SEQ_NUM =FILES.PRI_KEY_VAL))) "
@@ -4231,6 +4252,11 @@ public class AjaxHandlerServiceImpl implements AjaxHandlerService {
                     sb.append("<FILEID>" + resultSet.getString("FILE_ID") + "</FILEID>");
                 } else {
                     sb.append("<FILEID>--</FILEID>");
+                }
+                if (resultSet.getString("FILE_TYPE") != null && !"".equals(resultSet.getString("FILE_TYPE"))) {
+                    sb.append("<FILETYPE>" + resultSet.getString("FILE_TYPE") + "</FILETYPE>");
+                } else {
+                    sb.append("<FILETYPE>--</FILETYPE>");
                 }
                 if (resultSet.getString("SHIPMENT_ID") != null && !"".equals(resultSet.getString("SHIPMENT_ID"))) {
                     sb.append("<ASNNUMBER>" + resultSet.getString("SHIPMENT_ID") + "</ASNNUMBER>");
@@ -4466,13 +4492,13 @@ public class AjaxHandlerServiceImpl implements AjaxHandlerService {
                             // sb.append("<test userId=\""+empId+"\">" + commonInfo[17] + "</test>");
 
                             /*     String sapDetails = DataSourceDataProvider.getInstance().getSapDetails(commonInfo[0]);
-                             String sapDetailsInfo[] = sapDetails.split("\\|");
-                             sb.append("<SAP_USER>" + sapDetailsInfo[0] + "</SAP_USER>");
-                             sb.append("<IDOC_NUMBER>" + sapDetailsInfo[1] + "</IDOC_NUMBER>");
-                             sb.append("<PO_NUMBER>" + sapDetailsInfo[2] + "</PO_NUMBER>");
-                             sb.append("<PO_DATE>" + sapDetailsInfo[3] + "</PO_DATE>");
-                             sb.append("<IDOC_STATUS_CODE>" + sapDetailsInfo[4] + "</IDOC_STATUS_CODE>");
-                             sb.append("<IDOC_STATUS_DESCRIPTION>" + sapDetailsInfo[5] + "</IDOC_STATUS_DESCRIPTION>");
+                            String sapDetailsInfo[] = sapDetails.split("\\|");
+                            sb.append("<SAP_USER>" + sapDetailsInfo[0] + "</SAP_USER>");
+                            sb.append("<IDOC_NUMBER>" + sapDetailsInfo[1] + "</IDOC_NUMBER>");
+                            sb.append("<PO_NUMBER>" + sapDetailsInfo[2] + "</PO_NUMBER>");
+                            sb.append("<PO_DATE>" + sapDetailsInfo[3] + "</PO_DATE>");
+                            sb.append("<IDOC_STATUS_CODE>" + sapDetailsInfo[4] + "</IDOC_STATUS_CODE>");
+                            sb.append("<IDOC_STATUS_DESCRIPTION>" + sapDetailsInfo[5] + "</IDOC_STATUS_DESCRIPTION>");
                              */
                             //---------- detailInfo[0] End ------------------
                         }
@@ -6112,8 +6138,8 @@ public class AjaxHandlerServiceImpl implements AjaxHandlerService {
         }
 
     }
-    
-    public void doCacheRefresh(){
+
+    public void doCacheRefresh() {
         String response = "";
         String https_url = "http://192.168.1.179:8765/Cache";
         URL url;

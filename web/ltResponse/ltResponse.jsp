@@ -43,10 +43,10 @@
             {
                 $('#hide-menu1').removeClass('show-menu');
             }
-//            $('body,html').click(function(e){
-//                $('#hide-menu1').removeClass('show-menu');
-//               
-//            });
+            //            $('body,html').click(function(e){
+            //                $('#hide-menu1').removeClass('show-menu');
+            //               
+            //            });
 
             $(function() {
                 // $("#example1").DataTable();
@@ -72,9 +72,9 @@
         }
 
         //System.out.println("check-->"+check);
-    %>
-    <body onload="checkCorr();
-            doOnLoad()" class="hold-transition skin-blue sidebar-mini">
+%>
+          <body onload="checkCorr();
+        doOnLoad()" class="hold-transition skin-blue sidebar-mini">
         <div>
             <s:include value="../includes/template/header.jsp"/>
         </div>
@@ -457,11 +457,16 @@
                     </div>
                 </div>
                 <div class="row col-sm-12"> 
-                    <div class="col-sm-6"> <label class="labelw"> DocType </label>
+                    <div class="col-sm-6"> <label class="labelw"> Document Type </label>
                         <s:textfield cssClass="form-control"  required="required" placeholder="" id="resFiletype" name="resFiletype" readonly="true" />
                     </div>
                     <div class="col-sm-6"> <label class="labelw">Transaction Type </label>
                         <s:textfield cssClass="form-control"  required="required" placeholder="" id="resTransactiontype" name="resTransactiontype"  readonly="true"/>
+                    </div>
+                </div> 
+                <div class="row col-sm-12"> 
+                    <div class="col-sm-6"> <label class="labelw"> OrderId </label>
+                        <s:textfield cssClass="form-control"  required="required" placeholder="" id="resReference" name="resReference" readonly="true"/>
                     </div>
                 </div>
 
@@ -506,8 +511,6 @@
                     <div class="col-sm-6"> <label class="labelw"> GS # </label>
                         <s:textfield cssClass="form-control"  required="required" placeholder="" id="resGs" name="resGs" readonly="true"/>
                     </div>
-
-
                 </div>
 
                 <div class="row col-sm-12"  >
@@ -520,9 +523,6 @@
 
                     <div class="col-sm-6"> <label class="labelw">ISA Time </label>
                         <s:textfield cssClass="form-control"  required="required" placeholder="" id="resIsatime" name="resIsatime" readonly="true"/>
-                    </div>
-                    <div class="col-sm-6"> <label class="labelw"> OrderId </label>
-                        <s:textfield cssClass="form-control"  required="required" placeholder="" id="resReference" name="resReference" readonly="true"/>
                     </div>
                     <div class="col-sm-6"> <label class="labelw"> STATUS </label>
                         <s:textfield cssClass="form-control"  required="required" placeholder="" id="resStatus" name="resStatus" readonly="true"/>
@@ -580,12 +580,12 @@
 
 <script type="text/javascript">
 
-//    function getDetails(fileId, refId)
-//    {
-//        //  alert("hiiii");    
-//
-//        getLtResponseDetails(fileId, refId);
-//    }
+    //    function getDetails(fileId, refId)
+    //    {
+    //        //  alert("hiiii");    
+    //
+    //        getLtResponseDetails(fileId, refId);
+    //    }
     function checkCorrelation() {
         var db = document.forms["ltResponseForm"]["database"].value;
         if (db == '') {

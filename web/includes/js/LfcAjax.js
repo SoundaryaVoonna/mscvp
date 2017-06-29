@@ -186,9 +186,6 @@ function getLtlfcPODetails(number, id, type) {
     // req.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
     req.send(null);
 }
-
-
-
 function populateLtLifecycle(responseXML)
 {
     var details = responseXML.getElementsByTagName("DETAILS")[0];
@@ -198,6 +195,11 @@ function populateLtLifecycle(responseXML)
 
         var detail = details.childNodes[0];
         var fileid = detail.getElementsByTagName("FILEID")[0].childNodes[0].nodeValue;
+            var filetype = detail.getElementsByTagName("FILETYPE")[0].childNodes[0].nodeValue;
+        var shipmentid = detail.getElementsByTagName("SHIPMENTID")[0].childNodes[0].nodeValue;
+   
+   var st_ctrl_num = detail.getElementsByTagName("STCTRLNUM")[0].childNodes[0].nodeValue;
+        var gs_ctrl_num = detail.getElementsByTagName("GSCTRLNUM")[0].childNodes[0].nodeValue;
         //  var docType = detail.getElementsByTagName("FILETYPE")[0].childNodes[0].nodeValue; 
         var PRE_TRANS_FILEPATH = detail.getElementsByTagName("PRETRANSFILEPATH")[0].childNodes[0].nodeValue;
 
@@ -301,13 +303,15 @@ function populateLtLifecycle(responseXML)
 
 
         document.getElementById('LfcInstanceId').value = fileid;
-        if (PO_NUMBER != "NO") {
-            document.getElementById('LfcPONum').value = PO_NUMBER;
-        }
-        else
-        {
-            document.getElementById('LfcPONum').value = "--";
-        }
+//        if (PO_NUMBER != "NO") {
+//            document.getElementById('LfcPONum').value = PO_NUMBER;
+//        }
+//        else
+//        {
+//            document.getElementById('LfcPONum').value = "--";
+//        }
+        document.getElementById('LfcShipment').value = shipmentid;
+		document.getElementById('LfcDocumentType').value = filetype;
 //        if(PO_DATE != "NO"){
 //            document.getElementById('LfcPODates').value=PO_DATE;
 //        }
@@ -356,6 +360,18 @@ function populateLtLifecycle(responseXML)
         }
         else {
             document.getElementById('LfcPOISADate').value = "--";
+        }
+            if (st_ctrl_num != null) {
+            document.getElementById('LfccSt').value = st_ctrl_num;
+        }
+        else {
+            document.getElementById('LfccSt').value = "--";
+        }
+            if (gs_ctrl_num != null) {
+            document.getElementById('LofcGs').value = gs_ctrl_num;
+        }
+        else {
+            document.getElementById('LofcGs').value = "--";
         }
         if (ISA_TIME != 0) {
             document.getElementById('LfcPOIsATime').value = ISA_TIME;

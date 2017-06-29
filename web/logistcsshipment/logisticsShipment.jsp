@@ -528,28 +528,28 @@
                         <s:textfield cssClass="form-control"  required="required" placeholder="" id="LSAsnnumber" name="LSAsnnumber" readonly="true" />
                     </div>
                 </div>
+                     <div class="row col-sm-12">
+                          <div class="col-sm-6"> <label class="labelw"> Document Type </label>
+                        <s:textfield cssClass="form-control"  required="required" placeholder="" id="LSDocType" name="LSDocType" readonly="true" />
+                    </div>
+                       <div class="col-sm-6"> <label class="labelw"> Transaction Type </label>
+                        <s:textfield cssClass="form-control"  required="required" placeholder="" id="LSTransactionType" name="LSTransactionType" readonly="true"/>
+                    </div>
+                     </div>
                 <div class="row col-sm-12"> 
                     <div class="col-sm-6"> <label class="labelw"> PO # </label>
                         <s:textfield cssClass="form-control"  required="required" placeholder="" id="LSPo" name="LSPo" readonly="true" />
                     </div>
-                    <div class="col-sm-6"> <label class="labelw">Item Qty</label>
+                  
+                </div>
+<%--                <div class="row col-sm-12">
+                      <div class="col-sm-6"> <label class="labelw">Item Qty</label>
                         <s:textfield cssClass="form-control"  required="required" placeholder="" id="LSItemqty" name="LSItemqty" readonly="true"/>
                     </div>
-                </div>
-                <div class="row col-sm-12">
                     <div class="col-sm-6"> <label class="labelw"> Shipment Volume </label>
                         <s:textfield cssClass="form-control"  required="required" placeholder="" id="LSAsnvolume" name="LSAsnvolume" readonly="true" />
                     </div>
-                    <div class="col-sm-6"> <label class="labelw">ISA Number</label>
-                        <s:textfield cssClass="form-control"  required="required" placeholder="" id="LSIsANumber" name="LSIsANumber" readonly="true"/>
-                    </div>
-                    <div class="col-sm-6"> <label class="labelw">ISA Date</label>
-                        <s:textfield cssClass="form-control"  required="required" placeholder="" id="LSIsADate" name="LSIsADate" readonly="true"/>
-                    </div>
-                    <div class="col-sm-6"> <label class="labelw">ISA Time</label>
-                        <s:textfield cssClass="form-control"  required="required" placeholder="" id="LSIsATime" name="LSIsATime" readonly="true"/>
-                    </div>
-                </div>
+                </div>--%>
                 <br>
                 <div id="senderinfo">
                     <div class="row col-sm-12">
@@ -587,17 +587,21 @@
                     </div>
                 </div>
                 <div class="row col-sm-12 clear">
-
-                    <div class="col-sm-6"> <label class="labelw"> GS </label>
+                        <div class="col-sm-6"> <label class="labelw">ISA #</label>
+                        <s:textfield cssClass="form-control"  required="required" placeholder="" id="LSIsANumber" name="LSIsANumber" readonly="true"/>
+                    </div>
+                    <div class="col-sm-6"> <label class="labelw"> GS # </label>
                         <s:textfield cssClass="form-control"  required="required" placeholder="" id="LSGs" name="LSGs" readonly="true"/>
                     </div>
 
-                    <div class="col-sm-6"> <label class="labelw">  ST </label>
+                    <div class="col-sm-6"> <label class="labelw">  ST # </label>
                         <s:textfield cssClass="form-control"  required="required" placeholder="" id="LSSt" name="LSSt" readonly="true"/>
                     </div>
-
-                    <div class="col-sm-6"> <label class="labelw"> Transaction # </label>
-                        <s:textfield cssClass="form-control"  required="required" placeholder="" id="LSTransactionType" name="LSTransactionType" readonly="true"/>
+                    <div class="col-sm-6"> <label class="labelw">ISA Date</label>
+                        <s:textfield cssClass="form-control"  required="required" placeholder="" id="LSIsADate" name="LSIsADate" readonly="true"/>
+                    </div>
+                    <div class="col-sm-6"> <label class="labelw">ISA Time</label>
+                        <s:textfield cssClass="form-control"  required="required" placeholder="" id="LSIsATime" name="LSIsATime" readonly="true"/>
                     </div>
 
                     <div class="col-sm-6"> <label class="labelw"> STATUS </label>
@@ -618,7 +622,7 @@
                     <div class="col-sm-6">  <div id="LSOrgFilePath"></div></div>
                 </div>--%>
                 <div class="row col-sm-12" >
-                    <div class="col-sm-6"> <label class="labelw"> 997 ACK File </label></div>
+                    <div class="col-sm-6"> <label class="labelw"> 997 AckFile </label></div>
                     <div class="col-sm-6">   <div id="LSAckFileid"></div></div>
                 </div>
 

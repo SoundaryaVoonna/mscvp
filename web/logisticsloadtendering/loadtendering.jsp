@@ -66,8 +66,8 @@
 
         //System.out.println("check-->"+check);
     %>
-    <body onload="doOnLoad();
-            check();" class="hold-transition skin-blue sidebar-mini">
+          <body onload="doOnLoad();
+              check();" class="hold-transition skin-blue sidebar-mini">
         <script type="text/javascript" src='<s:url value="/includes/js/wz_tooltip.js"/>'></script>
         <div>
             <s:include value="../includes/template/header.jsp"/>
@@ -114,7 +114,7 @@
                                     <div class="form-group">
                                         <div class="row">
                                             <div class="col-sm-12">
-                                                    <div class="row">
+                                                <div class="row">
                                                     <div class="col-sm-3"><label>Database&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;</label>
                                                         <s:radio cssClass="myRadio" id="database" name="database" value="%{database}" list="#@java.util.LinkedHashMap@{'MSCVP':'LIVE','ARCHIVE':'ARCHIVE'}"/>
                                                     </div>
@@ -125,14 +125,14 @@
                                                     </div>
 
                                                     <script type="text/javascript">
-        function Date1()
-        {
-            var date = document.logisticsForm.reportrange.value;
-            var arr = date.split("-");
-            var x = arr[1].trim();
-            document.getElementById("docdatepickerfrom").value = arr[0];
-            document.getElementById("docdatepicker").value = x;
-        }
+                                                        function Date1()
+                                                        {
+                                                            var date = document.logisticsForm.reportrange.value;
+                                                            var arr = date.split("-");
+                                                            var x = arr[1].trim();
+                                                            document.getElementById("docdatepickerfrom").value = arr[0];
+                                                            document.getElementById("docdatepicker").value = x;
+                                                        }
                                                     </script>
 
                                                     <div  class="col-sm-3">
@@ -309,15 +309,15 @@
                                                                     <th >Direction</th>
 
                                                                     <th >Status</th>
-                                                                        <%-- <th >ACK_STATUS</th>  --%>
+                                                                    <%-- <th >ACK_STATUS</th>  --%>
                                                                     <th >Reprocess</th>
-                                                                        <%--<%
-                                                                            // out.println(session.getAttribute(AppConstants.SES_ROLE_ID));
+                                                                    <%--<%
+                                                                        // out.println(session.getAttribute(AppConstants.SES_ROLE_ID));
 
                                                                             if (session.getAttribute(AppConstants.SES_ROLE_ID).equals("100") || session.getAttribute(AppConstants.SES_ROLE_ID).equals("104")) {
                                                                         %> --%>
                                                                     <th>#</th>
-                                                                       <%-- <%}%> --%>
+                                                                    <%-- <%}%> --%>
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
@@ -528,14 +528,6 @@
                         <s:textfield cssClass="form-control"  required="required" placeholder="" id="shipment" name="shipment" readonly="true"/>
                     </div>
                 </div>
-                <div class="row col-sm-12"> 
-                    <div class="col-sm-6"> <label class="labelw"> Total Weight </label>
-                        <s:textfield cssClass="form-control"  required="required" placeholder="" id="totWeight" name="totWeight" readonly="true"/>
-                    </div>
-                    <div class="col-sm-6"> <label class="labelw"> Volume </label>
-                        <s:textfield cssClass="form-control"  required="required" placeholder="" id="Volume" name="Volume" readonly="true"/>
-                    </div>
-                </div>
                 <div class="row col-sm-12">
                     <div class="col-sm-6"> <label class="labelw"> Document Type </label>
                         <s:textfield cssClass="form-control"  required="required" placeholder="" id="documenttype" name="documenttype" readonly="true"/>
@@ -544,11 +536,20 @@
                         <s:textfield cssClass="form-control"  required="required" placeholder="" id="transactiontype" name="transactiontype" readonly="true"/>
                     </div>
                 </div>
-                <div class="row col-sm-12">
+                <div class="row col-sm-12"> 
+                    <div class="col-sm-6"> <label class="labelw"> Total Weight </label>
+                        <s:textfield cssClass="form-control"  required="required" placeholder="" id="totWeight" name="totWeight" readonly="true"/>
+                    </div>
                     <div class="col-sm-6"> <label class="labelw"> Pieces </label>
                         <s:textfield cssClass="form-control"  required="required" placeholder="" id="pieces" name="pieces" readonly="true"/>
                     </div>
                 </div>
+                <%--                <div class="row col-sm-12">
+                                 
+                   <div class="col-sm-6"> <label class="labelw"> Volume </label>
+                                        <s:textfield cssClass="form-control"  required="required" placeholder="" id="Volume" name="Volume" readonly="true"/>
+                                    </div>
+                                </div>--%>
                 <br>
                 <div id="senderinfo">
                     <div class="row col-sm-12">
@@ -619,7 +620,7 @@
                     <div class="col-sm-6">   <div id="posttranslation"></div></div>
                 </div>
                 <div class="row col-sm-12">
-                    <div class="col-sm-6"> <label class="labelw"> Ack FileId </label></div>
+                    <div class="col-sm-6"> <label class="labelw">997 AckFile</label></div>
                     <div class="col-sm-6">    <div id="ackfileid"></div></div>
                 </div>
                 <div class="row col-sm-12" id="errorDiv" style="display: none">
@@ -659,11 +660,11 @@
     <script type="text/javascript">
 
         function checkCorrelation() {
-             var db = document.forms["logisticsForm"]["database"].value;
-                                if (db == '') {
-                                    alert("Please select Database!!!");
-                                    return false;
-                                }
+            var db = document.forms["logisticsForm"]["database"].value;
+            if (db == '') {
+                alert("Please select Database!!!");
+                return false;
+            }
             var corrattr = document.getElementById('corrattribute').value;
             var corrval = document.getElementById('corrvalue').value;
 
@@ -704,7 +705,7 @@
         function resetvalues()
         {
             $('#hide-menu1').removeClass('show-menu');
-           // $('.myRadio').attr('checked', false);
+            // $('.myRadio').attr('checked', false);
             document.getElementById('docdatepickerfrom').value = "";
             document.getElementById('docdatepicker').value = "";
             document.getElementById('docSenderId').value = "";

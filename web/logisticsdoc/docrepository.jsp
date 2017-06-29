@@ -633,7 +633,7 @@
                         </div>
                     </div>
                     <div class="row col-sm-12" >
-                        <div class="col-sm-6"> <label class="labelw"> 997 ACK File </label></div>
+                        <div class="col-sm-6"> <label class="labelw"> 997 AckFile </label></div>
                         <div class="col-sm-6"> <div id="LogDocAckFileId"></div>
 
                         </div>

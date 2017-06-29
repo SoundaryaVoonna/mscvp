@@ -465,9 +465,15 @@
                             <s:textfield cssClass="form-control"  required="required" placeholder="" id="InvPo" name="InvPo" readonly="true"/>
                         </div>
                     </div> <div class="row col-sm-12">
-                        <div class="col-sm-6"> <label class="labelw">Transaction Type </label>
-                            <s:textfield cssClass="form-control"  required="required" placeholder="" id="InvTransactiontype" name="InvTransactiontype"  readonly="true"/>
+                        <div class="col-sm-6"> <label class="labelw">Document Type</label>
+                            <s:textfield cssClass="form-control"  required="required" placeholder="" id="InvDocpe" name="InvDocpe"  readonly="true"/>
                         </div>
+                        <div class="col-sm-6"> <label class="labelw">Transaction Type</label>
+                            <s:textfield cssClass="form-control"  required="required" placeholder="" id="InvTransactiontype" name="InvTransactiontype" readonly="true"/>
+                        </div>                     
+
+                    </div>
+                        <div class="row col-sm-12">
                         <div class="col-sm-6"> <label class="labelw">Invoice # </label>
                             <s:textfield cssClass="form-control"  required="required" placeholder="" id="InvNum" name="InvNum" readonly="true"/>
                         </div>
@@ -530,11 +536,11 @@
                         <div class="col-sm-6"> <label class="labelw">  ST #   </label>
                             <s:textfield cssClass="form-control"  required="required" placeholder="" id="InvSt" name="InvSt" readonly="true"/>
                         </div>
-                        <div class="col-sm-6"> <label class="labelw">ISA date  </label>
+                        <div class="col-sm-6"> <label class="labelw">ISA DATE  </label>
                             <s:textfield cssClass="form-control"  required="required" placeholder="" id="InvIsadate" name="InvIsadate" readonly="true"/>
                         </div>
 
-                        <div class="col-sm-6"> <label class="labelw">ISA Time </label>
+                        <div class="col-sm-6"> <label class="labelw">ISA TIME </label>
                             <s:textfield cssClass="form-control"  required="required" placeholder="" id="InvIsatime" name="InvIsatime" readonly="true"/>
                         </div>
                         <div class="col-sm-6"> <label class="labelw"> STATUS </label>
@@ -581,9 +587,6 @@
                 </div> 
             </div>
         </div>
-
-
-
     </div> 
 
 </div>

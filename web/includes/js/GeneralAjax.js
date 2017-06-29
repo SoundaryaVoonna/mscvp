@@ -2051,7 +2051,7 @@ function populateLoadTenderingDetails(responseXML)
         //        {
         //            document.getElementById('co').value="--";
         //        }
-        document.getElementById('Volume').value = totVolume;
+        //document.getElementById('Volume').value = totVolume;
         document.getElementById('totWeight').value = totWeight;
         document.getElementById('pieces').value = totpieces;
         document.getElementById('documenttype').value = docType;
@@ -2297,6 +2297,7 @@ function populateLogisticsInvDetails(responseXML)
         var ST_CONTROL_NUMBER = detail.getElementsByTagName("ST_CONTROL_NUMBER")[0].childNodes[0].nodeValue;
         var GS_CONTROL_NUMBER = detail.getElementsByTagName("GS_CONTROL_NUMBER")[0].childNodes[0].nodeValue;
         var ERROR_REPORT_FILEPATH = detail.getElementsByTagName("ERROR_REPORT_FILEPATH")[0].childNodes[0].nodeValue;
+        var FILETYPE = detail.getElementsByTagName("FILETYPE")[0].childNodes[0].nodeValue;
 
         // alert(deilvaryName+" "+poValue+ " "+ routings+ " "+invoice+" "+itemQty);
 
@@ -2306,6 +2307,7 @@ function populateLogisticsInvDetails(responseXML)
         document.getElementById('InvNum').value = invNum;
         document.getElementById('InvItemQty').value = itemQty;
         document.getElementById('InvAmt').value = invAmt;
+        document.getElementById('InvDocpe').value = FILETYPE;
         /* if (ORGFILEPATH == "No File") {
          document.getElementById('InvORGFILEPATH').innerHTML = "--";
          } else {
@@ -2440,13 +2442,14 @@ function populateLogisticsShipmentDetails(responseXML)
         var ST_CONTROL_NUMBER = detail.getElementsByTagName("ST_CONTROL_NUMBER")[0].childNodes[0].nodeValue;
         var GS_CONTROL_NUMBER = detail.getElementsByTagName("GS_CONTROL_NUMBER")[0].childNodes[0].nodeValue;
         var ERROR_REPORT_FILEPATH = detail.getElementsByTagName("ERROR_REPORT_FILEPATH")[0].childNodes[0].nodeValue;
+        var FILETYPE = detail.getElementsByTagName("FILETYPE")[0].childNodes[0].nodeValue;
 
         // alert(deilvaryName+" "+poValue+ " "+ routings+ " "+invoice+" "+itemQty);
         document.getElementById('LSInstanceId').value = fileID;
         document.getElementById('LSAsnnumber').value = asnNum;
         document.getElementById('LSPo').value = poNum;
-        document.getElementById('LSItemqty').value = itemQty;
-        document.getElementById('LSAsnvolume').value = asnVolume;
+        //document.getElementById('LSItemqty').value = itemQty;
+        //document.getElementById('LSAsnvolume').value = asnVolume;
         document.getElementById('LSIsANumber').value = isaNum;
         document.getElementById('LSIsADate').value = isaDate;
         document.getElementById('LSIsATime').value = isaTime;
@@ -2456,7 +2459,8 @@ function populateLogisticsShipmentDetails(responseXML)
         document.getElementById('LSReceiverName').value = RECEIVER_NAME;
         document.getElementById('LSGs').value = GS_CONTROL_NUMBER;
         document.getElementById('LSSt').value = ST_CONTROL_NUMBER;
-
+        document.getElementById('LSDocType').value = FILETYPE;
+        
         document.getElementById('LSTransactionType').value = TRANSACTION_TYPE;
 
         if (STATUS.toUpperCase() == "ERROR") {

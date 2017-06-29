@@ -40,6 +40,8 @@ public class LtInvoicesBean {
     private String poNumber;
     private String res;
     private String errorMessage;
+    private String gsCtrlNum;
+    private String stCtrlNum;
 
     public LtInvoicesBean() {
         System.out.println("I am inside LtInvoicesBean default constructor...");
@@ -259,6 +261,22 @@ public class LtInvoicesBean {
 
     public void setErrorMessage(String errorMessage) {
         this.errorMessage = errorMessage;
+    }
+
+    public String getGsCtrlNum() {
+        return gsCtrlNum;
+    }
+
+    public void setGsCtrlNum(String gsCtrlNum) {
+        this.gsCtrlNum = gsCtrlNum;
+    }
+
+    public String getStCtrlNum() {
+        return stCtrlNum;
+    }
+
+    public void setStCtrlNum(String stCtrlNum) {
+        this.stCtrlNum = stCtrlNum;
     }
     /**
      * @return the fileId

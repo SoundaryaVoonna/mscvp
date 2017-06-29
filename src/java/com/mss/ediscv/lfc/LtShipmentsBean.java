@@ -40,6 +40,8 @@ public class LtShipmentsBean {
     private String ackFile;
     private String poNumber;
     private String errorMessage;
+    private String gsCtrlNum;
+    private String stCtrlNum;
 
     public LtShipmentsBean() {
         System.out.println("I am inside LtShipmentsBean default constructor...");
@@ -260,6 +262,23 @@ public class LtShipmentsBean {
     public void setErrorMessage(String errorMessage) {
         this.errorMessage = errorMessage;
     }
+
+    public String getGsCtrlNum() {
+        return gsCtrlNum;
+    }
+
+    public void setGsCtrlNum(String gsCtrlNum) {
+        this.gsCtrlNum = gsCtrlNum;
+    }
+
+    public String getStCtrlNum() {
+        return stCtrlNum;
+    }
+
+    public void setStCtrlNum(String stCtrlNum) {
+        this.stCtrlNum = stCtrlNum;
+    }
+    
     /**
      * @return the fileId
      */
