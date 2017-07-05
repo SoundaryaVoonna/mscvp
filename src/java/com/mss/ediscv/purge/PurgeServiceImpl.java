@@ -333,7 +333,7 @@ public class PurgeServiceImpl implements PurgeService {
                 updateArchHistQuery = "insert into ARCHIVE_HISTORY(TRANSACTION_TYPE, DAYS_COUNT, USER, COMMENTS, DATE, FLAG) values ('" + transType + "','" + dayCount + "','" + user + "','" + comments + "','" + dateTime + "','" + flag + "')";
 
                 statement.addBatch(insertArchFilesQuery);
-                statement.addBatch(deleteFilesQuery);
+                //statement.addBatch(deleteFilesQuery);
                 statement.addBatch(updateArchHistQuery);
 
                 updateArchHistQueryFlag = true;
@@ -364,7 +364,7 @@ public class PurgeServiceImpl implements PurgeService {
 
                 System.out.println("insertArchTransQuery -->" + insertArchTransQuery);
                 statement.addBatch(insertArchTransQuery);
-                statement.addBatch(deleteArchTransQuery);
+                //statement.addBatch(deleteArchTransQuery);
 
             } else if (flowName.equalsIgnoreCase("Logistics")) {
                 System.out.println("inside logistics archiveReocords");
