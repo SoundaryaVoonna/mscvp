@@ -1392,6 +1392,18 @@ public class AjaxHandlerServiceImpl implements AjaxHandlerService {
                             if (res.equals("Success")) {
                                 String result = DataSourceDataProvider.getInstance().UpdateReProcessStatus("RESUBMITTED", fileId, poNum, "M");
                                 resultString = resultString + "PO : " + poNum + " was resubmission successfully." + "\n";
+
+                                try {
+                                    String https_url = "http://192.168.1.179:8765/RetailResubmit";
+                                    URL url = new URL(https_url);
+                                    HttpURLConnection con = (HttpURLConnection) url.openConnection();
+                                    con.setDoOutput(true);
+                                    con.connect();
+                                    String response = con.getResponseMessage();
+                                    System.out.println("Manufacturing auto SI update response : " + response);
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
                             } else {
                                 resultString = resultString + "PO : " + poNum + " = " + "Source file not found!" + "\n";
                             }
@@ -1975,6 +1987,18 @@ public class AjaxHandlerServiceImpl implements AjaxHandlerService {
                             if (res.equals("Success")) {
                                 String result = DataSourceDataProvider.getInstance().UpdateReProcessStatus("RESUBMITTED", fileId, shipmentId, "L");
                                 resultString = resultString + "ShipmentId : " + shipmentId + " was resubmission successfully." + "\n";
+
+                                String https_url = "http://192.168.1.179:8765/LogisticResubmit";
+                                try {
+                                    URL url = new URL(https_url);
+                                    HttpURLConnection con = (HttpURLConnection) url.openConnection();
+                                    con.setDoOutput(true);
+                                    con.connect();
+                                    String response = con.getResponseMessage();
+                                    System.out.println("Logistics auto SI update response : " + response);
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
                             } else {
                                 resultString = resultString + "ShipmentId : " + shipmentId + " = " + "Source file not found!" + "\n";
                             }
