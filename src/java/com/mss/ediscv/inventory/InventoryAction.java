@@ -106,7 +106,7 @@ public class InventoryAction extends ActionSupport implements ServletRequestAwar
     /*
      * getShipmentSearchQuery method will get the search query for grid.
      */
-    public String getShipmentSearchQuery() throws Exception {
+    public String getInventorySearchQuery() throws Exception {
         resultType = LOGIN;
         if (httpServletRequest.getSession(false).getAttribute(AppConstants.SES_USER_NAME) != null) {
             try {

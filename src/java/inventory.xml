@@ -1,11 +1,25 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
+<?xml version="1.0" encoding="UTF-8" ?>
 
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
 
-<root>
-    
-</root>
+<struts>
+    <package name="inventory" namespace="/inventory" extends="default">
+        <default-interceptor-ref name="crudStack"/>
+       
+        <action name="inventoryAction" class="com.mss.ediscv.inventory.InventoryAction" method="prepare">
+            <result>/inventory/Inventory.jsp</result>Inventory.jsp
+            <result name="error" type="redirect" >../exception/exception.action</result> 
+            <result type="redirect" name="login">../general/login.action</result> 
+        </action>
+        
+        <action name="inventorySearch" class="com.mss.ediscv.inventory.InventoryAction" method="getInventorySearchQuery">
+            <result>/inventory/Inventory.jsp</result>
+            <result name="error" type="redirect" >../exception/exception.action</result> 
+            <result type="redirect" name="login">../general/login.action</result>       
+        </action>
+        
+    </package>
+</struts>
+

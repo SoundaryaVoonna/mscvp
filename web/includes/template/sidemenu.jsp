@@ -231,6 +231,7 @@
                                 <li id="payments"><a href="<s:url action="../payment/paymentAction"/>"><i class="fa fa-circle-o"></i>Payments</a></li>
                             </ul>
                         </li>
+                        <li id="inventory"><a href="<s:url action="../inventory/inventoryAction.action"/>"><i class="fa fa-circle-o"></i> Inventory</a></li>
                         <li id="reports">
                             <a href="#"><i class="fa fa-circle-o"></i> Reports <i class="fa fa-angle-left pull-right"></i></a>
                             <ul class="treeview-menu">

@@ -1,7 +1,7 @@
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <!DOCTYPE html>
 <%@page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
-<%@page import="com.mss.ediscv.shipment.ShipmentBean"%>
+<%@page import="com.mss.ediscv.inventory.InventoryBean"%>
 <%@ taglib uri="/WEB-INF/tlds/dbgrid.tld" prefix="grd"%>
 <%@ page import="com.freeware.gridtag.*"%>
 <%@ page import="java.sql.Connection" %>
@@ -83,7 +83,7 @@
                         <div id="text">
                             <div style="alignment-adjust:central;" >
                                 <% String contextPath = request.getContextPath(); %>
-                                <s:form action="../shipment/shipmentSearch.action" method="post" name="shipmentForm" id="shipmentForm" theme="simple">
+                                <s:form action="../inventory/inventoryAction.action" method="post" name="inventoryForm" id="inventoryForm" theme="simple">
                                     <s:hidden id="datepickerfrom" name="datepickerfrom" />
                                     <s:hidden id="datepicker" name="datepicker"/>
                                     <div class="form-group">
@@ -100,7 +100,7 @@
                                                     </div>
                                                     <script type="text/javascript">
                                                         function Date1() {
-                                                            var date = document.shipmentForm.reportrange.value;
+                                                            var date = document.inventoryForm.reportrange.value;
                                                             var arr = date.split("-");
                                                             var x = arr[1].trim();
                                                             document.getElementById("datepickerfrom").value = arr[0];
@@ -109,7 +109,7 @@
                                                     </script>
                                                     <div  class="col-sm-3">
                                                         <label>Document Type</label> 
-                                                        <s:select headerKey="-1" cssClass="form-control" headerValue="Select Type" list="{'856'}" name="docType" id="docType" value="%{docType}"  tabindex="2"/>
+                                                        <s:select headerKey="-1" cssClass="form-control" headerValue="Select Type" list="{'846'}" name="docType" id="docType" value="%{docType}"  tabindex="2"/>
                                                     </div>
                                                     <div  class="col-sm-3">
                                                         <label>Sender Id</label>  
@@ -164,8 +164,8 @@
                                                         count++;
                                                         if (count == 1)
                                                             document.getElementById("corr").style.display = "block";
-                                                        //   else if(count==2)
-                                                        //   document.getElementById("corr1").style.display = "block";
+                                                          else if(count==2)
+                                                           document.getElementById("corr1").style.display = "block";
                                                         else
                                                             alert('Limit exceeded.... cannot add more fields !!');
                                                     })
@@ -179,6 +179,18 @@
                                                         <div class="col-sm-3">
                                                             <label for="corrvalue1">Value</label>
                                                             <s:textfield cssClass="form-control" name="corrvalue1" id="corrvalue1" value="%{corrvalue1}"  tabindex="13"/>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                        <div id="corr1" style="display: none">
+                                                    <br>   <div class="row">
+                                                        <div class="col-sm-3">
+                                                            <label for="corrattribute2">Correlation</label>
+                                                            <s:select headerKey="-1" headerValue="Select Attribute" cssClass="form-control" list="correlationList" name="corrattribute2" id="corrattribute2" value="%{corrattribute2}"  tabindex="12"/>
+                                                        </div>
+                                                        <div class="col-sm-3">
+                                                            <label for="corrvalue2">Value</label>
+                                                            <s:textfield cssClass="form-control" name="corrvalue2" id="corrvalue2" value="%{corrvalue2}"  tabindex="13"/>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -217,7 +229,7 @@
                                                             <%
                                                                 java.util.List list = (java.util.List) session.getAttribute(AppConstants.SES_SHIPMENT_LIST);
                                                                 if (list.size() != 0) {
-                                                                    ShipmentBean shipmentBean;
+                                                                    InventoryBean inventoryBean;
                                                             %>
                                                             <input type="hidden" name="sec_shipment_list" id="sec_shipment_list" value="<%=list.size()%>"/> 
                                                             <thead><tr>
@@ -231,7 +243,7 @@
                                                             </thead>
                                                             <%
                                                                 for (int i = 0; i < list.size(); i++) {
-                                                                    shipmentBean = (ShipmentBean) list.get(i);
+                                                                    inventoryBean = (InventoryBean) list.get(i);
                                                                     if (i % 2 == 0) {
                                                                         cssValue = "whiteStripe";
                                                                     } else {
@@ -241,9 +253,9 @@
                                                             <tr>
                                                                 <td>
                                                                     <%
-                                                                        if (shipmentBean.getDate_time_rec().toString().substring(0, shipmentBean.getDate_time_rec().toString().lastIndexOf(":")) != null
-                                                                                && !"".equals(shipmentBean.getDate_time_rec().toString().substring(0, shipmentBean.getDate_time_rec().toString().lastIndexOf(":")))) {
-                                                                            out.println(shipmentBean.getDate_time_rec().toString().substring(0, shipmentBean.getDate_time_rec().toString().lastIndexOf(":")));
+                                                                        if (inventoryBean.getDate_time_rec().toString().substring(0, inventoryBean.getDate_time_rec().toString().lastIndexOf(":")) != null
+                                                                                && !"".equals(inventoryBean.getDate_time_rec().toString().substring(0, inventoryBean.getDate_time_rec().toString().lastIndexOf(":")))) {
+                                                                            out.println(inventoryBean.getDate_time_rec().toString().substring(0, inventoryBean.getDate_time_rec().toString().lastIndexOf(":")));
                                                                         } else {
                                                                             out.println("-");
                                                                         }
@@ -251,29 +263,29 @@
                                                                 </td>
                                                                 <td>
                                                                     <%
-                                                                        if (shipmentBean.getFile_id() != null && !"".equals(shipmentBean.getFile_id())) {
-                                                                            out.println(shipmentBean.getFile_id());
+                                                                        if (inventoryBean.getFile_id() != null && !"".equals(inventoryBean.getFile_id())) {
+                                                                            out.println(inventoryBean.getFile_id());
                                                                         } else {
                                                                             out.println("-");
                                                                         }
                                                                     %>
-                                                                    <input type="hidden" name="Instance<%=i%>" id="Instance<%=i%>" value="<%=shipmentBean.getFile_id()%>"/> 
+                                                                    <input type="hidden" name="Instance<%=i%>" id="Instance<%=i%>" value="<%=inventoryBean.getFile_id()%>"/> 
                                                                 </td>
-                                                                <td>  <a href="javascript:getDetails('<%=shipmentBean.getAsnNo()%>','<%=shipmentBean.getPoNo()%>','<%=shipmentBean.getFile_id()%>');">
+                                                                <td>  <a href="javascript:getDetails('<%=inventoryBean.getAsnNo()%>','<%=inventoryBean.getPoNo()%>','<%=inventoryBean.getFile_id()%>');">
                                                                         <%
-                                                                            if (shipmentBean.getAsnNo() != null && !"".equals(shipmentBean.getAsnNo())) {
-                                                                                out.println(shipmentBean.getAsnNo());
+                                                                            if (inventoryBean.getAsnNo() != null && !"".equals(inventoryBean.getAsnNo())) {
+                                                                                out.println(inventoryBean.getAsnNo());
                                                                             } else {
                                                                                 out.println("-");
                                                                             }
                                                                         %>
-                                                                        <input type="hidden" name="text<%=i%>" id="text<%=i%>" value="<%=shipmentBean.getAsnNo()%>"/> 
+                                                                        <input type="hidden" name="text<%=i%>" id="text<%=i%>" value="<%=inventoryBean.getAsnNo()%>"/> 
                                                                     </a>
                                                                 </td>
                                                                 <td>
                                                                     <%
-                                                                        if (shipmentBean.getPname() != null && !"".equals(shipmentBean.getPname())) {
-                                                                            out.println(shipmentBean.getPname());
+                                                                        if (inventoryBean.getPname() != null && !"".equals(inventoryBean.getPname())) {
+                                                                            out.println(inventoryBean.getPname());
                                                                         } else {
                                                                             out.println("-");
                                                                         }
@@ -281,8 +293,8 @@
                                                                 </td>
                                                                 <td>
                                                                     <%
-                                                                        if (shipmentBean.getDirection() != null && !"".equals(shipmentBean.getDirection())) {
-                                                                            out.println(shipmentBean.getDirection().toUpperCase());
+                                                                        if (inventoryBean.getDirection() != null && !"".equals(inventoryBean.getDirection())) {
+                                                                            out.println(inventoryBean.getDirection().toUpperCase());
                                                                         } else {
                                                                             out.println("-");
                                                                         }
@@ -290,23 +302,23 @@
                                                                 </td>
                                                                 <td>
                                                                     <%
-                                                                        if (shipmentBean.getStatus().equalsIgnoreCase("ERROR")) {
-                                                                            out.println("<font color='red'>" + shipmentBean.getStatus().toUpperCase() + "</font>");
-                                                                        } else if (shipmentBean.getStatus().equalsIgnoreCase("SUCCESS")) {
-                                                                            out.println("<font color='green'>" + shipmentBean.getStatus().toUpperCase() + "</font>");
+                                                                        if (inventoryBean.getStatus().equalsIgnoreCase("ERROR")) {
+                                                                            out.println("<font color='red'>" + inventoryBean.getStatus().toUpperCase() + "</font>");
+                                                                        } else if (inventoryBean.getStatus().equalsIgnoreCase("SUCCESS")) {
+                                                                            out.println("<font color='green'>" + inventoryBean.getStatus().toUpperCase() + "</font>");
                                                                         } else {
-                                                                            out.println("<font color='orange'>" + shipmentBean.getStatus().toUpperCase() + "</font>");
+                                                                            out.println("<font color='orange'>" + inventoryBean.getStatus().toUpperCase() + "</font>");
                                                                         }
                                                                     %>
                                                                 </td>
                                                                 <td>
                                                                     <%
-                                                                        if (shipmentBean.getAckStatus().equalsIgnoreCase("REJECTED")) {
-                                                                            out.println("<font color='red'>" + shipmentBean.getAckStatus().toUpperCase() + "</font>");
-                                                                        } else if (shipmentBean.getAckStatus().equalsIgnoreCase("ACCEPTED")) {
-                                                                            out.println("<font color='green'>" + shipmentBean.getAckStatus().toUpperCase() + "</font>");
+                                                                        if (inventoryBean.getAckStatus().equalsIgnoreCase("REJECTED")) {
+                                                                            out.println("<font color='red'>" + inventoryBean.getAckStatus().toUpperCase() + "</font>");
+                                                                        } else if (inventoryBean.getAckStatus().equalsIgnoreCase("ACCEPTED")) {
+                                                                            out.println("<font color='green'>" + inventoryBean.getAckStatus().toUpperCase() + "</font>");
                                                                         } else {
-                                                                            out.println("<font color='orange'>" + shipmentBean.getAckStatus().toUpperCase() + "</font>");
+                                                                            out.println("<font color='orange'>" + inventoryBean.getAckStatus().toUpperCase() + "</font>");
                                                                         }
                                                                     %>
                                                                 </td>
@@ -491,12 +503,12 @@
                     }
 
                     function getDetails(val, ponum, fileid) {
-                        var db = document.forms["shipmentForm"]["database"].value;
+                        var db = document.forms["inventoryForm"]["database"].value;
                         getAsnDetails(val, ponum, fileid, db);
                     }
 
                     function checkCorrelation() {
-                        var db = document.forms["shipmentForm"]["database"].value;
+                        var db = document.forms["inventoryForm"]["database"].value;
                         if (db == '') {
                             alert("Please select Database!!!");
                             return false;
@@ -505,6 +517,8 @@
                         var corrval = document.getElementById('corrvalue').value;
                         var corrattr1 = document.getElementById('corrattribute1').value;
                         var corrval1 = document.getElementById('corrvalue1').value;
+                        var corrattr2 = document.getElementById('corrattribute2').value;
+                        var corrval2 = document.getElementById('corrvalue2').value;
                         if ((corrattr != "-1") && (corrval == "")) {
                             alert("Please enter Correlation Value !!");
                             return false;
@@ -518,6 +532,14 @@
                             return false;
                         }
                         if ((corrattr1 == "-1") && (corrval1 != "")) {
+                            alert("Please select Correlation !!");
+                            return false;
+                        }
+                        if ((corrattr2 != "-1") && (corrval2 == "")) {
+                            alert("Please enter Correlation Value !!");
+                            return false;
+                        }
+                        if ((corrattr2 == "-1") && (corrval2 != "")) {
                             alert("Please select Correlation !!");
                             return false;
                         }
@@ -543,16 +565,15 @@
                         document.getElementById('corrvalue').value = "";
                         document.getElementById('corrattribute1').value = "-1";
                         document.getElementById('corrvalue1').value = "";
-                        //document.getElementById('corrattribute2').value="-1";
-                        //document.getElementById('corrvalue2').value="";
+                        document.getElementById('corrattribute2').value="-1";
+                        document.getElementById('corrvalue2').value="";
                         $('#gridDiv').hide();
                     }
 
                     function doOnLoad() {
-                        $("#shipments").addClass("active");
-                        $("#supplychain").addClass("active");
+                        $("#inventory").addClass("active");
                         $("#manufacturing").addClass("active");
-                        $("#shipments i").addClass("text-red");
+                        $("#inventory i").addClass("text-red");
                         document.getElementById('loadingAcoountSearch').style.display = "none";
                     }
 
