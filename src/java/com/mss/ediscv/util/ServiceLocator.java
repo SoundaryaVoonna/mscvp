@@ -22,6 +22,8 @@ import com.mss.ediscv.editracking.TrackInOutService;
 import com.mss.ediscv.editracking.TrackInOutServiceImpl;
 import com.mss.ediscv.griddownload.GridDownloadService;
 import com.mss.ediscv.griddownload.GridDownloadServiceImpl;
+import com.mss.ediscv.inventory.InventoryService;
+import com.mss.ediscv.inventory.InventoryServiceImpl;
 import com.mss.ediscv.issues.IssuesService;
 import com.mss.ediscv.issues.IssuesServiceImpl;
 import com.mss.ediscv.lfc.LifecycleService;
@@ -66,7 +68,9 @@ import com.mss.ediscv.utilities.CertMonitorServiceImpl;
  */
 public class ServiceLocator {
 
-    /** Creates a new instance of ServiceLocator */
+    /**
+     * Creates a new instance of ServiceLocator
+     */
     private ServiceLocator() {
     }
 
@@ -217,8 +221,14 @@ public class ServiceLocator {
         LogisticTrackInOutService logistictrackInOutService = new LogisticTrackInOutServiceImpl();
         return logistictrackInOutService;
     }
-     public static CertMonitorService getCertMonitorService() throws ServiceLocatorException {
-        CertMonitorService  certMonitorService  = new CertMonitorServiceImpl();
+
+    public static CertMonitorService getCertMonitorService() throws ServiceLocatorException {
+        CertMonitorService certMonitorService = new CertMonitorServiceImpl();
         return certMonitorService;
+    }
+
+    public static InventoryService getInventoryService() throws ServiceLocatorException {
+        InventoryService inventoryService = new InventoryServiceImpl();
+        return inventoryService;
     }
 }
