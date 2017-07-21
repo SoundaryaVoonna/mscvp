@@ -62,4 +62,5 @@
      <include file="logisticReport.xml"/>
        <include file="utilities.xml"/>
        <include file="json.xml"/>
+       <include file="inventory.xml"/>
 </struts>
