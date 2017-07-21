@@ -17,8 +17,8 @@ import org.apache.log4j.Logger;
  */
 public class InventoryAction extends ActionSupport implements ServletRequestAware {
 
-    private String datepicker;
-    private String datepickerfrom;
+    private String docdatepicker;
+    private String docdatepickerfrom;
     private String senderId;
     private String senderName;
     private String buId;
@@ -148,32 +148,20 @@ public class InventoryAction extends ActionSupport implements ServletRequestAwar
         this.reportrange = reportrange;
     }
 
-    /**
-     * @return the datepicker
-     */
-    public String getDatepicker() {
-        return datepicker;
+    public String getDocdatepicker() {
+        return docdatepicker;
     }
 
-    /**
-     * @param datepicker the datepicker to set
-     */
-    public void setDatepicker(String datepicker) {
-        this.datepicker = datepicker;
+    public void setDocdatepicker(String docdatepicker) {
+        this.docdatepicker = docdatepicker;
     }
 
-    /**
-     * @return the datepickerfrom
-     */
-    public String getDatepickerfrom() {
-        return datepickerfrom;
+    public String getDocdatepickerfrom() {
+        return docdatepickerfrom;
     }
 
-    /**
-     * @param datepickerfrom the datepickerfrom to set
-     */
-    public void setDatepickerfrom(String datepickerfrom) {
-        this.datepickerfrom = datepickerfrom;
+    public void setDocdatepickerfrom(String docdatepickerfrom) {
+        this.docdatepickerfrom = docdatepickerfrom;
     }
 
     /**

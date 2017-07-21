@@ -953,7 +953,10 @@ public class AjaxHandlerServiceImpl implements AjaxHandlerService {
                     sb.append("<PRI_KEY_TYPE> Invoice </PRI_KEY_TYPE>");
                 } else if (resultSet.getString("PRI_KEY_TYPE") != null && resultSet.getString("PRI_KEY_TYPE").equalsIgnoreCase("PAYMENT")) {
                     sb.append("<PRI_KEY_TYPE> Cheque </PRI_KEY_TYPE>");
-                } else {
+                } 
+                else if (resultSet.getString("PRI_KEY_TYPE") != null && resultSet.getString("PRI_KEY_TYPE").equalsIgnoreCase("Inventory")) {
+                    sb.append("<PRI_KEY_TYPE> Inventory </PRI_KEY_TYPE>");
+                }else {
                     sb.append("<PRI_KEY_TYPE>--</PRI_KEY_TYPE>");
                 }
                 if (resultSet.getString("PRI_KEY_VAL") != null && !"".equals(resultSet.getString("PRI_KEY_VAL"))) {

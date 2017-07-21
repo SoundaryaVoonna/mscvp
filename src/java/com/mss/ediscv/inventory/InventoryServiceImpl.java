@@ -44,8 +44,8 @@ public class InventoryServiceImpl implements InventoryService {
     //@Override
     public ArrayList<InventoryBean> buildInventorySearchQuery(InventoryAction inventoryAction) throws ServiceLocatorException {
         StringBuffer inventorySearchQuery = new StringBuffer();
-        String datepickerTo = inventoryAction.getDatepicker();
-        String datePickerFrom = inventoryAction.getDatepickerfrom();
+        String datepickerTo = inventoryAction.getDocdatepicker();
+        String datePickerFrom = inventoryAction.getDocdatepickerfrom();
         String senderId = "";
         if (inventoryAction.getSenderId() != null && !inventoryAction.getSenderId().equals("-1")) {
             senderId = inventoryAction.getSenderId();
@@ -76,7 +76,7 @@ public class InventoryServiceImpl implements InventoryService {
         if (inventoryAction.getDocType() != null && !inventoryAction.getDocType().equals("-1")) {
             doctype = inventoryAction.getDocType();
         }
-        inventorySearchQuery.append("select DISTINCT(INVENTORY.FILE_ID) as FILE_ID,INVENTORY.ID,FILES.ISA_NUMBER,FILES.GS_CONTROL_NUMBER,FILES.SENDER_ID,FILES.RECEIVER_ID,INVENTORY.REFERENCE_NUMBER,INVENTORY.REPORTING_DATE,"
+        inventorySearchQuery.append("select DISTINCT(FILES.FILE_ID) as FILE_ID,INVENTORY.ID,FILES.ISA_NUMBER,FILES.GS_CONTROL_NUMBER,FILES.SENDER_ID,FILES.RECEIVER_ID,INVENTORY.REFERENCE_NUMBER,INVENTORY.REPORTING_DATE,"
                 + "FILES.DIRECTION,FILES.STATUS,INVENTORY.VENDOR_NAME,INVENTORY.VENDOR_LOCATION,TP1.NAME as SENDER_NAME,TP2.NAME as RECEIVER_NAME from INVENTORY JOIN "
                 + "FILES ON (FILES.FILE_ID=INVENTORY.FILE_ID) LEFT OUTER JOIN TP  TP1 ON (TP1.ID=FILES.SENDER_ID) "
                 + "LEFT OUTER JOIN TP  TP2 ON (TP2.ID=FILES.RECEIVER_ID) where 1=1 ");
@@ -268,8 +268,8 @@ public class InventoryServiceImpl implements InventoryService {
 
         public ArrayList<InventoryBean> buildInventorySearchQueryArchive(InventoryAction inventoryAction) throws ServiceLocatorException {
         StringBuffer inventorySearchQuery = new StringBuffer();
-        String datepickerTo = inventoryAction.getDatepicker();
-        String datePickerFrom = inventoryAction.getDatepickerfrom();
+        String datepickerTo = inventoryAction.getDocdatepicker();
+        String datePickerFrom = inventoryAction.getDocdatepickerfrom();
         String senderId = "";
         if (inventoryAction.getSenderId() != null && !inventoryAction.getSenderId().equals("-1")) {
             senderId = inventoryAction.getSenderId();
