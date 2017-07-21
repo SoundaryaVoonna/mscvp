@@ -98,4 +98,5 @@ public interface AjaxHandlerService {
     public String updateCodeList(String listName, String jsonData, String userName, int items) throws ServiceLocatorException;
 
     public String deleteCodeList(String jsonData) throws ServiceLocatorException;
+    public String getInventoryDetails(String fileId,int id,String database) throws ServiceLocatorException;
 }

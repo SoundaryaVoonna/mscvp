@@ -9,7 +9,7 @@
         <default-interceptor-ref name="crudStack"/>
        
         <action name="inventoryAction" class="com.mss.ediscv.inventory.InventoryAction" method="prepare">
-            <result>/inventory/Inventory.jsp</result>Inventory.jsp
+            <result>/inventory/Inventory.jsp</result>
             <result name="error" type="redirect" >../exception/exception.action</result> 
             <result type="redirect" name="login">../general/login.action</result> 
         </action>
@@ -22,4 +22,3 @@
         
     </package>
 </struts>
-

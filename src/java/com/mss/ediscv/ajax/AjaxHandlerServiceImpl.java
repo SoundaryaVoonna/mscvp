@@ -6180,6 +6180,208 @@ public class AjaxHandlerServiceImpl implements AjaxHandlerService {
         }
         //return response;
     }
+    
+    public String getInventoryDetails(String instanceid,int id, String database) throws ServiceLocatorException {
+        boolean isGetting = false;
+        Connection connection = null;
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+        StringBuffer sb = new StringBuffer();
+        if ("ARCHIVE".equals(database)) {
+            queryString = "select ARCHIVE_FILES.STATUS,ARCHIVE_FILES.DIRECTION as DIRECTION,ARCHIVE_FILES.FILE_ID,ARCHIVE_FILES.FILE_TYPE,ARCHIVE_FILES.SENDER_ID,ARCHIVE_FILES.RECEIVER_ID,"
+                    + "ARCHIVE_FILES.PRE_TRANS_FILEPATH,ARCHIVE_FILES.POST_TRANS_FILEPATH,ARCHIVE_FILES.SEC_KEY_VAL as SEC_KEY_VAL,ARCHIVE_FILES.PRI_KEY_TYPE as PRI_KEY_TYPE,"
+                    + "ARCHIVE_FILES.PRI_KEY_VAL as PRI_KEY_VAL,ARCHIVE_FILES.ORG_FILEPATH as ORG_FILEPATH,ARCHIVE_FILES.ISA_NUMBER as ISA_NUMBER,ARCHIVE_FILES.ISA_DATE as ISA_DATE,"
+                    + "ARCHIVE_FILES.ISA_TIME as ISA_TIME,ARCHIVE_FILES.TRANSACTION_TYPE as TRANSACTION_TYPE,ARCHIVE_FILES.GS_CONTROL_NUMBER as GS_CONTROL_NUMBER,"
+                    + "ARCHIVE_FILES.ST_CONTROL_NUMBER as ST_CONTROL_NUMBER,TP1.NAME as SENDER_NAME,TP2.NAME as RECEIVER_NAME,ARCHIVE_FILES.ERR_MESSAGE,"
+                    + "ARCHIVE_FILES.ACK_FILE_ID as ACK_FILE_ID, ARCHIVE_FILES.ERROR_REPORT_FILEPATH as ERROR_REPORT_FILEPATH from ARCHIVE_FILES "
+                    + "LEFT OUTER JOIN TP TP1 ON (TP1.ID = ARCHIVE_FILES.SENDER_ID) "
+                    + "LEFT OUTER JOIN TP TP2 ON (TP2.ID = ARCHIVE_FILES.RECEIVER_ID) "
+                    + "where FLOWFLAG like 'M' AND ARCHIVE_FILES.FILE_ID LIKE '%" + instanceid + "%' AND ARCHIVE_FILES.ID =" + id;
+        } else {
+            queryString = "select DISTINCT(INVENTORY.FILE_ID) as FILE_ID,INVENTORY.ID,FILES.ISA_NUMBER,FILES.GS_CONTROL_NUMBER,FILES.SENDER_ID,FILES.RECEIVER_ID,INVENTORY.REFERENCE_NUMBER,INVENTORY.REPORTING_DATE,"
+                + "FILES.DIRECTION,FILES.STATUS,INVENTORY.VENDOR_NAME,INVENTORY.VENDOR_LOCATION,INVENTORY.ITEMS_COUNT,TP1.NAME as SENDER_NAME,FILES.ISA_DATE as ISA_DATE,FILES.ISA_TIME as ISA_TIME,"
+                + "FILES.TRANSACTION_TYPE as TRANSACTION_TYPE,FILES.FILE_TYPE,FILES.PRI_KEY_VAL,FILES.PRI_KEY_TYPE as PRI_KEY_TYPE,"
+                + "FILES.PRE_TRANS_FILEPATH,FILES.POST_TRANS_FILEPATH,FILES.ACK_FILE_ID as ACK_FILE_ID,FILES.ORG_FILEPATH as ORG_FILEPATH,TP2.NAME as RECEIVER_NAME,FILES.ST_CONTROL_NUMBER as ST_CONTROL_NUMBER,FILES.ERR_MESSAGE from INVENTORY JOIN "
+                + "FILES ON (FILES.FILE_ID=INVENTORY.FILE_ID) LEFT OUTER JOIN TP  TP1 ON (TP1.ID=FILES.SENDER_ID) "
+                + "LEFT OUTER JOIN TP  TP2 ON (TP2.ID=FILES.RECEIVER_ID) "
+               + "where FLOWFLAG like 'M' AND INVENTORY.FILE_ID LIKE '%" + instanceid + "%' AND INVENTORY.ID =" + id;
+        }
+        System.out.println("invetory query---"+queryString);
+        try {
+            connection = ConnectionProvider.getInstance().getConnection();
+            statement = connection.prepareStatement(queryString);
+            resultSet = statement.executeQuery();
+            sb.append("<xml version=\"1.0\">");
+            sb.append("<DETAILS>");
+            while (resultSet.next()) {
+                sb.append("<DETAIL><VALID>true</VALID>");
+                if (resultSet.getString("FILE_ID") != null && !"".equals(resultSet.getString("FILE_ID"))) {
+                    sb.append("<FILEID>" + resultSet.getString("FILE_ID") + "</FILEID>");
+                } else {
+                    sb.append("<FILEID>--</FILEID>");
+                }
+                if (resultSet.getString("FILE_TYPE") != null && !"".equals(resultSet.getString("FILE_TYPE"))) {
+                    sb.append("<FILETYPE>" + resultSet.getString("FILE_TYPE") + "</FILETYPE>");
+                } else {
+                    sb.append("<FILETYPE>--</FILETYPE>");
+                }
+                if (resultSet.getString("SENDER_ID") != null && !"".equals(resultSet.getString("SENDER_ID"))) {
+                    sb.append("<SENDERID>" + resultSet.getString("SENDER_ID") + "</SENDERID>");
+                } else {
+                    sb.append("<SENDERID>--</SENDERID>");
+                }
+                if (resultSet.getString("RECEIVER_ID") != null && !"".equals(resultSet.getString("RECEIVER_ID"))) {
+                    sb.append("<RECEIVERID>" + resultSet.getString("RECEIVER_ID") + "</RECEIVERID>");
+                } else {
+                    sb.append("<RECEIVERID>--</RECEIVERID>");
+                }
+                if (resultSet.getString("SENDER_NAME") == null) {
+                    sb.append("<SENDER_NAME>--</SENDER_NAME>");
+                } else {
+                    sb.append("<SENDER_NAME>" + resultSet.getString("SENDER_NAME") + "</SENDER_NAME>");
+                }
+                if (resultSet.getString("RECEIVER_NAME") == null) {
+                    sb.append("<RECEIVER_NAME>--</RECEIVER_NAME>");
+                } else {
+                    sb.append("<RECEIVER_NAME>" + resultSet.getString("RECEIVER_NAME") + "</RECEIVER_NAME>");
+                }
+                //DIRECTION
+                if (resultSet.getString("DIRECTION") != null && !"".equals(resultSet.getString("DIRECTION"))) {
+                    sb.append("<DIRECTION>" + resultSet.getString("DIRECTION").toLowerCase() + "</DIRECTION>");
+                } else {
+                    sb.append("<DIRECTION>--</DIRECTION>");
+                }
+                if (resultSet.getString("ISA_NUMBER") != null && !"".equals(resultSet.getString("ISA_NUMBER"))) {
+                    sb.append("<ISA_NUMBER>" + resultSet.getString("ISA_NUMBER") + "</ISA_NUMBER>");
+                } else {
+                    sb.append("<ISA_NUMBER>--</ISA_NUMBER>");
+                }
+                if (resultSet.getString("ISA_DATE") != null && !"".equals(resultSet.getString("ISA_DATE"))) {
+                    sb.append("<ISA_DATE>" + resultSet.getString("ISA_DATE") + "</ISA_DATE>");
+                } else {
+                    sb.append("<ISA_DATE>--</ISA_DATE>");
+                }
+                if (resultSet.getString("ISA_TIME") != null && !"".equals(resultSet.getString("ISA_TIME"))) {
+                    sb.append("<ISA_TIME>" + resultSet.getString("ISA_TIME") + "</ISA_TIME>");
+                } else {
+                    sb.append("<ISA_TIME>--</ISA_TIME>");
+                }
+                if (resultSet.getString("GS_CONTROL_NUMBER") != null && !"".equalsIgnoreCase(resultSet.getString("GS_CONTROL_NUMBER"))) {
+                    sb.append("<GS_CONTROL_NUMBER>" + resultSet.getString("GS_CONTROL_NUMBER") + "</GS_CONTROL_NUMBER>");
+                } else {
+                    sb.append("<GS_CONTROL_NUMBER>--</GS_CONTROL_NUMBER>");
+                }
+                if (resultSet.getString("ST_CONTROL_NUMBER") != null && !"".equals(resultSet.getString("ST_CONTROL_NUMBER"))) {
+                    sb.append("<ST_CONTROL_NUMBER>" + resultSet.getString("ST_CONTROL_NUMBER") + "</ST_CONTROL_NUMBER>");
+                } else {
+                    sb.append("<ST_CONTROL_NUMBER>--</ST_CONTROL_NUMBER>");
+                }
+                if (resultSet.getString("TRANSACTION_TYPE") != null && !"".equals(resultSet.getString("TRANSACTION_TYPE"))) {
+                    sb.append("<TRANSACTION_TYPE>" + resultSet.getString("TRANSACTION_TYPE") + "</TRANSACTION_TYPE>");
+                } else {
+                    sb.append("<TRANSACTION_TYPE>--</TRANSACTION_TYPE>");
+                }
+                if (resultSet.getString("STATUS") != null && !"".equals(resultSet.getString("STATUS"))) {
+                    sb.append("<STATUS>" + resultSet.getString("STATUS") + "</STATUS>");
+                } else {
+                    sb.append("<STATUS>--</STATUS>");
+                }
+                if (resultSet.getString("ITEMS_COUNT") != null && !"".equals(resultSet.getString("ITEMS_COUNT"))) {
+                    sb.append("<ITEMS_COUNT>" + resultSet.getString("ITEMS_COUNT") + "</ITEMS_COUNT>");
+                } else {
+                    sb.append("<ITEMS_COUNT>--</ITEMS_COUNT>");
+                }
+       
+                if (resultSet.getString("PRI_KEY_TYPE") != null && resultSet.getString("PRI_KEY_TYPE").equalsIgnoreCase("Inventory")) {
+                    sb.append("<PRI_KEY_TYPE>Inventory</PRI_KEY_TYPE>");
+                }else {
+                    sb.append("<PRI_KEY_TYPE>--</PRI_KEY_TYPE>");
+                } 
+                if (resultSet.getString("PRI_KEY_VAL") != null && !"".equals(resultSet.getString("PRI_KEY_VAL"))) {
+                    sb.append("<PRI_KEY_VAL>" + resultSet.getString("PRI_KEY_VAL") + "</PRI_KEY_VAL>");
+                } else {
+                    sb.append("<PRI_KEY_VAL>--</PRI_KEY_VAL>");
+                }
+                if (resultSet.getString("PRE_TRANS_FILEPATH") != null) {
+                    if (new File(resultSet.getString("PRE_TRANS_FILEPATH")).exists() && new File(resultSet.getString("PRE_TRANS_FILEPATH")).isFile()) {
+                        sb.append("<PRETRANSFILEPATH>" + resultSet.getString("PRE_TRANS_FILEPATH") + "</PRETRANSFILEPATH>");
+                    } else {
+                        sb.append("<PRETRANSFILEPATH>No File</PRETRANSFILEPATH>");
+                    }
+                } else {
+                    sb.append("<PRETRANSFILEPATH>No File</PRETRANSFILEPATH>");
+                }
+
+                if (resultSet.getString("POST_TRANS_FILEPATH") != null) {
+                    if (new File(resultSet.getString("POST_TRANS_FILEPATH")).exists() && new File(resultSet.getString("POST_TRANS_FILEPATH")).isFile()) {
+                        sb.append("<POSTTRANSFILEPATH>" + resultSet.getString("POST_TRANS_FILEPATH") + "</POSTTRANSFILEPATH>");
+                    } else {
+                        sb.append("<POSTTRANSFILEPATH>No File</POSTTRANSFILEPATH>");
+                    }
+                } else {
+                    sb.append("<POSTTRANSFILEPATH>No File</POSTTRANSFILEPATH>");
+                }
+                if (resultSet.getString("ORG_FILEPATH") != null) {
+                    if (new File(resultSet.getString("ORG_FILEPATH")).exists() && new File(resultSet.getString("ORG_FILEPATH")).isFile()) {
+                        sb.append("<ORG_FILEPATH>" + resultSet.getString("ORG_FILEPATH") + "</ORG_FILEPATH>");
+                    } else {
+                        sb.append("<ORG_FILEPATH>No File</ORG_FILEPATH>");
+                    }
+                } else {
+                    sb.append("<ORG_FILEPATH>No File</ORG_FILEPATH>");
+                }
+                if (resultSet.getString("ACK_FILE_ID") != null) {
+                    if (new File(resultSet.getString("ACK_FILE_ID")).exists() && new File(resultSet.getString("ACK_FILE_ID")).isFile()) {
+                        sb.append("<ACKFILEID>" + resultSet.getString("ACK_FILE_ID") + "</ACKFILEID>");
+                    } else {
+                        sb.append("<ACKFILEID>No File</ACKFILEID>");
+                    }
+                } else {
+                    sb.append("<ACKFILEID>No File</ACKFILEID>");
+                }
+                if (resultSet.getString("ERR_MESSAGE") != null && !"".equals(resultSet.getString("ERR_MESSAGE"))) {
+                    sb.append("<ERR_MESSAGE>" + resultSet.getString("ERR_MESSAGE") + "</ERR_MESSAGE>");
+                } else {
+                    sb.append("<ERR_MESSAGE>NO MSG</ERR_MESSAGE>");
+                }
+           
+        
+                sb.append("</DETAIL>");
+                isGetting = true;
+            }
+            if (!isGetting) {
+                isGetting = false;
+                sb.append("<DETAIL><VALID>false</VALID></DETAIL>");
+            }
+
+            sb.append("</DETAILS>");
+            sb.append("</xml>");
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } catch (ServiceLocatorException sle) {
+            sle.printStackTrace();
+        } finally {
+            try {
+
+                if (resultSet != null) {
+                    resultSet.close();
+                    resultSet = null;
+                }
+                if (statement != null) {
+                    statement.close();
+                    statement = null;
+                }
+                if (connection != null) {
+                    connection.close();
+                    connection = null;
+                }
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+        System.out.println("doc deatails-------" + sb.toString());
+        return sb.toString();
+    }
 
     /**
      *

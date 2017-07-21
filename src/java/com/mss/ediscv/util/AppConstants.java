@@ -78,6 +78,7 @@ public class AppConstants {
     public static final String LFC_SES_LTTENDER_LIST = "LfcList";
     public static final String CERTMONITOR_LIST = "certmonitorList";
     public static final String CODE_LIST = "codeList";
+    public static final String SES_INVENTORY_LIST = "inventoryList";
 
     public static final String PURGEHISTORY_LIST = "purgeHistorylist";
     public static final String ARCHIVEHISTORY_LIST = "archiveHistorylist";

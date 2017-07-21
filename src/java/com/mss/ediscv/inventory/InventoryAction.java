@@ -64,25 +64,25 @@ public class InventoryAction extends ActionSupport implements ServletRequestAwar
                 httpSession.removeAttribute(AppConstants.SES_INV_LIST);
                 httpSession.removeAttribute(AppConstants.SES_PO_LIST);
                 if (getSubmitFrm() != null && (!getSubmitFrm().equals("frmDBGrid"))) {
-                    if (httpSession.getAttribute(AppConstants.SES_SHIPMENT_LIST) != null) {
-                        httpSession.removeAttribute(AppConstants.SES_SHIPMENT_LIST);
+                    if (httpSession.getAttribute(AppConstants.SES_INVENTORY_LIST) != null) {
+                        httpSession.removeAttribute(AppConstants.SES_INVENTORY_LIST);
                     }
-                } else if (getSubmitFrm() == null && httpSession.getAttribute(AppConstants.SES_SHIPMENT_LIST) != null) {
-                    httpSession.removeAttribute(AppConstants.SES_SHIPMENT_LIST);
+                } else if (getSubmitFrm() == null && httpSession.getAttribute(AppConstants.SES_INVENTORY_LIST) != null) {
+                    httpSession.removeAttribute(AppConstants.SES_INVENTORY_LIST);
                 }
-                List corrList;
-                List docList;
+               // List corrList;
+                //List docList;
                 List senderList;
                 List receiverList;
                 List senderNameList;
                 List receiverNameList;
-                corrList = DataSourceDataProvider.getInstance().getCorrelationNames(2, 1);
+               // corrList = DataSourceDataProvider.getInstance().getCorrelationNames(2, 1);
                 //docList = DataSourceDataProvider.getInstance().getDocumentTypeList();
                 senderList = DataSourceDataProvider.getInstance().getSenderIdlist("M");
                 receiverList = DataSourceDataProvider.getInstance().getReciverIdlist("M");
                 senderNameList = DataSourceDataProvider.getInstance().getSenderNamelist("M");
                 receiverNameList = DataSourceDataProvider.getInstance().getReciverNamelist("M");
-                setCorrelationList(corrList);
+               // setCorrelationList(corrList);
                 //setDocTypeList(docList);
                 setSenderIdList(senderList);
                 setReceiverIdList(receiverList);
@@ -122,7 +122,7 @@ public class InventoryAction extends ActionSupport implements ServletRequestAwar
                     inventoryList = ServiceLocator.getInventoryService().buildInventorySearchQuery(this);
                 }
 
-                httpServletRequest.getSession(false).setAttribute(AppConstants.SES_SHIPMENT_LIST, inventoryList);
+                httpServletRequest.getSession(false).setAttribute(AppConstants.SES_INVENTORY_LIST, inventoryList);
                 resultType = SUCCESS;
             } catch (Exception ex) {
                 httpServletRequest.getSession(false).setAttribute(AppConstants.REQ_EXCEPTION_MSG, ex.getMessage());

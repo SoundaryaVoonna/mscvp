@@ -1,5 +1,3 @@
-
-
 /*
  * Author : Santosh Kola
  * Created Date : 07/01/2013
@@ -44,8 +42,6 @@ public class PurgeAction extends ActionSupport implements ServletRequestAware {
         this.docdatepickerfrom = docdatepickerfrom;
     }
     private String docdatepickerfrom;
-    
-    
 
     public String getComments() {
         return comments;
@@ -55,52 +51,49 @@ public class PurgeAction extends ActionSupport implements ServletRequestAware {
         this.comments = comments;
     }
 
-      
     //added by raja for Archiving the data
-    
-    
-    public String getArcProPage(){
-        
-         Map userFlow=  (Map)httpServletRequest.getSession(false).getAttribute(AppConstants.SES_USER_FLOW_MAP);
-            setFlowName(DataSourceDataProvider.getInstance().getTransactionType(userFlow));
+    public String getArcProPage() {
+
+        Map userFlow = (Map) httpServletRequest.getSession(false).getAttribute(AppConstants.SES_USER_FLOW_MAP);
+        setFlowName(DataSourceDataProvider.getInstance().getTransactionType(userFlow));
         return SUCCESS;
     }
-    
-    public String getArcHisPage(){
-         Map userFlow=  (Map)httpServletRequest.getSession(false).getAttribute(AppConstants.SES_USER_FLOW_MAP);
-            setFlowName(DataSourceDataProvider.getInstance().getTransactionType(userFlow));
+
+    public String getArcHisPage() {
+        Map userFlow = (Map) httpServletRequest.getSession(false).getAttribute(AppConstants.SES_USER_FLOW_MAP);
+        setFlowName(DataSourceDataProvider.getInstance().getTransactionType(userFlow));
         return SUCCESS;
     }
-    public String getPurProPage(){
-         Map userFlow=  (Map)httpServletRequest.getSession(false).getAttribute(AppConstants.SES_USER_FLOW_MAP);
-            setFlowName(DataSourceDataProvider.getInstance().getTransactionType(userFlow));
+
+    public String getPurProPage() {
+        Map userFlow = (Map) httpServletRequest.getSession(false).getAttribute(AppConstants.SES_USER_FLOW_MAP);
+        setFlowName(DataSourceDataProvider.getInstance().getTransactionType(userFlow));
         return SUCCESS;
     }
-    public String getPurHisPage(){
-         Map userFlow=  (Map)httpServletRequest.getSession(false).getAttribute(AppConstants.SES_USER_FLOW_MAP);
-            setFlowName(DataSourceDataProvider.getInstance().getTransactionType(userFlow));
+
+    public String getPurHisPage() {
+        Map userFlow = (Map) httpServletRequest.getSession(false).getAttribute(AppConstants.SES_USER_FLOW_MAP);
+        setFlowName(DataSourceDataProvider.getInstance().getTransactionType(userFlow));
         return SUCCESS;
     }
-    
-    
-    
+
     public String doArchiveProcess() throws ServiceLocatorException {
         resultType = LOGIN;
-        String username = (String)httpServletRequest.getSession(false).getAttribute(AppConstants.SES_USER_NAME);
-          String defaultFlowId = httpServletRequest.getSession(false).getAttribute(AppConstants.SES_USER_DEFAULT_FLOWID).toString();
-         String defaultFlowName = DataSourceDataProvider.getInstance().getFlowNameByFlowID(defaultFlowId);
-       
+        String username = (String) httpServletRequest.getSession(false).getAttribute(AppConstants.SES_USER_NAME);
+        String defaultFlowId = httpServletRequest.getSession(false).getAttribute(AppConstants.SES_USER_DEFAULT_FLOWID).toString();
+        String defaultFlowName = DataSourceDataProvider.getInstance().getFlowNameByFlowID(defaultFlowId);
+
         if (httpServletRequest.getSession(false).getAttribute(AppConstants.SES_USER_NAME) != null) {
             resultType = "accessFailed";
             int userRoleId = Integer.parseInt(httpServletRequest.getSession(false).getAttribute(AppConstants.SES_ROLE_ID).toString());
-             
+
             if (AuthorizationManager.getInstance().isAuthorizedUser("PURGE_PROCESS", userRoleId)) {
                 try {
-                    resultMessage = ServiceLocator.getPurgeService().archiveProcess(this, username,defaultFlowName);
+                    resultMessage = ServiceLocator.getPurgeService().archiveProcess(this, username, defaultFlowName);
                     setDayCount("");
                     setTransType("-1");
-                     Map userFlow=  (Map)httpServletRequest.getSession(false).getAttribute(AppConstants.SES_USER_FLOW_MAP);
-        setFlowName(DataSourceDataProvider.getInstance().getTransactionType(userFlow));
+                    Map userFlow = (Map) httpServletRequest.getSession(false).getAttribute(AppConstants.SES_USER_FLOW_MAP);
+                    setFlowName(DataSourceDataProvider.getInstance().getTransactionType(userFlow));
                     httpServletRequest.setAttribute(AppConstants.REQ_RESULT_MSG, resultMessage);
                     resultType = SUCCESS;
                 } catch (Exception e) {
@@ -111,24 +104,24 @@ public class PurgeAction extends ActionSupport implements ServletRequestAware {
         }
         return resultType;
     }
-    
+
     public String doPurgeProcess() throws ServiceLocatorException {
         resultType = LOGIN;
-      
+
         if (httpServletRequest.getSession(false).getAttribute(AppConstants.SES_USER_NAME) != null) {
             resultType = "accessFailed";
-             String username = (String)httpServletRequest.getSession(false).getAttribute(AppConstants.SES_USER_NAME);
-              String defaultFlowId = httpServletRequest.getSession(false).getAttribute(AppConstants.SES_USER_DEFAULT_FLOWID).toString();
-             
-         String defaultFlowName = DataSourceDataProvider.getInstance().getFlowNameByFlowID(defaultFlowId);
+            String username = (String) httpServletRequest.getSession(false).getAttribute(AppConstants.SES_USER_NAME);
+            String defaultFlowId = httpServletRequest.getSession(false).getAttribute(AppConstants.SES_USER_DEFAULT_FLOWID).toString();
+
+            String defaultFlowName = DataSourceDataProvider.getInstance().getFlowNameByFlowID(defaultFlowId);
             int userRoleId = Integer.parseInt(httpServletRequest.getSession(false).getAttribute(AppConstants.SES_ROLE_ID).toString());
             if (AuthorizationManager.getInstance().isAuthorizedUser("PURGE_PROCESS", userRoleId)) {
                 try {
                     resultMessage = ServiceLocator.getPurgeService().purgeProcess(this, username, defaultFlowName);
                     setDayCount("");
                     setTransType("-1");
-                      Map userFlow=  (Map)httpServletRequest.getSession(false).getAttribute(AppConstants.SES_USER_FLOW_MAP);
-            setFlowName(DataSourceDataProvider.getInstance().getTransactionType(userFlow)); 
+                    Map userFlow = (Map) httpServletRequest.getSession(false).getAttribute(AppConstants.SES_USER_FLOW_MAP);
+                    setFlowName(DataSourceDataProvider.getInstance().getTransactionType(userFlow));
                     httpServletRequest.setAttribute(AppConstants.REQ_RESULT_MSG, resultMessage);
                     resultType = SUCCESS;
                 } catch (Exception e) {
@@ -139,48 +132,45 @@ public class PurgeAction extends ActionSupport implements ServletRequestAware {
         }
         return resultType;
     }
-    
-    public String getPurHistory(){
-        
+
+    public String getPurHistory() {
+
         httpServletRequest.getSession(false).removeAttribute(AppConstants.PURGEHISTORY_LIST);
-        Map userFlow=  (Map)httpServletRequest.getSession(false).getAttribute(AppConstants.SES_USER_FLOW_MAP);
-            setFlowName(DataSourceDataProvider.getInstance().getTransactionType(userFlow));
-        
-        try{
-           
-             String username = (String)httpServletRequest.getSession(false).getAttribute(AppConstants.SES_USER_NAME);
-        List purgeHistorylist = null;
-        purgeHistorylist = ServiceLocator.getPurgeService().getPurHistoryData(username, getDatepickerfrom(),getDatepicker(), getTransType() );
-         httpServletRequest.getSession(false).setAttribute(AppConstants.PURGEHISTORY_LIST, purgeHistorylist);
-        
-        }catch(Exception e){
+        Map userFlow = (Map) httpServletRequest.getSession(false).getAttribute(AppConstants.SES_USER_FLOW_MAP);
+        setFlowName(DataSourceDataProvider.getInstance().getTransactionType(userFlow));
+
+        try {
+
+            String username = (String) httpServletRequest.getSession(false).getAttribute(AppConstants.SES_USER_NAME);
+            List purgeHistorylist = null;
+            purgeHistorylist = ServiceLocator.getPurgeService().getPurHistoryData(username, getDatepickerfrom(), getDatepicker(), getTransType());
+            httpServletRequest.getSession(false).setAttribute(AppConstants.PURGEHISTORY_LIST, purgeHistorylist);
+
+        } catch (Exception e) {
             e.printStackTrace();
         }
-        
-             return "success";  
+
+        return "success";
     }
-    
-    public String getArcHistory(){
-        
-         httpServletRequest.getSession(false).removeAttribute(AppConstants.ARCHIVEHISTORY_LIST);
-         Map userFlow=  (Map)httpServletRequest.getSession(false).getAttribute(AppConstants.SES_USER_FLOW_MAP);
-            setFlowName(DataSourceDataProvider.getInstance().getTransactionType(userFlow));
-        try{
-            
-          
-             String username = (String)httpServletRequest.getSession(false).getAttribute(AppConstants.SES_USER_NAME);
-         List archiveHistorylist = null;
-        archiveHistorylist = ServiceLocator.getPurgeService().getArcHistoryData(username, getDatepickerfrom(),getDatepicker(), getTransType() );
-         httpServletRequest.getSession(false).setAttribute(AppConstants.ARCHIVEHISTORY_LIST, archiveHistorylist);
-        
-        }catch(Exception e){
+
+    public String getArcHistory() {
+
+        httpServletRequest.getSession(false).removeAttribute(AppConstants.ARCHIVEHISTORY_LIST);
+        Map userFlow = (Map) httpServletRequest.getSession(false).getAttribute(AppConstants.SES_USER_FLOW_MAP);
+        setFlowName(DataSourceDataProvider.getInstance().getTransactionType(userFlow));
+        try {
+
+            String username = (String) httpServletRequest.getSession(false).getAttribute(AppConstants.SES_USER_NAME);
+            List archiveHistorylist = null;
+            archiveHistorylist = ServiceLocator.getPurgeService().getArcHistoryData(username, getDatepickerfrom(), getDatepicker(), getTransType());
+            httpServletRequest.getSession(false).setAttribute(AppConstants.ARCHIVEHISTORY_LIST, archiveHistorylist);
+
+        } catch (Exception e) {
             e.printStackTrace();
         }
-        
-             return "success";  
+
+        return "success";
     }
-    
-    
 
     @Override
     public void setServletRequest(HttpServletRequest httpServletRequest) {
@@ -207,9 +197,6 @@ public class PurgeAction extends ActionSupport implements ServletRequestAware {
         this.datepicker = datepicker;
     }
 
-  
-
-    
     /**
      * @return the transType
      */
@@ -253,5 +240,5 @@ public class PurgeAction extends ActionSupport implements ServletRequestAware {
     public void setFlowName(Map flowName) {
         this.flowName = flowName;
     }
-    
+
 }

@@ -73,6 +73,7 @@
            
         <!-- new xml added Hyma-->
             <action name="codeVersionUpdate" class="com.mss.ediscv.ajax.AjaxHandlerAction" method="doCodeVersionUpdate"/>
+            <action name="getInventoryDetails" class="com.mss.ediscv.ajax.AjaxHandlerAction" method="getInventoryDetails"/>
             
     </package>
 </struts>

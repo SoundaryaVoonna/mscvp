@@ -60,19 +60,19 @@ public class PurgeServiceImpl implements PurgeService {
         try {
             connection = ConnectionProvider.getInstance().getConnection();
             //queryString.append("select FILE_ID, Transaction_Type from ARCHIVE_FILES where DATE(DATE_TIME_RECEIVED) <  DATE(CURRENT TIMESTAMP - " + dayCount + " DAYS)");
-            if ("Logistics".equalsIgnoreCase(defaultFlowName)) {
+           // if ("Logistics".equalsIgnoreCase(defaultFlowName)) {
                 if ("All".equalsIgnoreCase(transType)) {
-                    queryString.append("select FILE_ID, Transaction_Type from ARCHIVE_FILES where DATE(DATE_TIME_RECEIVED) <  DATE(CURRENT TIMESTAMP - " + dayCount + " DAYS) AND FLOWFLAG='L'");
+                    queryString.append("select FILE_ID, Transaction_Type from ARCHIVE_FILES where DATE(DATE_TIME_RECEIVED) <  DATE(CURRENT TIMESTAMP - " + dayCount + " DAYS) ");
                 } else {
-                    queryString.append("select FILE_ID, Transaction_Type from ARCHIVE_FILES where DATE(DATE_TIME_RECEIVED) <  DATE(CURRENT TIMESTAMP - " + dayCount + " DAYS) AND TRANSACTION_TYPE=" + transType + " AND FLOWFLAG='L'");
+                    queryString.append("select FILE_ID, Transaction_Type from ARCHIVE_FILES where DATE(DATE_TIME_RECEIVED) <  DATE(CURRENT TIMESTAMP - " + dayCount + " DAYS) AND TRANSACTION_TYPE=" + transType + " ");
                 }
-            } else if ("Manufacturing".equalsIgnoreCase(defaultFlowName)) {
-                if ("All".equalsIgnoreCase(transType)) {
-                    queryString.append("select FILE_ID, Transaction_Type from ARCHIVE_FILES where DATE(DATE_TIME_RECEIVED) <  DATE(CURRENT TIMESTAMP - " + dayCount + " DAYS) AND FLOWFLAG='M'");
-                } else {
-                    queryString.append("select FILE_ID, Transaction_Type from ARCHIVE_FILES where DATE(DATE_TIME_RECEIVED) <  DATE(CURRENT TIMESTAMP - " + dayCount + " DAYS) AND TRANSACTION_TYPE=" + transType + " AND FLOWFLAG='M'");
-                }
-            }
+           // } else if ("Manufacturing".equalsIgnoreCase(defaultFlowName)) {
+            //    if ("All".equalsIgnoreCase(transType)) {
+            //        queryString.append("select FILE_ID, Transaction_Type from ARCHIVE_FILES where DATE(DATE_TIME_RECEIVED) <  DATE(CURRENT TIMESTAMP - " + dayCount + " DAYS) AND FLOWFLAG='M'");
+            //    } else {
+            //        queryString.append("select FILE_ID, Transaction_Type from ARCHIVE_FILES where DATE(DATE_TIME_RECEIVED) <  DATE(CURRENT TIMESTAMP - " + dayCount + " DAYS) AND TRANSACTION_TYPE=" + transType + " AND FLOWFLAG='M'");
+           //     }
+           // }
             if (!transType.equals("-1") && !transType.equals("All")) {
                 queryString.append(" AND Transaction_Type = '" + transType + "'");
             }
@@ -141,7 +141,7 @@ public class PurgeServiceImpl implements PurgeService {
             }
 
             String deleteArchtransQuery = "";
-            if (defaultFlowName.equalsIgnoreCase("Manufacturing")) {
+          //  if (defaultFlowName.equalsIgnoreCase("Manufacturing")) {
                 if (transType.equals("850")) {
                     deleteArchtransQuery = "DELETE FROM ARCHIVE_PO WHERE File_ID='" + fileId + "'";
                 } else if (transType.equals("856")) {
@@ -150,6 +150,8 @@ public class PurgeServiceImpl implements PurgeService {
                     deleteArchtransQuery = "DELETE FROM ARCHIVE_INVOICE WHERE File_ID='" + fileId + "'";
                 } else if (transType.equals("820")) {
                     deleteArchtransQuery = "DELETE FROM ARCHIVE_PAYMENT WHERE File_ID='" + fileId + "'";
+                } else if (transType.equals("846")) {
+                    deleteArchtransQuery = "DELETE FROM ARCHIVE_INVENTORY WHERE File_ID='" + fileId + "'";
                 }
 
                 statement.addBatch(deleteArchFilesQuery);
@@ -158,7 +160,7 @@ public class PurgeServiceImpl implements PurgeService {
 //                System.out.println("deleteArchFilesQuery -->" + deleteArchFilesQuery);
 //                System.out.println("updateArchHistQuery -->" + updateArchHistQuery);
 //                System.out.println("deleteArchtransQuery -->" + deleteArchtransQuery);
-            } else if (defaultFlowName.equalsIgnoreCase("Logistics")) {
+         //   } else if (defaultFlowName.equalsIgnoreCase("Logistics")) {
                 System.out.println("Logistics purge");
                 if (transType.equals("204")) {
                     deleteArchtransQuery = "DELETE FROM ARCHIVE_TRANSPORT_LOADTENDER WHERE File_ID='" + fileId + "'";
@@ -174,7 +176,7 @@ public class PurgeServiceImpl implements PurgeService {
                 statement.addBatch(deleteArchtransQuery);
                 
 
-            }
+          //  }
             int[] count = statement.executeBatch();
             //System.out.println(" count=== " + count);
             connection.commit();
@@ -221,20 +223,20 @@ public class PurgeServiceImpl implements PurgeService {
 
             //System.out.println(" insert query updated ");
             System.out.println("flowName --" + flowName + " transType " + transType);
-            if ("Logistics".equalsIgnoreCase(flowName)) {
+           // if ("Logistics".equalsIgnoreCase(flowName)) {
                 //System.out.println("archiveProcess flow name is  logistics");
                 if ("All".equalsIgnoreCase(transType)) {
-                    queryString.append("select FILE_ID, TRANSACTION_TYPE from FILES where DATE(DATE_TIME_RECEIVED) <  DATE(CURRENT TIMESTAMP - " + dayCount + " DAYS) AND FLOWFLAG='L'");
+                    queryString.append("select FILE_ID, TRANSACTION_TYPE from FILES where DATE(DATE_TIME_RECEIVED) <  DATE(CURRENT TIMESTAMP - " + dayCount + " DAYS)");
                 } else {
-                    queryString.append("select FILE_ID from FILES where DATE(DATE_TIME_RECEIVED) <  DATE(CURRENT TIMESTAMP - " + dayCount + " DAYS) and TRANSACTION_TYPE=" + transType + " AND FLOWFLAG='L'");
+                    queryString.append("select FILE_ID from FILES where DATE(DATE_TIME_RECEIVED) <  DATE(CURRENT TIMESTAMP - " + dayCount + " DAYS) and TRANSACTION_TYPE=" + transType + " ");
                 }
-            } else if ("Manufacturing".equalsIgnoreCase(flowName)) {
-                if ("All".equalsIgnoreCase(transType)) {
-                    queryString.append("select FILE_ID, TRANSACTION_TYPE from FILES where DATE(DATE_TIME_RECEIVED) <  DATE(CURRENT TIMESTAMP - " + dayCount + " DAYS) AND FLOWFLAG='M'");
-                } else {
-                    queryString.append("select FILE_ID from FILES where DATE(DATE_TIME_RECEIVED) <  DATE(CURRENT TIMESTAMP - " + dayCount + " DAYS) and TRANSACTION_TYPE=" + transType + " AND FLOWFLAG='M'");
-                }
-            }
+           // } else if ("Manufacturing".equalsIgnoreCase(flowName)) {
+           //     if ("All".equalsIgnoreCase(transType)) {
+           //         queryString.append("select FILE_ID, TRANSACTION_TYPE from FILES where DATE(DATE_TIME_RECEIVED) <  DATE(CURRENT TIMESTAMP - " + dayCount + " DAYS) AND FLOWFLAG='M'");
+          //      } else {
+           //         queryString.append("select FILE_ID from FILES where DATE(DATE_TIME_RECEIVED) <  DATE(CURRENT TIMESTAMP - " + dayCount + " DAYS) and TRANSACTION_TYPE=" + transType + " AND FLOWFLAG='M'");
+           //     }
+          //  }
             System.out.println("queryString is " + queryString);
             //queryString.append("select FILE_ID, Transaction_Type from ARCHIVE_FILES where DATE(DATE_TIME_RECEIVED) <  DATE(CURRENT TIMESTAMP - " + dayCount + " DAYS)");
             //queryString.append("delete * from ARCHIVE_FILES where DATE(DATE_TIME_RECEIVED) <  DATE(CURRENT TIMESTAMP - " +dayCount+ " DAYS)");
@@ -340,9 +342,9 @@ public class PurgeServiceImpl implements PurgeService {
                 //System.out.println("insertArchFilesQuery" + insertArchFilesQuery);
                 //System.out.println("updateArchHistQuery" + updateArchHistQuery);
             }
-            if (flowName.equalsIgnoreCase("Manufacturing")) {
+          //  if (flowName.equalsIgnoreCase("Manufacturing")) {
                 System.out.println("inside manufacturing archiveReocords");
-                if (transType.equals("850")) {
+                if ((transType.equals("850")) || (transType.equals("855"))) {
                     insertArchTransQuery = "INSERT INTO ARCHIVE_PO SELECT t.* FROM MSCVP.PO t where file_ID= '" + fileId + "' ";
                     deleteArchTransQuery = "DELETE FROM PO WHERE File_ID='" + fileId + "'";
                 } else if (transType.equals("856")) {
@@ -354,19 +356,16 @@ public class PurgeServiceImpl implements PurgeService {
                 } else if (transType.equals("820")) {
                     insertArchTransQuery = "INSERT INTO ARCHIVE_PAYMENT SELECT t.* FROM MSCVP.PAYMENT t where file_ID= '" + fileId + "' ";
                     deleteArchTransQuery = "DELETE FROM PAYMENT WHERE File_ID='" + fileId + "'";
-                } else if (transType.equals("855")) {
-                    insertArchTransQuery = "INSERT INTO ARCHIVE_PO SELECT t.* FROM MSCVP.PAYMENT t where file_ID= '" + fileId + "' ";
-                    deleteArchTransQuery = "DELETE FROM PO WHERE File_ID='" + fileId + "'";
-                } else if (transType.equals("997")) {
-                    insertArchTransQuery = "INSERT INTO ARCHIVE_FILES SELECT t.* FROM MSCVP.PAYMENT t where file_ID= '" + fileId + "' ";
-                    deleteArchTransQuery = "DELETE FROM FILES WHERE File_ID='" + fileId + "'";
+                } else if (transType.equals("846")) {
+                    insertArchTransQuery = "INSERT INTO ARCHIVE_INVENTORY SELECT t.* FROM MSCVP.INVENTORY t where file_ID= '" + fileId + "' ";
+                    deleteArchTransQuery = "DELETE FROM INVENTORY WHERE File_ID='" + fileId + "'";
                 }
 
                 System.out.println("insertArchTransQuery -->" + insertArchTransQuery);
                 statement.addBatch(insertArchTransQuery);
                 //statement.addBatch(deleteArchTransQuery);
 
-            } else if (flowName.equalsIgnoreCase("Logistics")) {
+          //  } else if (flowName.equalsIgnoreCase("Logistics")) {
                 System.out.println("inside logistics archiveReocords");
                 if (transType.equals("204")) {
                     insertArchTransQuery = "INSERT INTO ARCHIVE_TRANSPORT_LOADTENDER SELECT t.* FROM MSCVP.TRANSPORT_LOADTENDER t where file_ID= '" + fileId + "' ";
@@ -385,7 +384,7 @@ public class PurgeServiceImpl implements PurgeService {
                 //System.out.println("insertArchTransQuery -->" + insertArchTransQuery);
                 statement.addBatch(insertArchTransQuery);
                 //statement.addBatch(deleteArchTransQuery);
-            }
+         //   }
             int[] count = statement.executeBatch();
             //System.out.println(" count=== " + count);
             connection.commit();

@@ -686,6 +686,20 @@ public class AjaxHandlerAction extends ActionSupport implements ServletRequestAw
         }
         return null;
     }
+    
+       public String getInventoryDetails() {
+        if (httpServletRequest.getSession(false).getAttribute(AppConstants.SES_USER_NAME) != null) {
+            try {
+                responseString = ServiceLocator.getAjaxHandlerService().getInventoryDetails(getFileId(),getId(), getDatabase()).toString();
+                httpServletResponse.setContentType("text/xml");
+                httpServletResponse.getWriter().write(responseString);
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        }
+        return null;
+    }
+
 
     public int getId() {
         return id;

@@ -47,19 +47,19 @@ public class InventoryServiceImpl implements InventoryService {
         String datepickerTo = inventoryAction.getDatepicker();
         String datePickerFrom = inventoryAction.getDatepickerfrom();
         String senderId = "";
-        if (inventoryAction.getSenderId()!=null && !inventoryAction.getSenderId().equals("-1")) {
+        if (inventoryAction.getSenderId() != null && !inventoryAction.getSenderId().equals("-1")) {
             senderId = inventoryAction.getSenderId();
         }
         String senderName = "";
-        if (inventoryAction.getSenderName()!=null && !inventoryAction.getSenderName().equals("-1")) {
+        if (inventoryAction.getSenderName() != null && !inventoryAction.getSenderName().equals("-1")) {
             senderName = inventoryAction.getSenderName();
         }
         String recName = "";
-        if (inventoryAction.getRecName()!=null && !inventoryAction.getRecName().equals("-1")) {
+        if (inventoryAction.getRecName() != null && !inventoryAction.getRecName().equals("-1")) {
             recName = inventoryAction.getRecName();
         }
         String recId = "";
-        if (inventoryAction.getBuId()!=null && !inventoryAction.getBuId().equals("-1")) {
+        if (inventoryAction.getBuId() != null && !inventoryAction.getBuId().equals("-1")) {
             recId = inventoryAction.getBuId();
         }
         String bolNum = inventoryAction.getBolNum();
@@ -69,27 +69,21 @@ public class InventoryServiceImpl implements InventoryService {
         String corrattribute = inventoryAction.getCorrattribute();
         String corrvalue = inventoryAction.getCorrvalue();
         String corrattribute1 = inventoryAction.getCorrattribute1();
+        String corrattribute2 = inventoryAction.getCorrattribute2();
         String corrvalue1 = inventoryAction.getCorrvalue1();
+        String corrvalue2 = inventoryAction.getCorrvalue2();
         String doctype = "";
-        if (inventoryAction.getDocType()!=null && !inventoryAction.getDocType().equals("-1")) {
+        if (inventoryAction.getDocType() != null && !inventoryAction.getDocType().equals("-1")) {
             doctype = inventoryAction.getDocType();
         }
-        inventorySearchQuery.append("SELECT DISTINCT(ASN.FILE_ID) as FILE_ID,"
-                + "ASN.ASN_NUMBER as ASN_NUMBER,ASN.PO_NUMBER as PO_NUMBER,"
-                + "ASN.BOL_NUMBER as BOL_NUMBER,ASN.ISA_NUMBER as ISA_NUMBER,ASN.SHIP_DATE as SHIP_DATE, "
-                + "TP2.NAME as RECEIVER_NAME,TP1.NAME as SENDER_NAME,FILES.GS_CONTROL_NUMBER as GS_CONTROL_NUMBER,"
-                + " FILES.ST_CONTROL_NUMBER as ST_CONTROL_NUMBER, FILES.DIRECTION as DIRECTION,"
-                + " FILES.STATUS as STATUS, FILES.DATE_TIME_RECEIVED as DATE_TIME_RECEIVED ,"
-                + "FILES.ACK_STATUS as ACK_STATUS,FILES.REPROCESSSTATUS"
-                + " FROM ASN LEFT OUTER JOIN FILES "
-                + "ON (ASN.ASN_NUMBER = FILES.PRI_KEY_VAL AND ASN.FILE_ID = FILES.FILE_ID) "
-                + "LEFT OUTER JOIN TP TP1 ON (TP1.ID=FILES.SENDER_ID) "
-                + "LEFT OUTER JOIN TP TP2 ON (TP2.ID=FILES.RECEIVER_ID)");
-        inventorySearchQuery.append(" WHERE 1=1 AND FLOWFLAG like 'M' ");
+        inventorySearchQuery.append("select DISTINCT(INVENTORY.FILE_ID) as FILE_ID,INVENTORY.ID,FILES.ISA_NUMBER,FILES.GS_CONTROL_NUMBER,FILES.SENDER_ID,FILES.RECEIVER_ID,INVENTORY.REFERENCE_NUMBER,INVENTORY.REPORTING_DATE,"
+                + "FILES.DIRECTION,FILES.STATUS,INVENTORY.VENDOR_NAME,INVENTORY.VENDOR_LOCATION,TP1.NAME as SENDER_NAME,TP2.NAME as RECEIVER_NAME from INVENTORY JOIN "
+                + "FILES ON (FILES.FILE_ID=INVENTORY.FILE_ID) LEFT OUTER JOIN TP  TP1 ON (TP1.ID=FILES.SENDER_ID) "
+                + "LEFT OUTER JOIN TP  TP2 ON (TP2.ID=FILES.RECEIVER_ID) where 1=1 ");
         // Db2 Date formate
         if (datePickerFrom != null && !"".equals(datePickerFrom)) {
           //  StringTokenizer st = new StringTokenizer(datePickerFrom, " ");
-         //   String datePickerFrom1 = st.nextToken();
+            //   String datePickerFrom1 = st.nextToken();
             tmp_Recieved_From = DateUtility.getInstance().DateViewToDBCompare(datePickerFrom);
             inventorySearchQuery.append(" AND FILES.DATE_TIME_RECEIVED >= '" + tmp_Recieved_From + "'");
         }
@@ -100,59 +94,99 @@ public class InventoryServiceImpl implements InventoryService {
             inventorySearchQuery.append(" AND FILES.DATE_TIME_RECEIVED <= '" + tmp_Recieved_ToTime + "'");
         }
         //newly added for corrletionstart
-        if ((corrattribute != null) && (corrattribute.equalsIgnoreCase("Shipment Number"))) {
-            if (corrvalue != null && !"".equals(corrvalue.trim())) {
-                inventorySearchQuery.append(WildCardSql.getWildCardSql1("FILES.PRI_KEY_VAL", corrvalue.trim().toUpperCase()));
-            }
-        }
-        if ((corrattribute1 != null) && (corrattribute1.equalsIgnoreCase("Shipment Number"))) {
-            if (corrvalue1 != null && !"".equals(corrvalue1.trim())) {
-                inventorySearchQuery.append(WildCardSql.getWildCardSql1("FILES.PRI_KEY_VAL", corrvalue1.trim().toUpperCase()));
-            }
-        }
-        if ((corrattribute != null) && (corrattribute.equalsIgnoreCase("BOL Number"))) {
-            if (corrvalue != null && !"".equals(corrvalue.trim())) {
-                inventorySearchQuery.append(WildCardSql.getWildCardSql1("ASN.BOL_NUMBER", corrvalue.trim().toUpperCase()));
-            }
-        }
-        if ((corrattribute1 != null) && (corrattribute1.equalsIgnoreCase("BOL Number"))) {
-            if (corrvalue1 != null && !"".equals(corrvalue1.trim())) {
-                inventorySearchQuery.append(WildCardSql.getWildCardSql1("ASN.BOL_NUMBER", corrvalue1.trim().toUpperCase()));
-            }
-        }
-        //PO NUMBER
-        if ((corrattribute != null)  && (corrattribute.equalsIgnoreCase("PO Number"))) {
-            if (corrvalue != null && !"".equals(corrvalue.trim())) {
-                inventorySearchQuery.append(WildCardSql.getWildCardSql1("ASN.PO_NUMBER", corrvalue.trim().toUpperCase()));
-            }
-        }
-        if ((corrattribute1 != null) && (corrattribute1.equalsIgnoreCase("PO Number"))) {
-            if (corrvalue1 != null && !"".equals(corrvalue1.trim())) {
-                inventorySearchQuery.append(WildCardSql.getWildCardSql1("ASN.PO_NUMBER", corrvalue1.trim().toUpperCase()));
-            }
-        }
-          if ((corrattribute != null) && (corrattribute.equalsIgnoreCase("Instance Id"))) {
-            if (corrvalue != null && !"".equals(corrvalue.trim())) {
-                inventorySearchQuery.append(WildCardSql.getWildCardSql1("FILES.FILE_ID", corrvalue.trim().toUpperCase()));
-            }
-        }
-        if ((corrattribute1 != null) && (corrattribute1.equalsIgnoreCase("Instance Id"))) {
-            if (corrvalue1 != null && !"".equals(corrvalue1.trim())) {
-                inventorySearchQuery.append(WildCardSql.getWildCardSql1("FILES.FILE_ID", corrvalue1.trim().toUpperCase()));
-            }
-        }
-         //Direction
-         if ((corrattribute != null) && (corrattribute.equalsIgnoreCase("Direction"))) {
-            if (corrvalue != null && !"".equals(corrvalue.trim())) {
-                inventorySearchQuery.append(WildCardSql.getWildCardSql1("FILES.DIRECTION", corrvalue.trim().toUpperCase()));
-            }
-        }
-        if ((corrattribute1 != null) && (corrattribute1.equalsIgnoreCase("Direction"))) {
-            if (corrvalue1 != null && !"".equals(corrvalue1.trim())) {
-                inventorySearchQuery.append(WildCardSql.getWildCardSql1("FILES.DIRECTION", corrvalue1.trim().toUpperCase()));
-            }
-        }
         
+        //REPORTING_PERIOD
+        if ((corrattribute != null) && (corrattribute.equalsIgnoreCase("REPORTING_PERIOD"))) {
+            if (corrvalue != null && !"".equals(corrvalue.trim())) {
+                inventorySearchQuery.append(WildCardSql.getWildCardSql1("INVENTORY.REFERENCE_NUMBER", corrvalue.trim().toUpperCase()));
+            }
+        }
+        if ((corrattribute1 != null) && (corrattribute1.equalsIgnoreCase("REPORTING_PERIOD"))) {
+            if (corrvalue1 != null && !"".equals(corrvalue1.trim())) {
+                inventorySearchQuery.append(WildCardSql.getWildCardSql1("INVENTORY.REFERENCE_NUMBER", corrvalue1.trim().toUpperCase()));
+            }
+        }
+        if ((corrattribute2 != null) && (corrattribute2.equalsIgnoreCase("REPORTING_PERIOD"))) {
+            if (corrvalue2 != null && !"".equals(corrvalue2.trim())) {
+                inventorySearchQuery.append(WildCardSql.getWildCardSql1("INVENTORY.REFERENCE_NUMBER", corrvalue2.trim().toUpperCase()));
+            }
+        }
+        //REPORTING_DATE
+        if ((corrattribute1 != null) && (corrattribute1.equalsIgnoreCase("REPORTING_DATE"))) {
+            if (corrvalue1 != null && !"".equals(corrvalue1.trim())) {
+                inventorySearchQuery.append(WildCardSql.getWildCardSql1("INVENTORY.REPORTING_DATE", corrvalue1.trim().toUpperCase()));
+            }
+        }
+        if ((corrattribute != null) && (corrattribute.equalsIgnoreCase("REPORTING_DATE"))) {
+            if (corrvalue != null && !"".equals(corrvalue.trim())) {
+                inventorySearchQuery.append(WildCardSql.getWildCardSql1("INVENTORY.REPORTING_DATE", corrvalue.trim().toUpperCase()));
+            }
+        }
+        if ((corrattribute2 != null) && (corrattribute2.equalsIgnoreCase("REPORTING_DATE"))) {
+            if (corrvalue2 != null && !"".equals(corrvalue2.trim())) {
+                inventorySearchQuery.append(WildCardSql.getWildCardSql1("INVENTORY.REPORTING_DATE", corrvalue2.trim().toUpperCase()));
+            }
+        }
+        //VENDOR_NAME
+        if ((corrattribute != null) && (corrattribute.equalsIgnoreCase("VENDOR_NAME"))) {
+            if (corrvalue != null && !"".equals(corrvalue.trim())) {
+                inventorySearchQuery.append(WildCardSql.getWildCardSql1("INVENTORY.VENDOR_NAME", corrvalue.trim().toUpperCase()));
+            }
+        }
+        if ((corrattribute1 != null) && (corrattribute1.equalsIgnoreCase("VENDOR_NAME"))) {
+            if (corrvalue1 != null && !"".equals(corrvalue1.trim())) {
+                inventorySearchQuery.append(WildCardSql.getWildCardSql1("INVENTORY.VENDOR_NAME", corrvalue.trim().toUpperCase()));
+            }
+        }
+        if ((corrattribute2 != null) && (corrattribute2.equalsIgnoreCase("VENDOR_NAME"))) {
+            if (corrvalue2 != null && !"".equals(corrvalue2.trim())) {
+                inventorySearchQuery.append(WildCardSql.getWildCardSql1("INVENTORY.VENDOR_NAME", corrvalue2.trim().toUpperCase()));
+            }
+        }
+        //VENDOR_LOCATION
+        if ((corrattribute != null) && (corrattribute.equalsIgnoreCase("VENDOR_LOCATION"))) {
+            if (corrvalue != null && !"".equals(corrvalue.trim())) {
+                inventorySearchQuery.append(WildCardSql.getWildCardSql1("INVENTORY.VENDOR_LOCATION", corrvalue.trim().toUpperCase()));
+            }
+        }
+        if ((corrattribute1 != null) && (corrattribute1.equalsIgnoreCase("VENDOR_LOCATION"))) {
+            if (corrvalue1 != null && !"".equals(corrvalue1.trim())) {
+                inventorySearchQuery.append(WildCardSql.getWildCardSql1("INVENTORY.VENDOR_LOCATION", corrvalue1.trim().toUpperCase()));
+            }
+        }
+        if ((corrattribute2 != null) && (corrattribute2.equalsIgnoreCase("VENDOR_LOCATION"))) {
+            if (corrvalue2 != null && !"".equals(corrvalue2.trim())) {
+                inventorySearchQuery.append(WildCardSql.getWildCardSql1("INVENTORY.VENDOR_LOCATION", corrvalue2.trim().toUpperCase()));
+            }
+        }
+   //INSTANCE_ID
+        if ((corrattribute != null) && (corrattribute.equalsIgnoreCase("INSTANCE_ID"))) {
+            if (corrvalue != null && !"".equals(corrvalue.trim())) {
+                inventorySearchQuery.append(WildCardSql.getWildCardSql1("INVENTORY.FILE_ID", corrvalue.trim().toUpperCase()));
+            }
+        }
+        if ((corrattribute1 != null) && (corrattribute1.equalsIgnoreCase("INSTANCE_ID"))) {
+            if (corrvalue1 != null && !"".equals(corrvalue1.trim())) {
+                inventorySearchQuery.append(WildCardSql.getWildCardSql1("INVENTORY.FILE_ID", corrvalue1.trim().toUpperCase()));
+            }
+        }
+        if ((corrattribute2 != null) && (corrattribute2.equalsIgnoreCase("INSTANCE_ID"))) {
+            if (corrvalue2 != null && !"".equals(corrvalue2.trim())) {
+                inventorySearchQuery.append(WildCardSql.getWildCardSql1("INVENTORY.FILE_ID", corrvalue2.trim().toUpperCase()));
+            }
+        }
+        //Direction
+//        if ((corrattribute != null) && (corrattribute.equalsIgnoreCase("Direction"))) {
+//            if (corrvalue != null && !"".equals(corrvalue.trim())) {
+//                inventorySearchQuery.append(WildCardSql.getWildCardSql1("FILES.DIRECTION", corrvalue.trim().toUpperCase()));
+//            }
+//        }
+//        if ((corrattribute1 != null) && (corrattribute1.equalsIgnoreCase("Direction"))) {
+//            if (corrvalue1 != null && !"".equals(corrvalue1.trim())) {
+//                inventorySearchQuery.append(WildCardSql.getWildCardSql1("FILES.DIRECTION", corrvalue1.trim().toUpperCase()));
+//            }
+//        }
+
         //Doc Type
         if (doctype != null && !"".equals(doctype.trim())) {
             inventorySearchQuery.append(WildCardSql.getWildCardSql1("FILES.TRANSACTION_TYPE", doctype.trim()));
@@ -177,9 +211,10 @@ public class InventoryServiceImpl implements InventoryService {
         if (recName != null && !"".equals(recName.trim())) {
             inventorySearchQuery.append(WildCardSql.getWildCardSql1("TP2.NAME", recName.trim().toUpperCase()));
         }
-        inventorySearchQuery.append("order by DATE_TIME_RECEIVED DESC fetch first 50 rows only");
+       // inventorySearchQuery.append("order by DATE_TIME_RECEIVED DESC fetch first 50 rows only");
+        inventorySearchQuery.append(" fetch first 50 rows only");
         String searchQuery = inventorySearchQuery.toString();
-         System.out.println("mscvp shipment query-->"+searchQuery);
+        System.out.println("mscvp inventorySearchQuery query-->" + searchQuery);
         try {
             connection = ConnectionProvider.getInstance().getConnection();
             statement = connection.createStatement();
@@ -187,13 +222,13 @@ public class InventoryServiceImpl implements InventoryService {
             inventoryList = new ArrayList<InventoryBean>();
             while (resultSet.next()) {
                 InventoryBean inventoryBean = new InventoryBean();
-                inventoryBean.setAsnNo(resultSet.getString("ASN_NUMBER"));
-                inventoryBean.setPoNo(resultSet.getString("PO_NUMBER"));
-                inventoryBean.setBolNo(resultSet.getString("BOL_NUMBER"));
-                inventoryBean.setIsa(resultSet.getString("ISA_NUMBER"));
-                inventoryBean.setShipmentDate(resultSet.getString("SHIP_DATE"));
+                inventoryBean.setInventory_id(resultSet.getInt("ID"));
+                inventoryBean.setReportingPeriod(resultSet.getString("REFERENCE_NUMBER"));
+                inventoryBean.setReportingDate(resultSet.getString("REPORTING_DATE"));
+                inventoryBean.setVendorName(resultSet.getString("VENDOR_NAME"));
+                inventoryBean.setVendorLocation(resultSet.getString("VENDOR_LOCATION"));
+                inventoryBean.setIsaNum(resultSet.getString("ISA_NUMBER"));
                 inventoryBean.setGsCtrl(resultSet.getString("GS_CONTROL_NUMBER"));
-                inventoryBean.setStCtrl(resultSet.getString("ST_CONTROL_NUMBER"));
                 String direction = resultSet.getString("DIRECTION");
                 inventoryBean.setDirection(direction);
                 if ("INBOUND".equalsIgnoreCase(direction)) {
@@ -202,10 +237,8 @@ public class InventoryServiceImpl implements InventoryService {
                     inventoryBean.setPname(resultSet.getString("RECEIVER_NAME"));
                 }
                 inventoryBean.setStatus(resultSet.getString("STATUS"));
-                inventoryBean.setDate_time_rec(resultSet.getTimestamp("DATE_TIME_RECEIVED"));
+               // inventoryBean.setDate_time_rec(resultSet.getTimestamp("DATE_TIME_RECEIVED"));
                 inventoryBean.setFile_id(resultSet.getString("FILE_ID"));
-                inventoryBean.setAckStatus(resultSet.getString("ACK_STATUS"));
-                inventoryBean.setReProcessStatus(resultSet.getString("REPROCESSSTATUS"));
                 inventoryList.add(inventoryBean);
             }
         } catch (SQLException e) {
@@ -232,25 +265,25 @@ public class InventoryServiceImpl implements InventoryService {
         }
         return inventoryList;
     }
-    
-     public ArrayList<InventoryBean> buildInventorySearchQueryArchive(InventoryAction inventoryAction) throws ServiceLocatorException {
+
+        public ArrayList<InventoryBean> buildInventorySearchQueryArchive(InventoryAction inventoryAction) throws ServiceLocatorException {
         StringBuffer inventorySearchQuery = new StringBuffer();
         String datepickerTo = inventoryAction.getDatepicker();
         String datePickerFrom = inventoryAction.getDatepickerfrom();
         String senderId = "";
-        if (inventoryAction.getSenderId()!=null && !inventoryAction.getSenderId().equals("-1")) {
+        if (inventoryAction.getSenderId() != null && !inventoryAction.getSenderId().equals("-1")) {
             senderId = inventoryAction.getSenderId();
         }
         String senderName = "";
-        if (inventoryAction.getSenderName()!=null && !inventoryAction.getSenderName().equals("-1")) {
+        if (inventoryAction.getSenderName() != null && !inventoryAction.getSenderName().equals("-1")) {
             senderName = inventoryAction.getSenderName();
         }
         String recName = "";
-        if (inventoryAction.getRecName()!=null && !inventoryAction.getRecName().equals("-1")) {
+        if (inventoryAction.getRecName() != null && !inventoryAction.getRecName().equals("-1")) {
             recName = inventoryAction.getRecName();
         }
         String recId = "";
-        if (inventoryAction.getBuId()!=null && !inventoryAction.getBuId().equals("-1")) {
+        if (inventoryAction.getBuId() != null && !inventoryAction.getBuId().equals("-1")) {
             recId = inventoryAction.getBuId();
         }
         String bolNum = inventoryAction.getBolNum();
@@ -260,27 +293,22 @@ public class InventoryServiceImpl implements InventoryService {
         String corrattribute = inventoryAction.getCorrattribute();
         String corrvalue = inventoryAction.getCorrvalue();
         String corrattribute1 = inventoryAction.getCorrattribute1();
+        String corrattribute2 = inventoryAction.getCorrattribute2();
         String corrvalue1 = inventoryAction.getCorrvalue1();
+        String corrvalue2 = inventoryAction.getCorrvalue2();
         String doctype = "";
-        if (inventoryAction.getDocType()!=null && !inventoryAction.getDocType().equals("-1")) {
+        if (inventoryAction.getDocType() != null && !inventoryAction.getDocType().equals("-1")) {
             doctype = inventoryAction.getDocType();
         }
-        inventorySearchQuery.append("SELECT DISTINCT(ARCHIVE_ASN.FILE_ID) as FILE_ID,"
-                + "ARCHIVE_ASN.ASN_NUMBER as ASN_NUMBER,ARCHIVE_ASN.PO_NUMBER as PO_NUMBER,"
-                + "ARCHIVE_ASN.BOL_NUMBER as BOL_NUMBER,ARCHIVE_ASN.ISA_NUMBER as ISA_NUMBER,ARCHIVE_ASN.SHIP_DATE as SHIP_DATE, "
-                + "TP2.NAME as RECEIVER_NAME,TP1.NAME as SENDER_NAME,ARCHIVE_FILES.GS_CONTROL_NUMBER as GS_CONTROL_NUMBER,"
-                + " ARCHIVE_FILES.ST_CONTROL_NUMBER as ST_CONTROL_NUMBER, ARCHIVE_FILES.DIRECTION as DIRECTION,"
-                + " ARCHIVE_FILES.STATUS as STATUS, ARCHIVE_FILES.DATE_TIME_RECEIVED as DATE_TIME_RECEIVED ,"
-                + "ARCHIVE_FILES.ACK_STATUS as ACK_STATUS,ARCHIVE_FILES.REPROCESSSTATUS"
-                + " FROM ARCHIVE_ASN LEFT OUTER JOIN ARCHIVE_FILES "
-                + "ON (ARCHIVE_ASN.ASN_NUMBER = ARCHIVE_FILES.PRI_KEY_VAL AND ARCHIVE_ASN.FILE_ID = ARCHIVE_FILES.FILE_ID) "
-                + "LEFT OUTER JOIN TP TP1 ON (TP1.ID=ARCHIVE_FILES.SENDER_ID) "
-                + "LEFT OUTER JOIN TP TP2 ON (TP2.ID=ARCHIVE_FILES.RECEIVER_ID)");
-        inventorySearchQuery.append(" WHERE 1=1 AND FLOWFLAG like 'M' ");
+       inventorySearchQuery.append("select DISTINCT(ARCHIVE_INVENTORY.FILE_ID) as FILE_ID,ARCHIVE_INVENTORY.ID,FILES.ISA_NUMBER,FILES.GS_CONTROL_NUMBER,FILES.SENDER_ID,FILES.RECEIVER_ID,ARCHIVE_INVENTORY.REFERENCE_NUMBER,ARCHIVE_INVENTORY.REPORTING_DATE,"
+                + "ARCHIVE_FILES.DIRECTION,ARCHIVE_FILES.STATUS,ARCHIVE_INVENTORY.VENDOR_NAME,ARCHIVE_INVENTORY.VENDOR_LOCATION,TP1.NAME,TP2.NAME from ARCHIVE_INVENTORY JOIN "
+                + "ARCHIVE_FILES ON (ARCHIVE_FILES.FILE_ID=ARCHIVE_INVENTORY.FILE_ID) LEFT OUTER JOIN TP  TP1 ON (TP1.ID=ARCHIVE_FILES.SENDER_ID) "
+                + "LEFT OUTER JOIN TP  TP2 ON (TP2.ID=ARCHIVE_FILES.RECEIVER_ID) where 1=1 ");
+				
         // Db2 Date formate
         if (datePickerFrom != null && !"".equals(datePickerFrom)) {
           //  StringTokenizer st = new StringTokenizer(datePickerFrom, " ");
-         //   String datePickerFrom1 = st.nextToken();
+            //   String datePickerFrom1 = st.nextToken();
             tmp_Recieved_From = DateUtility.getInstance().DateViewToDBCompare(datePickerFrom);
             inventorySearchQuery.append(" AND ARCHIVE_FILES.DATE_TIME_RECEIVED >= '" + tmp_Recieved_From + "'");
         }
@@ -291,59 +319,99 @@ public class InventoryServiceImpl implements InventoryService {
             inventorySearchQuery.append(" AND ARCHIVE_FILES.DATE_TIME_RECEIVED <= '" + tmp_Recieved_ToTime + "'");
         }
         //newly added for corrletionstart
-        if ((corrattribute != null) && (corrattribute.equalsIgnoreCase("Shipment Number"))) {
-            if (corrvalue != null && !"".equals(corrvalue.trim())) {
-                inventorySearchQuery.append(WildCardSql.getWildCardSql1("ARCHIVE_FILES.PRI_KEY_VAL", corrvalue.trim().toUpperCase()));
-            }
-        }
-        if ((corrattribute1 != null) && (corrattribute1.equalsIgnoreCase("Shipment Number"))) {
-            if (corrvalue1 != null && !"".equals(corrvalue1.trim())) {
-                inventorySearchQuery.append(WildCardSql.getWildCardSql1("ARCHIVE_FILES.PRI_KEY_VAL", corrvalue1.trim().toUpperCase()));
-            }
-        }
-        if ((corrattribute != null) && (corrattribute.equalsIgnoreCase("BOL Number"))) {
-            if (corrvalue != null && !"".equals(corrvalue.trim())) {
-                inventorySearchQuery.append(WildCardSql.getWildCardSql1("ARCHIVE_ASN.BOL_NUMBER", corrvalue.trim().toUpperCase()));
-            }
-        }
-        if ((corrattribute1 != null) && (corrattribute1.equalsIgnoreCase("BOL Number"))) {
-            if (corrvalue1 != null && !"".equals(corrvalue1.trim())) {
-                inventorySearchQuery.append(WildCardSql.getWildCardSql1("ARCHIVE_ASN.BOL_NUMBER", corrvalue1.trim().toUpperCase()));
-            }
-        }
-        //PO NUMBER
-        if ((corrattribute != null)  && (corrattribute.equalsIgnoreCase("PO Number"))) {
-            if (corrvalue != null && !"".equals(corrvalue.trim())) {
-                inventorySearchQuery.append(WildCardSql.getWildCardSql1("ARCHIVE_ASN.PO_NUMBER", corrvalue.trim().toUpperCase()));
-            }
-        }
-        if ((corrattribute1 != null) && (corrattribute1.equalsIgnoreCase("PO Number"))) {
-            if (corrvalue1 != null && !"".equals(corrvalue1.trim())) {
-                inventorySearchQuery.append(WildCardSql.getWildCardSql1("ARCHIVE_ASN.PO_NUMBER", corrvalue1.trim().toUpperCase()));
-            }
-        }
-          if ((corrattribute != null) && (corrattribute.equalsIgnoreCase("Instance Id"))) {
-            if (corrvalue != null && !"".equals(corrvalue.trim())) {
-                inventorySearchQuery.append(WildCardSql.getWildCardSql1("ARCHIVE_FILES.FILE_ID", corrvalue.trim().toUpperCase()));
-            }
-        }
-        if ((corrattribute1 != null) && (corrattribute1.equalsIgnoreCase("Instance Id"))) {
-            if (corrvalue1 != null && !"".equals(corrvalue1.trim())) {
-                inventorySearchQuery.append(WildCardSql.getWildCardSql1("ARCHIVE_FILES.FILE_ID", corrvalue1.trim().toUpperCase()));
-            }
-        }
-         //Direction
-         if ((corrattribute != null) && (corrattribute.equalsIgnoreCase("Direction"))) {
-            if (corrvalue != null && !"".equals(corrvalue.trim())) {
-                inventorySearchQuery.append(WildCardSql.getWildCardSql1("ARCHIVE_FILES.DIRECTION", corrvalue.trim().toUpperCase()));
-            }
-        }
-        if ((corrattribute1 != null) && (corrattribute1.equalsIgnoreCase("Direction"))) {
-            if (corrvalue1 != null && !"".equals(corrvalue1.trim())) {
-                inventorySearchQuery.append(WildCardSql.getWildCardSql1("ARCHIVE_FILES.DIRECTION", corrvalue1.trim().toUpperCase()));
-            }
-        }
         
+        //REPORTING_PERIOD
+        if ((corrattribute != null) && (corrattribute.equalsIgnoreCase("REPORTING_PERIOD"))) {
+            if (corrvalue != null && !"".equals(corrvalue.trim())) {
+                inventorySearchQuery.append(WildCardSql.getWildCardSql1("ARCHIVE_INVENTORY.REFERENCE_NUMBER", corrvalue.trim().toUpperCase()));
+            }
+        }
+        if ((corrattribute1 != null) && (corrattribute1.equalsIgnoreCase("REPORTING_PERIOD"))) {
+            if (corrvalue1 != null && !"".equals(corrvalue1.trim())) {
+                inventorySearchQuery.append(WildCardSql.getWildCardSql1("ARCHIVE_INVENTORY.REFERENCE_NUMBER", corrvalue1.trim().toUpperCase()));
+            }
+        }
+        if ((corrattribute2 != null) && (corrattribute2.equalsIgnoreCase("REPORTING_PERIOD"))) {
+            if (corrvalue2 != null && !"".equals(corrvalue2.trim())) {
+                inventorySearchQuery.append(WildCardSql.getWildCardSql1("ARCHIVE_INVENTORY.REFERENCE_NUMBER", corrvalue2.trim().toUpperCase()));
+            }
+        }
+        //REPORTING_DATE
+        if ((corrattribute1 != null) && (corrattribute1.equalsIgnoreCase("REPORTING_DATE"))) {
+            if (corrvalue1 != null && !"".equals(corrvalue1.trim())) {
+                inventorySearchQuery.append(WildCardSql.getWildCardSql1("ARCHIVE_INVENTORY.REPORTING_DATE", corrvalue1.trim().toUpperCase()));
+            }
+        }
+        if ((corrattribute != null) && (corrattribute.equalsIgnoreCase("REPORTING_DATE"))) {
+            if (corrvalue != null && !"".equals(corrvalue.trim())) {
+                inventorySearchQuery.append(WildCardSql.getWildCardSql1("ARCHIVE_INVENTORY.REPORTING_DATE", corrvalue.trim().toUpperCase()));
+            }
+        }
+        if ((corrattribute2 != null) && (corrattribute2.equalsIgnoreCase("REPORTING_DATE"))) {
+            if (corrvalue2 != null && !"".equals(corrvalue2.trim())) {
+                inventorySearchQuery.append(WildCardSql.getWildCardSql1("ARCHIVE_INVENTORY.REPORTING_DATE", corrvalue2.trim().toUpperCase()));
+            }
+        }
+        //VENDOR_NAME
+        if ((corrattribute != null) && (corrattribute.equalsIgnoreCase("VENDOR_NAME"))) {
+            if (corrvalue != null && !"".equals(corrvalue.trim())) {
+                inventorySearchQuery.append(WildCardSql.getWildCardSql1("ARCHIVE_INVENTORY.VENDOR_NAME", corrvalue.trim().toUpperCase()));
+            }
+        }
+        if ((corrattribute1 != null) && (corrattribute1.equalsIgnoreCase("VENDOR_NAME"))) {
+            if (corrvalue1 != null && !"".equals(corrvalue1.trim())) {
+                inventorySearchQuery.append(WildCardSql.getWildCardSql1("ARCHIVE_INVENTORY.VENDOR_NAME", corrvalue.trim().toUpperCase()));
+            }
+        }
+        if ((corrattribute2 != null) && (corrattribute2.equalsIgnoreCase("VENDOR_NAME"))) {
+            if (corrvalue2 != null && !"".equals(corrvalue2.trim())) {
+                inventorySearchQuery.append(WildCardSql.getWildCardSql1("ARCHIVE_INVENTORY.VENDOR_NAME", corrvalue2.trim().toUpperCase()));
+            }
+        }
+        //VENDOR_LOCATION
+        if ((corrattribute != null) && (corrattribute.equalsIgnoreCase("VENDOR_LOCATION"))) {
+            if (corrvalue != null && !"".equals(corrvalue.trim())) {
+                inventorySearchQuery.append(WildCardSql.getWildCardSql1("ARCHIVE_INVENTORY.VENDOR_LOCATION", corrvalue.trim().toUpperCase()));
+            }
+        }
+        if ((corrattribute1 != null) && (corrattribute1.equalsIgnoreCase("VENDOR_LOCATION"))) {
+            if (corrvalue1 != null && !"".equals(corrvalue1.trim())) {
+                inventorySearchQuery.append(WildCardSql.getWildCardSql1("ARCHIVE_INVENTORY.VENDOR_LOCATION", corrvalue1.trim().toUpperCase()));
+            }
+        }
+        if ((corrattribute2 != null) && (corrattribute2.equalsIgnoreCase("VENDOR_LOCATION"))) {
+            if (corrvalue2 != null && !"".equals(corrvalue2.trim())) {
+                inventorySearchQuery.append(WildCardSql.getWildCardSql1("ARCHIVE_INVENTORY.VENDOR_LOCATION", corrvalue2.trim().toUpperCase()));
+            }
+        }
+   //INSTANCE_ID
+        if ((corrattribute != null) && (corrattribute.equalsIgnoreCase("INSTANCE_ID"))) {
+            if (corrvalue != null && !"".equals(corrvalue.trim())) {
+                inventorySearchQuery.append(WildCardSql.getWildCardSql1("ARCHIVE_INVENTORY.FILE_ID", corrvalue.trim().toUpperCase()));
+            }
+        }
+        if ((corrattribute1 != null) && (corrattribute1.equalsIgnoreCase("INSTANCE_ID"))) {
+            if (corrvalue1 != null && !"".equals(corrvalue1.trim())) {
+                inventorySearchQuery.append(WildCardSql.getWildCardSql1("ARCHIVE_INVENTORY.FILE_ID", corrvalue1.trim().toUpperCase()));
+            }
+        }
+        if ((corrattribute2 != null) && (corrattribute2.equalsIgnoreCase("INSTANCE_ID"))) {
+            if (corrvalue2 != null && !"".equals(corrvalue2.trim())) {
+                inventorySearchQuery.append(WildCardSql.getWildCardSql1("ARCHIVE_INVENTORY.FILE_ID", corrvalue2.trim().toUpperCase()));
+            }
+        }
+        //Direction
+//        if ((corrattribute != null) && (corrattribute.equalsIgnoreCase("Direction"))) {
+//            if (corrvalue != null && !"".equals(corrvalue.trim())) {
+//                inventorySearchQuery.append(WildCardSql.getWildCardSql1("ARCHIVE_ARCHIVE_FILES.DIRECTION", corrvalue.trim().toUpperCase()));
+//            }
+//        }
+//        if ((corrattribute1 != null) && (corrattribute1.equalsIgnoreCase("Direction"))) {
+//            if (corrvalue1 != null && !"".equals(corrvalue1.trim())) {
+//                inventorySearchQuery.append(WildCardSql.getWildCardSql1("ARCHIVE_FILES.DIRECTION", corrvalue1.trim().toUpperCase()));
+//            }
+//        }
+
         //Doc Type
         if (doctype != null && !"".equals(doctype.trim())) {
             inventorySearchQuery.append(WildCardSql.getWildCardSql1("ARCHIVE_FILES.TRANSACTION_TYPE", doctype.trim()));
@@ -368,9 +436,9 @@ public class InventoryServiceImpl implements InventoryService {
         if (recName != null && !"".equals(recName.trim())) {
             inventorySearchQuery.append(WildCardSql.getWildCardSql1("TP2.NAME", recName.trim().toUpperCase()));
         }
-        inventorySearchQuery.append("order by DATE_TIME_RECEIVED DESC fetch first 50 rows only");
+        inventorySearchQuery.append(" fetch first 50 rows only");
         String searchQuery = inventorySearchQuery.toString();
-        System.out.println("archive shipment query-->"+searchQuery);
+        System.out.println("mscvp inventorySearchQuery query-->" + searchQuery);
         try {
             connection = ConnectionProvider.getInstance().getConnection();
             statement = connection.createStatement();
@@ -378,13 +446,12 @@ public class InventoryServiceImpl implements InventoryService {
             inventoryList = new ArrayList<InventoryBean>();
             while (resultSet.next()) {
                 InventoryBean inventoryBean = new InventoryBean();
-                inventoryBean.setAsnNo(resultSet.getString("ASN_NUMBER"));
-                inventoryBean.setPoNo(resultSet.getString("PO_NUMBER"));
-                inventoryBean.setBolNo(resultSet.getString("BOL_NUMBER"));
-                inventoryBean.setIsa(resultSet.getString("ISA_NUMBER"));
-                inventoryBean.setShipmentDate(resultSet.getString("SHIP_DATE"));
+                inventoryBean.setReportingPeriod(resultSet.getString("REFERENCE_NUMBER"));
+                inventoryBean.setReportingDate(resultSet.getString("REPORTING_DATE"));
+                inventoryBean.setVendorName(resultSet.getString("VENDOR_NAME"));
+                inventoryBean.setVendorLocation(resultSet.getString("VENDOR_LOCATION"));
+                inventoryBean.setIsaNum(resultSet.getString("ISA_NUMBER"));
                 inventoryBean.setGsCtrl(resultSet.getString("GS_CONTROL_NUMBER"));
-                inventoryBean.setStCtrl(resultSet.getString("ST_CONTROL_NUMBER"));
                 String direction = resultSet.getString("DIRECTION");
                 inventoryBean.setDirection(direction);
                 if ("INBOUND".equalsIgnoreCase(direction)) {
@@ -393,10 +460,8 @@ public class InventoryServiceImpl implements InventoryService {
                     inventoryBean.setPname(resultSet.getString("RECEIVER_NAME"));
                 }
                 inventoryBean.setStatus(resultSet.getString("STATUS"));
-                inventoryBean.setDate_time_rec(resultSet.getTimestamp("DATE_TIME_RECEIVED"));
+                //inventoryBean.setDate_time_rec(resultSet.getTimestamp("DATE_TIME_RECEIVED"));
                 inventoryBean.setFile_id(resultSet.getString("FILE_ID"));
-                inventoryBean.setAckStatus(resultSet.getString("ACK_STATUS"));
-                inventoryBean.setReProcessStatus(resultSet.getString("REPROCESSSTATUS"));
                 inventoryList.add(inventoryBean);
             }
         } catch (SQLException e) {

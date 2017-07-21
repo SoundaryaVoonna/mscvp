@@ -11,90 +11,20 @@ import java.sql.Timestamp;
  */
 public class InventoryBean {
 
-    private String asnNo;
-    private String poNo;
-    private String bolNo;
-    private String isa;
-    private String shipmentDate;
+    private String reportingPeriod;
+    private String reportingDate;
+    private String vendorName;
+    private String vendorLocation;
     private String pname;
     private String gsCtrl;
-    private String stCtrl;
+    private String isaNum;
     private String direction;
     private String status;
     private Timestamp date_time_rec;
-    private String ackStatus;
     private String file_id;
-    private String reProcessStatus;
+    private int inventory_id;
+    
 
-    /**
-     * @return the asnNo
-     */
-    public String getAsnNo() {
-        return asnNo;
-    }
-
-    /**
-     * @param asnNo the asnNo to set
-     */
-    public void setAsnNo(String asnNo) {
-        this.asnNo = asnNo;
-    }
-
-    /**
-     * @return the poNo
-     */
-    public String getPoNo() {
-        return poNo;
-    }
-
-    /**
-     * @param poNo the poNo to set
-     */
-    public void setPoNo(String poNo) {
-        this.poNo = poNo;
-    }
-
-    /**
-     * @return the bolNo
-     */
-    public String getBolNo() {
-        return bolNo;
-    }
-
-    /**
-     * @param bolNo the bolNo to set
-     */
-    public void setBolNo(String bolNo) {
-        this.bolNo = bolNo;
-    }
-
-    /**
-     * @return the isa
-     */
-    public String getIsa() {
-        return isa;
-    }
-
-    /**
-     * @param isa the isa to set
-     */
-    public void setIsa(String isa) {
-        this.isa = isa;
-    }
-
-    /**
-     * @return the shipmentDate
-     */
-    public String getShipmentDate() {
-        return shipmentDate;
-    }
-
-    /**
-     * @param shipmentDate the shipmentDate to set
-     */
-    public void setShipmentDate(String shipmentDate) {
-        this.shipmentDate = shipmentDate;
-    }
 
     /**
      * @return the pname
@@ -124,19 +54,6 @@ public class InventoryBean {
         this.gsCtrl = gsCtrl;
     }
 
-    /**
-     * @return the stCtrl
-     */
-    public String getStCtrl() {
-        return stCtrl;
-    }
-
-    /**
-     * @param stCtrl the stCtrl to set
-     */
-    public void setStCtrl(String stCtrl) {
-        this.stCtrl = stCtrl;
-    }
 
     /**
      * @return the direction
@@ -181,20 +98,6 @@ public class InventoryBean {
     }
 
     /**
-     * @return the ackStatus
-     */
-    public String getAckStatus() {
-        return ackStatus;
-    }
-
-    /**
-     * @param ackStatus the ackStatus to set
-     */
-    public void setAckStatus(String ackStatus) {
-        this.ackStatus = ackStatus;
-    }
-
-    /**
      * @return the file_id
      */
     public String getFile_id() {
@@ -208,11 +111,54 @@ public class InventoryBean {
         this.file_id = file_id;
     }
 
-    public String getReProcessStatus() {
-        return reProcessStatus;
+    public String getReportingPeriod() {
+        return reportingPeriod;
     }
 
-    public void setReProcessStatus(String reProcessStatus) {
-        this.reProcessStatus = reProcessStatus;
+    public void setReportingPeriod(String reportingPeriod) {
+        this.reportingPeriod = reportingPeriod;
     }
+
+    public String getReportingDate() {
+        return reportingDate;
+    }
+
+    public void setReportingDate(String reportingDate) {
+        this.reportingDate = reportingDate;
+    }
+
+    public String getVendorName() {
+        return vendorName;
+    }
+
+    public void setVendorName(String vendorName) {
+        this.vendorName = vendorName;
+    }
+
+    public String getVendorLocation() {
+        return vendorLocation;
+    }
+
+    public void setVendorLocation(String vendorLocation) {
+        this.vendorLocation = vendorLocation;
+    }
+
+    public String getIsaNum() {
+        return isaNum;
+    }
+
+    public void setIsaNum(String isaNum) {
+        this.isaNum = isaNum;
+    }
+
+    public int getInventory_id() {
+        return inventory_id;
+    }
+
+    public void setInventory_id(int inventory_id) {
+        this.inventory_id = inventory_id;
+    }
+    
+    
+
 }

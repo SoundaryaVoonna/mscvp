@@ -2670,6 +2670,7 @@ public class DataSourceDataProvider {
             flows.put("856", "Manufacturing Shipments");
             flows.put("810", "Manufacturing Invoice");
             flows.put("820", "Manufacturing Payments");
+            flows.put("846", "Manufacturing Inventory");
         }
         if (flowMap.containsValue("Logistics")) {
             flows.put("204", "Logistics Load Tender");
