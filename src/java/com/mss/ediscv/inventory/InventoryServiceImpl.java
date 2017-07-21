@@ -135,7 +135,7 @@ public class InventoryServiceImpl implements InventoryService {
         }
         if ((corrattribute1 != null) && (corrattribute1.equalsIgnoreCase("VENDOR_NAME"))) {
             if (corrvalue1 != null && !"".equals(corrvalue1.trim())) {
-                inventorySearchQuery.append(WildCardSql.getWildCardSql1("INVENTORY.VENDOR_NAME", corrvalue.trim().toUpperCase()));
+                inventorySearchQuery.append(WildCardSql.getWildCardSql1("INVENTORY.VENDOR_NAME", corrvalue1.trim().toUpperCase()));
             }
         }
         if ((corrattribute2 != null) && (corrattribute2.equalsIgnoreCase("VENDOR_NAME"))) {

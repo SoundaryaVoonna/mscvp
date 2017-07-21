@@ -153,7 +153,7 @@
                                                     <br>   <div class="row">
                                                         <div class="col-sm-3">
                                                             <label for="corrattribute1">Correlation</label>
-                                                            <s:select headerKey="-1" headerValue="Select Attribute" cssClass="form-control" list="{'REPORTING_PERIOD','REPORTING_DATE','VENDOR_NAME','VENDOR_LOCATION'}" name="corrattribute1" id="corrattribute1" value="%{corrattribute1}" tabindex="12"/>
+                                                            <s:select headerKey="-1" headerValue="Select Attribute" cssClass="form-control" list="#@java.util.LinkedHashMap@{'REPORTING_PERIOD':'Reporting Period','REPORTING_DATE':'Reporting Date','VENDOR_NAME':'Vendor Name','VENDOR_LOCATION':'Vendor Location','INSTANCE_ID':'Instance Id'}" name="corrattribute1" id="corrattribute1" value="%{corrattribute1}" tabindex="12"/>
                                                         </div>
                                                         <div class="col-sm-3">
                                                             <label for="corrvalue1">Value</label>
@@ -165,7 +165,7 @@
                                                     <br>   <div class="row">
                                                         <div class="col-sm-3">
                                                             <label for="corrattribute2">Correlation</label>
-                                                            <s:select headerKey="-1" headerValue="Select Attribute" cssClass="form-control" list="{'REPORTING_PERIOD','REPORTING_DATE','VENDOR_NAME','VENDOR_LOCATION'}" name="corrattribute2" id="corrattribute2" value="%{corrattribute2}"  tabindex="14"/>
+                                                            <s:select headerKey="-1" headerValue="Select Attribute" cssClass="form-control" list="#@java.util.LinkedHashMap@{'REPORTING_PERIOD':'Reporting Period','REPORTING_DATE':'Reporting Date','VENDOR_NAME':'Vendor Name','VENDOR_LOCATION':'Vendor Location','INSTANCE_ID':'Instance Id'}" name="corrattribute2" id="corrattribute2" value="%{corrattribute2}"  tabindex="14"/>
                                                         </div>
                                                         <div class="col-sm-3">
                                                             <label for="corrvalue2">Value</label>
@@ -400,7 +400,7 @@
                                 <s:textfield  cssClass="form-control"  required="required" placeholder="" id="ManDocumentType" name="ManDocumentType" readonly="true"/>
                             </div>
                         </div>
-                        <div class="row col-sm-12" id="prikeytypeandvalue" style="display:none"> 
+                        <div class="row col-sm-12"> 
                             <div class="col-sm-6"><label class="labelw">Doc Type</label>
                                 <s:textfield cssClass="form-control"  required="required" placeholder="" id="Manpri_key_type" name="Manpri_key_type" readonly="true"/>
                             </div>
@@ -466,9 +466,9 @@
                         <br/>
 
                         <div class="row col-sm-12" >
-                            <div class="col-sm-6"> <label class="labelw"> ST</label>
+<%--                            <div class="col-sm-6"> <label class="labelw"> ST</label>
                                 <s:textfield  cssClass="form-control"  required="required" placeholder="" id="ManSt" name="ManSt" readonly="true"/>
-                            </div>
+                            </div>--%>
                             <div class="col-sm-6"> <label class="labelw"> ISA Date</label>
                                 <s:textfield  cssClass="form-control"  required="required" placeholder="" id="ManIsADate" name="ManIsADate" readonly="true"/>
                             </div>

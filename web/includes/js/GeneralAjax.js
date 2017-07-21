@@ -3305,8 +3305,8 @@ function populateInventoryDetails(responseXML)
         var ISA_DATE = detail.getElementsByTagName("ISA_DATE")[0].childNodes[0].nodeValue;
         var ISA_TIME = detail.getElementsByTagName("ISA_TIME")[0].childNodes[0].nodeValue;
         var GS_CONTROL_NUMBER = detail.getElementsByTagName("GS_CONTROL_NUMBER")[0].childNodes[0].nodeValue;
-        var ST_CONTROL_NUMBER = detail.getElementsByTagName("ST_CONTROL_NUMBER")[0].childNodes[0].nodeValue;
-        var PRI_KEY_VAL = detail.getElementsByTagName("PRI_KEY_VAL")[0].childNodes[0].nodeValue;
+       // var ST_CONTROL_NUMBER = detail.getElementsByTagName("ST_CONTROL_NUMBER")[0].childNodes[0].nodeValue;
+        var REFERENCE_NUMBER = detail.getElementsByTagName("REFERENCE_NUMBER")[0].childNodes[0].nodeValue;
         var PRI_KEY_TYPE = detail.getElementsByTagName("PRI_KEY_TYPE")[0].childNodes[0].nodeValue;
         var ACKFILEID = detail.getElementsByTagName("ACKFILEID")[0].childNodes[0].nodeValue;
         var ERRMESSAGE = detail.getElementsByTagName("ERR_MESSAGE")[0].childNodes[0].nodeValue;
@@ -3315,13 +3315,8 @@ function populateInventoryDetails(responseXML)
         var ITEMS_COUNT = detail.getElementsByTagName("ITEMS_COUNT")[0].childNodes[0].nodeValue;
 
         document.getElementById('ManFileId').value = fileid;
-          if(PRI_KEY_TYPE != "PO"){
-              document.getElementById('prikeytypeandvalue').style.display = "block";
             document.getElementById('Manpri_key_type').value = PRI_KEY_TYPE;
-            document.getElementById('Manpri_key_value').value = PRI_KEY_VAL;
-        }else{
-             document.getElementById('prikeytypeandvalue').style.display = "none";
-        }
+            document.getElementById('Manpri_key_value').value = REFERENCE_NUMBER;
         if (SENDER_NAME == "NULL") {
             SENDER_NAME = "Null";
         }
@@ -3336,7 +3331,7 @@ function populateInventoryDetails(responseXML)
         document.getElementById('ManReceiverName').value = RECEIVER_NAME;
         document.getElementById('ManISA').value = ISA_NUMBER;
         document.getElementById('ManGs').value = GS_CONTROL_NUMBER;
-        document.getElementById('ManSt').value = ST_CONTROL_NUMBER;
+       // document.getElementById('ManSt').value = ST_CONTROL_NUMBER;
         document.getElementById('ManIsADate').value = ISA_DATE;
         document.getElementById('ManIsATime').value = ISA_TIME;
 

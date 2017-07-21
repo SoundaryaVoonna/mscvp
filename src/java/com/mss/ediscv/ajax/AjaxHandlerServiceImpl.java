@@ -6188,20 +6188,18 @@ public class AjaxHandlerServiceImpl implements AjaxHandlerService {
         ResultSet resultSet = null;
         StringBuffer sb = new StringBuffer();
         if ("ARCHIVE".equals(database)) {
-            queryString = "select ARCHIVE_FILES.STATUS,ARCHIVE_FILES.DIRECTION as DIRECTION,ARCHIVE_FILES.FILE_ID,ARCHIVE_FILES.FILE_TYPE,ARCHIVE_FILES.SENDER_ID,ARCHIVE_FILES.RECEIVER_ID,"
-                    + "ARCHIVE_FILES.PRE_TRANS_FILEPATH,ARCHIVE_FILES.POST_TRANS_FILEPATH,ARCHIVE_FILES.SEC_KEY_VAL as SEC_KEY_VAL,ARCHIVE_FILES.PRI_KEY_TYPE as PRI_KEY_TYPE,"
-                    + "ARCHIVE_FILES.PRI_KEY_VAL as PRI_KEY_VAL,ARCHIVE_FILES.ORG_FILEPATH as ORG_FILEPATH,ARCHIVE_FILES.ISA_NUMBER as ISA_NUMBER,ARCHIVE_FILES.ISA_DATE as ISA_DATE,"
-                    + "ARCHIVE_FILES.ISA_TIME as ISA_TIME,ARCHIVE_FILES.TRANSACTION_TYPE as TRANSACTION_TYPE,ARCHIVE_FILES.GS_CONTROL_NUMBER as GS_CONTROL_NUMBER,"
-                    + "ARCHIVE_FILES.ST_CONTROL_NUMBER as ST_CONTROL_NUMBER,TP1.NAME as SENDER_NAME,TP2.NAME as RECEIVER_NAME,ARCHIVE_FILES.ERR_MESSAGE,"
-                    + "ARCHIVE_FILES.ACK_FILE_ID as ACK_FILE_ID, ARCHIVE_FILES.ERROR_REPORT_FILEPATH as ERROR_REPORT_FILEPATH from ARCHIVE_FILES "
-                    + "LEFT OUTER JOIN TP TP1 ON (TP1.ID = ARCHIVE_FILES.SENDER_ID) "
-                    + "LEFT OUTER JOIN TP TP2 ON (TP2.ID = ARCHIVE_FILES.RECEIVER_ID) "
-                    + "where FLOWFLAG like 'M' AND ARCHIVE_FILES.FILE_ID LIKE '%" + instanceid + "%' AND ARCHIVE_FILES.ID =" + id;
+           queryString = "select DISTINCT(ARCHIVE_INVENTORY.FILE_ID) as FILE_ID,ARCHIVE_INVENTORY.ID,ARCHIVE_FILES.ISA_NUMBER,ARCHIVE_FILES.GS_CONTROL_NUMBER,ARCHIVE_FILES.SENDER_ID,ARCHIVE_FILES.RECEIVER_ID,ARCHIVE_INVENTORY.REFERENCE_NUMBER,ARCHIVE_INVENTORY.REPORTING_DATE,"
+                + "ARCHIVE_FILES.DIRECTION,ARCHIVE_FILES.STATUS,ARCHIVE_INVENTORY.VENDOR_NAME,ARCHIVE_INVENTORY.VENDOR_LOCATION,ARCHIVE_INVENTORY.ITEMS_COUNT,TP1.NAME as SENDER_NAME,ARCHIVE_FILES.ISA_DATE as ISA_DATE,ARCHIVE_FILES.ISA_TIME as ISA_TIME,"
+                + "ARCHIVE_FILES.TRANSACTION_TYPE as TRANSACTION_TYPE,ARCHIVE_FILES.FILE_TYPE,ARCHIVE_FILES.PRI_KEY_TYPE,"
+                + "ARCHIVE_FILES.PRE_TRANS_FILEPATH,ARCHIVE_FILES.POST_TRANS_FILEPATH,ARCHIVE_FILES.ACK_FILE_ID as ACK_FILE_ID,ARCHIVE_FILES.ORG_FILEPATH as ORG_FILEPATH,TP2.NAME as RECEIVER_NAME,ARCHIVE_FILES.ERR_MESSAGE from ARCHIVE_INVENTORY JOIN "
+                + "ARCHIVE_FILES ON (ARCHIVE_FILES.FILE_ID=ARCHIVE_INVENTORY.FILE_ID) LEFT OUTER JOIN TP  TP1 ON (TP1.ID=ARCHIVE_FILES.SENDER_ID) "
+                + "LEFT OUTER JOIN TP  TP2 ON (TP2.ID=ARCHIVE_FILES.RECEIVER_ID) "
+               + "where FLOWFLAG like 'M' AND ARCHIVE_INVENTORY.FILE_ID LIKE '%" + instanceid + "%' AND ARCHIVE_INVENTORY.ID =" + id;
         } else {
             queryString = "select DISTINCT(INVENTORY.FILE_ID) as FILE_ID,INVENTORY.ID,FILES.ISA_NUMBER,FILES.GS_CONTROL_NUMBER,FILES.SENDER_ID,FILES.RECEIVER_ID,INVENTORY.REFERENCE_NUMBER,INVENTORY.REPORTING_DATE,"
                 + "FILES.DIRECTION,FILES.STATUS,INVENTORY.VENDOR_NAME,INVENTORY.VENDOR_LOCATION,INVENTORY.ITEMS_COUNT,TP1.NAME as SENDER_NAME,FILES.ISA_DATE as ISA_DATE,FILES.ISA_TIME as ISA_TIME,"
-                + "FILES.TRANSACTION_TYPE as TRANSACTION_TYPE,FILES.FILE_TYPE,FILES.PRI_KEY_VAL,FILES.PRI_KEY_TYPE as PRI_KEY_TYPE,"
-                + "FILES.PRE_TRANS_FILEPATH,FILES.POST_TRANS_FILEPATH,FILES.ACK_FILE_ID as ACK_FILE_ID,FILES.ORG_FILEPATH as ORG_FILEPATH,TP2.NAME as RECEIVER_NAME,FILES.ST_CONTROL_NUMBER as ST_CONTROL_NUMBER,FILES.ERR_MESSAGE from INVENTORY JOIN "
+                + "FILES.TRANSACTION_TYPE as TRANSACTION_TYPE,FILES.FILE_TYPE,FILES.PRI_KEY_TYPE,"
+                + "FILES.PRE_TRANS_FILEPATH,FILES.POST_TRANS_FILEPATH,FILES.ACK_FILE_ID as ACK_FILE_ID,FILES.ORG_FILEPATH as ORG_FILEPATH,TP2.NAME as RECEIVER_NAME,FILES.ERR_MESSAGE from INVENTORY JOIN "
                 + "FILES ON (FILES.FILE_ID=INVENTORY.FILE_ID) LEFT OUTER JOIN TP  TP1 ON (TP1.ID=FILES.SENDER_ID) "
                 + "LEFT OUTER JOIN TP  TP2 ON (TP2.ID=FILES.RECEIVER_ID) "
                + "where FLOWFLAG like 'M' AND INVENTORY.FILE_ID LIKE '%" + instanceid + "%' AND INVENTORY.ID =" + id;
@@ -6266,20 +6264,30 @@ public class AjaxHandlerServiceImpl implements AjaxHandlerService {
                 } else {
                     sb.append("<ISA_TIME>--</ISA_TIME>");
                 }
+                if (resultSet.getString("PRI_KEY_TYPE") != null && !"".equals(resultSet.getString("PRI_KEY_TYPE"))) {
+                    sb.append("<PRI_KEY_TYPE>" + resultSet.getString("PRI_KEY_TYPE") + "</PRI_KEY_TYPE>");
+                } else {
+                    sb.append("<PRI_KEY_TYPE>--</PRI_KEY_TYPE>");
+                }
                 if (resultSet.getString("GS_CONTROL_NUMBER") != null && !"".equalsIgnoreCase(resultSet.getString("GS_CONTROL_NUMBER"))) {
                     sb.append("<GS_CONTROL_NUMBER>" + resultSet.getString("GS_CONTROL_NUMBER") + "</GS_CONTROL_NUMBER>");
                 } else {
                     sb.append("<GS_CONTROL_NUMBER>--</GS_CONTROL_NUMBER>");
                 }
-                if (resultSet.getString("ST_CONTROL_NUMBER") != null && !"".equals(resultSet.getString("ST_CONTROL_NUMBER"))) {
-                    sb.append("<ST_CONTROL_NUMBER>" + resultSet.getString("ST_CONTROL_NUMBER") + "</ST_CONTROL_NUMBER>");
-                } else {
-                    sb.append("<ST_CONTROL_NUMBER>--</ST_CONTROL_NUMBER>");
-                }
+//                if (resultSet.getString("ST_CONTROL_NUMBER") != null && !"".equals(resultSet.getString("ST_CONTROL_NUMBER"))) {
+//                    sb.append("<ST_CONTROL_NUMBER>" + resultSet.getString("ST_CONTROL_NUMBER") + "</ST_CONTROL_NUMBER>");
+//                } else {
+//                    sb.append("<ST_CONTROL_NUMBER>--</ST_CONTROL_NUMBER>");
+//                }
                 if (resultSet.getString("TRANSACTION_TYPE") != null && !"".equals(resultSet.getString("TRANSACTION_TYPE"))) {
                     sb.append("<TRANSACTION_TYPE>" + resultSet.getString("TRANSACTION_TYPE") + "</TRANSACTION_TYPE>");
                 } else {
                     sb.append("<TRANSACTION_TYPE>--</TRANSACTION_TYPE>");
+                }
+                if (resultSet.getString("REFERENCE_NUMBER") != null && !"".equals(resultSet.getString("REFERENCE_NUMBER"))) {
+                    sb.append("<REFERENCE_NUMBER>" + resultSet.getString("REFERENCE_NUMBER") + "</REFERENCE_NUMBER>");
+                } else {
+                    sb.append("<REFERENCE_NUMBER>--</REFERENCE_NUMBER>");
                 }
                 if (resultSet.getString("STATUS") != null && !"".equals(resultSet.getString("STATUS"))) {
                     sb.append("<STATUS>" + resultSet.getString("STATUS") + "</STATUS>");
@@ -6291,17 +6299,7 @@ public class AjaxHandlerServiceImpl implements AjaxHandlerService {
                 } else {
                     sb.append("<ITEMS_COUNT>--</ITEMS_COUNT>");
                 }
-       
-                if (resultSet.getString("PRI_KEY_TYPE") != null && resultSet.getString("PRI_KEY_TYPE").equalsIgnoreCase("Inventory")) {
-                    sb.append("<PRI_KEY_TYPE>Inventory</PRI_KEY_TYPE>");
-                }else {
-                    sb.append("<PRI_KEY_TYPE>--</PRI_KEY_TYPE>");
-                } 
-                if (resultSet.getString("PRI_KEY_VAL") != null && !"".equals(resultSet.getString("PRI_KEY_VAL"))) {
-                    sb.append("<PRI_KEY_VAL>" + resultSet.getString("PRI_KEY_VAL") + "</PRI_KEY_VAL>");
-                } else {
-                    sb.append("<PRI_KEY_VAL>--</PRI_KEY_VAL>");
-                }
+    
                 if (resultSet.getString("PRE_TRANS_FILEPATH") != null) {
                     if (new File(resultSet.getString("PRE_TRANS_FILEPATH")).exists() && new File(resultSet.getString("PRE_TRANS_FILEPATH")).isFile()) {
                         sb.append("<PRETRANSFILEPATH>" + resultSet.getString("PRE_TRANS_FILEPATH") + "</PRETRANSFILEPATH>");
