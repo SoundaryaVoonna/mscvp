@@ -38,7 +38,7 @@ public class InventoryServiceImpl implements InventoryService {
     java.sql.Date date = new java.sql.Date(time);
     int callableStatementUpdateCount;
     private ArrayList<InventoryBean> inventoryList;
-    private InventoryBean inventoryAction;
+    private InventoryBean inventoryBean;
     private static Logger logger = Logger.getLogger(InventoryServiceImpl.class.getName());
 
     //@Override
