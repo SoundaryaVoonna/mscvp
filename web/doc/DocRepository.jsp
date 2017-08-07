@@ -1,9 +1,8 @@
-<%@page import="com.mss.ediscv.partner.PartnerBean"%>
 <%@page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@page buffer="50kb" autoFlush="true" %>
 <%@ taglib prefix="s" uri="/struts-tags" %>
-
 <%@page import="com.mss.ediscv.doc.DocRepositoryBean"%>
+<%@page import="com.mss.ediscv.partner.PartnerBean"%>
 <%@ taglib uri="/WEB-INF/tlds/dbgrid.tld" prefix="grd"%>
 <%@ page import="com.freeware.gridtag.*"%>
 <%@page import="java.sql.Connection"%>
@@ -11,9 +10,6 @@
 <%@ page import="com.mss.ediscv.util.ConnectionProvider"%>
 <%@ page import="java.sql.SQLException"%>
 <%@ page import = "java.util.ResourceBundle" %>
-<%--<%@page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>--%>
-<%@page buffer="50kb" autoFlush="true" %>
-
 
 <!DOCTYPE html>
 <html>
